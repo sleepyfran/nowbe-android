@@ -2,10 +2,14 @@
     <string name="app_name">Nowbe</string>
     <string name="title_activity_main">Nowbe</string>
 
-    <!-- Main activity -->
+    <!-- Base activity -->
     <string name="main.feed_tab">Feed</string>
     <string name="main.notifications_tab">Notifications</string>
     <string name="main.profile_tab">Me</string>
+
+    <!-- Navigation drawer -->
+    <string name="drawer.open">Open navigation drawer</string>
+    <string name="drawer.close">Close navigation drawer</string>
 
     <!-- Feed section -->
     <string name="feed.dummy_data">Picture slot #1 updated.</string>

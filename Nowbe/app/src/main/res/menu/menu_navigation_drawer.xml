@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!-- TODO: Complete with the actual menu -->
+        <item
+            android:id="@+id/navigation_drawer_todo"
+            android:icon="@drawable/ic_search_white"
+            android:title="@string/app_name"/>
+    </group>
+</menu>
