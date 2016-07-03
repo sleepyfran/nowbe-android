@@ -1,0 +1,75 @@
+<!-- Profile details -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/profile_info_height"
+    android:background="@color/cardview_dark_background">
+
+    <!-- User image with its state (online/offline) -->
+    <FrameLayout
+        android:id="@+id/ivUserProfilePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/profile_pic_margin_left"
+        android:layout_marginTop="@dimen/profile_pic_margin_top">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivUserPicture"
+            android:layout_width="@dimen/default_pic_size"
+            android:layout_height="@dimen/default_pic_size"
+            android:layout_gravity="center"
+            android:src="@drawable/placeholder_pic"/>
+
+        <ImageView
+            android:id="@+id/ivUserState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/user_status_icon_margin"
+            android:layout_marginRight="@dimen/user_status_icon_margin"
+            android:src="@drawable/online_state"/>
+
+    </FrameLayout>
+
+    <!-- User's username -->
+    <TextView
+        android:id="@+id/tvUserUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/profile_user_name_margin_left"
+        android:layout_marginTop="@dimen/profile_user_name_margin_top"
+        android:layout_toRightOf="@id/ivUserProfilePic"
+        android:maxLines="1"
+        android:text="@string/dummy_data.username"
+        android:textColor="@color/primary_text_white"
+        android:textSize="@dimen/profile_user_name_size"
+        android:textStyle="bold"/>
+
+    <!-- User status -->
+    <TextView
+        android:id="@+id/tvUserStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUserUsername"
+        android:layout_marginLeft="@dimen/profile_status_margin_left"
+        android:layout_marginRight="@dimen/profile_status_margin_right"
+        android:layout_marginTop="@dimen/profile_status_margin_top"
+        android:layout_toRightOf="@id/ivUserProfilePic"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/dummy_data.status"
+        android:textColor="@color/primary_text_white"
+        android:textSize="15sp"/>
+
+    <!-- User statistics -->
+    <TextView
+        android:id="@+id/tvUserInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUserStatus"
+        android:layout_margin="@dimen/profile_info_margin"
+        android:layout_toRightOf="@id/ivUserProfilePic"
+        android:text="@string/dummy_data.info"
+        android:textColor="@color/primary_text_white"
+        android:textStyle="bold"/>
+</RelativeLayout>

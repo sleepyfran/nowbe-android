@@ -1,5 +1,12 @@
 package us.nowbe.nowbe.fragments
 
+/**
+ * This file is part of Nowbe for Android
+ *
+ * Copyright (c) 2016 The Nowbe Team
+ * Maintained by Fran González <@spaceisstrange>
+ */
+
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment

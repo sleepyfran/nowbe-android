@@ -10,4 +10,6 @@ class FeedView(context: Context) : RelativeLayout(context) {
         // Inflate the view
         LayoutInflater.from(context).inflate(R.layout.list_item_update, this, true)
     }
+
+    // TODO: Expose an update method that will update the views according to a representation of a feed post
 }

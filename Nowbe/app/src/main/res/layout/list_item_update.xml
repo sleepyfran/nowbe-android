@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLines="1"
-                    android:text="@string/feed.dummy_data.name"
+                    android:text="@string/dummy_data.name"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@string/feed.dummy_data.username"
+                    android:text="@string/dummy_data.username"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/feed.dummy_data"
+                android:text="@string/dummy_data.update"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="15sp"/>

@@ -1,5 +1,12 @@
 package us.nowbe.nowbe.adapters
 
+/**
+ * This file is part of Nowbe for Android
+ *
+ * Copyright (c) 2016 The Nowbe Team
+ * Maintained by Fran González <@spaceisstrange>
+ */
+
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter

@@ -1,5 +1,12 @@
 package us.nowbe.nowbe.activities
 
+/**
+ * This file is part of Nowbe for Android
+ *
+ * Copyright (c) 2016 The Nowbe Team
+ * Maintained by Fran González <@spaceisstrange>
+ */
+
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
