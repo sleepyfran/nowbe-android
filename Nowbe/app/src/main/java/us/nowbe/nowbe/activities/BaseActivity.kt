@@ -14,7 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_base_toolbar.*
+import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import kotlinx.android.synthetic.main.navigation_drawer.*
 import us.nowbe.nowbe.R
 
@@ -27,7 +27,12 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         super.onCreate(savedInstanceState)
 
         // Setup the activity and the toolbar
-        setContentView(R.layout.activity_base_toolbar)
+        if (hasTabs()) {
+            setContentView(R.layout.activity_base_tabs)
+        } else {
+            setContentView(R.layout.activity_base_no_tabs)
+        }
+
         setSupportActionBar(toolbar)
 
         // Hide the navigation drawer if we don't want it to be displayed
@@ -75,5 +80,11 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
      * This method will be called whenever the activity wants to check if there's a navigation drawer
      * available. If true, the activity will show it or hide it if not
      */
-    abstract fun isNavigationDrawerShown() : Boolean
+    abstract fun isNavigationDrawerShown(): Boolean
+
+    /**
+     * This method will be called whenever the activity has to inflate the content so it'll select
+     * it based on this
+     */
+    abstract fun hasTabs(): Boolean
 }

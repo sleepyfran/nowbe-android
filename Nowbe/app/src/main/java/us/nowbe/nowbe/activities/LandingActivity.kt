@@ -8,7 +8,8 @@ package us.nowbe.nowbe.activities
  */
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_base_toolbar.*
+import kotlinx.android.synthetic.main.activity_base_no_tabs.*
+import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.utils.TabUtils
 
 class LandingActivity : BaseActivity() {
@@ -24,6 +25,10 @@ class LandingActivity : BaseActivity() {
     }
 
     override fun isNavigationDrawerShown(): Boolean {
+        return true
+    }
+
+    override fun hasTabs(): Boolean {
         return true
     }
 }
