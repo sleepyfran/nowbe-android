@@ -1,4 +1,4 @@
-<fragment xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
           android:id="@+id/fragment"
           android:name="us.nowbe.nowbe.fragments.FeedFragment"
           xmlns:android="http://schemas.android.com/apk/res/android"

@@ -29,7 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     // Good ol' Java
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
@@ -37,6 +36,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.0-RC1'
 }
 repositories {
     mavenCentral()

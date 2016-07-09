@@ -7,6 +7,11 @@
     <!-- General -->
     <dimen name="user_status_icon_margin">5dp</dimen>
 
+    <!-- Welcome activity -->
+    <dimen name="welcome_app_name_text_size">45sp</dimen>
+    <dimen name="welcome_slogan_text_size">20sp</dimen>
+    <dimen name="welcome_introduction_text_size">20sp</dimen>
+
     <!-- Profile information view dimensions -->
     <dimen name="profile_info_height">150dp</dimen>
     <dimen name="profile_pic_margin_left">15dp</dimen>

@@ -7,10 +7,29 @@
     <string name="main.notifications_tab">Notifications</string>
     <string name="main.profile_tab">Me</string>
 
+    <!-- Welcome fragment -->
+    <string name="welcome.slogan">the place to be</string>
+    <string name="welcome.login">Log in</string>
+    <string name="welcome.sign_up">Sign up</string>
+    <string name="welcome.introduction">Connect with your world at a glance</string>
+
+    <!-- Log in / Sign up fragment -->
+    <string name="login_sign_up.username">Username</string>
+    <string name="login_sign_up.email">Email</string>
+    <string name="login_sign_up.password">Password</string>
+    <string name="login_sign_up.let_me_in">Let me in!</string>
+    <string name="login_sign_up.sign_up">Sign up!</string>
+    <string name="login_sign_up.error_title">Error login in</string>
+    <string name="login_sign_up.error_login_message">There was an error login you into Nowbe. Please check your username and password</string>
+    <string name="login_sign_up.error_sign_up_message">There was an error signing you up into Nowbe. Please check your username and password</string>
+    <string name="login_sign_up.error_user">Please specify an username!</string>
+    <string name="login_sign_up.error_email">Please specify an email!</string>
+    <string name="login_sign_up.error_password">Please specify a password!</string>
+
     <!-- Navigation drawer -->
     <string name="drawer.open">Open navigation drawer</string>
     <string name="drawer.close">Close navigation drawer</string>
-    
+
     <!-- Profile -->
     <string name="profile.info">%1$s years · %2$s visits · %3$s friends</string>
     <string name="profile.say_hello">Say hello!</string>
