@@ -23,6 +23,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
 import us.nowbe.nowbe.net.NowbeLogin
 import us.nowbe.nowbe.net.NowbeSignup
+import us.nowbe.nowbe.utils.ApiUtils
 
 class SignUpFragment : Fragment {
     constructor() : super()
@@ -45,20 +46,27 @@ class SignUpFragment : Fragment {
             if (password.isEmpty()) etSignupPassword.error = getString(R.string.login_sign_up_error_password)
 
             // Attempt to login with the username and password provided in another thread
-            object : AsyncTask<Void, Void, Boolean>() {
-                override fun doInBackground(vararg params: Void?): Boolean {
+            object : AsyncTask<Void, Void, ApiUtils.Companion.SignupResults>() {
+                override fun doInBackground(vararg params: Void?): ApiUtils.Companion.SignupResults {
                     return NowbeSignup(context, user, email, password).attemptSignUp()
                 }
 
-                override fun onPostExecute(result: Boolean?) {
-                    if (result!!) {
+                override fun onPostExecute(result: ApiUtils.Companion.SignupResults?) {
+                    if (result == ApiUtils.Companion.SignupResults.OK) {
                         // If the sign up is good, show the landing activity
                         startActivity(Intent(context, LandingActivity::class.java))
-                    } else {
-                        // Show an error dialog otherwise
+                    } else if (result == ApiUtils.Companion.SignupResults.NOT_OK) {
+                        // Show an error dialog when the sign up went wrong
                         AlertDialog.Builder(activity)
                                 .setTitle(getString(R.string.login_sign_up_error_title))
                                 .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show()
+                    } else {
+                        // Or another when the user already exits
+                        AlertDialog.Builder(activity)
+                                .setTitle(getString(R.string.login_sign_up_error_title))
+                                .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
                                 .setPositiveButton(android.R.string.ok, null)
                                 .show()
                     }

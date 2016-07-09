@@ -22,6 +22,7 @@
     <string name="login_sign_up.error_title">Error login in</string>
     <string name="login_sign_up.error_login_message">There was an error login you into Nowbe. Please check your username and password</string>
     <string name="login_sign_up.error_sign_up_message">There was an error signing you up into Nowbe. Please check your username and password</string>
+    <string name="login_sign_up.error_sign_up_exist_message">That user or email already exists!</string>
     <string name="login_sign_up.error_user">Please specify an username!</string>
     <string name="login_sign_up.error_email">Please specify an email!</string>
     <string name="login_sign_up.error_password">Please specify a password!</string>

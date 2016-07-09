@@ -17,18 +17,25 @@ class NowbeSignup(val context: Context, val user: String, val email: String, val
     /**
      * Attempts to sign up the user into Nowbe and returns whether it was or not succesful
      */
-    fun attemptSignUp(): Boolean {
+    fun attemptSignUp(): ApiUtils.Companion.SignupResults {
         // Make th request and get the JSON data returned
         val json = super.makeRequest()
-        val success = json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK
+        var success = ApiUtils.Companion.SignupResults.NOT_OK
+
+        if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK) {
+            success = ApiUtils.Companion.SignupResults.OK
+        } else if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_ERROR) {
+            success = ApiUtils.Companion.SignupResults.NOT_OK
+        } else if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_EXIST) {
+            success = ApiUtils.Companion.SignupResults.EXISTS
+        }
 
         // If it was successful, set the user as logged in and save the token
-        if (success) {
+        if (success == ApiUtils.Companion.SignupResults.OK) {
             SharedPreferencesUtils.setLoggedIn(context, true)
             SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_TOKEN))
         }
 
-        // TODO: Return different states based on whether the user already exists or not
         return success
     }
 

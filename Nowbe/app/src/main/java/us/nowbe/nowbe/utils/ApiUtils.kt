@@ -31,6 +31,7 @@ class ApiUtils {
         val API_SUCCESS = "success"
         val API_SUCCESS_OK = "1"
         val API_SUCCESS_ERROR = "0"
+        val API_SUCCESS_EXIST = "exist"
         val API_ID = "id"
         val API_TOKEN = "token"
         val API_USERNAME = "username"
@@ -41,5 +42,10 @@ class ApiUtils {
         val BASE_URL = "https://www.nowbe.us/api/"
         val LOGIN_URL = "login.php"
         val SIGNUP_URL = "newUser.php"
+
+        /**
+         * Results of different sections of the API
+         */
+        enum class SignupResults {OK, NOT_OK, EXISTS}
     }
 }
