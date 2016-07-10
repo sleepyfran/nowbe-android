@@ -6,6 +6,7 @@
 
     <!-- General -->
     <dimen name="user_status_icon_margin">5dp</dimen>
+    <dimen name="login_title">40sp</dimen>
 
     <!-- Welcome activity -->
     <dimen name="welcome_app_name_text_size">45sp</dimen>
