@@ -19,14 +19,14 @@ class NowbeLogin(val context: Context, val username: String, val password: Strin
      * Attempts to log into Nowbe and returns whether it was or not successful
      */
     fun attemptLogin(): Boolean {
-        // Make th request and get the JSON data returned
+        // Make the request and get the JSON data returned
         val json = super.makeRequest()
         val success = json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK
 
         // If the log in was successful, save the token and set the user as logged in
         if (success) {
             SharedPreferencesUtils.setLoggedIn(context, true)
-            SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_TOKEN))
+            SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_USER_TOKEN))
         }
 
         return success

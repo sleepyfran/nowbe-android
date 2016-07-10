@@ -21,7 +21,7 @@ import us.nowbe.nowbe.R
 /**
  * Defines a base activity used by any other activity of the app
  */
-abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,29 +34,6 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         }
 
         setSupportActionBar(toolbar)
-
-        // Hide the navigation drawer if we don't want it to be displayed
-        if (!isNavigationDrawerShown()) {
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        } else {
-            // Setup the navigation view
-            val navigationToggle = ActionBarDrawerToggle(this,
-                    drawerLayout,
-                    toolbar,
-                    R.string.drawer_open,
-                    R.string.drawer_close)
-            drawerLayout.addDrawerListener(navigationToggle)
-            navigationToggle.syncState()
-
-            // Set this class as the navigation item selected
-            navigationView.setNavigationItemSelectedListener(this)
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem?): Boolean {
-        // TODO: Setup the navigation drawer
-        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,12 +52,6 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
         return super.onOptionsItemSelected(item)
     }
-
-    /**
-     * This method will be called whenever the activity wants to check if there's a navigation drawer
-     * available. If true, the activity will show it or hide it if not
-     */
-    abstract fun isNavigationDrawerShown(): Boolean
 
     /**
      * This method will be called whenever the activity has to inflate the content so it'll select

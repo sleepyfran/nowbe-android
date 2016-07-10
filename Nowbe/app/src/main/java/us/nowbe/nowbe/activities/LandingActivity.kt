@@ -24,10 +24,6 @@ class LandingActivity : BaseActivity() {
         // TODO: Provide a method to dynamically change the menu bar
     }
 
-    override fun isNavigationDrawerShown(): Boolean {
-        return true
-    }
-
     override fun hasTabs(): Boolean {
         return true
     }

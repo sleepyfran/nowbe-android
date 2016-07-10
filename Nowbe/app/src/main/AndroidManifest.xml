@@ -12,14 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.WizardActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar.Welcome">
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.WizardActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar.Welcome"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name=".activities.LandingActivity"

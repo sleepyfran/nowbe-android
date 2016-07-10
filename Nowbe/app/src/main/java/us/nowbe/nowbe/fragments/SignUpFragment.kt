@@ -15,15 +15,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.android.synthetic.main.fragment_welcome.*
-
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
-import us.nowbe.nowbe.net.NowbeLogin
 import us.nowbe.nowbe.net.NowbeSignup
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.ValidatorUtils
 
 class SignUpFragment : Fragment {
     constructor() : super()
@@ -36,42 +33,64 @@ class SignUpFragment : Fragment {
         super.onViewCreated(view, savedInstanceState)
 
         btnRegister.setOnClickListener({
+            // Boolean specifying if there was or not an error
+            var error = false
+
             val user = etSignupUsername.text.toString()
             val email = etSignupEmail.text.toString()
             val password = etSignupPassword.text.toString()
+            val passwordVerif = etSignupPasswordVerif.text.toString()
 
             // Check if the edit text fields are empty and if so, show an error
-            if (user.isEmpty()) etSignupUsername.error = getString(R.string.login_sign_up_error_user)
-            if (email.isEmpty()) etSignupEmail.error = getString(R.string.login_sign_up_error_email)
-            if (password.isEmpty()) etSignupPassword.error = getString(R.string.login_sign_up_error_password)
+            if (user.isEmpty()) {
+                etSignupUsername.error = getString(R.string.login_sign_up_error_user)
+                error = true
+            }
+
+            if (email.isEmpty() || !ValidatorUtils.isEmailValid(email)) {
+                etSignupEmail.error = getString(R.string.login_sign_up_error_email)
+                error = true
+            }
+
+            if (password.isEmpty()) {
+                etSignupPassword.error = getString(R.string.login_sign_up_error_password)
+                error = true
+            }
+
+            if (passwordVerif.isEmpty() || password != passwordVerif) {
+                etSignupPasswordVerif.error = getString(R.string.login_sign_up_error_password)
+                error = true
+            }
 
             // Attempt to login with the username and password provided in another thread
-            object : AsyncTask<Void, Void, ApiUtils.Companion.SignupResults>() {
-                override fun doInBackground(vararg params: Void?): ApiUtils.Companion.SignupResults {
-                    return NowbeSignup(context, user, email, password).attemptSignUp()
-                }
-
-                override fun onPostExecute(result: ApiUtils.Companion.SignupResults?) {
-                    if (result == ApiUtils.Companion.SignupResults.OK) {
-                        // If the sign up is good, show the landing activity
-                        startActivity(Intent(context, LandingActivity::class.java))
-                    } else if (result == ApiUtils.Companion.SignupResults.NOT_OK) {
-                        // Show an error dialog when the sign up went wrong
-                        AlertDialog.Builder(activity)
-                                .setTitle(getString(R.string.login_sign_up_error_title))
-                                .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
-                    } else {
-                        // Or another when the user already exits
-                        AlertDialog.Builder(activity)
-                                .setTitle(getString(R.string.login_sign_up_error_title))
-                                .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
+            if (!error) {
+                object : AsyncTask<Void, Void, ApiUtils.Companion.SignupResults>() {
+                    override fun doInBackground(vararg params: Void?): ApiUtils.Companion.SignupResults {
+                        return NowbeSignup(context, user, email, password).attemptSignUp()
                     }
-                }
-            }.execute()
+
+                    override fun onPostExecute(result: ApiUtils.Companion.SignupResults?) {
+                        if (result == ApiUtils.Companion.SignupResults.OK) {
+                            // If the sign up is good, show the landing activity
+                            startActivity(Intent(context, LandingActivity::class.java))
+                        } else if (result == ApiUtils.Companion.SignupResults.NOT_OK) {
+                            // Show an error dialog when the sign up went wrong
+                            AlertDialog.Builder(activity)
+                                    .setTitle(getString(R.string.login_sign_up_error_title))
+                                    .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show()
+                        } else {
+                            // Or another when the user already exits
+                            AlertDialog.Builder(activity)
+                                    .setTitle(getString(R.string.login_sign_up_error_title))
+                                    .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show()
+                        }
+                    }
+                }.execute()
+            }
         })
     }
 }

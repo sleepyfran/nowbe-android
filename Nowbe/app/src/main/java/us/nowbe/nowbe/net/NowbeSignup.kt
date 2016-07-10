@@ -33,7 +33,7 @@ class NowbeSignup(val context: Context, val user: String, val email: String, val
         // If it was successful, set the user as logged in and save the token
         if (success == ApiUtils.Companion.SignupResults.OK) {
             SharedPreferencesUtils.setLoggedIn(context, true)
-            SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_TOKEN))
+            SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_USER_TOKEN))
         }
 
         return success

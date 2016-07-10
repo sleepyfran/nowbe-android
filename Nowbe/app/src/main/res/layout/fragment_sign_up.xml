@@ -5,43 +5,20 @@
                 android:layout_marginTop="30dp">
 
     <!-- Logo -->
-    <ImageView
+    <!--<ImageView
         android:id="@+id/ivLogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/nowbe_logo"/>
+        android:src="@drawable/nowbe_logo"/>-->
 
-    <!-- Username + Email + Password edit text -->
-    <EditText
-        android:id="@+id/etSignupUsername"
+    <TextView
+        android:id="@+id/tvSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ivLogo"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/login_sign_up.username"/>
-
-    <EditText
-        android:id="@+id/etSignupEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etSignupUsername"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/login_sign_up.email"
-        android:inputType="textEmailAddress"/>
-
-    <EditText
-        android:id="@+id/etSignupPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etSignupEmail"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/login_sign_up.password"
-        android:inputType="textPassword"/>
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/login_sign_up.sign_up"
+        android:textSize="@dimen/login_title"/>
 
     <!-- Log in button -->
     <Button
@@ -52,5 +29,56 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/login_sign_up.sign_up"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnRegister"
+        android:layout_below="@id/tvSignup">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Username + Email + Password edit text -->
+            <EditText
+                android:id="@+id/etSignupUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/login_sign_up.username"/>
+
+            <EditText
+                android:id="@+id/etSignupEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="@string/login_sign_up.email"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/etSignupPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="@string/login_sign_up.password"
+                android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/etSignupPasswordVerif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="@string/login_sign_up.password_verif"
+                android:inputType="textPassword"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
