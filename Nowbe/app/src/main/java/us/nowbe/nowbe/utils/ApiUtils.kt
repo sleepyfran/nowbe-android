@@ -24,7 +24,7 @@ class ApiUtils {
         /**
          * Non-changing values
          */
-        val OS = "1"
+        val OS = "2"
 
         /**
          * Returned information from the API
