@@ -19,7 +19,7 @@ class NowbeSignup(val context: Context, val user: String, val email: String, val
      */
     fun attemptSignUp(): ApiUtils.Companion.SignupResults {
         // Make th request and get the JSON data returned
-        val json = super.makeRequest()
+        val json = super.getObjectFromResponse()
         var success = ApiUtils.Companion.SignupResults.NOT_OK
 
         if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK) {

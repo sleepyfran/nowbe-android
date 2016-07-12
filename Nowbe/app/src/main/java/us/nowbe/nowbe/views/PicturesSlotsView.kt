@@ -17,9 +17,14 @@ import kotlinx.android.synthetic.main.pictures_slot_view.view.*
 
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.PicturesSlotsAdapter
+import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.OnClick
 
 class PicturesSlotsView : RelativeLayout {
+    /**
+     * Adapter of the view
+     */
+    private val adapter: PicturesSlotsAdapter
 
     constructor(context: Context) : super(context)
 
@@ -32,7 +37,7 @@ class PicturesSlotsView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.pictures_slot_view, this, true)
 
         // Setup the recycler view
-        val adapter = PicturesSlotsAdapter(object : OnClick.OnPictureSlotClick {
+        adapter = PicturesSlotsAdapter(object : OnClick.OnPictureSlotClick {
             override fun onPictureSlotClick(itemSelected: Int) {
                 // TODO: Show the picture
                 Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_LONG).show()
@@ -42,5 +47,16 @@ class PicturesSlotsView : RelativeLayout {
         rvPicturesSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    // TODO: Expose an update method that will update the views according to a representation of an user
+    /**
+     * Updates the current pictures with the new ones
+     */
+    fun updateSlots(user: User) {
+        // Clear the current pictures slots
+        adapter.clear()
+
+        // Add non-null picture slots
+        for (picture in user.picturesSlots.filterNotNull()) {
+            adapter.addPicture(picture)
+        }
+    }
 }

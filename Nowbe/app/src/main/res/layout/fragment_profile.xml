@@ -44,6 +44,7 @@
             android:text="@string/profile.pictures_slots"/>
 
         <us.nowbe.nowbe.views.PicturesSlotsView
+            android:id="@+id/psvPicturesSlots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

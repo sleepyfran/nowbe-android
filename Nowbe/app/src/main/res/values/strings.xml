@@ -34,9 +34,10 @@
     <string name="drawer.close">Close navigation drawer</string>
 
     <!-- Profile -->
+    <string name="profile.username">\@%1$s</string>
     <string name="profile.info">%1$s years · %2$s visits · %3$s friends</string>
     <string name="profile.say_hello">Say hello!</string>
-    <string name="profile.send_message">Send message</string>
+    <string name="profile.send_message">Send email</string>
     <string name="profile.pictures_slots">Pictures slots</string>
 
     <!-- Dummy data -->

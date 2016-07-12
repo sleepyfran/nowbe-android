@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.holders.PicturesSlotsHolder
+import us.nowbe.nowbe.model.Slot
 import us.nowbe.nowbe.utils.OnClick
 import us.nowbe.nowbe.views.PicturesSlotsPictureView
 
@@ -18,14 +19,31 @@ class PicturesSlotsAdapter(val onClick: OnClick.OnPictureSlotClick) : RecyclerVi
     /**
      * Array of pictures of the user
      */
-    private var pictures = Array(itemCount, {R.drawable.placeholder_pic})
+    var pictures: MutableList<Slot> = arrayListOf()
+
+    /**
+     * Deletes all the current pictures
+     */
+    fun clear() {
+        pictures = arrayListOf()
+    }
+
+    /**
+     * Adds a picture to the array
+     */
+    fun addPicture(slot: Slot) {
+        pictures.add(slot.index, slot)
+        notifyItemChanged(slot.index)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesSlotsHolder {
         return PicturesSlotsHolder(PicturesSlotsPictureView(parent.context))
     }
 
     override fun onBindViewHolder(holder: PicturesSlotsHolder, position: Int) {
-        holder.bindView(pictures[position], 560, onClick, position)
+        if (pictures.size > 0) {
+            holder.bindView(pictures[position].data, pictures[position].cools!!, onClick, position)
+        }
     }
 
     override fun getItemCount(): Int {

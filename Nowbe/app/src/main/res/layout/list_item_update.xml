@@ -22,7 +22,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:src="@drawable/placeholder_pic"/>
+                android:src="@drawable/nowbe_logo"/>
 
             <ImageView
                 android:id="@+id/ivUserState"

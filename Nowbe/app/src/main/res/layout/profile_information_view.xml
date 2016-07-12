@@ -18,7 +18,7 @@
             android:layout_width="@dimen/default_pic_size"
             android:layout_height="@dimen/default_pic_size"
             android:layout_gravity="center"
-            android:src="@drawable/placeholder_pic"/>
+            android:src="@drawable/nowbe_logo"/>
 
         <ImageView
             android:id="@+id/ivUserState"
@@ -47,7 +47,7 @@
 
     <!-- User status -->
     <TextView
-        android:id="@+id/tvUserStatus"
+        android:id="@+id/tvUserAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUserUsername"
@@ -66,7 +66,7 @@
         android:id="@+id/tvUserInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvUserStatus"
+        android:layout_below="@id/tvUserAbout"
         android:layout_margin="@dimen/profile_info_margin"
         android:layout_toRightOf="@id/ivUserProfilePic"
         android:text="@string/dummy_data.info"

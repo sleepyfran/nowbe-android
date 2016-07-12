@@ -5,6 +5,7 @@ import okhttp3.FormBody
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
 
@@ -19,9 +20,9 @@ abstract class NowbeRequest() {
     /**
      * Makes a request delegating to subclasses the body and URL of it
      */
-    fun makeRequest(): JSONObject {
+    fun makeRequest(): String {
         // Create the client to make the request
-        val client = OkHttpClient()
+        val client = HttpClient.httpClient
 
         // Create the request
         val request = Request.Builder()
@@ -35,8 +36,29 @@ abstract class NowbeRequest() {
         // Log the response
         Log.i(javaClass.simpleName, response)
 
-        // Return it as a JSON string
-        return JSONObject(response)
+        // Return the response
+        return response
+    }
+
+    /**
+     * Makes a JSON object out of a JSON string
+     */
+    fun getObjectFromResponse(): JSONObject {
+        return JSONObject(makeRequest())
+    }
+
+    /**
+     * Makes a JSON object out of the first JSON object on the response array
+     */
+    fun getFirstObjectFromArray(): JSONObject {
+        return JSONArray(makeRequest()).getJSONObject(0)
+    }
+
+    /**
+     * Makes a JSON array out of a JSON string
+     */
+    fun getArrayFromResponse(): JSONArray {
+        return JSONArray(makeRequest())
     }
 
     /**

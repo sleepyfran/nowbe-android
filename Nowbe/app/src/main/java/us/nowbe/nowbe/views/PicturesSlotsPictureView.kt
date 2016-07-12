@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pictures_slots_picture_view.view.*
 
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.utils.ApiUtils
 
 class PicturesSlotsPictureView : RelativeLayout {
 
@@ -33,12 +34,8 @@ class PicturesSlotsPictureView : RelativeLayout {
     /**
      * Updates the image of the slot
      */
-    fun updateImage(imageId: Int) {
-        Picasso.with(context).load(imageId).noFade().into(ivPictureSlot)
-    }
-
     fun updateImage(url: String) {
-        Picasso.with(context).load(url).noFade().into(ivPictureSlot)
+        Picasso.with(context).load(ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_THUMB_URL + url).noFade().into(ivPictureSlot)
     }
 
     /**

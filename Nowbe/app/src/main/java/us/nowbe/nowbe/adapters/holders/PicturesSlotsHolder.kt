@@ -18,8 +18,8 @@ class PicturesSlotsHolder(val imageView: PicturesSlotsPictureView) : RecyclerVie
      * Binds the current image into the image view
      * TODO: Change with the representation of a picture slot
      */
-    fun bindView(pictureId: Int, coolsCounter: Int, onClick: OnClick.OnPictureSlotClick, position: Int) {
-        imageView.updateImage(pictureId)
+    fun bindView(picture: String, coolsCounter: Int, onClick: OnClick.OnPictureSlotClick, position: Int) {
+        imageView.updateImage(picture)
         imageView.updateCounter(NumberUtils.roundNumber(coolsCounter))
 
         // Notify about the pressed picture to the adapter

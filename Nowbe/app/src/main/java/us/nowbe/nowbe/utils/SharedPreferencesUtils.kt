@@ -63,7 +63,7 @@ class SharedPreferencesUtils {
         fun setToken(context: Context, token: String) {
             val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
-            sharedPrefs.edit().putString(TOKEN_KEY, token)
+            sharedPrefs.edit().putString(TOKEN_KEY, token).apply()
         }
     }
 }

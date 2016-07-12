@@ -20,7 +20,7 @@ class NowbeLogin(val context: Context, val username: String, val password: Strin
      */
     fun attemptLogin(): Boolean {
         // Make the request and get the JSON data returned
-        val json = super.makeRequest()
+        val json = super.getObjectFromResponse()
         val success = json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK
 
         // If the log in was successful, save the token and set the user as logged in
