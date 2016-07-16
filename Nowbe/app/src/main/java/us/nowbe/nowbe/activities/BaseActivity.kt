@@ -7,16 +7,14 @@ package us.nowbe.nowbe.activities
  * Maintained by Fran González <@spaceisstrange>
  */
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
-import kotlinx.android.synthetic.main.navigation_drawer.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
  * Defines a base activity used by any other activity of the app
@@ -47,6 +45,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
         if (selectedId == android.R.id.home) {
             finish()
+            return true
+        } else if (selectedId == R.id.toolbarLogOut) {
+            // Clear the data from the shared preferences TODO: Check if this works
+            SharedPreferencesUtils.clearData(applicationContext)
+
+            // Show the welcome activity
+            startActivity(Intent(this, WizardActivity::class.java))
             return true
         }
 

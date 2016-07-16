@@ -1,9 +1,13 @@
 package us.nowbe.nowbe.net
 
+import android.util.Log
 import okhttp3.FormBody
+import org.json.JSONException
 import us.nowbe.nowbe.model.Slot
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android
@@ -19,52 +23,22 @@ class NowbeUserData(val token: String) : NowbeRequest() {
      */
     fun getUser(): User? {
         // Make the request and get the JSON data returned
-        val json = super.getFirstObjectFromArray()
-        val success = json.length() != 0
-        var user: User? = null
+        val response: String
 
-        if (success) {
-            // Get the user data
-            val username = json.getString(ApiUtils.API_USER_USERNAME)
-            val fullname = json.getString(ApiUtils.API_USER_FULLNAME)
-            val status = json.getInt(ApiUtils.API_USER_STATUS) == 1
-            val email = json.getString(ApiUtils.API_USER_EMAIL)
-            val profilePicDir = json.getString(ApiUtils.API_USER_PROFILE_PIC)
-            val age = json.getInt(ApiUtils.API_USER_AGE)
-            val about = json.getString(ApiUtils.API_USER_ABOUT)
-            val friends = json.getInt(ApiUtils.API_USER_FRIENDS)
-            //val isOnline = json.getString(ApiUtils.API_USER_IS_ONLINE) == "1"
-            val visits = json.getInt(ApiUtils.API_USER_VISITS)
-            val interest = json.getString(ApiUtils.API_USER_INTERESTS)
-            val coupleToken = json.getString(ApiUtils.API_USER_COUPLE_TOKEN)
-
-            // Make the user from this data TODO: Check the isOnline
-            user = User(token,
-                    username,
-                    fullname,
-                    status,
-                    email,
-                    profilePicDir,
-                    age,
-                    about,
-                    friends,
-                    false,
-                    visits,
-                    interest,
-                    coupleToken)
-
-            // Add the pictures and comments
-            for (i in 0..4) {
-                val picture = json.getString(ApiUtils.API_USER_PICTURE_SLOT + i)
-                val pictureCools = json.getInt(ApiUtils.API_USER_PICTURE_SLOT_COOLS + i)
-                val comment = json.getString(ApiUtils.API_USER_COMMENT_SLOT + i)
-
-                user.addPicture(Slot(picture, i, pictureCools))
-                user.addComment(Slot(comment, i, null))
-            }
+        // Attempt to make a request TODO: Check the null return
+        try {
+            response = super.makeRequest()
+        } catch (e: UnknownHostException) {
+            return null
+        } catch (e: ConnectException) {
+            return null
         }
 
-        return user
+        val json = super.getFirstObjectFromArray(response)
+        val success = json.length() != 0
+
+        // Return the user if the request was successful or null otherwise
+        return if (success) User.fromJson(token, json) else null
     }
 
     override fun getBody(): FormBody {

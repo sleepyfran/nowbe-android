@@ -2,6 +2,10 @@
     <string name="app_name">Nowbe</string>
     <string name="title_activity_main">Nowbe</string>
 
+    <!-- General -->
+    <string name="general.no_internet">We lost the internet here :(</string>
+    <string name="general.log_out">Log out</string>
+
     <!-- Base activity -->
     <string name="main.feed_tab">Feed</string>
     <string name="main.notifications_tab">Notifications</string>
@@ -28,6 +32,7 @@
     <string name="login_sign_up.error_user">Please specify an username!</string>
     <string name="login_sign_up.error_email">Please specify a valid email!</string>
     <string name="login_sign_up.error_password">Please specify a password!</string>
+    <string name="login_sign_up.error_connection">Whoops! It seems like you don\'t have an internet connection or it\'s not working right.</string>
 
     <!-- Navigation drawer -->
     <string name="drawer.open">Open navigation drawer</string>
@@ -42,8 +47,8 @@
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>
-    <string name="dummy_data.name">Fran González</string>
-    <string name="dummy_data.username">\@spaceisstrange</string>
-    <string name="dummy_data.status">Welcome to the real world, jackass!</string>
-    <string name="dummy_data.info">20 years · 19M visits · 12M friends</string>
+    <string name="dummy_data.name">Nowbe</string>
+    <string name="dummy_data.username">\@nowbe</string>
+    <string name="dummy_data.status">The place to be</string>
+    <string name="dummy_data.info">20 years · 100M visits · 100M friends</string>
 </resources>

@@ -14,14 +14,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.pictures_slot_view.*
-import kotlinx.android.synthetic.main.profile_information_view.*
 
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class ProfileFragment : Fragment() {
@@ -41,37 +40,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    fun loadProfileData() {
-        // Load the user in another thread
-        object : AsyncTask<Void, Void, User>() {
-            override fun doInBackground(vararg params: Void?): User {
-                return NowbeUserData(token).getUser()!!
-            }
-
-            override fun onPostExecute(user: User?) {
-                // Update the user's profile pic
-                Picasso.with(context).load(user?.profilePicDir).noFade().into(ivUserPicture)
-
-                // Update the user's online state
-                Picasso.with(context).load(
-                        (if (user?.status!!) R.drawable.online_state else R.drawable.offline_state)
-                ).into(ivUserState)
-
-                // Update the user's username
-                tvUserUsername.text = getString(R.string.profile_username, user?.nickname!!)
-
-                // Update the user's about section
-                tvUserAbout.text = user?.about
-
-                // Update the user's statistics
-                tvUserInfo.text = getString(R.string.profile_info, user?.age, user?.visits, user?.friends)
-
-                // Set up the pictures slots
-                psvPicturesSlots.updateSlots(user!!)
-            }
-        }.execute()
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
@@ -86,7 +54,30 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Load the profile data
-        loadProfileData()
+        // If we don't have an internet connection, show an error and return
+        if (!NetUtils.isConnectionAvailable(context)) {
+            Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // Load the user in another thread
+        object : AsyncTask<Void, Void, User?>() {
+            override fun doInBackground(vararg params: Void?): User? {
+                return NowbeUserData(token).getUser()
+            }
+
+            override fun onPostExecute(user: User?) {
+                if (user != null) {
+                    // Update the profile information
+                    pivProfileInfo.updateInformation(user)
+
+                    // Set up the pictures slots
+                    psvPicturesSlots.updateSlots(user)
+                } else {
+                    // We have no connection or the server is down
+                    Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+                }
+            }
+        }.execute()
     }
 }

@@ -47,6 +47,6 @@ class PicturesSlotsAdapter(val onClick: OnClick.OnPictureSlotClick) : RecyclerVi
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return pictures.size
     }
 }

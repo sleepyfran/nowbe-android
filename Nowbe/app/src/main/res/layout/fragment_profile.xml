@@ -10,6 +10,7 @@
 
         <!-- Profile information -->
         <us.nowbe.nowbe.views.ProfileInformationView
+            android:id="@+id/pivProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

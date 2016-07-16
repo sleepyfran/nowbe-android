@@ -1,10 +1,7 @@
 package us.nowbe.nowbe.net
 
 import android.util.Log
-import okhttp3.FormBody
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
@@ -17,6 +14,7 @@ import us.nowbe.nowbe.utils.ApiUtils
  */
 
 abstract class NowbeRequest() {
+
     /**
      * Makes a request delegating to subclasses the body and URL of it
      */
@@ -31,34 +29,35 @@ abstract class NowbeRequest() {
                 .build()
 
         // Get the response
-        val response = client.newCall(request).execute().body().string()
+        val response = client.newCall(request).execute()
+        val responseString = response.body().string()
 
         // Log the response
-        Log.i(javaClass.simpleName, response)
+        Log.i(javaClass.simpleName, responseString)
 
         // Return the response
-        return response
+        return responseString
     }
 
     /**
      * Makes a JSON object out of a JSON string
      */
-    fun getObjectFromResponse(): JSONObject {
-        return JSONObject(makeRequest())
+    fun getObjectFromResponse(response: String): JSONObject {
+        return JSONObject(response)
     }
 
     /**
      * Makes a JSON object out of the first JSON object on the response array
      */
-    fun getFirstObjectFromArray(): JSONObject {
-        return JSONArray(makeRequest()).getJSONObject(0)
+    fun getFirstObjectFromArray(response: String): JSONObject {
+        return JSONArray(response).getJSONObject(0)
     }
 
     /**
      * Makes a JSON array out of a JSON string
      */
-    fun getArrayFromResponse(): JSONArray {
-        return JSONArray(makeRequest())
+    fun getArrayFromResponse(response: String): JSONArray {
+        return JSONArray(response)
     }
 
     /**

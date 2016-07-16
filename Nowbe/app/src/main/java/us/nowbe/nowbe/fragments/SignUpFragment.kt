@@ -15,11 +15,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
 import us.nowbe.nowbe.net.NowbeSignup
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.ValidatorUtils
 
 class SignUpFragment : Fragment {
@@ -33,6 +35,12 @@ class SignUpFragment : Fragment {
         super.onViewCreated(view, savedInstanceState)
 
         btnRegister.setOnClickListener({
+            // If we don't have an internet connection, show an error and return
+            if (!NetUtils.isConnectionAvailable(context)) {
+                Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             // Boolean specifying if there was or not an error
             var error = false
 
@@ -80,11 +88,18 @@ class SignUpFragment : Fragment {
                                     .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
                                     .setPositiveButton(android.R.string.ok, null)
                                     .show()
-                        } else {
+                        } else if (result == ApiUtils.Companion.SignupResults.EXISTS) {
                             // Or another when the user already exits
                             AlertDialog.Builder(activity)
                                     .setTitle(getString(R.string.login_sign_up_error_title))
                                     .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show()
+                        } else {
+                            // Show an error dialog indicating that we have no connection otherwise
+                            AlertDialog.Builder(activity)
+                                    .setTitle(getString(R.string.login_sign_up_error_title))
+                                    .setMessage(getString(R.string.login_sign_up_error_connection))
                                     .setPositiveButton(android.R.string.ok, null)
                                     .show()
                         }

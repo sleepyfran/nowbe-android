@@ -4,6 +4,8 @@ import android.content.Context
 import okhttp3.FormBody
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android
@@ -18,8 +20,20 @@ class NowbeSignup(val context: Context, val user: String, val email: String, val
      * Attempts to sign up the user into Nowbe and returns whether it was or not succesful
      */
     fun attemptSignUp(): ApiUtils.Companion.SignupResults {
+        // Make the request and get the JSON data returned
+        val response: String
+
+        // Attempt to make a request
+        try {
+            response = super.makeRequest()
+        } catch (e: UnknownHostException) {
+            return ApiUtils.Companion.SignupResults.NO_CONNECTION
+        }catch (e: ConnectException) {
+            return ApiUtils.Companion.SignupResults.NO_CONNECTION
+        }
+
         // Make th request and get the JSON data returned
-        val json = super.getObjectFromResponse()
+        val json = super.getObjectFromResponse(response)
         var success = ApiUtils.Companion.SignupResults.NOT_OK
 
         if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK) {

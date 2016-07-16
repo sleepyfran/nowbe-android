@@ -65,5 +65,12 @@ class SharedPreferencesUtils {
 
             sharedPrefs.edit().putString(TOKEN_KEY, token).apply()
         }
+
+        /**
+         * Clears the whole data stored in the shared preferences
+         */
+        fun clearData(context: Context) {
+            context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE).edit().clear().apply()
+        }
     }
 }

@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.pictures_slot_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.PicturesSlotsAdapter
 import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.OnClick
 
 class PicturesSlotsView : RelativeLayout {
@@ -55,8 +56,10 @@ class PicturesSlotsView : RelativeLayout {
         adapter.clear()
 
         // Add non-null picture slots
-        for (picture in user.picturesSlots.filterNotNull()) {
-            adapter.addPicture(picture)
+        for (picture in user.picturesSlots) {
+            if (picture?.data != ApiUtils.NULL) {
+                adapter.addPicture(picture!!)
+            }
         }
     }
 }

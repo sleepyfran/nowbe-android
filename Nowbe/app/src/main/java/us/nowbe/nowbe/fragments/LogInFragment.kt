@@ -15,11 +15,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
 import us.nowbe.nowbe.net.NowbeLogin
+import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.NetUtils
 
 class LogInFragment : Fragment {
     constructor() : super()
@@ -32,33 +35,58 @@ class LogInFragment : Fragment {
         super.onViewCreated(view, savedInstanceState)
 
         btnLetMeIn.setOnClickListener({
+            // If we don't have an internet connection, show an error and return
+            if (!NetUtils.isConnectionAvailable(context)) {
+                Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             val username = etLoginUsername.text.toString()
             val password = etLoginPassword.text.toString()
 
+            // Boolean specifying if there was or not an error
+            var error = false
+
             // Check if the edit text fields are empty and if so, show an error
-            if (username.isEmpty()) etLoginUsername.error = getString(R.string.login_sign_up_error_user)
-            if (password.isEmpty()) etLoginPassword.error = getString(R.string.login_sign_up_error_password)
+            if (username.isEmpty()) {
+                etLoginUsername.error = getString(R.string.login_sign_up_error_user)
+                error = true
+            }
+
+            if (password.isEmpty()) {
+                etLoginPassword.error = getString(R.string.login_sign_up_error_password)
+                error = true
+            }
 
             // Attempt to login with the username and password provided in another thread
-            object : AsyncTask<Void, Void, Boolean>() {
-                override fun doInBackground(vararg params: Void?): Boolean {
-                    return NowbeLogin(context, username, password).attemptLogin()
-                }
-
-                override fun onPostExecute(result: Boolean?) {
-                    if (result!!) {
-                        // If the login is good, show the landing activity
-                        startActivity(Intent(context, LandingActivity::class.java))
-                    } else {
-                        // Show an error dialog otherwise
-                        AlertDialog.Builder(activity)
-                                .setTitle(getString(R.string.login_sign_up_error_title))
-                                .setMessage(getString(R.string.login_sign_up_error_login_message))
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
+            if (!error) {
+                object : AsyncTask<Void, Void, ApiUtils.Companion.LoginResults>() {
+                    override fun doInBackground(vararg p0: Void?): ApiUtils.Companion.LoginResults {
+                        return NowbeLogin(context, username, password).attemptLogin()
                     }
-                }
-            }.execute()
+
+                    override fun onPostExecute(result: ApiUtils.Companion.LoginResults?) {
+                        if (result == ApiUtils.Companion.LoginResults.LOGGED) {
+                            // If the login is good, show the landing activity
+                            startActivity(Intent(context, LandingActivity::class.java))
+                        } else if (result == ApiUtils.Companion.LoginResults.WRONG_DATA) {
+                            // Show an error showing that the data provided is wrong
+                            AlertDialog.Builder(activity)
+                                    .setTitle(getString(R.string.login_sign_up_error_title))
+                                    .setMessage(getString(R.string.login_sign_up_error_login_message))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show()
+                        } else {
+                            // Show an error dialog indicating that we have no connection otherwise
+                            AlertDialog.Builder(activity)
+                                    .setTitle(getString(R.string.login_sign_up_error_title))
+                                    .setMessage(getString(R.string.login_sign_up_error_connection))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show()
+                        }
+                    }
+                }.execute()
+            }
         })
     }
 }
