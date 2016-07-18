@@ -10,7 +10,10 @@ package us.nowbe.nowbe.fragments
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v4.widget.NestedScrollView
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +21,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.NowbeUserData
 import us.nowbe.nowbe.utils.NetUtils
@@ -54,6 +58,20 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up the (empty) adapters and layout manager of the comments recycler view
+        val commentsAdapter = CommentsAdapter()
+        rvCommentsSlots.isNestedScrollingEnabled = false
+        rvCommentsSlots.adapter = commentsAdapter
+        rvCommentsSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        // Hide the fab when scrolling the fragment
+        nsvProfile.setOnScrollChangeListener {
+            nestedScrollView: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            val fab = activity.findViewById(R.id.fab) as FloatingActionButton
+            if (scrollY - oldScrollY > 0) fab.hide()
+            else fab.show()
+        }
+
         // If we don't have an internet connection, show an error and return
         if (!NetUtils.isConnectionAvailable(context)) {
             Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
@@ -73,6 +91,13 @@ class ProfileFragment : Fragment() {
 
                     // Set up the pictures slots
                     psvPicturesSlots.updateSlots(user)
+
+                    // Add the non-null comments to the adapter
+                    for (comment in user.commentsSlots) {
+                        if (comment?.data != "") {
+                            commentsAdapter.addComment(comment!!)
+                        }
+                    }
                 } else {
                     // We have no connection or the server is down
                     Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()

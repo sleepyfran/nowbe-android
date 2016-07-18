@@ -44,6 +44,8 @@
     <string name="profile.say_hello">Say hello!</string>
     <string name="profile.send_message">Send email</string>
     <string name="profile.pictures_slots">Pictures slots</string>
+    <string name="profile.comments_slots">Comments slots</string>
+    <string name="profile.comment_number">#%1$s</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>

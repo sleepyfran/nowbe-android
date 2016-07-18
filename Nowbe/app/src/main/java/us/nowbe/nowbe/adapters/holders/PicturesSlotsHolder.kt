@@ -16,7 +16,6 @@ import us.nowbe.nowbe.views.PicturesSlotsPictureView
 class PicturesSlotsHolder(val imageView: PicturesSlotsPictureView) : RecyclerView.ViewHolder(imageView) {
     /**
      * Binds the current image into the image view
-     * TODO: Change with the representation of a picture slot
      */
     fun bindView(picture: String, coolsCounter: Int, onClick: OnClick.OnPictureSlotClick, position: Int) {
         imageView.updateImage(picture)

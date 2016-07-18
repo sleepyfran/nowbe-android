@@ -22,6 +22,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
     }
 
     override fun getItemCount(): Int {
+        // TODO: Return the size of the feed
         return 20
     }
 }

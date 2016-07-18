@@ -25,7 +25,7 @@ class NowbeUserData(val token: String) : NowbeRequest() {
         // Make the request and get the JSON data returned
         val response: String
 
-        // Attempt to make a request TODO: Check the null return
+        // Attempt to make a request
         try {
             response = super.makeRequest()
         } catch (e: UnknownHostException) {

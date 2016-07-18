@@ -26,7 +26,7 @@ class FeedFragment : Fragment {
      * Reference to the scroll listener that our recycler view will be using
      */
     val scrollListener: OnScrollListener by lazy {
-        OnScrollListener(activity.findViewById(R.id.searchFab) as FloatingActionButton)
+        OnScrollListener(activity.findViewById(R.id.fab) as FloatingActionButton)
     }
 
     constructor() : super()
