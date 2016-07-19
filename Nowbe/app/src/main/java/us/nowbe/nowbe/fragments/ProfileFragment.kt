@@ -89,6 +89,9 @@ class ProfileFragment : Fragment() {
                     // Update the profile information
                     pivProfileInfo.updateInformation(user)
 
+                    // Update the likes, couple and education info
+                    pleLikesEducationCouple.updateInformation(user)
+
                     // Set up the pictures slots
                     psvPicturesSlots.updateSlots(user)
 

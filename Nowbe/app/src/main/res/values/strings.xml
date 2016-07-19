@@ -53,4 +53,7 @@
     <string name="dummy_data.username">\@nowbe</string>
     <string name="dummy_data.status">The place to be</string>
     <string name="dummy_data.info">20 years · 100M visits · 100M friends</string>
+    <string name="dummy_data.likes">Computers, NFL, Something else</string>
+    <string name="dummy_data.education">Something related with computers</string>
+    <string name="dummy_data.couple">Me myself And I</string>
 </resources>

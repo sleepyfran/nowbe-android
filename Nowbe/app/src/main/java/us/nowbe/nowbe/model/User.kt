@@ -4,6 +4,7 @@ import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.JsonUtils
 import java.util.*
 
 /**
@@ -25,7 +26,9 @@ class User(token: String,
            isOnline: Boolean?,
            visits: Int,
            interests: String?,
-           coupleToken: String?) {
+           education: String?,
+           coupleToken: String?,
+           coupleName: String?) {
 
     /**
      * A Nowbe user representation
@@ -42,7 +45,9 @@ class User(token: String,
     var isOnline: Boolean?
     var visits: Int
     var interests: String?
+    var education: String?
     var coupleToken: String?
+    var coupleName: String?
     var commentsSlots: MutableList<Slot?>
     var picturesSlots: MutableList<Slot?>
 
@@ -59,7 +64,9 @@ class User(token: String,
         this.isOnline = isOnline
         this.visits = visits
         this.interests = interests
+        this.education = education
         this.coupleToken = coupleToken
+        this.coupleName = coupleName
         this.commentsSlots = arrayListOf()
         this.picturesSlots = arrayListOf()
     }
@@ -108,8 +115,10 @@ class User(token: String,
             }
 
             val visits = json.getInt(ApiUtils.API_USER_VISITS)
-            val interest = json.getString(ApiUtils.API_USER_INTERESTS)
-            val coupleToken = json.getString(ApiUtils.API_USER_COUPLE_TOKEN)
+            val interest = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_INTERESTS)
+            val education = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_EDUCATION)
+            val coupleToken = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_TOKEN)
+            val coupleName = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_NAME)
 
             // Make the user from this data TODO: Check the isOnline
             val user = User(token,
@@ -124,7 +133,9 @@ class User(token: String,
                     isOnline,
                     visits,
                     interest,
-                    coupleToken)
+                    education,
+                    coupleToken,
+                    coupleName)
 
             // Add the pictures and comments
             for (i in 0..4) {

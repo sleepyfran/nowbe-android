@@ -7,12 +7,12 @@ import android.widget.RelativeLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.android.synthetic.main.profile_information_view.*
-import kotlinx.android.synthetic.main.profile_information_view.view.*
+import kotlinx.android.synthetic.main.profile_basic_info_view.*
+import kotlinx.android.synthetic.main.profile_basic_info_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 
-class ProfileInformationView : RelativeLayout {
+class ProfileBasicInfoView : RelativeLayout {
 
     constructor(context: Context) : super(context)
 
@@ -22,7 +22,7 @@ class ProfileInformationView : RelativeLayout {
 
     init {
         // Inflate the view
-        LayoutInflater.from(context).inflate(R.layout.profile_information_view, this, true)
+        LayoutInflater.from(context).inflate(R.layout.profile_basic_info_view, this, true)
     }
 
     fun updateInformation(user: User) {

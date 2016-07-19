@@ -14,11 +14,16 @@
         android:orientation="vertical">
 
         <!-- Profile information -->
-        <us.nowbe.nowbe.views.ProfileInformationView
+        <us.nowbe.nowbe.views.ProfileBasicInfoView
             android:id="@+id/pivProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- Likes, education and couple -->
+        <us.nowbe.nowbe.views.ProfileSpecificInfoView
+            android:id="@+id/pleLikesEducationCouple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <!-- Say hello and send message buttons -->
         <LinearLayout
