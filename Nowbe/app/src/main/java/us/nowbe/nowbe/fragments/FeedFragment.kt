@@ -8,6 +8,7 @@ package us.nowbe.nowbe.fragments
  */
 
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -21,10 +22,13 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.activities.ProfileActivity
 import us.nowbe.nowbe.adapters.FeedAdapter
 import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.net.NowbeFeedData
+import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
+import us.nowbe.nowbe.utils.OnClick
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class FeedFragment : Fragment {
@@ -58,6 +62,23 @@ class FeedFragment : Fragment {
 
         // Setup the recycler view with an empty list
         val adapter = FeedAdapter()
+        adapter.onClick = object : OnClick.OnFeedItemClick {
+            override fun onFeedItemClick(itemSelected: Int) {
+                // TODO: Allow the user to send a hello to the user from the feed
+
+                // Get the selected user's token
+                val selectedToken = adapter.getFeedItem(itemSelected).token
+
+                // Create an intent pointing to the profile activity
+                val intent = Intent(activity, ProfileActivity::class.java)
+
+                // Put the selected user's token as an extra
+                intent.putExtra(ApiUtils.API_USER_TOKEN, selectedToken)
+
+                // Start the activity
+                startActivity(intent)
+            }
+        }
         rvFeed.adapter = adapter
         rvFeed.layoutManager = LinearLayoutManager(context)
 

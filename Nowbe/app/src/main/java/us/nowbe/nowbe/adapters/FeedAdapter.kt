@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import us.nowbe.nowbe.adapters.holders.FeedHolder
 import us.nowbe.nowbe.model.FeedContent
+import us.nowbe.nowbe.utils.OnClick
 import us.nowbe.nowbe.views.FeedView
 
 class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
@@ -18,6 +19,11 @@ class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
      * List of content to display
      */
     var feed: MutableList<FeedContent> = arrayListOf()
+
+    /**
+     * Interface to be called when the user presses an item
+     */
+    lateinit var onClick: OnClick.OnFeedItemClick
 
     /**
      * Updates the feed with new content and notifies about the change
@@ -28,12 +34,19 @@ class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
         notifyDataSetChanged()
     }
 
+    /**
+     * Returns the content of the specified position of the feed
+     */
+    fun getFeedItem(position: Int): FeedContent {
+        return feed[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedHolder {
         return FeedHolder(FeedView(parent.context))
     }
 
     override fun onBindViewHolder(holder: FeedHolder, position: Int) {
-        holder.bindContent(feed[position])
+        holder.bindContent(feed[position], onClick, position)
     }
 
     override fun getItemCount(): Int {

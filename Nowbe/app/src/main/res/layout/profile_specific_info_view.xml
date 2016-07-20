@@ -93,6 +93,7 @@
             android:maxLines="2"
             android:text="@string/dummy_data.couple"
             android:textColor="@color/primary_text_white"
+            android:textStyle="italic"
             android:textSize="@dimen/profile_info_likes_education_text_size"/>
     </LinearLayout>
 </LinearLayout>
