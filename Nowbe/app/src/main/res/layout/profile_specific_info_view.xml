@@ -18,11 +18,12 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:orientation="horizontal">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivInterestsIcon"
             android:layout_width="@dimen/profile_info_icon_size"
             android:layout_height="@dimen/profile_info_icon_size"
-            android:src="@drawable/ic_favorite_white"/>
+            android:src="@drawable/ic_favorite_white"
+            android:tint="@color/accent"/>
 
         <TextView
             android:id="@+id/tvInterests"
@@ -47,7 +48,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:orientation="horizontal">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivEducationIcon"
             android:layout_width="@dimen/profile_info_icon_size"
             android:layout_height="@dimen/profile_info_icon_size"
@@ -76,7 +77,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:orientation="horizontal">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivCoupleIcon"
             android:layout_width="@dimen/profile_info_icon_size"
             android:layout_height="@dimen/profile_info_icon_size"
