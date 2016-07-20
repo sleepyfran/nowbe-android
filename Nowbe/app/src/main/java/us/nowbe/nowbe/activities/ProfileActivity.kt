@@ -8,6 +8,8 @@ package us.nowbe.nowbe.activities
  */
 
 import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.fragments.ProfileFragment
 import us.nowbe.nowbe.utils.ApiUtils
@@ -15,6 +17,9 @@ import us.nowbe.nowbe.utils.ApiUtils
 class ProfileActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Hide the toolbar
+        toolbar.visibility = View.GONE
 
         val token = intent.getStringExtra(ApiUtils.API_USER_TOKEN)
 
