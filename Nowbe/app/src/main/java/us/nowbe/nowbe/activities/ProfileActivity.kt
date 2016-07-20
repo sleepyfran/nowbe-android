@@ -21,6 +21,7 @@ class ProfileActivity : BaseActivity() {
         // Hide the toolbar
         toolbar.visibility = View.GONE
 
+        // Get the token from the intent's extras
         val token = intent.getStringExtra(ApiUtils.API_USER_TOKEN)
 
         // Load the profile fragment with the specified token
