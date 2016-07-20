@@ -7,7 +7,6 @@ package us.nowbe.nowbe.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
-import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -17,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 import us.nowbe.nowbe.R
@@ -26,7 +24,6 @@ import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.NowbeUserData
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class ProfileFragment : Fragment() {
     /**
