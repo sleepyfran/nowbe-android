@@ -16,7 +16,7 @@ class FeedView(context: Context) : RelativeLayout(context) {
 
     fun update(content: FeedContent) {
         // Load the user picture
-        Picasso.with(context).load(content.profilePic).noFade().into(ivUserPicture)
+        Picasso.with(context).load(content.profilePic).noFade().placeholder(R.drawable.nowbe_logo).into(ivUserPicture)
 
         // Load the user state (online or not)
         val drawableStatus: Int
