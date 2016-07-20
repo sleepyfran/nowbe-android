@@ -52,7 +52,7 @@ class ProfileSpecificInfoView : RelativeLayout {
         if (user.coupleName == null) {
             llCouple.visibility = GONE
         } else {
-            tvCouple.text == user.coupleName
+            tvCouple.text = user.coupleName
 
             // TODO: Send the user to the couple's profile when onClick
         }
