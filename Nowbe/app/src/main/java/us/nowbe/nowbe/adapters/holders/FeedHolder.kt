@@ -9,5 +9,18 @@ package us.nowbe.nowbe.adapters.holders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import kotlinx.android.synthetic.main.feed_view.view.*
+import us.nowbe.nowbe.model.FeedContent
+import us.nowbe.nowbe.views.FeedView
 
-class FeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+class FeedHolder(val feedView: FeedView) : RecyclerView.ViewHolder(feedView) {
+    /**
+     * Binds a FeedContent into the view
+     */
+    fun bindContent(content: FeedContent) {
+        // Bind the content
+        feedView.update(content)
+    }
+
+    // TODO: Set an onClick for various interaction with the feed (opening profile, etc)
+}

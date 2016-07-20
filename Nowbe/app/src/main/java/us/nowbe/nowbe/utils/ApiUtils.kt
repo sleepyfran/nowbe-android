@@ -36,6 +36,9 @@ class ApiUtils {
         const val API_SUCCESS_EXIST = "exist"
         const val API_ID = "id"
 
+        // General API calls
+        const val API_TIMESTAMP = "elapsedTime"
+
         // User-specific API calls
         const val API_USER_TOKEN = "token"
         const val API_USER_USERNAME = "username"
@@ -56,6 +59,11 @@ class ApiUtils {
         const val API_USER_PICTURE_SLOT_COOLS = "coolSlot"
         const val API_USER_COMMENT_SLOT = "comment"
 
+        // Feed-specific API calls
+        const val API_FEED_USERNAME = "nickname"
+        const val API_FEED_UPDATE = "lastThingChanged"
+        const val API_FEED_PICTURE = "pictureProfile"
+
         /**
          * URLs for the API requests
          */
@@ -63,6 +71,7 @@ class ApiUtils {
         const val LOGIN_URL = "login.php"
         const val SIGNUP_URL = "newUser.php"
         const val USER_DATA_URL = "getUserDetails.php"
+        const val USER_FEED_URL = "getFriends.php"
         const val USER_PICTURE_URL = "UserPictures/"
         const val USER_SLOTS_PICTURES_THUMB_URL = "slotsPicturesThumbnails/"
         const val USER_SLOTS_PICTURES_URL = "slotsPictures/"
@@ -73,5 +82,12 @@ class ApiUtils {
         enum class RequestResults {OK, NO_CONNECTION}
         enum class SignupResults {OK, NOT_OK, EXISTS, NO_CONNECTION}
         enum class LoginResults {LOGGED, WRONG_DATA, NO_CONNECTION}
+
+        /**
+         * Various utils
+         */
+        fun getFullProfilePicDir(profilePic: String): String {
+            return ApiUtils.BASE_URL + ApiUtils.USER_PICTURE_URL + profilePic
+        }
     }
 }

@@ -1,7 +1,7 @@
 package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
-import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.utils.ApiUtils
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -13,12 +13,11 @@ import java.net.UnknownHostException
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class NowbeUserData(val token: String) : NowbeRequest() {
-
+class NowbeFeedData(val token: String): NowbeRequest() {
     /**
-     * Attempts to get an user by its token
+     * Attemps to get the feed of the user
      */
-    fun getUser(): User? {
+    fun getFeed(): Feed? {
         // Make the request and get the JSON data returned
         val response: String
 
@@ -31,11 +30,10 @@ class NowbeUserData(val token: String) : NowbeRequest() {
             return null
         }
 
-        val json = super.getFirstObjectFromArray(response)
-        val success = json.length() != 0
+        val json = super.getArrayFromResponse(response)
 
-        // Return the user if the request was successful or null otherwise
-        return if (success) User.fromJson(token, json) else null
+        // Return the feed from the JSON we got
+        return Feed.fromJson(json)
     }
 
     override fun getBody(): FormBody {
@@ -46,6 +44,6 @@ class NowbeUserData(val token: String) : NowbeRequest() {
     }
 
     override fun getRequestUrl(): String {
-        return ApiUtils.USER_DATA_URL
+        return ApiUtils.USER_FEED_URL
     }
 }

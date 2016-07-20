@@ -47,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
             finish()
             return true
         } else if (selectedId == R.id.toolbarLogOut) {
-            // Clear the data from the shared preferences TODO: Check if this works
+            // Clear the data from the shared preferences
             SharedPreferencesUtils.clearData(applicationContext)
 
             // Show the welcome activity

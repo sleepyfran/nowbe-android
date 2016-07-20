@@ -21,6 +21,7 @@ class HttpClient {
         lateinit var httpClient: OkHttpClient
 
         fun configureClient(file: File) {
+            // Check the damn cache
             val cache = Cache(file, cacheSize)
 
             httpClient = OkHttpClient.Builder()

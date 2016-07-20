@@ -4,8 +4,19 @@
                 android:layout_height="match_parent"
                 tools:context=".fragments.FeedFragment">
 
+    <!-- Loading icon to be shown while fetching the feed -->
+    <ProgressBar
+        android:id="@+id/pbLoadingFeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"/>
+
+    <!-- Feed, GONE by default, and shown when it's already loaded -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFeed"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>

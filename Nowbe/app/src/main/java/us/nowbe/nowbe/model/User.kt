@@ -57,7 +57,7 @@ class User(token: String,
         this.fullName = fullName
         this.status = status
         this.email = email
-        this.profilePicDir = ApiUtils.BASE_URL + ApiUtils.USER_PICTURE_URL + profilePicDir
+        this.profilePicDir = ApiUtils.getFullProfilePicDir(profilePicDir)
         this.age = age
         this.about = about
         this.friends = friends
@@ -105,22 +105,14 @@ class User(token: String,
             val age = json.getInt(ApiUtils.API_USER_AGE)
             val about = json.getString(ApiUtils.API_USER_ABOUT)
             val friends = json.getInt(ApiUtils.API_USER_FRIENDS)
-            var isOnline: Boolean? = null
-
-            // Try to obtain the online state (might not be available)
-            try {
-                isOnline = json.getString(ApiUtils.API_USER_IS_ONLINE) == "1"
-            } catch (e: JSONException) {
-                Log.e("NowbeUserData", "Cannot find isOnline string")
-            }
-
             val visits = json.getInt(ApiUtils.API_USER_VISITS)
+            val isOnline = JsonUtils.getNullableBooleanFromJson(json, ApiUtils.API_USER_IS_ONLINE)
             val interest = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_INTERESTS)
             val education = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_EDUCATION)
             val coupleToken = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_TOKEN)
             val coupleName = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_NAME)
 
-            // Make the user from this data TODO: Check the isOnline
+            // Make the user from this data
             val user = User(token,
                     username,
                     fullname,

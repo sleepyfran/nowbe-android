@@ -24,6 +24,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
@@ -62,7 +63,7 @@ class ProfileFragment : Fragment() {
         val commentsAdapter = CommentsAdapter()
         rvCommentsSlots.isNestedScrollingEnabled = false
         rvCommentsSlots.adapter = commentsAdapter
-        rvCommentsSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvCommentsSlots.layoutManager = LinearLayoutManager(context)
 
         // Hide the fab when scrolling the fragment
         nsvProfile.setOnScrollChangeListener {
@@ -74,7 +75,7 @@ class ProfileFragment : Fragment() {
 
         // If we don't have an internet connection, show an error and return
         if (!NetUtils.isConnectionAvailable(context)) {
-            Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+            ErrorUtils.showNoConnectionToast(context)
             return
         }
 
@@ -103,7 +104,7 @@ class ProfileFragment : Fragment() {
                     }
                 } else {
                     // We have no connection or the server is down
-                    Toast.makeText(context, getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+                    ErrorUtils.showNoConnectionToast(context)
                 }
             }
         }.execute()
