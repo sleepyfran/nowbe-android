@@ -1,13 +1,16 @@
 package us.nowbe.nowbe.views
 
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.profile_specific_info_view.view.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.activities.ProfileActivity
 import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.utils.ApiUtils
 
 /**
  * This file is part of Nowbe for Android
@@ -54,7 +57,17 @@ class ProfileSpecificInfoView : RelativeLayout {
         } else {
             tvCouple.text = user.coupleName
 
-            // TODO: Send the user to the couple's profile when onClick
+            // Take the user to the couple's profile when clicking on its name
+            tvCouple.setOnClickListener {
+                // Create an intent pointing to the profile activity
+                val intent = Intent(context, ProfileActivity::class.java)
+
+                // Put the selected user's token as an extra
+                intent.putExtra(ApiUtils.API_USER_TOKEN, user.coupleToken)
+
+                // Start the activity
+                context.startActivity(intent)
+            }
         }
     }
 }
