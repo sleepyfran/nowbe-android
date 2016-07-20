@@ -24,7 +24,10 @@ class TabUtils {
             val adapter = ViewPagerAdapter(fragmentManager)
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_feed_tab))
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_notifications_tab))
-            adapter.addFragment(ProfileFragment(), context.getString(R.string.main_profile_tab))
+
+            // Load the profile fragment with the token of the user
+            adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!),
+                    context.getString(R.string.main_profile_tab))
             return adapter
         }
     }

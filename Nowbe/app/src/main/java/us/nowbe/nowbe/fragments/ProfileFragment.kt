@@ -45,13 +45,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        // Get the token
-        token = SharedPreferencesUtils.getToken(context!!)!!
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater?.inflate(R.layout.fragment_profile, container, false)!!
     }
@@ -59,7 +52,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up the (empty) adapters and layout manager of the comments recycler view
+        // Set up the (empty) adapter and layout manager of the comments recycler view
         val commentsAdapter = CommentsAdapter()
         rvCommentsSlots.isNestedScrollingEnabled = false
         rvCommentsSlots.adapter = commentsAdapter
