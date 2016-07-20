@@ -53,7 +53,7 @@ class User(token: String,
 
     init {
         this.token = token
-        this.username = username
+        this.username = username.toLowerCase()
         this.fullName = fullName
         this.status = status
         this.email = email

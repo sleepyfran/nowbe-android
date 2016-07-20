@@ -33,7 +33,7 @@ class FeedContent(token: String,
         this.profilePic = ApiUtils.getFullProfilePicDir(profilePic)
         this.isOnline = isOnline
         this.fullname = fullname
-        this.username = username
+        this.username = username.toLowerCase()
         this.update = update
         this.timestamp = timestamp
     }
