@@ -80,7 +80,11 @@ class SignUpFragment : Fragment {
                     override fun onPostExecute(result: ApiUtils.Companion.SignupResults?) {
                         if (result == ApiUtils.Companion.SignupResults.OK) {
                             // If the sign up is good, show the landing activity
-                            startActivity(Intent(context, LandingActivity::class.java))
+                            val landingIntent = Intent(context, LandingActivity::class.java)
+
+                            // Clear the activity stack
+                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(landingIntent)
                         } else if (result == ApiUtils.Companion.SignupResults.NOT_OK) {
                             // Show an error dialog when the sign up went wrong
                             AlertDialog.Builder(activity)

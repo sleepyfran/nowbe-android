@@ -68,7 +68,11 @@ class LogInFragment : Fragment {
                     override fun onPostExecute(result: ApiUtils.Companion.LoginResults?) {
                         if (result == ApiUtils.Companion.LoginResults.LOGGED) {
                             // If the login is good, show the landing activity
-                            startActivity(Intent(context, LandingActivity::class.java))
+                            val landingIntent = Intent(context, LandingActivity::class.java)
+
+                            // Clear the activity stack
+                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(landingIntent)
                         } else if (result == ApiUtils.Companion.LoginResults.WRONG_DATA) {
                             // Show an error showing that the data provided is wrong
                             AlertDialog.Builder(activity)

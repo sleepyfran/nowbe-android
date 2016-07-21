@@ -25,10 +25,14 @@ class SplashActivity : AppCompatActivity() {
         // Check if the user has already logged in
         if (SharedPreferencesUtils.isLoggedIn(applicationContext)) {
             // Show'em the feed then
-            startActivity(Intent(this, LandingActivity::class.java))
+            val feedIntent = Intent(this, LandingActivity::class.java)
+            feedIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(feedIntent)
         } else {
             // Or the wizard instead
-            startActivity(Intent(this, WizardActivity::class.java))
+            val wizardIntent = Intent(this, WizardActivity::class.java)
+            wizardIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(wizardIntent)
         }
     }
 }
