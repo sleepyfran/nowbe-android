@@ -22,7 +22,9 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.NetUtils
 
 class ProfileFragment : Fragment() {
@@ -31,13 +33,19 @@ class ProfileFragment : Fragment() {
      */
     lateinit var token: String
 
+    /**
+     * Interface to call when we got a result from the API call
+     */
+    var onUserResult: Interfaces.OnUserResult? = null
+
     companion object {
         /**
          * Returns a new instance with the specified token as the one to use
          */
-        fun newInstance(token: String): ProfileFragment {
+        fun newInstance(token: String, onUserResult: Interfaces.OnUserResult?): ProfileFragment {
             val fragment = ProfileFragment()
             fragment.token = token
+            fragment.onUserResult = onUserResult
             return fragment
         }
     }
@@ -48,6 +56,12 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // If the user is the one using the app, hide the send mail and hello buttons
+        if (ApiUtils.isAppUser(context, token)) {
+            btnSayHello.visibility = View.GONE
+            btnSendMessage.visibility = View.GONE
+        }
 
         // Set up the (empty) adapter and layout manager of the comments recycler view
         val commentsAdapter = CommentsAdapter()
@@ -77,6 +91,9 @@ class ProfileFragment : Fragment() {
 
             override fun onPostExecute(user: User?) {
                 if (user != null) {
+                    // Callback indicating the result we got if the callback is not null
+                    onUserResult?.onUserResult(user)
+
                     // Update the profile information
                     pivProfileInfo.updateInformation(user)
 
