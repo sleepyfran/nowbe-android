@@ -42,11 +42,16 @@ class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedHolder {
-        return FeedHolder(FeedView(parent.context))
+        val holder = FeedHolder(FeedView(parent.context))
+
+        // Set the holder on click listener
+        holder.itemView.setOnClickListener({ onClick.onFeedItemClick(holder.adapterPosition) })
+
+        return holder
     }
 
     override fun onBindViewHolder(holder: FeedHolder, position: Int) {
-        holder.bindContent(feed[position], onClick, position)
+        holder.bindContent(feed[position])
     }
 
     override fun getItemCount(): Int {
