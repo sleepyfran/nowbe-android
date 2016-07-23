@@ -7,22 +7,21 @@ package us.nowbe.nowbe.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
-
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
-import us.nowbe.nowbe.net.NowbeLogin
-import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.net.async.LoginObservable
 import us.nowbe.nowbe.utils.NetUtils
+import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class LogInFragment : Fragment {
     constructor() : super()
@@ -60,36 +59,42 @@ class LogInFragment : Fragment {
 
             // Attempt to login with the username and password provided in another thread
             if (!error) {
-                object : AsyncTask<Void, Void, ApiUtils.Companion.LoginResults>() {
-                    override fun doInBackground(vararg p0: Void?): ApiUtils.Companion.LoginResults {
-                        return NowbeLogin(context, username, password).attemptLogin()
-                    }
+                LoginObservable.create(username, password).subscribe(
+                        // On Next
+                        {
+                            logInResponse ->
+                            if (logInResponse.success) {
+                                // If the login is good save the token
+                                SharedPreferencesUtils.setLoggedIn(context, true)
+                                SharedPreferencesUtils.setToken(context, logInResponse.data!!)
 
-                    override fun onPostExecute(result: ApiUtils.Companion.LoginResults?) {
-                        if (result == ApiUtils.Companion.LoginResults.LOGGED) {
-                            // If the login is good, show the landing activity
-                            val landingIntent = Intent(context, LandingActivity::class.java)
+                                // And show the landing activity
+                                val landingIntent = Intent(context, LandingActivity::class.java)
 
-                            // Clear the activity stack
-                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(landingIntent)
-                        } else if (result == ApiUtils.Companion.LoginResults.WRONG_DATA) {
-                            // Show an error showing that the data provided is wrong
-                            AlertDialog.Builder(activity)
-                                    .setTitle(getString(R.string.login_sign_up_error_title))
-                                    .setMessage(getString(R.string.login_sign_up_error_login_message))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show()
-                        } else {
+                                // Clear the activity stack
+                                landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(landingIntent)
+                            } else {
+                                // Show an error showing that the data provided is wrong
+                                AlertDialog.Builder(activity)
+                                        .setTitle(getString(R.string.login_sign_up_error_title))
+                                        .setMessage(getString(R.string.login_sign_up_error_login_message))
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show()
+                            }
+                        },
+                        // On Error
+                        {
+                            error ->
                             // Show an error dialog indicating that we have no connection otherwise
                             AlertDialog.Builder(activity)
                                     .setTitle(getString(R.string.login_sign_up_error_title))
                                     .setMessage(getString(R.string.login_sign_up_error_connection))
                                     .setPositiveButton(android.R.string.ok, null)
                                     .show()
-                        }
-                    }
-                }.execute()
+
+                            Log.e(LogInFragment::class.java.canonicalName, error.message)
+                        })
             }
         })
     }
