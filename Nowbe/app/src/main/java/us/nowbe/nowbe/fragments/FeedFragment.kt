@@ -25,10 +25,12 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.ProfileActivity
 import us.nowbe.nowbe.adapters.FeedAdapter
 import us.nowbe.nowbe.model.Feed
+import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.net.NowbeFeedData
+import us.nowbe.nowbe.net.async.FeedObsevable
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
-import us.nowbe.nowbe.utils.OnClick
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class FeedFragment : Fragment {
@@ -62,7 +64,7 @@ class FeedFragment : Fragment {
 
         // Setup the recycler view with an empty list
         val adapter = FeedAdapter()
-        adapter.onClick = object : OnClick.OnFeedItemClick {
+        adapter.onClick = object : Interfaces.OnFeedItemClick {
             override fun onFeedItemClick(itemSelected: Int) {
                 // TODO: Allow the user to send a hello to the user from the feed
 
@@ -85,25 +87,39 @@ class FeedFragment : Fragment {
         // Hide the fab when scrolling the recycler view
         rvFeed.addOnScrollListener(scrollListener)
 
-        // Load the feed in another thread
-        object : AsyncTask<Void, Void, Feed?>() {
-            override fun doInBackground(vararg args: Void?): Feed? {
-                return NowbeFeedData(token).getFeed()
-            }
+        // Load the feed in another thread and set the refresh layout as loading
+        srlFeedRefresh.isRefreshing = true
+        loadData(adapter)
 
-            override fun onPostExecute(feed: Feed?) {
-                if (feed != null) {
+        // Implement the swipe to refresh feature
+        srlFeedRefresh.setOnRefreshListener {
+            loadData(adapter)
+        }
+    }
+
+    /**
+     * Loads the data into the feed
+     */
+    fun loadData(adapter: FeedAdapter) {
+        FeedObsevable.create(token).subscribe(
+                // On Next
+                {
+                    feed ->
                     // Hide the loading progress bar and show the recycler view
-                    pbLoadingFeed.visibility = View.GONE
-                    rvFeed.visibility = View.VISIBLE
+                    srlFeedRefresh.isRefreshing = false
 
                     // Update the adapter's feed
                     adapter.updateFeed(feed.feedContent)
-                } else {
-                    ErrorUtils.showNoConnectionToast(context)
-                }
-            }
-        }.execute()
+                },
+                // On Error
+                {
+                    error ->
+                    if (error is EmptyFeedException) {
+                        // TODO: Show a sad face :(
+                    } else {
+                        ErrorUtils.showNoConnectionToast(context)
+                    }
+                })
     }
 
     /**

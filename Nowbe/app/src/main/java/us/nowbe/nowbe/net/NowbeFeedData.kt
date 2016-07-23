@@ -2,6 +2,7 @@ package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
 import us.nowbe.nowbe.model.Feed
+import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.utils.ApiUtils
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -17,22 +18,15 @@ class NowbeFeedData(val token: String): NowbeRequest() {
     /**
      * Attemps to get the feed of the user
      */
-    fun getFeed(): Feed? {
+    fun getFeed(): Feed {
         // Make the request and get the JSON data returned
-        val response: String
-
-        // Attempt to make a request
-        try {
-            response = super.makeRequest()
-        } catch (e: UnknownHostException) {
-            return null
-        } catch (e: ConnectException) {
-            return null
-        }
-
+        val response = super.makeRequest()
         val json = super.getArrayFromResponse(response)
 
-        // Return the feed from the JSON we got
+        // If the JSON is empty (no results) throw an empty feed exception
+        if (json.length() == 0) throw EmptyFeedException("This seems a little empty, m8")
+
+        // Otherwise return the feed from the JSON we got
         return Feed.fromJson(json)
     }
 
