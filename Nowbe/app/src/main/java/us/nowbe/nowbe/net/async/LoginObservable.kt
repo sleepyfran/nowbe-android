@@ -16,7 +16,7 @@ import us.nowbe.nowbe.net.NowbeResponse
 class LoginObservable {
     companion object {
         /**
-         * TODO: Check
+         * Returns an observable that logs the user into the web and returns the response
          */
         fun create(username: String, password: String): Observable<NowbeResponse<String>> {
             return Observable.fromCallable({
