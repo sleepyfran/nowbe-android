@@ -21,6 +21,7 @@ import us.nowbe.nowbe.activities.LandingActivity
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.model.exceptions.UserAlreadyExistsException
 import us.nowbe.nowbe.net.async.SignupObservable
+import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.ValidatorUtils
@@ -95,25 +96,13 @@ class SignupFragment : Fragment {
 
                             if (error is UserAlreadyExistsException) {
                                 // Show an error dialog when the user/mail already exists
-                                AlertDialog.Builder(activity)
-                                        .setTitle(getString(R.string.login_sign_up_error_title))
-                                        .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
+                                ErrorUtils.showUserAlreadyExistsDialog(context)
                             } else if (error is RequestNotSuccessfulException) {
                                 // Show an error dialog when the sign up went wrong
-                                AlertDialog.Builder(activity)
-                                        .setTitle(getString(R.string.login_sign_up_error_title))
-                                        .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
+                                ErrorUtils.showGeneralWhoopsDialog(context)
                             } else {
                                 // Show an error dialog indicating that we have no connection otherwise
-                                AlertDialog.Builder(activity)
-                                        .setTitle(getString(R.string.login_sign_up_error_title))
-                                        .setMessage(getString(R.string.login_sign_up_error_connection))
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
+                                ErrorUtils.showNoConnectionDialog(context)
                             }
                         }
                 )

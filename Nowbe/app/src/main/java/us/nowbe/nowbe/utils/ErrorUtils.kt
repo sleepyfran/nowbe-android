@@ -1,6 +1,7 @@
 package us.nowbe.nowbe.utils
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import us.nowbe.nowbe.R
 
@@ -18,6 +19,50 @@ class ErrorUtils {
          */
         fun showNoConnectionToast(context: Context) {
             Toast.makeText(context, context.getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
+        }
+
+        /**
+         * Shows a general dialog indicating that something was wrong
+         */
+        fun showGeneralWhoopsDialog(context: Context) {
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.general_whoops_message))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+        }
+
+        /**
+         * Shows a dialog indicating that the data provided was wrong
+         */
+        fun showWrongDataDialog(context: Context) {
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.login_sign_up_error_login_message))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+        }
+
+        /**
+         * Shows a dialog indicating that we have no connection
+         */
+        fun showNoConnectionDialog(context: Context) {
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.general_no_connection_error))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+        }
+
+        /**
+         * Shows a dialog indicating that the mail/user already exists
+         */
+        fun showUserAlreadyExistsDialog(context: Context) {
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.login_sign_up_error_sign_up_exist_message))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
         }
     }
 }

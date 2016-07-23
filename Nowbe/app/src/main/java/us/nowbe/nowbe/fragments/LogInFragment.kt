@@ -21,6 +21,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.LoginObservable
+import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
@@ -81,18 +82,10 @@ class LogInFragment : Fragment {
 
                             if (error is RequestNotSuccessfulException) {
                                 // Show an error showing that the data provided is wrong
-                                AlertDialog.Builder(activity)
-                                        .setTitle(getString(R.string.login_sign_up_error_title))
-                                        .setMessage(getString(R.string.login_sign_up_error_login_message))
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
+                                ErrorUtils.showWrongDataDialog(context)
                             } else {
                                 // Show an error dialog indicating that we have no connection otherwise
-                                AlertDialog.Builder(activity)
-                                        .setTitle(getString(R.string.login_sign_up_error_title))
-                                        .setMessage(getString(R.string.login_sign_up_error_connection))
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
+                                ErrorUtils.showNoConnectionDialog(context)
                             }
 
                             // Log the error anyway
