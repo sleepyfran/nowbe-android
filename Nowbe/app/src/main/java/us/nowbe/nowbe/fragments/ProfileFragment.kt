@@ -21,7 +21,9 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces
@@ -91,13 +93,10 @@ class ProfileFragment : Fragment() {
         }
 
         // Load the user in another thread
-        object : AsyncTask<Void, Void, User?>() {
-            override fun doInBackground(vararg params: Void?): User? {
-                return NowbeUserData(token).getUser()
-            }
-
-            override fun onPostExecute(user: User?) {
-                if (user != null) {
+        UserDataObservable.create(token).subscribe(
+                // On Next
+                {
+                    user ->
                     // Callback indicating the result we got if the callback is not null
                     onUserResult?.onUserResult(user)
 
@@ -116,11 +115,18 @@ class ProfileFragment : Fragment() {
                             commentsAdapter.addComment(comment!!)
                         }
                     }
-                } else {
-                    // We have no connection or the server is down
-                    ErrorUtils.showNoConnectionToast(context)
+                },
+                // On Error
+                {
+                    error ->
+
+                    // If the user doesn't exists
+                    if (error is UserDoesNotExistsException) {
+                        ErrorUtils.showUserDoesNotExists(context)
+                    } else {
+                        ErrorUtils.showNoConnectionDialog(context)
+                    }
                 }
-            }
-        }.execute()
+        )
     }
 }

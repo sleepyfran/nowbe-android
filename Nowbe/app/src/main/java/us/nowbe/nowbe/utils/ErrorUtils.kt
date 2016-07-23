@@ -64,5 +64,16 @@ class ErrorUtils {
                     .setPositiveButton(android.R.string.ok, null)
                     .show()
         }
+
+        /**
+         * Shows a dialog indicating that the user does not exists
+         */
+        fun showUserDoesNotExists(context: Context) {
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.profile_does_not_exists_error))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+        }
     }
 }

@@ -2,6 +2,7 @@ package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
 import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.utils.ApiUtils
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -18,24 +19,15 @@ class NowbeUserData(val token: String) : NowbeRequest() {
     /**
      * Attempts to get an user by its token
      */
-    fun getUser(): User? {
+    fun getUser(): User {
         // Make the request and get the JSON data returned
-        val response: String
-
-        // Attempt to make a request
-        try {
-            response = super.makeRequest()
-        } catch (e: UnknownHostException) {
-            return null
-        } catch (e: ConnectException) {
-            return null
-        }
-
+        val response = super.makeRequest()
         val json = super.getFirstObjectFromArray(response)
-        val success = json.length() != 0
+
+        if (json.length() <= 0) throw UserDoesNotExistsException("Hello, is there anybody in there?")
 
         // Return the user if the request was successful or null otherwise
-        return if (success) User.fromJson(token, json) else null
+        return User.fromJson(token, json)
     }
 
     override fun getBody(): FormBody {

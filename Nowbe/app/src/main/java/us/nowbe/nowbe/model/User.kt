@@ -1,11 +1,8 @@
 package us.nowbe.nowbe.model
 
-import android.util.Log
-import org.json.JSONException
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.JsonUtils
-import java.util.*
 
 /**
  * This file is part of Nowbe for Android
