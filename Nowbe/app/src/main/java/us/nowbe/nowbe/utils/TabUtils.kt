@@ -26,7 +26,7 @@ class TabUtils {
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_notifications_tab))
 
             // Load the profile fragment with the token of the user
-            adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!),
+            adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!, null),
                     context.getString(R.string.main_profile_tab))
             return adapter
         }

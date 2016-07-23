@@ -93,6 +93,10 @@ class FeedFragment : Fragment {
 
         // Implement the swipe to refresh feature
         srlFeedRefresh.setOnRefreshListener {
+            // Hide the :( face and show the recycler view if it's hidden
+            llEmptyFeed.visibility = View.GONE
+
+            // Refresh the adapter
             loadData(adapter)
         }
     }
@@ -114,8 +118,15 @@ class FeedFragment : Fragment {
                 // On Error
                 {
                     error ->
+                    // Set an empty list to the adapter
+                    adapter.updateFeed(arrayListOf())
+
+                    // Hide the loading progress
+                    srlFeedRefresh.isRefreshing = false
+
                     if (error is EmptyFeedException) {
-                        // TODO: Show a sad face :(
+                        // Show a :( message
+                        llEmptyFeed.visibility = View.VISIBLE
                     } else {
                         ErrorUtils.showNoConnectionToast(context)
                     }

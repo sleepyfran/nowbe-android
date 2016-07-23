@@ -4,7 +4,11 @@
 
     <!-- General -->
     <string name="general.no_internet">We lost the internet here :(</string>
+    <string name="general.no_connection_error">Whoops! It seems like you don\'t have an internet connection or it\'s not working right.</string>
+    <string name="general.error_title">Error</string>
+    <string name="general.whoops_message">Whoops! Something wrong happened. Please try again.</string>
     <string name="general.log_out">Log out</string>
+    <string name="general.sad_face">:(</string>
 
     <!-- Base activity -->
     <string name="main.feed_tab">Feed</string>
@@ -17,6 +21,9 @@
     <string name="welcome.sign_up">Sign up</string>
     <string name="welcome.introduction">Connect with your world at a glance</string>
 
+    <!-- Feed -->
+    <string name="feed.empty">This seems a little empty. Why don\'t you try searching for someone?</string>
+
     <!-- Log in / Sign up fragment -->
     <string name="login_sign_up.username">Username</string>
     <string name="login_sign_up.email">Email</string>
@@ -25,14 +32,11 @@
     <string name="login_sign_up.let_me_in">Let me in</string>
     <string name="login_sign_up.sign_in">Sign in</string>
     <string name="login_sign_up.sign_up">Sign up</string>
-    <string name="login_sign_up.error_title">Error login in</string>
     <string name="login_sign_up.error_login_message">There was an error login you into Nowbe. Please check your username and password</string>
-    <string name="login_sign_up.error_sign_up_message">There was an error signing you up into Nowbe. Please check your username and password</string>
     <string name="login_sign_up.error_sign_up_exist_message">That user or email already exists!</string>
     <string name="login_sign_up.error_user">Please specify an username!</string>
     <string name="login_sign_up.error_email">Please specify a valid email!</string>
     <string name="login_sign_up.error_password">Please specify a password!</string>
-    <string name="login_sign_up.error_connection">Whoops! It seems like you don\'t have an internet connection or it\'s not working right.</string>
 
     <!-- Navigation drawer -->
     <string name="drawer.open">Open navigation drawer</string>
@@ -46,6 +50,11 @@
     <string name="profile.pictures_slots">Pictures slots</string>
     <string name="profile.comments_slots">Comments slots</string>
     <string name="profile.comment_number">#%1$s</string>
+    <string name="profile.does_not_exists_error">That profile does not exists :(</string>
+    <string name="profile.could_not_add_error">The user could not be added. Please try again</string>
+    <string name="profile.could_not_remove_error">The user could not be removed. Please try again</string>
+    <string name="profile.user_added">You and %1$s are now friends!</string>
+    <string name="profile.user_removed">You and %1$s are no longer friends :(</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>

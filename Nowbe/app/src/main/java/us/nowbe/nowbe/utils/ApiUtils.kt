@@ -1,5 +1,6 @@
 package us.nowbe.nowbe.utils
 
+import android.content.Context
 import org.json.JSONObject
 
 /**
@@ -20,6 +21,8 @@ class ApiUtils {
         const val KEY_NICKNAME = "nickname"
         const val KEY_EMAIL = "email"
         const val KEY_TOKEN = "token"
+        const val KEY_TOKEN_1 = "token1"
+        const val KEY_TOKEN_2 = "token2"
 
         /**
          * Non-changing values
@@ -35,6 +38,11 @@ class ApiUtils {
         const val API_SUCCESS_ERROR = "0"
         const val API_SUCCESS_EXIST = "exist"
         const val API_ID = "id"
+
+        // Friendship-specific results
+        const val API_FRIENDSHIP_MUTUAL = "1"
+        const val API_FRIENDSHIP_SEMI_MUTUAL = "0.5"
+        const val API_FRIENDSHIP_NOT_FRIENDS = "0"
 
         // General API calls
         const val API_TIMESTAMP = "elapsedTime"
@@ -75,19 +83,37 @@ class ApiUtils {
         const val USER_PICTURE_URL = "UserPictures/"
         const val USER_SLOTS_PICTURES_THUMB_URL = "slotsPicturesThumbnails/"
         const val USER_SLOTS_PICTURES_URL = "slotsPictures/"
+        const val USER_ADD_FRIEND = "addFriend.php"
+        const val USER_REMOVE_FRIEND = "removeFriend.php"
+        const val USER_CHECK_IF_FRIENDS = "checkMutualFriendship.php"
 
         /**
          * Results of different sections of the API
          */
-        enum class RequestResults {OK, NO_CONNECTION}
-        enum class SignupResults {OK, NOT_OK, EXISTS, NO_CONNECTION}
-        enum class LoginResults {LOGGED, WRONG_DATA, NO_CONNECTION}
+        enum class AddUserResults {ADDED, NOT_ADDED, NO_CONNECTION}
+        enum class CheckIfFriendsResults {MUTUAL, SEMI_MUTUAL, NOT_FRIENDS}
 
         /**
          * Various utils
          */
         fun getFullProfilePicDir(profilePic: String): String {
             return ApiUtils.BASE_URL + ApiUtils.USER_PICTURE_URL + profilePic
+        }
+
+        fun isAppUser(context: Context, token: String): Boolean {
+            return SharedPreferencesUtils.getToken(context)!! == token
+        }
+
+        fun isRelationMutual(relation: String): Boolean {
+            return relation == API_FRIENDSHIP_MUTUAL
+        }
+
+        fun isRelationSemiMutual(relation: String): Boolean {
+            return relation == API_FRIENDSHIP_SEMI_MUTUAL
+        }
+
+        fun hasRelation(relation: String): Boolean {
+            return isRelationMutual(relation) or isRelationSemiMutual(relation)
         }
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.fragments.LogInFragment
-import us.nowbe.nowbe.fragments.SignUpFragment
+import us.nowbe.nowbe.fragments.SignupFragment
 import us.nowbe.nowbe.fragments.WelcomeFragment
 
 class WizardActivity : FragmentActivity() {
@@ -33,7 +33,7 @@ class WizardActivity : FragmentActivity() {
 
         when (option) {
             FragmentsEnum.LOGIN -> transaction.replace(R.id.fgWizard, LogInFragment())
-            FragmentsEnum.SIGNUP -> transaction.replace(R.id.fgWizard, SignUpFragment())
+            FragmentsEnum.SIGNUP -> transaction.replace(R.id.fgWizard, SignupFragment())
         }
 
         // Commit the transaction

@@ -4,19 +4,40 @@
                 android:layout_height="match_parent"
                 tools:context=".fragments.FeedFragment">
 
-    <!-- Loading icon to be shown while fetching the feed -->
-    <ProgressBar
-        android:id="@+id/pbLoadingFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="true"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srlFeedRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- Feed, GONE by default, and shown when it's already loaded -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvFeed"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvFeed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/llEmptyFeed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/general.sad_face"
+            android:textSize="150sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center"
+            android:text="@string/feed.empty"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
+import org.json.JSONArray
+import org.json.JSONException
 import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.utils.ApiUtils
@@ -24,7 +26,7 @@ class NowbeFeedData(val token: String): NowbeRequest() {
         val json = super.getArrayFromResponse(response)
 
         // If the JSON is empty (no results) throw an empty feed exception
-        if (json.length() == 0) throw EmptyFeedException("This seems a little empty, m8")
+        if (json.length() <= 0) throw EmptyFeedException("This seems a little empty, m8")
 
         // Otherwise return the feed from the JSON we got
         return Feed.fromJson(json)

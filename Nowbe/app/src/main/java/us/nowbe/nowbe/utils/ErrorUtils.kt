@@ -22,6 +22,20 @@ class ErrorUtils {
         }
 
         /**
+         * Shows a toast indicating that the user could not be added
+         */
+        fun showUserNotAddedToast(context: Context) {
+            Toast.makeText(context, context.getString(R.string.profile_could_not_add_error), Toast.LENGTH_LONG).show()
+        }
+
+        /**
+         * Shows a toast indicating that the user could not be added
+         */
+        fun showUserNotRemovedToast(context: Context) {
+            Toast.makeText(context, context.getString(R.string.profile_could_not_remove_error), Toast.LENGTH_LONG).show()
+        }
+
+        /**
          * Shows a general dialog indicating that something was wrong
          */
         fun showGeneralWhoopsDialog(context: Context) {
