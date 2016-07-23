@@ -1,11 +1,9 @@
 package us.nowbe.nowbe.net
 
-import android.content.Context
 import okhttp3.FormBody
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
+import us.nowbe.nowbe.model.exceptions.UserAlreadyExistsException
 import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android
@@ -14,43 +12,26 @@ import java.net.UnknownHostException
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class NowbeSignup(val context: Context, val user: String, val email: String, val password: String) : NowbeRequest() {
+class NowbeSignup(val user: String, val email: String, val password: String) : NowbeRequest() {
 
     /**
      * Attempts to sign up the user into Nowbe and returns whether it was or not succesful
      */
-    fun attemptSignUp(): ApiUtils.Companion.SignupResults {
+    fun attemptSignUp(): String {
         // Make the request and get the JSON data returned
-        val response: String
-
-        // Attempt to make a request
-        try {
-            response = super.makeRequest()
-        } catch (e: UnknownHostException) {
-            return ApiUtils.Companion.SignupResults.NO_CONNECTION
-        }catch (e: ConnectException) {
-            return ApiUtils.Companion.SignupResults.NO_CONNECTION
-        }
-
-        // Make th request and get the JSON data returned
+        val response = super.makeRequest()
         val json = super.getObjectFromResponse(response)
-        var success = ApiUtils.Companion.SignupResults.NOT_OK
+        val success = json.getString(ApiUtils.API_SUCCESS)
 
-        if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK) {
-            success = ApiUtils.Companion.SignupResults.OK
-        } else if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_ERROR) {
-            success = ApiUtils.Companion.SignupResults.NOT_OK
-        } else if (json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_EXIST) {
-            success = ApiUtils.Companion.SignupResults.EXISTS
+        when (success) {
+            ApiUtils.API_SUCCESS_EXIST -> throw UserAlreadyExistsException("That user already exists in the database.")
+            ApiUtils.API_SUCCESS_ERROR -> throw RequestNotSuccessfulException("We got a 0 over here.")
         }
 
-        // If it was successful, set the user as logged in and save the token
-        if (success == ApiUtils.Companion.SignupResults.OK) {
-            SharedPreferencesUtils.setLoggedIn(context, true)
-            SharedPreferencesUtils.setToken(context, json.getString(ApiUtils.API_USER_TOKEN))
-        }
+        // Get the token
+        val token = json.getString(ApiUtils.API_USER_TOKEN)
 
-        return success
+        return token
     }
 
     override fun getBody(): FormBody {

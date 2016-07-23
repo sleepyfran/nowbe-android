@@ -7,11 +7,10 @@ package us.nowbe.nowbe.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +18,14 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
-import us.nowbe.nowbe.net.NowbeSignup
-import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
+import us.nowbe.nowbe.model.exceptions.UserAlreadyExistsException
+import us.nowbe.nowbe.net.async.SignupObservable
 import us.nowbe.nowbe.utils.NetUtils
+import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.ValidatorUtils
 
-class SignUpFragment : Fragment {
+class SignupFragment : Fragment {
     constructor() : super()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -72,43 +73,50 @@ class SignUpFragment : Fragment {
 
             // Attempt to login with the username and password provided in another thread
             if (!error) {
-                object : AsyncTask<Void, Void, ApiUtils.Companion.SignupResults>() {
-                    override fun doInBackground(vararg params: Void?): ApiUtils.Companion.SignupResults {
-                        return NowbeSignup(context, user, email, password).attemptSignUp()
-                    }
+                SignupObservable.create(user, email, password).subscribe(
+                        // On Next
+                        {
+                            token ->
 
-                    override fun onPostExecute(result: ApiUtils.Companion.SignupResults?) {
-                        if (result == ApiUtils.Companion.SignupResults.OK) {
-                            // If the sign up is good, show the landing activity
+                            // Save the token of the user
+                            SharedPreferencesUtils.setLoggedIn(context, true)
+                            SharedPreferencesUtils.setToken(context, token)
+
+                            // Show the landing activity
                             val landingIntent = Intent(context, LandingActivity::class.java)
 
                             // Clear the activity stack
                             landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(landingIntent)
-                        } else if (result == ApiUtils.Companion.SignupResults.NOT_OK) {
-                            // Show an error dialog when the sign up went wrong
-                            AlertDialog.Builder(activity)
-                                    .setTitle(getString(R.string.login_sign_up_error_title))
-                                    .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show()
-                        } else if (result == ApiUtils.Companion.SignupResults.EXISTS) {
-                            // Or another when the user already exits
-                            AlertDialog.Builder(activity)
-                                    .setTitle(getString(R.string.login_sign_up_error_title))
-                                    .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show()
-                        } else {
-                            // Show an error dialog indicating that we have no connection otherwise
-                            AlertDialog.Builder(activity)
-                                    .setTitle(getString(R.string.login_sign_up_error_title))
-                                    .setMessage(getString(R.string.login_sign_up_error_connection))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show()
+                        },
+                        // On error
+                        {
+                            error ->
+
+                            if (error is UserAlreadyExistsException) {
+                                // Show an error dialog when the user/mail already exists
+                                AlertDialog.Builder(activity)
+                                        .setTitle(getString(R.string.login_sign_up_error_title))
+                                        .setMessage(getString(R.string.login_sign_up_error_sign_up_exist_message))
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show()
+                            } else if (error is RequestNotSuccessfulException) {
+                                // Show an error dialog when the sign up went wrong
+                                AlertDialog.Builder(activity)
+                                        .setTitle(getString(R.string.login_sign_up_error_title))
+                                        .setMessage(getString(R.string.login_sign_up_error_sign_up_message))
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show()
+                            } else {
+                                // Show an error dialog indicating that we have no connection otherwise
+                                AlertDialog.Builder(activity)
+                                        .setTitle(getString(R.string.login_sign_up_error_title))
+                                        .setMessage(getString(R.string.login_sign_up_error_connection))
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show()
+                            }
                         }
-                    }
-                }.execute()
+                )
             }
         })
     }
