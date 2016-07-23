@@ -9,13 +9,12 @@ package us.nowbe.nowbe.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.holders.PicturesSlotsHolder
 import us.nowbe.nowbe.model.Slot
-import us.nowbe.nowbe.utils.OnClick
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.views.PicturesSlotsPictureView
 
-class PicturesSlotsAdapter(val onClick: OnClick.OnPictureSlotClick) : RecyclerView.Adapter<PicturesSlotsHolder>() {
+class PicturesSlotsAdapter(val onClick: Interfaces.OnPictureSlotClick) : RecyclerView.Adapter<PicturesSlotsHolder>() {
     /**
      * Array of pictures of the user
      */
@@ -37,12 +36,16 @@ class PicturesSlotsAdapter(val onClick: OnClick.OnPictureSlotClick) : RecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesSlotsHolder {
-        return PicturesSlotsHolder(PicturesSlotsPictureView(parent.context))
+        val holder = PicturesSlotsHolder(PicturesSlotsPictureView(parent.context))
+
+        // Set the onClick listener for the view
+        holder.itemView.setOnClickListener({ onClick.onPictureSlotClick(holder.adapterPosition) })
+        return holder
     }
 
     override fun onBindViewHolder(holder: PicturesSlotsHolder, position: Int) {
         if (pictures.size > 0) {
-            holder.bindView(pictures[position].data, pictures[position].cools!!, onClick, position)
+            holder.bindView(pictures[position].data, pictures[position].cools!!)
         }
     }
 
