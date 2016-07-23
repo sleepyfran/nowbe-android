@@ -4,7 +4,6 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import us.nowbe.nowbe.net.NowbeLogin
-import us.nowbe.nowbe.net.NowbeResponse
 
 /**
  * This file is part of Nowbe for Android
@@ -18,11 +17,11 @@ class LoginObservable {
         /**
          * Returns an observable that logs the user into the web and returns the response
          */
-        fun create(username: String, password: String): Observable<NowbeResponse<String>> {
+        fun create(username: String, password: String): Observable<String> {
             return Observable.fromCallable({
                 NowbeLogin(username, password).attemptLogin()
             }).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(AndroidSchedulers.mainThread())
         }
     }
 }

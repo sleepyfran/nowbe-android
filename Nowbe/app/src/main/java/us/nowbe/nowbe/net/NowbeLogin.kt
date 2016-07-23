@@ -1,6 +1,7 @@
 package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.utils.ApiUtils
 
 /**
@@ -14,13 +15,19 @@ class NowbeLogin(val username: String, val password: String) : NowbeRequest() {
     /**
      * Attempts to log into Nowbe and returns whether it was or not successful
      */
-    fun attemptLogin(): NowbeResponse<String> {
+    fun attemptLogin(): String {
         // Make the request and get the JSON data returned
         val response = super.makeRequest()
         val json = super.getObjectFromResponse(response)
+        val success = json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK
 
-        return NowbeResponse(json.getString(ApiUtils.API_SUCCESS) == ApiUtils.API_SUCCESS_OK,
-                json.optString(ApiUtils.API_USER_TOKEN))
+        // If we got a 0 then throw a request not successful exception
+        if (!success) throw RequestNotSuccessfulException("We got a 0 over here.")
+
+        // Return the token otherwise
+        val token = json.optString(ApiUtils.API_USER_TOKEN)
+
+        return token
     }
 
     override fun getBody(): FormBody {

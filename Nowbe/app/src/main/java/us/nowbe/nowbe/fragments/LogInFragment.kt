@@ -19,6 +19,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.activities.LandingActivity
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.LoginObservable
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
@@ -62,37 +63,39 @@ class LogInFragment : Fragment {
                 LoginObservable.create(username, password).subscribe(
                         // On Next
                         {
-                            logInResponse ->
-                            if (logInResponse.success) {
-                                // If the login is good save the token
-                                SharedPreferencesUtils.setLoggedIn(context, true)
-                                SharedPreferencesUtils.setToken(context, logInResponse.data!!)
+                            token ->
+                            // If the login is good save the token
+                            SharedPreferencesUtils.setLoggedIn(context, true)
+                            SharedPreferencesUtils.setToken(context, token)
 
-                                // And show the landing activity
-                                val landingIntent = Intent(context, LandingActivity::class.java)
+                            // And show the landing activity
+                            val landingIntent = Intent(context, LandingActivity::class.java)
 
-                                // Clear the activity stack
-                                landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(landingIntent)
-                            } else {
+                            // Clear the activity stack
+                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(landingIntent)
+                        },
+                        // On Error
+                        {
+                            error ->
+
+                            if (error is RequestNotSuccessfulException) {
                                 // Show an error showing that the data provided is wrong
                                 AlertDialog.Builder(activity)
                                         .setTitle(getString(R.string.login_sign_up_error_title))
                                         .setMessage(getString(R.string.login_sign_up_error_login_message))
                                         .setPositiveButton(android.R.string.ok, null)
                                         .show()
+                            } else {
+                                // Show an error dialog indicating that we have no connection otherwise
+                                AlertDialog.Builder(activity)
+                                        .setTitle(getString(R.string.login_sign_up_error_title))
+                                        .setMessage(getString(R.string.login_sign_up_error_connection))
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show()
                             }
-                        },
-                        // On Error
-                        {
-                            error ->
-                            // Show an error dialog indicating that we have no connection otherwise
-                            AlertDialog.Builder(activity)
-                                    .setTitle(getString(R.string.login_sign_up_error_title))
-                                    .setMessage(getString(R.string.login_sign_up_error_connection))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show()
 
+                            // Log the error anyway
                             Log.e(LogInFragment::class.java.canonicalName, error.message)
                         })
             }
