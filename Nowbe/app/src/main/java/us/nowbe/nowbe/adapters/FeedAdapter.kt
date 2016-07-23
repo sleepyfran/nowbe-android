@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import us.nowbe.nowbe.adapters.holders.FeedHolder
 import us.nowbe.nowbe.model.FeedContent
-import us.nowbe.nowbe.utils.OnClick
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.views.FeedView
 
 class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
@@ -23,7 +23,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
     /**
      * Interface to be called when the user presses an item
      */
-    lateinit var onClick: OnClick.OnFeedItemClick
+    lateinit var onClick: Interfaces.OnFeedItemClick
 
     /**
      * Updates the feed with new content and notifies about the change
