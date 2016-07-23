@@ -19,7 +19,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.PicturesSlotsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.OnClick
+import us.nowbe.nowbe.utils.Interfaces
 
 class PicturesSlotsView : RelativeLayout {
     /**
@@ -38,7 +38,7 @@ class PicturesSlotsView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.pictures_slot_view, this, true)
 
         // Setup the recycler view
-        adapter = PicturesSlotsAdapter(object : OnClick.OnPictureSlotClick {
+        adapter = PicturesSlotsAdapter(object : Interfaces.OnPictureSlotClick {
             override fun onPictureSlotClick(itemSelected: Int) {
                 // TODO: Show the picture
                 Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_LONG).show()
