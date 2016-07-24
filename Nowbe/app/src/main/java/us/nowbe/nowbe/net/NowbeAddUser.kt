@@ -40,6 +40,6 @@ class NowbeAddUser(val tokenOfUser: String, val tokenToAdd: String) : NowbeReque
     }
 
     override fun getRequestUrl(): String {
-        return ApiUtils.USER_ADD_FRIEND
+        return ApiUtils.USER_ADD_FRIEND_URL
     }
 }

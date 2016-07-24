@@ -23,6 +23,8 @@ class ApiUtils {
         const val KEY_TOKEN = "token"
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
+        const val KEY_TOKEN_TO = "tokenTo"
+        const val KEY_TOKEN_FROM = "tokenFrom"
 
         /**
          * Non-changing values
@@ -83,9 +85,10 @@ class ApiUtils {
         const val USER_PICTURE_URL = "UserPictures/"
         const val USER_SLOTS_PICTURES_THUMB_URL = "slotsPicturesThumbnails/"
         const val USER_SLOTS_PICTURES_URL = "slotsPictures/"
-        const val USER_ADD_FRIEND = "addFriend.php"
-        const val USER_REMOVE_FRIEND = "removeFriend.php"
-        const val USER_CHECK_IF_FRIENDS = "checkMutualFriendship.php"
+        const val USER_ADD_FRIEND_URL = "addFriend.php"
+        const val USER_REMOVE_FRIEND_URL = "removeFriend.php"
+        const val USER_CHECK_IF_FRIENDS_URL = "checkMutualFriendship.php"
+        const val USER_SAY_HELLO_URL = "sayHello.php"
 
         /**
          * Results of different sections of the API

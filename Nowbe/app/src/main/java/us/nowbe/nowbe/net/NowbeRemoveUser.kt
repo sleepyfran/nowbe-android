@@ -44,6 +44,6 @@ class NowbeRemoveUser(val tokenOfUser: String, val tokenToRemove: String) : Nowb
     }
 
     override fun getRequestUrl(): String {
-        return ApiUtils.USER_REMOVE_FRIEND
+        return ApiUtils.USER_REMOVE_FRIEND_URL
     }
 }

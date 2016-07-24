@@ -43,6 +43,6 @@ class NowbeCheckIfFriend(val userToken: String, val friendToken: String) : Nowbe
     }
 
     override fun getRequestUrl(): String {
-        return ApiUtils.USER_CHECK_IF_FRIENDS
+        return ApiUtils.USER_CHECK_IF_FRIENDS_URL
     }
 }
