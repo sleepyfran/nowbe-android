@@ -59,39 +59,40 @@ class LogInFragment : Fragment {
                 error = true
             }
 
+            // If the provided data is empty, return
+            if (error) return@setOnClickListener
+
             // Attempt to login with the username and password provided in another thread
-            if (!error) {
-                LoginObservable.create(username, password).subscribe(
-                        // On Next
-                        {
-                            token ->
-                            // If the login is good save the token
-                            SharedPreferencesUtils.setLoggedIn(context, true)
-                            SharedPreferencesUtils.setToken(context, token)
+            LoginObservable.create(username, password).subscribe(
+                    // On Next
+                    {
+                        token ->
+                        // If the login is good save the token
+                        SharedPreferencesUtils.setLoggedIn(context, true)
+                        SharedPreferencesUtils.setToken(context, token)
 
-                            // And show the landing activity
-                            val landingIntent = Intent(context, LandingActivity::class.java)
+                        // And show the landing activity
+                        val landingIntent = Intent(context, LandingActivity::class.java)
 
-                            // Clear the activity stack
-                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(landingIntent)
-                        },
-                        // On Error
-                        {
-                            error ->
+                        // Clear the activity stack
+                        landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(landingIntent)
+                    },
+                    // On Error
+                    {
+                        error ->
 
-                            if (error is RequestNotSuccessfulException) {
-                                // Show an error showing that the data provided is wrong
-                                ErrorUtils.showWrongDataDialog(context)
-                            } else {
-                                // Show an error dialog indicating that we have no connection otherwise
-                                ErrorUtils.showNoConnectionDialog(context)
-                            }
+                        if (error is RequestNotSuccessfulException) {
+                            // Show an error showing that the data provided is wrong
+                            ErrorUtils.showWrongDataDialog(context)
+                        } else {
+                            // Show an error dialog indicating that we have no connection otherwise
+                            ErrorUtils.showNoConnectionDialog(context)
+                        }
 
-                            // Log the error anyway
-                            Log.e(LogInFragment::class.java.canonicalName, error.message)
-                        })
-            }
+                        // Log the error anyway
+                        Log.e(LogInFragment::class.java.canonicalName, error.message)
+                    })
         })
     }
 }
