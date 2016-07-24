@@ -43,9 +43,6 @@ class SignupFragment : Fragment {
                 return@setOnClickListener
             }
 
-            // Boolean specifying if there was or not an error
-            var error = false
-
             val user = etSignupUsername.text.toString()
             val email = etSignupEmail.text.toString()
             val password = etSignupPassword.text.toString()
@@ -54,59 +51,57 @@ class SignupFragment : Fragment {
             // Check if the edit text fields are empty and if so, show an error
             if (user.isEmpty()) {
                 etSignupUsername.error = getString(R.string.login_sign_up_error_user)
-                error = true
+                return@setOnClickListener
             }
 
             if (email.isEmpty() || !ValidatorUtils.isEmailValid(email)) {
                 etSignupEmail.error = getString(R.string.login_sign_up_error_email)
-                error = true
+                return@setOnClickListener
             }
 
             if (password.isEmpty()) {
                 etSignupPassword.error = getString(R.string.login_sign_up_error_password)
-                error = true
+                return@setOnClickListener
             }
 
             if (passwordVerif.isEmpty() || password != passwordVerif) {
                 etSignupPasswordVerif.error = getString(R.string.login_sign_up_error_password)
-                error = true
+                return@setOnClickListener
             }
 
             // Attempt to login with the username and password provided in another thread
-            if (!error) {
-                SignupObservable.create(user, email, password).subscribe(
-                        // On Next
-                        {
-                            token ->
+            SignupObservable.create(user, email, password).subscribe(
+                    // On Next
+                    {
+                        token ->
 
-                            // Save the token of the user
-                            SharedPreferencesUtils.setLoggedIn(context, true)
-                            SharedPreferencesUtils.setToken(context, token)
+                        // Save the token of the user
+                        SharedPreferencesUtils.setLoggedIn(context, true)
+                        SharedPreferencesUtils.setToken(context, token)
 
-                            // Show the landing activity
-                            val landingIntent = Intent(context, LandingActivity::class.java)
+                        // Show the landing activity
+                        val landingIntent = Intent(context, LandingActivity::class.java)
 
-                            // Clear the activity stack
-                            landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(landingIntent)
-                        },
-                        // On error
-                        {
-                            error ->
+                        // Clear the activity stack
+                        landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(landingIntent)
+                    },
+                    // On error
+                    {
+                        error ->
 
-                            if (error is UserAlreadyExistsException) {
-                                // Show an error dialog when the user/mail already exists
-                                ErrorUtils.showUserAlreadyExistsDialog(context)
-                            } else if (error is RequestNotSuccessfulException) {
-                                // Show an error dialog when the sign up went wrong
-                                ErrorUtils.showGeneralWhoopsDialog(context)
-                            } else {
-                                // Show an error dialog indicating that we have no connection otherwise
-                                ErrorUtils.showNoConnectionDialog(context)
-                            }
+                        if (error is UserAlreadyExistsException) {
+                            // Show an error dialog when the user/mail already exists
+                            ErrorUtils.showUserAlreadyExistsDialog(context)
+                        } else if (error is RequestNotSuccessfulException) {
+                            // Show an error dialog when the sign up went wrong
+                            ErrorUtils.showGeneralWhoopsDialog(context)
+                        } else {
+                            // Show an error dialog indicating that we have no connection otherwise
+                            ErrorUtils.showNoConnectionDialog(context)
                         }
-                )
-            }
+                    }
+            )
         })
     }
 }

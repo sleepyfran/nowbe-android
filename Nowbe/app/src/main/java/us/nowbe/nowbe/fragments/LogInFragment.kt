@@ -45,22 +45,16 @@ class LogInFragment : Fragment {
             val username = etLoginUsername.text.toString()
             val password = etLoginPassword.text.toString()
 
-            // Boolean specifying if there was or not an error
-            var error = false
-
             // Check if the edit text fields are empty and if so, show an error
             if (username.isEmpty()) {
                 etLoginUsername.error = getString(R.string.login_sign_up_error_user)
-                error = true
+                return@setOnClickListener
             }
 
             if (password.isEmpty()) {
                 etLoginPassword.error = getString(R.string.login_sign_up_error_password)
-                error = true
+                return@setOnClickListener
             }
-
-            // If the provided data is empty, return
-            if (error) return@setOnClickListener
 
             // Attempt to login with the username and password provided in another thread
             LoginObservable.create(username, password).subscribe(
