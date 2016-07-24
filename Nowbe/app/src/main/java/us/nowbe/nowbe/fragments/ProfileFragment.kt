@@ -7,7 +7,8 @@ package us.nowbe.nowbe.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
-import android.os.AsyncTask
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -16,18 +17,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
-
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
-import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.net.async.SayHelloObservable
 import us.nowbe.nowbe.net.async.UserDataObservable
-import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.ErrorUtils
-import us.nowbe.nowbe.utils.Interfaces
-import us.nowbe.nowbe.utils.NetUtils
+import us.nowbe.nowbe.utils.*
 
 class ProfileFragment : Fragment() {
     /**
@@ -50,6 +48,42 @@ class ProfileFragment : Fragment() {
             fragment.onUserResult = onUserResult
             return fragment
         }
+    }
+
+    /**
+     * Method that will setup the say hello button
+     */
+    fun setupSayHelloButton(user: User) {
+        btnSayHello.setOnClickListener({
+            // Get the token from the app user
+            val appUserToken = SharedPreferencesUtils.getToken(context)!!
+
+            // Send the hello!
+            SayHelloObservable.create(appUserToken, user.token).subscribe(
+                    // On Next
+                    {
+                        // Show a toast indicating that we sent the hello
+                        Toast.makeText(context,
+                                getString(R.string.profile_hello_sent, user.fullName),
+                                Toast.LENGTH_SHORT).show()
+                    },
+                    // On Error
+                    {
+                        ErrorUtils.showNoConnectionToast(context)
+                    }
+            )
+        })
+    }
+
+    /**
+     * Method that will setup the send email button
+     */
+    fun setupSendEmailButton(user: User) {
+        btnSendMessage.setOnClickListener({
+            // Ask the user which app to use sending the mail
+            val sendEmailIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + user.email))
+            startActivity(Intent.createChooser(sendEmailIntent, null))
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +148,12 @@ class ProfileFragment : Fragment() {
                         if (comment?.data != "") {
                             commentsAdapter.addComment(comment!!)
                         }
+                    }
+
+                    // Setup the send hello and send email if they're visible
+                    if (btnSayHello.visibility == View.VISIBLE) {
+                        setupSayHelloButton(user)
+                        setupSendEmailButton(user)
                     }
                 },
                 // On Error

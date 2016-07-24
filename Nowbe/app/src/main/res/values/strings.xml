@@ -55,6 +55,7 @@
     <string name="profile.could_not_remove_error">The user could not be removed. Please try again</string>
     <string name="profile.user_added">You and %1$s are now friends!</string>
     <string name="profile.user_removed">You and %1$s are no longer friends :(</string>
+    <string name="profile.hello_sent">Hello there, %1$s!</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>
