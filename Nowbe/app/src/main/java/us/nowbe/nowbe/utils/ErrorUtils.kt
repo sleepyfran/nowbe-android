@@ -17,28 +17,36 @@ class ErrorUtils {
         /**
          * Shows a toast with the no-connection error
          */
-        fun showNoConnectionToast(context: Context) {
+        fun showNoConnectionToast(context: Context?) {
+            if (context == null) return
+
             Toast.makeText(context, context.getString(R.string.general_no_internet), Toast.LENGTH_LONG).show()
         }
 
         /**
          * Shows a toast indicating that the user could not be added
          */
-        fun showUserNotAddedToast(context: Context) {
+        fun showUserNotAddedToast(context: Context?) {
+            if (context == null) return
+
             Toast.makeText(context, context.getString(R.string.profile_could_not_add_error), Toast.LENGTH_LONG).show()
         }
 
         /**
          * Shows a toast indicating that the user could not be added
          */
-        fun showUserNotRemovedToast(context: Context) {
+        fun showUserNotRemovedToast(context: Context?) {
+            if (context == null) return
+
             Toast.makeText(context, context.getString(R.string.profile_could_not_remove_error), Toast.LENGTH_LONG).show()
         }
 
         /**
          * Shows a general dialog indicating that something was wrong
          */
-        fun showGeneralWhoopsDialog(context: Context) {
+        fun showGeneralWhoopsDialog(context: Context?) {
+            if (context == null) return
+
             AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.general_error_title))
                     .setMessage(context.getString(R.string.general_whoops_message))
@@ -49,7 +57,9 @@ class ErrorUtils {
         /**
          * Shows a dialog indicating that the data provided was wrong
          */
-        fun showWrongDataDialog(context: Context) {
+        fun showWrongDataDialog(context: Context?) {
+            if (context == null) return
+
             AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.general_error_title))
                     .setMessage(context.getString(R.string.login_sign_up_error_login_message))
@@ -60,7 +70,9 @@ class ErrorUtils {
         /**
          * Shows a dialog indicating that we have no connection
          */
-        fun showNoConnectionDialog(context: Context) {
+        fun showNoConnectionDialog(context: Context?) {
+            if (context == null) return
+
             AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.general_error_title))
                     .setMessage(context.getString(R.string.general_no_connection_error))
@@ -71,7 +83,9 @@ class ErrorUtils {
         /**
          * Shows a dialog indicating that the mail/user already exists
          */
-        fun showUserAlreadyExistsDialog(context: Context) {
+        fun showUserAlreadyExistsDialog(context: Context?) {
+            if (context == null) return
+
             AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.general_error_title))
                     .setMessage(context.getString(R.string.login_sign_up_error_sign_up_exist_message))
@@ -82,7 +96,9 @@ class ErrorUtils {
         /**
          * Shows a dialog indicating that the user does not exists
          */
-        fun showUserDoesNotExists(context: Context) {
+        fun showUserDoesNotExists(context: Context?) {
+            if (context == null) return
+
             AlertDialog.Builder(context)
                     .setTitle(context.getString(R.string.general_error_title))
                     .setMessage(context.getString(R.string.profile_does_not_exists_error))
