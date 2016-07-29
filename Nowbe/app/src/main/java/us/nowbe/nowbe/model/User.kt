@@ -3,6 +3,7 @@ package us.nowbe.nowbe.model
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.JsonUtils
+import us.nowbe.nowbe.utils.NumberUtils
 
 /**
  * This file is part of Nowbe for Android
@@ -18,6 +19,7 @@ class User(token: String,
            email: String,
            profilePicDir: String,
            age: Int,
+           birthday: String,
            about: String,
            friends: Int?,
            isOnline: Boolean?,
@@ -37,6 +39,7 @@ class User(token: String,
     var email: String
     var profilePicDir: String
     var age: Int
+    var birthday: String
     var about: String
     var friends: Int?
     var isOnline: Boolean?
@@ -56,6 +59,7 @@ class User(token: String,
         this.email = email
         this.profilePicDir = ApiUtils.getFullProfilePicDir(profilePicDir)
         this.age = age
+        this.birthday = birthday
         this.about = about
         this.friends = friends
         this.isOnline = isOnline
@@ -100,6 +104,7 @@ class User(token: String,
             val email = json.getString(ApiUtils.API_USER_EMAIL)
             val profilePicDir = json.getString(ApiUtils.API_USER_PROFILE_PIC)
             val age = json.getInt(ApiUtils.API_USER_AGE)
+            val birthday = NumberUtils.formatDate(json.getString(ApiUtils.API_USER_BIRTHDAY))
             val about = json.getString(ApiUtils.API_USER_ABOUT)
             val friends = json.getInt(ApiUtils.API_USER_FRIENDS)
             val visits = json.getInt(ApiUtils.API_USER_VISITS)
@@ -117,6 +122,7 @@ class User(token: String,
                     email,
                     profilePicDir,
                     age,
+                    birthday,
                     about,
                     friends,
                     isOnline,

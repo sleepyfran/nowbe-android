@@ -56,6 +56,7 @@ class ApiUtils {
         const val API_USER_EMAIL = "email"
         const val API_USER_PROFILE_PIC = "profilePicture"
         const val API_USER_AGE = "age"
+        const val API_USER_BIRTHDAY = "ageNonFormated"
         const val API_USER_ABOUT = "aboutUser"
         const val API_USER_FRIENDS = "numberOfFriends"
         const val API_USER_VISITS = "visits"

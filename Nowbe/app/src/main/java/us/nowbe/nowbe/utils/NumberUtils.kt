@@ -1,5 +1,6 @@
 package us.nowbe.nowbe.utils
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -24,7 +25,7 @@ class NumberUtils {
         /**
          * Rounds a given number to an approximation with a suffix. For example: 1650 to 1k
          */
-        fun roundNumber(value: Int) : String {
+        fun roundNumber(value: Int): String {
             if (value < 1000) return value.toString()
 
             val entry: Map.Entry<Int, String> = roundSubffixes.floorEntry(value)
@@ -32,6 +33,16 @@ class NumberUtils {
             val subffix = entry.value
 
             return Math.floor((value / dividend).toDouble()).toInt().toString() + subffix
+        }
+
+        /**
+         * Formats a date to the dd/MM/YYYY format
+         */
+        fun formatDate(date: String): String {
+            val formatterIn = SimpleDateFormat("yyyy-MM-dd")
+            val unformattedDate = formatterIn.parse(date)
+
+            return SimpleDateFormat("dd-MM-yyyy").format(unformattedDate).replace("-", "/")
         }
     }
 }
