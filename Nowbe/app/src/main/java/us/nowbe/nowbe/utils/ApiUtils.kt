@@ -25,6 +25,7 @@ class ApiUtils {
         const val KEY_TOKEN_2 = "token2"
         const val KEY_TOKEN_TO = "tokenTo"
         const val KEY_TOKEN_FROM = "tokenFrom"
+        const val KEY_ABOUT = "aboutMe"
 
         /**
          * Non-changing values
@@ -90,6 +91,7 @@ class ApiUtils {
         const val USER_REMOVE_FRIEND_URL = "removeFriend.php"
         const val USER_CHECK_IF_FRIENDS_URL = "checkMutualFriendship.php"
         const val USER_SAY_HELLO_URL = "sayHello.php"
+        const val USER_UPDATE_ABOUT_URL = "updateAboutMe.php"
 
         /**
          * Results of different sections of the API

@@ -56,6 +56,22 @@
     <string name="profile.user_added">You and %1$s are now friends!</string>
     <string name="profile.user_removed">You and %1$s are no longer friends :(</string>
     <string name="profile.hello_sent">Hello there, %1$s!</string>
+    <string name="profile.edit.title">Edit your profile</string>
+    <string name="profile.edit.full_name">Visible name</string>
+    <string name="profile.edit.about_user">About you</string>
+    <string name="profile.edit.birthday">Birthday</string>
+    <string name="profile.edit.set_btn">Set</string>
+    <string name="profile.edit.interests">Interests</string>
+    <string name="profile.edit.interests_description">Tell us what you\'re interested in!</string>
+    <string name="profile.edit.academic">Education</string>
+    <string name="profile.edit.academic_description">College, High School&#8230; What did you study?</string>
+    <string name="profile.edit.couple">Couple</string>
+    <string name="profile.edit.couple_description">Who\'s your couple? This person will receive a notification to add you as a couple too.</string>
+    <string name="profile.edit.pictures_slots">Pictures slots</string>
+    <string name="profile.edit.comments_slots">Comments slots</string>
+    <string name="profile.edit.slots_description">%1$s set</string>
+    <string name="profile.edit.unset">Unset</string>
+    <string name="profile.edit.save">Save</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>
@@ -63,7 +79,8 @@
     <string name="dummy_data.username">\@nowbe</string>
     <string name="dummy_data.status">The place to be</string>
     <string name="dummy_data.info">20 years · 100M visits · 100M friends</string>
-    <string name="dummy_data.likes">Computers, NFL, Something else</string>
-    <string name="dummy_data.education">Something related with computers</string>
+    <string name="dummy_data.interests">Nowbe, Music, NFL</string>
+    <string name="dummy_data.education">PhD in Nowbe Science</string>
     <string name="dummy_data.couple">Me myself And I</string>
+    <string name="dummy_data.birthday">01/01/1990</string>
 </resources>

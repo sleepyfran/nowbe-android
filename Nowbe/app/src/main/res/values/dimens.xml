@@ -28,4 +28,6 @@
     <dimen name="profile_status_margin_top">5dp</dimen>
     <dimen name="profile_info_margin">10dp</dimen>
     <dimen name="pictures_slots_margin">16dp</dimen>
+    <dimen name="profile_edit_text_margin">10dp</dimen>
+    <dimen name="profile_edit_picture_margin">10dp</dimen>
 </resources>

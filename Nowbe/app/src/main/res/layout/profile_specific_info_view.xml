@@ -33,7 +33,7 @@
             android:layout_marginLeft="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@string/dummy_data.likes"
+            android:text="@string/dummy_data.interests"
             android:textColor="@color/primary_text_white"
             android:textSize="@dimen/profile_info_likes_education_text_size"/>
     </LinearLayout>

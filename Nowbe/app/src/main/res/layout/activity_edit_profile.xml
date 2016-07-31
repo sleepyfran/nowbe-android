@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- The root view should be hidden by default so we can show the animation
+        to reveal it later -->
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/clEditProfileRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:elevation="4dp"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <!-- User image with the edit drawable -->
+                <FrameLayout
+                    android:id="@+id/ivUserProfilePic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivUserPicture"
+                        android:layout_width="@dimen/default_pic_size"
+                        android:layout_height="@dimen/default_pic_size"
+                        android:layout_gravity="center"
+                        android:src="@drawable/nowbe_logo" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginBottom="@dimen/profile_edit_picture_margin"
+                        android:layout_marginRight="@dimen/profile_edit_picture_margin"
+                        android:src="@drawable/ic_edit_white" />
+                </FrameLayout>
+
+                <!-- User's username -->
+                <TextView
+                    android:id="@+id/tvEditUsername"
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/dummy_data.username" />
+
+                <!-- User's visible name -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/profile.edit.full_name" />
+
+                <EditText
+                    android:id="@+id/etEditVisibleName"
+                    style="@style/EditProfileEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile.edit.full_name" />
+
+                <!-- About the user -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.about_user" />
+
+                <EditText
+                    android:id="@+id/etEditAboutUser"
+                    style="@style/EditProfileEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|left"
+                    android:hint="@string/profile.edit.about_user"
+                    android:inputType="textMultiLine"
+                    android:lines="3" />
+
+                <!-- User's birthday -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.birthday" />
+
+                <Button
+                    android:id="@+id/btnEditBirthday"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dummy_data.birthday"
+                    android:textColor="@color/primary_text"
+                    android:textSize="20sp" />
+
+                <!-- User's interests -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.interests" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.interests_description"
+                    android:textColor="@color/primary_text_white_hint" />
+
+                <EditText
+                    android:id="@+id/etEditInterests"
+                    style="@style/EditProfileEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dummy_data.interests" />
+
+                <!-- User's academic info -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.academic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.academic_description"
+                    android:textColor="@color/primary_text_white_hint" />
+
+                <EditText
+                    android:id="@+id/etEditAcademic"
+                    style="@style/EditProfileEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dummy_data.education" />
+
+                <!-- User's couple -->
+                <TextView
+                    style="@style/EditProfileSecondTitle"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.couple" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/profile_edit_text_margin"
+                    android:text="@string/profile.edit.couple_description"
+                    android:textColor="@color/primary_text_white_hint" />
+
+                <EditText
+                    android:id="@+id/etEditCouple"
+                    style="@style/EditProfileEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dummy_data.couple"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</io.codetail.widget.RevealFrameLayout>
