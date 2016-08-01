@@ -22,24 +22,24 @@ class LandingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // Default action for the fab
-        setupEditFab()
+        setupSearchFab()
 
         // Setup the view pager and the tab view
         val adapter = TabUtils.createPagerAdapter(this, supportFragmentManager)
         vpFragmentList.adapter = adapter
         tlTabs.setupWithViewPager(vpFragmentList)
 
-        // TODO: Update the menu of the activity when navigating through the ViewPager
+        // Update the menu of the activity when navigating through the ViewPager
         vpFragmentList.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
                 val pageTitle = adapter.getPageTitle(position)
 
                 if (pageTitle == getString(R.string.main_feed_tab)) {
-                    setupEditFab()
+                    setupSearchFab()
                 } else if (pageTitle == getString(R.string.main_notifications_tab)) {
                     // TODO: Show the clear all fab
                 } else if (pageTitle == getString(R.string.main_profile_tab)) {
-                    // TODO: Think what the fuck to show in here
+                    setupEditFab()
                 }
             }
 
@@ -58,7 +58,20 @@ class LandingActivity : BaseActivity() {
     }
 
     /**
-     * Setups the fab to the edit profile action
+     * Setups the fab with the search icon and action
+     */
+    fun setupSearchFab() {
+        // Show the search icon in the fab
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_search_white))
+
+        // TODO: Show the Search Activity when clicking the fab
+        fab.setOnClickListener {
+
+        }
+    }
+
+    /**
+     * Setups the fab with the edit icon and action
      */
     fun setupEditFab() {
         // Show the pencil in the fab
