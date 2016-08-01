@@ -16,7 +16,15 @@ import us.nowbe.nowbe.R
 abstract class EditWithTextFieldDialog : EditDialog() {
 
     override fun getDialogView(): View {
-        return LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)
+        val view = LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)
+
+        // Show the description only if the subclass wants it
+        if (hasDescription()) {
+            view.tvEditDialogOptionalDescription.visibility = View.VISIBLE
+            view.tvEditDialogOptionalDescription.text = getDescription()
+        }
+
+        return view
     }
 
     override fun isDataValid(view: View): Boolean {
@@ -24,5 +32,19 @@ abstract class EditWithTextFieldDialog : EditDialog() {
         val data = view.tvEditDialogText.text
 
         return !TextUtils.isEmpty(data)
+    }
+
+    /**
+     * This should be overridden by the subclass if it wants a description
+     */
+    open fun hasDescription(): Boolean {
+        return false
+    }
+
+    /**
+     * This should be overridden by the subclass if it wants a description
+     */
+    open fun getDescription(): String? {
+        return null
     }
 }
