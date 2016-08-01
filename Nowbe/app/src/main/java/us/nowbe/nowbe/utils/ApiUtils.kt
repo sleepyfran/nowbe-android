@@ -27,6 +27,7 @@ class ApiUtils {
         const val KEY_TOKEN_FROM = "tokenFrom"
         const val KEY_VISIBLE_NAME = "newMutableName"
         const val KEY_ABOUT = "aboutMe"
+        const val KEY_AGE = "age"
 
         /**
          * Non-changing values
@@ -94,6 +95,7 @@ class ApiUtils {
         const val USER_SAY_HELLO_URL = "sayHello.php"
         const val USER_UPDATE_VISIBLE_NAME_URL = "updateMutableName.php"
         const val USER_UPDATE_ABOUT_URL = "updateAboutMe.php"
+        const val USER_UPDATE_BIRTHDAY_URL = "updateAge.php"
 
         /**
          * Results of different sections of the API

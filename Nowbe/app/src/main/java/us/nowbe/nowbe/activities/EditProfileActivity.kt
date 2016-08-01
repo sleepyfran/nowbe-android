@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.dialogs.EditAboutDialog
+import us.nowbe.nowbe.dialogs.EditBirthdayDialog
 import us.nowbe.nowbe.dialogs.EditVisibleNameDialog
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.ApiUtils
@@ -153,6 +154,36 @@ class EditProfileActivity : AppCompatActivity() {
         // Setup the action of the about button
         llEditAboutUser.setOnClickListener {
             EditAboutDialog.newInstance(onDismiss).show(supportFragmentManager, null)
+        }
+
+        // Setup the action of the birthday button
+        llEditBirthday.setOnClickListener {
+            EditBirthdayDialog.newInstance(onDismiss).show(supportFragmentManager, null)
+        }
+
+        // TODO: Setup the action of the interests button
+        llEditInterests.setOnClickListener {
+
+        }
+
+        // TODO: Setup the action of the education button
+        llEditEducation.setOnClickListener {
+
+        }
+
+        // TODO: Setup the action of the couple button
+        llEditCouple.setOnClickListener {
+
+        }
+
+        // TODO: Setup the action of the pictures slots
+        llEditPictures.setOnClickListener {
+
+        }
+
+        // TODO: Setup the action of the comments slots
+        llEditComments.setOnClickListener {
+
         }
     }
 

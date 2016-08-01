@@ -2,6 +2,9 @@
     <string name="app_name">Nowbe</string>
     <string name="title_activity_main">Nowbe</string>
 
+    <!-- Formats (DO NOT MODIFY) -->
+    <string name="format.date">%1$s-%2$s-%3$s</string>
+
     <!-- General -->
     <string name="general.no_internet">We lost the internet here :(</string>
     <string name="general.no_connection_error">Whoops! It seems like you don\'t have an internet connection or it\'s not working right.</string>

@@ -63,7 +63,7 @@ abstract class EditDialog() : DialogFragment() {
     /**
      * Method to be implemented by the subclass and that's going to be called when the dialog needs a title
      */
-    abstract fun getTitle(): String
+    abstract fun getTitle(): String?
 
     /**
      * Method to be implemented by the subclass and that's going to be called when the dialog calls the positive action
