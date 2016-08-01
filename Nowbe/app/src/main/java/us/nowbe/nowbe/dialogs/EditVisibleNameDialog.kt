@@ -29,6 +29,10 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
         }
     }
 
+    override fun getTitle(): String {
+        return getString(R.string.profile_edit_full_name)
+    }
+
     override fun getPositiveAction(view: View): () -> Unit {
         return {
             // Get the new visible name and the token of the user

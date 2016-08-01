@@ -29,6 +29,10 @@ class EditAboutDialog : EditWithTextFieldDialog() {
         }
     }
 
+    override fun getTitle(): String {
+        return getString(R.string.profile_edit_about_user)
+    }
+
     override fun getPositiveAction(view: View): () -> Unit {
         return {
             // Get the token from the user

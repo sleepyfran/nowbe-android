@@ -19,10 +19,6 @@ abstract class EditWithTextFieldDialog : EditDialog() {
         return LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)
     }
 
-    override fun getTitle(): String {
-        return getString(R.string.profile_edit_full_name)
-    }
-
     override fun isDataValid(view: View): Boolean {
         // Get the text that the user wrote
         val data = view.tvEditDialogText.text
