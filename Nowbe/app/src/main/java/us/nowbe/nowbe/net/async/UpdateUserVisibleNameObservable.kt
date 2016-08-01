@@ -10,17 +10,16 @@ package us.nowbe.nowbe.net.async
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import us.nowbe.nowbe.net.NowbeAddUser
-import us.nowbe.nowbe.net.NowbeUpdateAboutUser
+import us.nowbe.nowbe.net.NowbeUpdateUserVisibleName
 
-class UpdateAboutUserObservable {
+class UpdateUserVisibleNameObservable {
     companion object {
         /**
-         * Returns an observable that adds an user as a friend to the app user's account
+         * Returns an observable that changes the visible (mutable) name of the user
          */
-        fun create(token: String, about: String): Observable<Unit> {
+        fun create(newVisibleName: String, token: String): Observable<Boolean> {
             return Observable.fromCallable({
-                NowbeUpdateAboutUser(token, about).updateAbout()
+                NowbeUpdateUserVisibleName(newVisibleName, token).updateVisibleName()
             }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         }

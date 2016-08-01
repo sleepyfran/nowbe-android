@@ -11,11 +11,11 @@ import us.nowbe.nowbe.utils.ApiUtils
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class NowbeUpdateAboutUser(val token: String, val about: String) : NowbeRequest() {
+class NowbeUpdateUserAbout(val token: String, val about: String) : NowbeRequest() {
     /**
      * Attempts to add the user of the provided token and returns whether it was or not possible
      */
-    fun updateAbout() {
+    fun updateAbout(): Boolean {
         // Make the request and get the JSON data returned
         val response = super.makeRequest()
 
@@ -24,6 +24,8 @@ class NowbeUpdateAboutUser(val token: String, val about: String) : NowbeRequest(
         val success = json.getInt(ApiUtils.API_SUCCESS)
 
         if (success != 1) throw RequestNotSuccessfulException("We got a 0 here, not good")
+
+        return true
     }
 
     override fun getBody(): FormBody {

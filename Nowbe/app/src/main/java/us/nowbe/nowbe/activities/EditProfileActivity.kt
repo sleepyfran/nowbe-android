@@ -7,6 +7,7 @@ package us.nowbe.nowbe.activities
  * Maintained by Fran González <@spaceisstrange>
  */
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
@@ -16,7 +17,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
+import us.nowbe.nowbe.dialogs.EditAboutDialog
+import us.nowbe.nowbe.dialogs.EditVisibleNameDialog
 import us.nowbe.nowbe.net.async.UserDataObservable
+import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.IntentUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
@@ -74,6 +78,14 @@ class EditProfileActivity : AppCompatActivity() {
                     } else {
                         tvEditCouple.text = getString(R.string.profile_edit_unset)
                     }
+
+                    // Load the number of pictures and comments
+                    tvEditPicturesSlotsDescription.text =
+                            getString(R.string.profile_edit_slots_description,
+                                    user.picturesSlots.filter { it?.data != ApiUtils.NULL }.size)
+                    tvEditCommentsSlotsDescription.text =
+                            getString(R.string.profile_edit_slots_description,
+                                    user.commentsSlots.filter { it?.data != "" }.size)
                 },
                 // On Error
                 {
@@ -121,6 +133,26 @@ class EditProfileActivity : AppCompatActivity() {
                 // Show the circular reveal animation passing the fab position
                 CircularReveal.showEnterRevealAnimation(clEditProfileRoot, { }, fabX, fabY)
             }
+        }
+
+        // Action to perform when the dialogs are dismissed
+        // TODO: Check if we can ONLY do this when the user pressed the cancel button or pressed back
+        val onDismiss = object : DialogInterface.OnDismissListener {
+            override fun onDismiss(dialog: DialogInterface?) {
+                // Re-load the user data
+                loadUserData()
+            }
+        }
+
+
+        // Setup the action of the visible name button
+        llEditVisibleName.setOnClickListener {
+            EditVisibleNameDialog.newInstance(onDismiss).show(supportFragmentManager, null)
+        }
+
+        // Setup the action of the about button
+        llEditAboutUser.setOnClickListener {
+            EditAboutDialog.newInstance(onDismiss).show(supportFragmentManager, null)
         }
     }
 
