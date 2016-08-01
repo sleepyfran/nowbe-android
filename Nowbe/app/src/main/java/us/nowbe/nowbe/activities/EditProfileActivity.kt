@@ -11,10 +11,9 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.net.async.UserDataObservable
@@ -86,7 +85,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit)
+        setContentView(R.layout.activity_edit_profile)
 
         // Load the data of the user
         loadUserData()

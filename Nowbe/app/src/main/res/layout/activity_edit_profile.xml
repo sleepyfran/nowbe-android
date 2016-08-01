@@ -28,21 +28,22 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardview_light_background"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/activity_horizontal_margin">
+                android:background="@color/primary"
+                android:orientation="vertical">
 
                 <!-- User image with the edit drawable -->
                 <FrameLayout
                     android:id="@+id/ivUserProfilePic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivUserPicture"
@@ -66,112 +67,156 @@
                     style="@style/EditProfileSecondTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:gravity="center"
                     android:text="@string/dummy_data.username" />
 
-                <!-- User's visible name -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:text="@string/profile.edit.full_name" />
+                <!-- Basic info card -->
+                <LinearLayout
+                    android:id="@+id/llEditBasicInfoCard"
+                    style="@style/SettingsCard">
 
-                <EditText
-                    android:id="@+id/etEditVisibleName"
-                    style="@style/EditProfileEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/profile.edit.full_name" />
+                    <!-- Visible name button -->
+                    <LinearLayout
+                        android:id="@+id/llEditVisibleName"
+                        style="@style/SettingsCard_OptionButton">
 
-                <!-- About the user -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.about_user" />
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.full_name" />
 
-                <EditText
-                    android:id="@+id/etEditAboutUser"
-                    style="@style/EditProfileEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="top|left"
-                    android:hint="@string/profile.edit.about_user"
-                    android:inputType="textMultiLine"
-                    android:lines="3" />
+                        <TextView
+                            android:id="@+id/tvEditVisibleName"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.name" />
 
-                <!-- User's birthday -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.birthday" />
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnEditBirthday"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dummy_data.birthday"
-                    android:textColor="@color/primary_text"
-                    android:textSize="20sp" />
+                    <!-- About button -->
+                    <LinearLayout
+                        android:id="@+id/llEditAboutUser"
+                        style="@style/SettingsCard_OptionButton">
 
-                <!-- User's interests -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.interests" />
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.about_user" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.interests_description"
-                    android:textColor="@color/primary_text_white_hint" />
+                        <TextView
+                            android:id="@+id/tvEditAbout"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.status" />
 
-                <EditText
-                    android:id="@+id/etEditInterests"
-                    style="@style/EditProfileEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dummy_data.interests" />
+                    </LinearLayout>
 
-                <!-- User's academic info -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.academic" />
+                    <!-- Birthday button -->
+                    <LinearLayout
+                        android:id="@+id/llEditBirthday"
+                        style="@style/SettingsCard_OptionButton">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.academic_description"
-                    android:textColor="@color/primary_text_white_hint" />
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.birthday" />
 
-                <EditText
-                    android:id="@+id/etEditAcademic"
-                    style="@style/EditProfileEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dummy_data.education" />
+                        <TextView
+                            android:id="@+id/tvEditBirthday"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.birthday" />
 
-                <!-- User's couple -->
-                <TextView
-                    style="@style/EditProfileSecondTitle"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.couple" />
+                    </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/profile_edit_text_margin"
-                    android:text="@string/profile.edit.couple_description"
-                    android:textColor="@color/primary_text_white_hint" />
+                </LinearLayout>
 
-                <EditText
-                    android:id="@+id/etEditCouple"
-                    style="@style/EditProfileEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dummy_data.couple"/>
+                <!-- Specific info card -->
+                <LinearLayout
+                    android:id="@+id/llEditSpecificInfoCard"
+                    style="@style/SettingsCard">
+                    <!-- Interests button -->
+                    <LinearLayout
+                        android:id="@+id/llEditInterests"
+                        style="@style/SettingsCard_OptionButton">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.interests" />
+
+                        <TextView
+                            android:id="@+id/tvEditInterests"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.interests" />
+
+                    </LinearLayout>
+
+                    <!-- Education button -->
+                    <LinearLayout
+                        android:id="@+id/llEditEducation"
+                        style="@style/SettingsCard_OptionButton">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.academic" />
+
+                        <TextView
+                            android:id="@+id/tvEditEducation"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.education" />
+
+                    </LinearLayout>
+
+                    <!-- Couple button -->
+                    <LinearLayout
+                        android:id="@+id/llEditCouple"
+                        style="@style/SettingsCard_OptionButton">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.couple" />
+
+                        <TextView
+                            android:id="@+id/tvEditCouple"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/dummy_data.couple" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Slots card -->
+                <LinearLayout
+                    android:id="@+id/llEditSlotsCard"
+                    style="@style/SettingsCard">
+
+                    <!-- Pictures slots button -->
+                    <LinearLayout
+                        android:id="@+id/llEditPictures"
+                        style="@style/SettingsCard_OptionButton">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.pictures_slots" />
+
+                        <TextView
+                            android:id="@+id/tvEditPicturesSlotsDescription"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/profile.edit.slots_description" />
+
+                    </LinearLayout>
+
+                    <!-- Comments slots button -->
+                    <LinearLayout
+                        android:id="@+id/llEditComments"
+                        style="@style/SettingsCard_OptionButton">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/profile.edit.comments_slots" />
+
+                        <TextView
+                            android:id="@+id/tvEditCommentsSlotsDescription"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/profile.edit.slots_description" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
