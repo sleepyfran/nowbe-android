@@ -19,6 +19,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.dialogs.EditAboutDialog
 import us.nowbe.nowbe.dialogs.EditBirthdayDialog
+import us.nowbe.nowbe.dialogs.EditInterestsDialog
 import us.nowbe.nowbe.dialogs.EditVisibleNameDialog
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.ApiUtils
@@ -145,15 +146,16 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
 
-
         // Setup the action of the visible name button
         llEditVisibleName.setOnClickListener {
-            EditVisibleNameDialog.newInstance(onDismiss).show(supportFragmentManager, null)
+            EditVisibleNameDialog.newInstance(onDismiss, tvEditVisibleName.text.toString())
+                    .show(supportFragmentManager, null)
         }
 
         // Setup the action of the about button
         llEditAboutUser.setOnClickListener {
-            EditAboutDialog.newInstance(onDismiss).show(supportFragmentManager, null)
+            EditAboutDialog.newInstance(onDismiss, tvEditAbout.text.toString())
+                    .show(supportFragmentManager, null)
         }
 
         // Setup the action of the birthday button
@@ -161,9 +163,10 @@ class EditProfileActivity : AppCompatActivity() {
             EditBirthdayDialog.newInstance(onDismiss).show(supportFragmentManager, null)
         }
 
-        // TODO: Setup the action of the interests button
+        // Setup the action of the interests button
         llEditInterests.setOnClickListener {
-
+            EditInterestsDialog.newInstance(onDismiss, tvEditInterests.text.toString())
+                    .show(supportFragmentManager, null)
         }
 
         // TODO: Setup the action of the education button

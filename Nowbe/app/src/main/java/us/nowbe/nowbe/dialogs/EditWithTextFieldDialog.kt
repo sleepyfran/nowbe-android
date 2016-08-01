@@ -15,8 +15,16 @@ import us.nowbe.nowbe.R
 
 abstract class EditWithTextFieldDialog : EditDialog() {
 
+    /**
+     * Default text to be shown in the text field
+     */
+    lateinit var defaultText: String
+
     override fun getDialogView(): View {
         val view = LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)
+
+        // Set the default text of the text field
+        view.tvEditDialogText.setText(defaultText)
 
         // Show the description only if the subclass wants it
         if (hasDescription()) {

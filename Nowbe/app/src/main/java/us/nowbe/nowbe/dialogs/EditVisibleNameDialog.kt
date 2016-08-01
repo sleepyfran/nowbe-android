@@ -20,11 +20,12 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
 
     companion object {
         /**
-         * Creates a new instance of the dialog with the onDismiss implementation
+         * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
-        fun newInstance(onDismiss: DialogInterface.OnDismissListener): EditWithTextFieldDialog {
+        fun newInstance(onDismiss: DialogInterface.OnDismissListener, defaultText: String): EditWithTextFieldDialog {
             val dialog = EditVisibleNameDialog()
             dialog.onDismiss = onDismiss
+            dialog.defaultText = defaultText
             return dialog
         }
     }
