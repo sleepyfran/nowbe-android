@@ -29,6 +29,11 @@ import us.nowbe.nowbe.utils.*
 
 class ProfileFragment : Fragment() {
     /**
+     * Adapter of the comments
+     */
+    lateinit var commentsAdapter: CommentsAdapter
+
+    /**
      * Token to which the profile refers to
      */
     lateinit var token: String
@@ -86,6 +91,53 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    /**
+     * Method that loads the user data in another thread and updates the displayed data
+     */
+    fun loadUserData() {
+        UserDataObservable.create(token).subscribe(
+                // On Next
+                {
+                    user ->
+                    // Hide the refresh icon
+                    srlProfileRefresh.isRefreshing = false
+
+                    // Callback indicating the result we got if the callback is not null
+                    onUserResult?.onUserResult(user)
+
+                    // Update the profile information
+                    pivProfileInfo.updateInformation(user)
+
+                    // Update the likes, couple and education info
+                    pleLikesEducationCouple.updateInformation(user)
+
+                    // Set up the pictures slots
+                    psvPicturesSlots.updateSlots(user)
+
+                    // Add the non-null comments to the adapter
+                    val nonNullComments = user.commentsSlots.filterNotNull().filter { it.data != "" }
+                    commentsAdapter.updateComments(nonNullComments.toMutableList())
+
+                    // Setup the send hello and send email if they're visible
+                    if (btnSayHello.visibility == View.VISIBLE) {
+                        setupSayHelloButton(user)
+                        setupSendEmailButton(user)
+                    }
+                },
+                // On Error
+                {
+                    error ->
+
+                    // If the user doesn't exists
+                    if (error is UserDoesNotExistsException) {
+                        ErrorUtils.showUserDoesNotExists(context)
+                    } else {
+                        ErrorUtils.showNoConnectionDialog(context)
+                    }
+                }
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -107,7 +159,7 @@ class ProfileFragment : Fragment() {
         }
 
         // Set up the (empty) adapter and layout manager of the comments recycler view
-        val commentsAdapter = CommentsAdapter()
+        commentsAdapter = CommentsAdapter()
         rvCommentsSlots.isNestedScrollingEnabled = false
         rvCommentsSlots.adapter = commentsAdapter
         rvCommentsSlots.layoutManager = LinearLayoutManager(context)
@@ -127,46 +179,12 @@ class ProfileFragment : Fragment() {
         }
 
         // Load the user in another thread
-        UserDataObservable.create(token).subscribe(
-                // On Next
-                {
-                    user ->
-                    // Callback indicating the result we got if the callback is not null
-                    onUserResult?.onUserResult(user)
+        loadUserData()
 
-                    // Update the profile information
-                    pivProfileInfo.updateInformation(user)
-
-                    // Update the likes, couple and education info
-                    pleLikesEducationCouple.updateInformation(user)
-
-                    // Set up the pictures slots
-                    psvPicturesSlots.updateSlots(user)
-
-                    // Add the non-null comments to the adapter
-                    for (comment in user.commentsSlots) {
-                        if (comment?.data != "") {
-                            commentsAdapter.addComment(comment!!)
-                        }
-                    }
-
-                    // Setup the send hello and send email if they're visible
-                    if (btnSayHello.visibility == View.VISIBLE) {
-                        setupSayHelloButton(user)
-                        setupSendEmailButton(user)
-                    }
-                },
-                // On Error
-                {
-                    error ->
-
-                    // If the user doesn't exists
-                    if (error is UserDoesNotExistsException) {
-                        ErrorUtils.showUserDoesNotExists(context)
-                    } else {
-                        ErrorUtils.showNoConnectionDialog(context)
-                    }
-                }
-        )
+        // Implement the swipe to refresh feature
+        srlProfileRefresh.setOnRefreshListener {
+            // Refresh the user data
+            loadUserData()
+        }
     }
 }

@@ -20,12 +20,10 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
      */
     var comments: MutableList<Slot> = arrayListOf()
 
-    /**
-     * Adds a comment to the list
-     */
-    fun addComment(comment: Slot) {
-        comments.add(comment)
-        notifyItemInserted(comments.size)
+    fun updateComments(content: MutableList<Slot>) {
+        comments.clear()
+        comments.addAll(content)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {

@@ -1,79 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nsvProfile"
+    android:id="@+id/srlProfileRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsvProfile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Profile information -->
-        <us.nowbe.nowbe.views.ProfileBasicInfoView
-            android:id="@+id/pivProfileInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Likes, education and couple -->
-        <us.nowbe.nowbe.views.ProfileSpecificInfoView
-            android:id="@+id/pleLikesEducationCouple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Say hello and send message buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnSayHello"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/profile.say_hello"/>
+            <!-- Profile information -->
+            <us.nowbe.nowbe.views.ProfileBasicInfoView
+                android:id="@+id/pivProfileInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnSendMessage"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
+            <!-- Likes, education and couple -->
+            <us.nowbe.nowbe.views.ProfileSpecificInfoView
+                android:id="@+id/pleLikesEducationCouple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Say hello and send message buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/profile.send_message"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSayHello"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile.say_hello" />
+
+                <Button
+                    android:id="@+id/btnSendMessage"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile.send_message" />
+            </LinearLayout>
+
+            <!-- Pictures slots separator -->
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile.pictures_slots" />
+
+            <us.nowbe.nowbe.views.PicturesSlotsView
+                android:id="@+id/psvPicturesSlots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Comments slots separator -->
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/profile.comments_slots" />
+
+            <!-- Comments slots -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCommentsSlots"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </LinearLayout>
 
-        <!-- Pictures slots separator -->
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/profile.pictures_slots"/>
-
-        <us.nowbe.nowbe.views.PicturesSlotsView
-            android:id="@+id/psvPicturesSlots"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Comments slots separator -->
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile.comments_slots"/>
-
-        <!-- Comments slots -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvCommentsSlots"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>
