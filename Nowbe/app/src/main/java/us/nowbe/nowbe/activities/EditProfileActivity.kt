@@ -17,10 +17,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
-import us.nowbe.nowbe.dialogs.EditAboutDialog
-import us.nowbe.nowbe.dialogs.EditBirthdayDialog
-import us.nowbe.nowbe.dialogs.EditInterestsDialog
-import us.nowbe.nowbe.dialogs.EditVisibleNameDialog
+import us.nowbe.nowbe.dialogs.*
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
@@ -169,9 +166,10 @@ class EditProfileActivity : AppCompatActivity() {
                     .show(supportFragmentManager, null)
         }
 
-        // TODO: Setup the action of the education button
+        // Setup the action of the education button
         llEditEducation.setOnClickListener {
-
+            EditEducationDialog.newInstance(onDismiss, tvEditEducation.text.toString())
+                    .show(supportFragmentManager, null)
         }
 
         // TODO: Setup the action of the couple button
@@ -200,7 +198,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // Show the exit reveal animation (and finish the activity) TODO: Show a dialog confirming the discard
+        // Show the exit reveal animation (and finish the activity)
         CircularReveal.showExitRevealAnimation(clEditProfileRoot, { finish() }, fabX, fabY)
     }
 
