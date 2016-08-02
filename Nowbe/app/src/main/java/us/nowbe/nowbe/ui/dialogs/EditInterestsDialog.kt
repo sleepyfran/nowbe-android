@@ -1,11 +1,11 @@
-package us.nowbe.nowbe.dialogs
+package us.nowbe.nowbe.ui.dialogs
 
 import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.net.async.UpdateUserEducationObservable
+import us.nowbe.nowbe.net.async.UpdateUserInterestsObservable
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
@@ -16,14 +16,14 @@ import us.nowbe.nowbe.utils.SharedPreferencesUtils
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class EditEducationDialog : EditWithTextFieldDialog() {
+class EditInterestsDialog : EditWithTextFieldDialog() {
 
     companion object {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
         fun newInstance(onDismiss: DialogInterface.OnDismissListener, defaultText: String): EditWithTextFieldDialog {
-            val dialog = EditEducationDialog()
+            val dialog = EditInterestsDialog()
             dialog.onDismiss = onDismiss
             dialog.defaultText = defaultText
             return dialog
@@ -31,24 +31,25 @@ class EditEducationDialog : EditWithTextFieldDialog() {
     }
 
     override fun getTitle(): String {
-        return getString(R.string.profile_edit_about_user)
+        return getString(R.string.profile_edit_interests)
     }
 
     override fun getPositiveAction(view: View): () -> Unit {
         return {
-            // Get the token from the user
+            // Get the token of the user
             val token = SharedPreferencesUtils.getToken(context)!!
 
-            // Get the about text
-            val newEducation = view.tvEditDialogText.text.toString()
+            // Get the new interests
+            val interests = view.tvEditDialogText.text.toString()
 
-            UpdateUserEducationObservable.create(token, newEducation).subscribe(
+            // Notify the server about the change
+            UpdateUserInterestsObservable.create(token, interests).subscribe(
                     // On Next
                     {
                         result ->
 
                         // Show a toast confirming the change
-                        Toast.makeText(activity, getString(R.string.profile_edit_academic_updated), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, getString(R.string.profile_edit_interests_updated), Toast.LENGTH_SHORT).show()
                     },
                     // On Error
                     {
@@ -57,5 +58,13 @@ class EditEducationDialog : EditWithTextFieldDialog() {
                     }
             )
         }
+    }
+
+    override fun hasDescription(): Boolean {
+        return true
+    }
+
+    override fun getDescription(): String {
+        return getString(R.string.profile_edit_interests_description)
     }
 }

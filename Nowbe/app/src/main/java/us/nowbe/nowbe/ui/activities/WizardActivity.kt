@@ -1,11 +1,11 @@
-package us.nowbe.nowbe.activities
+package us.nowbe.nowbe.ui.activities
 
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.fragments.LogInFragment
-import us.nowbe.nowbe.fragments.SignupFragment
-import us.nowbe.nowbe.fragments.WelcomeFragment
+import us.nowbe.nowbe.ui.fragments.LogInFragment
+import us.nowbe.nowbe.ui.fragments.SignupFragment
+import us.nowbe.nowbe.ui.fragments.WelcomeFragment
 
 class WizardActivity : FragmentActivity() {
 

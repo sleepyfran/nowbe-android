@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="us.nowbe.nowbe.ui.activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,23 +22,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.WizardActivity"
+            android:name="us.nowbe.nowbe.ui.activities.WizardActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar.Welcome"
             android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-            android:name=".activities.LandingActivity"
+            android:name="us.nowbe.nowbe.ui.activities.LandingActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name="us.nowbe.nowbe.ui.activities.ProfileActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.EditProfileActivity"
+            android:name="us.nowbe.nowbe.ui.activities.EditProfileActivity"
             android:label="@string/app_name"
             android:theme="@style/TransparentTheme">
         </activity>

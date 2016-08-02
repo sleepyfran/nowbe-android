@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.profile_specific_info_view.view.*
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.activities.ProfileActivity
+import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
 

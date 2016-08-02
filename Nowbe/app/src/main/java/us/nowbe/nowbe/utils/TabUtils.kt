@@ -12,8 +12,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.ViewPagerAdapter
-import us.nowbe.nowbe.fragments.FeedFragment
-import us.nowbe.nowbe.fragments.ProfileFragment
+import us.nowbe.nowbe.ui.fragments.FeedFragment
+import us.nowbe.nowbe.ui.fragments.ProfileFragment
 
 class TabUtils {
     companion object {

@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.dialogs
+package us.nowbe.nowbe.ui.dialogs
 
 import android.text.TextUtils
 import android.view.LayoutInflater

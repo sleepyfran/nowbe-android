@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.activities
+package us.nowbe.nowbe.ui.activities
 
 /**
  * This file is part of Nowbe for Android
@@ -16,7 +16,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import rx.Observable
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.fragments.ProfileFragment
+import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.NowbeCheckIfFriend

@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.activities
+package us.nowbe.nowbe.ui.activities
 
 /**
  * This file is part of Nowbe for Android

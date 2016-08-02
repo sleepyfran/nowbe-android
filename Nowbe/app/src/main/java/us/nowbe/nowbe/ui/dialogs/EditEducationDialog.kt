@@ -1,11 +1,11 @@
-package us.nowbe.nowbe.dialogs
+package us.nowbe.nowbe.ui.dialogs
 
 import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.net.async.UpdateUserVisibleNameObservable
+import us.nowbe.nowbe.net.async.UpdateUserEducationObservable
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
@@ -16,14 +16,14 @@ import us.nowbe.nowbe.utils.SharedPreferencesUtils
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class EditVisibleNameDialog : EditWithTextFieldDialog() {
+class EditEducationDialog : EditWithTextFieldDialog() {
 
     companion object {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
         fun newInstance(onDismiss: DialogInterface.OnDismissListener, defaultText: String): EditWithTextFieldDialog {
-            val dialog = EditVisibleNameDialog()
+            val dialog = EditEducationDialog()
             dialog.onDismiss = onDismiss
             dialog.defaultText = defaultText
             return dialog
@@ -31,23 +31,24 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
     }
 
     override fun getTitle(): String {
-        return getString(R.string.profile_edit_full_name)
+        return getString(R.string.profile_edit_about_user)
     }
 
     override fun getPositiveAction(view: View): () -> Unit {
         return {
-            // Get the new visible name and the token of the user
-            val newVisibleName = view.tvEditDialogText.text.toString()
+            // Get the token from the user
             val token = SharedPreferencesUtils.getToken(context)!!
 
-            // Update the visible name of the user
-            UpdateUserVisibleNameObservable.create(newVisibleName, token).subscribe(
+            // Get the about text
+            val newEducation = view.tvEditDialogText.text.toString()
+
+            UpdateUserEducationObservable.create(token, newEducation).subscribe(
                     // On Next
                     {
                         result ->
 
                         // Show a toast confirming the change
-                        Toast.makeText(activity, getString(R.string.profile_edit_full_name_updated), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, getString(R.string.profile_edit_academic_updated), Toast.LENGTH_SHORT).show()
                     },
                     // On Error
                     {

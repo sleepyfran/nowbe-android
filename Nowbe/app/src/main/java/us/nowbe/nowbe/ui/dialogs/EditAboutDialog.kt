@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.dialogs
+package us.nowbe.nowbe.ui.dialogs
 
 import android.content.DialogInterface
 import android.view.View

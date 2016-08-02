@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.fragments
+package us.nowbe.nowbe.ui.fragments
 
 /**
  * This file is part of Nowbe for Android
@@ -22,7 +22,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.activities.ProfileActivity
+import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.adapters.FeedAdapter
 import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.model.exceptions.EmptyFeedException

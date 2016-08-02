@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.activities
+package us.nowbe.nowbe.ui.activities
 
 /**
  * This file is part of Nowbe for Android
@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
-import us.nowbe.nowbe.dialogs.*
+import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
@@ -141,6 +141,11 @@ class EditProfileActivity : AppCompatActivity() {
                 // Re-load the user data
                 loadUserData()
             }
+        }
+
+        // TODO: Setup the action of the edit profile photo
+        ivUserProfilePic.setOnClickListener {
+
         }
 
         // Setup the action of the visible name button

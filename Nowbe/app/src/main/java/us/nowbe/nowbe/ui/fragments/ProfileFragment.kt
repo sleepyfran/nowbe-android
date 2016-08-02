@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.fragments
+package us.nowbe.nowbe.ui.fragments
 
 /**
  * This file is part of Nowbe for Android

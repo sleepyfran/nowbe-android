@@ -1,11 +1,11 @@
-package us.nowbe.nowbe.dialogs
+package us.nowbe.nowbe.ui.dialogs
 
 import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.net.async.UpdateUserInterestsObservable
+import us.nowbe.nowbe.net.async.UpdateUserVisibleNameObservable
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
@@ -16,14 +16,14 @@ import us.nowbe.nowbe.utils.SharedPreferencesUtils
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class EditInterestsDialog : EditWithTextFieldDialog() {
+class EditVisibleNameDialog : EditWithTextFieldDialog() {
 
     companion object {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
         fun newInstance(onDismiss: DialogInterface.OnDismissListener, defaultText: String): EditWithTextFieldDialog {
-            val dialog = EditInterestsDialog()
+            val dialog = EditVisibleNameDialog()
             dialog.onDismiss = onDismiss
             dialog.defaultText = defaultText
             return dialog
@@ -31,25 +31,23 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
     }
 
     override fun getTitle(): String {
-        return getString(R.string.profile_edit_interests)
+        return getString(R.string.profile_edit_full_name)
     }
 
     override fun getPositiveAction(view: View): () -> Unit {
         return {
-            // Get the token of the user
+            // Get the new visible name and the token of the user
+            val newVisibleName = view.tvEditDialogText.text.toString()
             val token = SharedPreferencesUtils.getToken(context)!!
 
-            // Get the new interests
-            val interests = view.tvEditDialogText.text.toString()
-
-            // Notify the server about the change
-            UpdateUserInterestsObservable.create(token, interests).subscribe(
+            // Update the visible name of the user
+            UpdateUserVisibleNameObservable.create(newVisibleName, token).subscribe(
                     // On Next
                     {
                         result ->
 
                         // Show a toast confirming the change
-                        Toast.makeText(activity, getString(R.string.profile_edit_interests_updated), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, getString(R.string.profile_edit_full_name_updated), Toast.LENGTH_SHORT).show()
                     },
                     // On Error
                     {
@@ -58,13 +56,5 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
                     }
             )
         }
-    }
-
-    override fun hasDescription(): Boolean {
-        return true
-    }
-
-    override fun getDescription(): String {
-        return getString(R.string.profile_edit_interests_description)
     }
 }
