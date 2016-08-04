@@ -1,5 +1,6 @@
 package us.nowbe.nowbe.utils
 
+import us.nowbe.nowbe.model.BottomSheetItem
 import us.nowbe.nowbe.model.User
 
 /**
@@ -38,5 +39,25 @@ class Interfaces {
          * (Should) return the user that we got from the API call
          */
         fun onUserResult(user: User)
+    }
+
+    /**
+     * Interface to implement when the user pressed and item on a Bottom Sheet
+     */
+    interface OnBottomSheetItemClick {
+        /**
+         * (Should) return the item clicked
+         */
+        fun onClick(item: BottomSheetItem)
+    }
+
+    /**
+     * Interface to call when we have a path for a temporary image
+     */
+    interface OnTemporaryImagePath {
+        /**
+         * (Should) pass the path of the temporary image
+         */
+        fun onImagePath(imagePath: String)
     }
 }

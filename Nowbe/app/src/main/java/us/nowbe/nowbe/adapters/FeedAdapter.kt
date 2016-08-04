@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import us.nowbe.nowbe.adapters.holders.FeedHolder
 import us.nowbe.nowbe.model.FeedContent
 import us.nowbe.nowbe.utils.Interfaces
-import us.nowbe.nowbe.views.FeedView
+import us.nowbe.nowbe.ui.views.FeedView
 
 class FeedAdapter : RecyclerView.Adapter<FeedHolder>() {
     /**

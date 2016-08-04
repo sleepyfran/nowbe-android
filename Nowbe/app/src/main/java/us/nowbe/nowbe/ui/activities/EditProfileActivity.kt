@@ -7,22 +7,27 @@ package us.nowbe.nowbe.ui.activities
  * Maintained by Fran González <@spaceisstrange>
  */
 
+import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
 import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
+import us.nowbe.nowbe.net.async.UpdateUserAvatarObservable
 import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.net.async.UserDataObservable
-import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.ErrorUtils
-import us.nowbe.nowbe.utils.IntentUtils
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import us.nowbe.nowbe.utils.*
+import java.io.File
 
 class EditProfileActivity : AppCompatActivity() {
     /**
@@ -32,9 +37,14 @@ class EditProfileActivity : AppCompatActivity() {
     var fabY: Int = 0
 
     /**
+     * File path of the temporary file
+     */
+    lateinit var tempFilePath: String
+
+    /**
      * Loads the data of the user and populates the widgets with that data
      */
-    fun loadUserData() {
+    fun loadUserData(forceRefresh: Boolean) {
         // Load the user data and populate the widgets with it
         val token = SharedPreferencesUtils.getToken(this)!!
         UserDataObservable.create(token).subscribe(
@@ -43,7 +53,7 @@ class EditProfileActivity : AppCompatActivity() {
                     user ->
 
                     // Set the user photo
-                    Picasso.with(this).load(user.profilePicDir).noFade().into(ivUserPicture)
+                    Picasso.with(this).load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh)).noFade().into(ivUserPicture)
 
                     // Set the user's username
                     tvEditUsername.text = getString(R.string.profile_username, user.username)
@@ -94,12 +104,51 @@ class EditProfileActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Uploads a photo to the server
+     */
+    fun uploadPhoto() {
+        // Get the token of the user
+        val token = SharedPreferencesUtils.getToken(this)!!
+
+        // Get the temporary file
+        val tempFile = File(tempFilePath)
+
+        // Upload it!
+        UpdateUserAvatarObservable.create(token, tempFile).subscribe(
+                // On Next
+                {
+                    // Show the new photo
+                    ivUserPicture.setImageBitmap(BitmapFactory.decodeFile(tempFilePath))
+
+                    // Show a toast confirming the change
+                    Toast.makeText(this, getString(R.string.profile_edit_avatar_updated), Toast.LENGTH_SHORT).show()
+
+                    // Delete the temporary file
+                    InternalStorageUtils.deleteTemporaryImagefile(this, tempFilePath)
+                },
+                // On Error
+                {
+                    error ->
+
+                    if (error is RequestNotSuccessfulException) {
+                        // Show a general error, we don't know why we got the 0!
+                        ErrorUtils.showGeneralWhoopsDialog(this)
+                    } else {
+                        ErrorUtils.showNoConnectionToast(this)
+                    }
+
+                    error.printStackTrace()
+                }
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 
         // Load the data of the user
-        loadUserData()
+        loadUserData(false)
 
         // Get the extras (fab position) from the intent
         fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION)
@@ -135,17 +184,22 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         // Action to perform when the dialogs are dismissed
-        // TODO: Check if we can ONLY do this when the user pressed the cancel button or pressed back
+        // TODO: Check if we can ONLY do this when the user has not pressed the cancel button or pressed back
         val onDismiss = object : DialogInterface.OnDismissListener {
             override fun onDismiss(dialog: DialogInterface?) {
                 // Re-load the user data
-                loadUserData()
+                loadUserData(true)
             }
         }
 
-        // TODO: Setup the action of the edit profile photo
+        // Setup the action of the edit profile photo
         ivUserProfilePic.setOnClickListener {
-
+            SelectPictureSourceDialog.newInstance(object : Interfaces.OnTemporaryImagePath {
+                override fun onImagePath(imagePath: String) {
+                    // Save the temporary image file path
+                    tempFilePath = imagePath
+                }
+            }).show(supportFragmentManager, null)
         }
 
         // Setup the action of the visible name button
@@ -190,6 +244,25 @@ class EditProfileActivity : AppCompatActivity() {
         // TODO: Setup the action of the comments slots
         llEditComments.setOnClickListener {
 
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == IntentUtils.REQUEST_CAMERA_IMAGE && resultCode == Activity.RESULT_OK) {
+            // Allow the user to crop the image
+            CropUtils.startSquareCroppingActivityFromFilePath(this, tempFilePath)
+        } else if (requestCode == IntentUtils.REQUEST_GALLERY_IMAGE && resultCode == Activity.RESULT_OK) {
+            // Allow the user to crop the image that they selected
+            CropUtils.startSquareCroppingActivityFromUri(this, data?.data!!)
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Get the URI of the cropped image
+            val croppedImage = CropImage.getActivityResult(data).uri
+
+            // Change the path of the file to the cropped one
+            tempFilePath = croppedImage.path
+
+            // Upload the image once we have it cropped
+            uploadPhoto()
         }
     }
 

@@ -44,5 +44,12 @@ class NumberUtils {
 
             return SimpleDateFormat("dd-MM-yyyy").format(unformattedDate).replace("-", "/")
         }
+
+        /**
+         * Returns the current UNIX timestamp
+         */
+        fun getCurrentUnixTimestamp(): Long {
+            return System.currentTimeMillis() / 1000
+        }
     }
 }

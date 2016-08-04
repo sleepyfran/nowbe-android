@@ -4,6 +4,7 @@ import okhttp3.FormBody
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.NumberUtils
 import java.net.ConnectException
 import java.net.UnknownHostException
 
@@ -31,7 +32,7 @@ class NowbeUserData(val token: String) : NowbeRequest() {
     }
 
     override fun getBody(): FormBody {
-        // Build the body with the token
+        // Make the body with the token
         return FormBody.Builder()
                 .add(ApiUtils.KEY_TOKEN, token)
                 .build()

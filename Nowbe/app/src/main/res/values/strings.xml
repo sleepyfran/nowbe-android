@@ -65,6 +65,8 @@
 
     <string name="profile.edit.title">Edit your profile</string>
 
+    <string name="profile.edit.avatar_updated">Profile picture updated!</string>
+
     <string name="profile.edit.full_name">Visible name</string>
     <string name="profile.edit.full_name_updated">Visible name updated!</string>
 
@@ -90,6 +92,10 @@
     <string name="profile.edit.comments_slots">Comments slots</string>
     <string name="profile.edit.slots_description">%1$s set</string>
     <string name="profile.edit.unset">Not set</string>
+
+    <!-- Select Picture Source Dialog -->
+    <string name="select_picture_source.camera">Take a photo</string>
+    <string name="select_picture_source.gallery">Select from gallery</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">Picture slot #1 updated.</string>

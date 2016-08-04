@@ -94,7 +94,7 @@ class ProfileFragment : Fragment() {
     /**
      * Method that loads the user data in another thread and updates the displayed data
      */
-    fun loadUserData() {
+    fun loadUserData(forceRefresh: Boolean) {
         UserDataObservable.create(token).subscribe(
                 // On Next
                 {
@@ -106,7 +106,7 @@ class ProfileFragment : Fragment() {
                     onUserResult?.onUserResult(user)
 
                     // Update the profile information
-                    pivProfileInfo.updateInformation(user)
+                    pivProfileInfo.updateInformation(user, forceRefresh)
 
                     // Update the likes, couple and education info
                     pleLikesEducationCouple.updateInformation(user)
@@ -179,12 +179,12 @@ class ProfileFragment : Fragment() {
         }
 
         // Load the user in another thread
-        loadUserData()
+        loadUserData(false)
 
         // Implement the swipe to refresh feature
         srlProfileRefresh.setOnRefreshListener {
             // Refresh the user data
-            loadUserData()
+            loadUserData(true)
         }
     }
 }

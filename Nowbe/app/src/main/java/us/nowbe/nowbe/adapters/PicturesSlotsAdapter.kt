@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import us.nowbe.nowbe.adapters.holders.PicturesSlotsHolder
 import us.nowbe.nowbe.model.Slot
 import us.nowbe.nowbe.utils.Interfaces
-import us.nowbe.nowbe.views.PicturesSlotsPictureView
+import us.nowbe.nowbe.ui.views.PicturesSlotsPictureView
 
 class PicturesSlotsAdapter(val onClick: Interfaces.OnPictureSlotClick) : RecyclerView.Adapter<PicturesSlotsHolder>() {
     /**

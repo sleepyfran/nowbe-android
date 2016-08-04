@@ -57,7 +57,7 @@ class User(token: String,
         this.fullName = fullName
         this.status = status
         this.email = email
-        this.profilePicDir = ApiUtils.getFullProfilePicDir(profilePicDir)
+        this.profilePicDir = profilePicDir
         this.age = age
         this.birthday = birthday
         this.about = about

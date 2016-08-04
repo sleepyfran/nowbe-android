@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.views
+package us.nowbe.nowbe.ui.views
 
 import android.content.Context
 import android.content.Intent

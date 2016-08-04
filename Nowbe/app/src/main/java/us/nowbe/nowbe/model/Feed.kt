@@ -23,12 +23,12 @@ class Feed(feedContent: MutableList<FeedContent>) {
         /**
          * Returns a Feed from a JSON array
          */
-        fun fromJson(jsonArray: JSONArray): Feed {
+        fun fromJson(jsonArray: JSONArray, forceRefresh: Boolean): Feed {
             val content: MutableList<FeedContent> = arrayListOf()
 
             // Iterate through the array getting a FeedContent from each JSON object
             for (i in 0..jsonArray.length() - 1) {
-                content.add(FeedContent.fromJson(jsonArray.getJSONObject(i)))
+                content.add(FeedContent.fromJson(jsonArray.getJSONObject(i), forceRefresh))
             }
 
             return Feed(content)

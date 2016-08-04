@@ -43,6 +43,7 @@ dependencies {
     compile ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true;
     }
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.2.+'
 }
 repositories {
     mavenCentral()

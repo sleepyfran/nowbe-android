@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.views
+package us.nowbe.nowbe.ui.views
 
 /**
  * This file is part of Nowbe for Android

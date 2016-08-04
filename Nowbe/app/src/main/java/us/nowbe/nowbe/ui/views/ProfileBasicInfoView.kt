@@ -1,9 +1,10 @@
-package us.nowbe.nowbe.views
+package us.nowbe.nowbe.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.profile_basic_info_view.*
 import kotlinx.android.synthetic.main.profile_basic_info_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
+import us.nowbe.nowbe.utils.ApiUtils
 
 class ProfileBasicInfoView : RelativeLayout {
 
@@ -25,9 +27,9 @@ class ProfileBasicInfoView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.profile_basic_info_view, this, true)
     }
 
-    fun updateInformation(user: User) {
+    fun updateInformation(user: User, forceRefresh: Boolean) {
         // Update the user's profile pic
-        Picasso.with(context).load(user.profilePicDir).noFade().into(ivUserPicture)
+        Picasso.with(context).load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh)).noFade().into(ivUserPicture)
 
         // Update the user's online state
         val drawableStatus: Int

@@ -18,13 +18,13 @@
             android:orientation="vertical">
 
             <!-- Profile information -->
-            <us.nowbe.nowbe.views.ProfileBasicInfoView
+            <us.nowbe.nowbe.ui.views.ProfileBasicInfoView
                 android:id="@+id/pivProfileInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <!-- Likes, education and couple -->
-            <us.nowbe.nowbe.views.ProfileSpecificInfoView
+            <us.nowbe.nowbe.ui.views.ProfileSpecificInfoView
                 android:id="@+id/pleLikesEducationCouple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -60,7 +60,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/profile.pictures_slots" />
 
-            <us.nowbe.nowbe.views.PicturesSlotsView
+            <us.nowbe.nowbe.ui.views.PicturesSlotsView
                 android:id="@+id/psvPicturesSlots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

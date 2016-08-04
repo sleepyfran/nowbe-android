@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.views
+package us.nowbe.nowbe.ui.views
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.feed_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.FeedContent
+import us.nowbe.nowbe.utils.ApiUtils
 
 class FeedView(context: Context) : RelativeLayout(context) {
     init {
@@ -16,7 +17,7 @@ class FeedView(context: Context) : RelativeLayout(context) {
 
     fun update(content: FeedContent) {
         // Load the user picture
-        Picasso.with(context).load(content.profilePic).noFade().placeholder(R.drawable.nowbe_logo).into(ivUserPicture)
+        Picasso.with(context).load(ApiUtils.getThumbProfilePicDir(content.profilePic, true)).noFade().placeholder(R.drawable.nowbe_logo).into(ivUserPicture)
 
         // Load the user state (online or not)
         val drawableStatus: Int

@@ -23,6 +23,7 @@ class ApiUtils {
         const val KEY_TOKEN = "token"
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
+        const val KEY_FAKE_TOKEN = "fakeToken"
         const val KEY_TOKEN_TO = "tokenTo"
         const val KEY_TOKEN_FROM = "tokenFrom"
         const val KEY_VISIBLE_NAME = "newMutableName"
@@ -90,6 +91,7 @@ class ApiUtils {
         const val USER_DATA_URL = "getUserDetails.php"
         const val USER_FEED_URL = "getFriends.php"
         const val USER_PICTURE_URL = "UserPictures/"
+        const val USER_PICTURE_THUMB_URL = "UserPicturesThumbnails/"
         const val USER_SLOTS_PICTURES_THUMB_URL = "slotsPicturesThumbnails/"
         const val USER_SLOTS_PICTURES_URL = "slotsPictures/"
         const val USER_ADD_FRIEND_URL = "addFriend.php"
@@ -102,6 +104,13 @@ class ApiUtils {
         const val USER_UPDATE_INTERESTS_URL = "updateInterests.php"
         const val USER_UPDATE_EDUCATION_URL = "updateStudies.php"
         const val USER_UPDATE_COUPLE_URL = "updateCouple.php"
+        const val USER_UPDATE_AVATAR_URL = "uploadImageProfile.php"
+
+        /**
+         * POST parameters
+         */
+        const val USER_UPDATE_PROFILE_NAME_PARAM = "name"
+        const val USER_UPDATE_PROFILE_PIC_PARAM = "userPicture"
 
         /**
          * Results of different sections of the API
@@ -113,7 +122,34 @@ class ApiUtils {
          * Various utils
          */
         fun getFullProfilePicDir(profilePic: String): String {
-            return ApiUtils.BASE_URL + ApiUtils.USER_PICTURE_URL + profilePic
+            return BASE_URL + USER_PICTURE_URL + profilePic
+        }
+
+        fun getThumbProfilePicDir(profilePic: String, forceRefresh: Boolean): String {
+            var url =  BASE_URL + USER_PICTURE_THUMB_URL +
+                    profilePic
+
+            if (forceRefresh) {
+                url = url + "?" + KEY_FAKE_TOKEN +
+                        NumberUtils.getCurrentUnixTimestamp().toString()
+            }
+
+            return url
+        }
+
+        fun getFullSlotPicDir(slotPic: String): String {
+            return ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_URL + slotPic
+        }
+
+        fun getThumbSlotPicDir(slotPic: String, forceRefresh: Boolean): String {
+            var url = ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_THUMB_URL + slotPic
+
+            if (forceRefresh) {
+                url = url + "?" + KEY_FAKE_TOKEN +
+                        NumberUtils.getCurrentUnixTimestamp().toString()
+            }
+
+            return url
         }
 
         fun isAppUser(context: Context, token: String): Boolean {

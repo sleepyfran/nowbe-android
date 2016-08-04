@@ -9,7 +9,7 @@ package us.nowbe.nowbe.adapters.holders
 
 import android.support.v7.widget.RecyclerView
 import us.nowbe.nowbe.utils.NumberUtils
-import us.nowbe.nowbe.views.PicturesSlotsPictureView
+import us.nowbe.nowbe.ui.views.PicturesSlotsPictureView
 
 class PicturesSlotsHolder(val imageView: PicturesSlotsPictureView) : RecyclerView.ViewHolder(imageView) {
     /**

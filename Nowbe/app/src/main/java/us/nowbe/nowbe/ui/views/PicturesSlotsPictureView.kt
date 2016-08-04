@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.views
+package us.nowbe.nowbe.ui.views
 
 /**
  * This file is part of Nowbe for Android
@@ -35,7 +35,7 @@ class PicturesSlotsPictureView : RelativeLayout {
      * Updates the image of the slot
      */
     fun updateImage(url: String) {
-        Picasso.with(context).load(ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_THUMB_URL + url).noFade().into(ivPictureSlot)
+        Picasso.with(context).load(ApiUtils.getThumbSlotPicDir(url, true)).noFade().into(ivPictureSlot)
     }
 
     /**

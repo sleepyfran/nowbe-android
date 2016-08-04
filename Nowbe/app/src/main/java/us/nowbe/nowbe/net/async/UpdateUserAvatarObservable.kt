@@ -10,17 +10,17 @@ package us.nowbe.nowbe.net.async
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import us.nowbe.nowbe.model.Feed
-import us.nowbe.nowbe.net.NowbeFeedData
+import us.nowbe.nowbe.net.NowbeUploadUserAvatar
+import java.io.File
 
-class FeedObsevable {
+class UpdateUserAvatarObservable {
     companion object {
         /**
-         * Returns an observable that loads the feed and returns it as a Feed object
+         * Returns an observable that uploads the avatar of the user
          */
-        fun create(token: String, forceRefresh: Boolean): Observable<Feed> {
+        fun create(token: String, file: File): Observable<Unit> {
             return Observable.fromCallable({
-                NowbeFeedData(token).getFeed(forceRefresh)
+                NowbeUploadUserAvatar(token, file).upload()
             }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         }

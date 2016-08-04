@@ -89,7 +89,7 @@ class FeedFragment : Fragment {
 
         // Load the feed in another thread and set the refresh layout as loading
         srlFeedRefresh.isRefreshing = true
-        loadData(adapter)
+        loadData(adapter, false)
 
         // Implement the swipe to refresh feature
         srlFeedRefresh.setOnRefreshListener {
@@ -97,15 +97,15 @@ class FeedFragment : Fragment {
             llEmptyFeed.visibility = View.GONE
 
             // Refresh the adapter
-            loadData(adapter)
+            loadData(adapter, true)
         }
     }
 
     /**
      * Loads the data into the feed
      */
-    fun loadData(adapter: FeedAdapter) {
-        FeedObsevable.create(token).subscribe(
+    fun loadData(adapter: FeedAdapter, forceRefresh: Boolean) {
+        FeedObsevable.create(token, forceRefresh).subscribe(
                 // On Next
                 {
                     feed ->
