@@ -27,6 +27,11 @@ class PicturesSlotsView : RelativeLayout {
      */
     private val adapter: PicturesSlotsAdapter
 
+    /**
+     * Action to perform when clicking a slot
+     */
+    var onClick: Interfaces.OnPictureSlotClick? = null
+
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -38,12 +43,8 @@ class PicturesSlotsView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.pictures_slot_view, this, true)
 
         // Setup the recycler view
-        adapter = PicturesSlotsAdapter(object : Interfaces.OnPictureSlotClick {
-            override fun onPictureSlotClick(itemSelected: Int) {
-                // TODO: Show the picture
-                Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_LONG).show()
-            }
-        })
+        adapter = PicturesSlotsAdapter()
+        adapter.onClick = onClick
         rvPicturesSlots.adapter = adapter
         rvPicturesSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }

@@ -111,7 +111,7 @@ class ProfileFragment : Fragment() {
                     // Update the likes, couple and education info
                     pleLikesEducationCouple.updateInformation(user)
 
-                    // Set up the pictures slots
+                    // Set up the pictures slots TODO: Show the full picture when clicking on a slot
                     psvPicturesSlots.updateSlots(user)
 
                     // Add the non-null comments to the adapter

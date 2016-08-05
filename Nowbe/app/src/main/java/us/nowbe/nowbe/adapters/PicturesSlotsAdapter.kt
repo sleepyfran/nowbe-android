@@ -14,11 +14,16 @@ import us.nowbe.nowbe.model.Slot
 import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.ui.views.PicturesSlotsPictureView
 
-class PicturesSlotsAdapter(val onClick: Interfaces.OnPictureSlotClick) : RecyclerView.Adapter<PicturesSlotsHolder>() {
+class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
     /**
      * Array of pictures of the user
      */
     var pictures: MutableList<Slot> = arrayListOf()
+
+    /**
+     * Action to perform when clicking a slot
+     */
+    var onClick: Interfaces.OnPictureSlotClick? = null
 
     /**
      * Deletes all the current pictures
@@ -39,7 +44,7 @@ class PicturesSlotsAdapter(val onClick: Interfaces.OnPictureSlotClick) : Recycle
         val holder = PicturesSlotsHolder(PicturesSlotsPictureView(parent.context))
 
         // Set the onClick listener for the view
-        holder.itemView.setOnClickListener({ onClick.onPictureSlotClick(holder.adapterPosition) })
+        holder.itemView.setOnClickListener({ onClick?.onPictureSlotClick(holder.adapterPosition) })
         return holder
     }
 
