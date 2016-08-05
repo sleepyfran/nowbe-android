@@ -32,6 +32,9 @@ abstract class EditWithTextFieldDialog : EditDialog() {
             view.tvEditDialogOptionalDescription.text = getDescription()
         }
 
+        // Set the cursor at the end of the text field
+        view.tvEditDialogText.setSelection(view.tvEditDialogText.text.length)
+
         return view
     }
 
