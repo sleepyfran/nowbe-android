@@ -37,6 +37,7 @@ class ApiUtils {
          * Non-changing values
          */
         const val NULL = "null"
+        const val EMPTY = ""
         const val OS = "2"
 
         /**

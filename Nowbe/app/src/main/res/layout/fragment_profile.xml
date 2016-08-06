@@ -73,11 +73,10 @@
                 android:text="@string/profile.comments_slots" />
 
             <!-- Comments slots -->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvCommentsSlots"
+            <us.nowbe.nowbe.ui.views.CommentsSlotsView
+                android:id="@+id/csvCommentsSlots"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

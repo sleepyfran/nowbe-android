@@ -21,6 +21,13 @@ class Interfaces {
         fun onPictureSlotClick(itemSelected: Int)
     }
 
+    interface OnCommentSlotClick {
+        /**
+         * (Should) return the position of the item clicked so the adapter can do whatever it wants with the comment
+         */
+        fun onCommentSlotClick(itemSelected: Int)
+    }
+
     /**
      * Interface to implement when a feed item is clicked
      */

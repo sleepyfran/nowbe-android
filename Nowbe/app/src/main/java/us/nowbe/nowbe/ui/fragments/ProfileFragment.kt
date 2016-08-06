@@ -121,9 +121,15 @@ class ProfileFragment : Fragment() {
                         }
                     }
 
-                    // Add the non-null comments to the adapter
-                    val nonNullComments = user.commentsSlots.filterNotNull().filter { it.data != "" }
-                    commentsAdapter.updateComments(nonNullComments.toMutableList())
+                    // Add the comments to the adapter
+                    csvCommentsSlots.updateSlots(user)
+
+                    // TODO: Show the full comment when clicking on a comment
+                    csvCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
+                        override fun onCommentSlotClick(itemSelected: Int) {
+                            Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
 
                     // Setup the send hello and send email if they're visible
                     if (btnSayHello.visibility == View.VISIBLE) {
@@ -164,12 +170,6 @@ class ProfileFragment : Fragment() {
             btnSayHello.visibility = View.GONE
             btnSendMessage.visibility = View.GONE
         }
-
-        // Set up the (empty) adapter and layout manager of the comments recycler view
-        commentsAdapter = CommentsAdapter()
-        rvCommentsSlots.isNestedScrollingEnabled = false
-        rvCommentsSlots.adapter = commentsAdapter
-        rvCommentsSlots.layoutManager = LinearLayoutManager(context)
 
         // Hide the fab when scrolling the fragment
         nsvProfile.setOnScrollChangeListener {

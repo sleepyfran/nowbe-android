@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    app:cardBackgroundColor="@color/cardview_light_background"
-                                    app:cardElevation="4dp"
-                                    app:cardUseCompatPadding="true">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,24 +14,25 @@
         android:layout_margin="10dp"
         android:orientation="horizontal">
 
-        <!-- User image with its state (online/offline) -->
+        <!-- Number of the comment -->
         <ImageView
             android:id="@+id/ivCommentNumber"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/nowbe_logo"/>
+            android:src="@drawable/nowbe_logo" />
 
-        <!-- Text of the feed/notification update -->
+        <!-- Text of the comment -->
         <TextView
             android:id="@+id/tvCommentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@string/dummy_data.status"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

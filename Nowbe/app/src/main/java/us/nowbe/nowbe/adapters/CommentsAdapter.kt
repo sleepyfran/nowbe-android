@@ -8,11 +8,11 @@ package us.nowbe.nowbe.adapters
  */
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.holders.CommentHolder
 import us.nowbe.nowbe.model.Slot
+import us.nowbe.nowbe.ui.views.CommentsSlotsCommentView
+import us.nowbe.nowbe.utils.Interfaces
 
 class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
     /**
@@ -20,16 +20,32 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
      */
     var comments: MutableList<Slot> = arrayListOf()
 
-    fun updateComments(content: MutableList<Slot>) {
-        comments.clear()
-        comments.addAll(content)
-        notifyDataSetChanged()
+    /**
+     * Action to perform when clicking a slot
+     */
+    var onClick: Interfaces.OnCommentSlotClick? = null
+
+    /**
+     * Deletes all the current comments
+     */
+    fun clear() {
+        comments = arrayListOf()
+    }
+
+    /**
+     * Adds a comment to the array
+     */
+    fun addComment(slot: Slot) {
+        comments.add(slot.index, slot)
+        notifyItemChanged(slot.index)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
-        // Inflate the view and return a comment holder from it
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_comment, parent, false)
-        return CommentHolder(view)
+        val holder = CommentHolder(CommentsSlotsCommentView(parent.context))
+
+        // Set the onClick listener for the view
+        holder.itemView.setOnClickListener({ onClick?.onCommentSlotClick(holder.adapterPosition) })
+        return holder
     }
 
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
