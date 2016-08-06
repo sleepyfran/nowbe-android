@@ -111,8 +111,15 @@ class ProfileFragment : Fragment() {
                     // Update the likes, couple and education info
                     pleLikesEducationCouple.updateInformation(user)
 
-                    // Set up the pictures slots TODO: Show the full picture when clicking on a slot
+                    // Set up the pictures slots
                     psvPicturesSlots.updateSlots(user)
+
+                    // TODO: Show the full picture when clicking on a slot
+                    psvPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
+                        override fun onPictureSlotClick(itemSelected: Int) {
+                            Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
 
                     // Add the non-null comments to the adapter
                     val nonNullComments = user.commentsSlots.filterNotNull().filter { it.data != "" }

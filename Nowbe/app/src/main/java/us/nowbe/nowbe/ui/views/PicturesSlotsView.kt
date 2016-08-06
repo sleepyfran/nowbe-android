@@ -22,31 +22,55 @@ import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.Interfaces
 
 class PicturesSlotsView : RelativeLayout {
+
     /**
      * Adapter of the view
      */
     private val adapter: PicturesSlotsAdapter
 
     /**
+     * Defines whether the view should position itself as horizontal or vertical
+     */
+    var orientation: Int = LinearLayoutManager.HORIZONTAL
+        set(value) {
+            if (value == LinearLayoutManager.HORIZONTAL || value == LinearLayoutManager.VERTICAL) {
+                field = value
+            }
+        }
+
+    /**
+     * Defines whether the view should display null content or not
+     */
+    var allowNullValues: Boolean = false
+
+    /**
      * Action to perform when clicking a slot
      */
     var onClick: Interfaces.OnPictureSlotClick? = null
+        set(value) {
+            adapter.onClick = value
+        }
 
-    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        // Get the attributes
+        val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.PicturesSlotsView, 0, 0)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+        // Try to set the custom attributes
+        try {
+            orientation = attributes.getInt(R.styleable.PicturesSlotsView_orientation, LinearLayoutManager.HORIZONTAL)
+            allowNullValues = attributes.getBoolean(R.styleable.PicturesSlotsView_allowNullValues, false)
+        } finally {
+            // Recycle the attributes
+            attributes.recycle()
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+            // Inflate the view
+            LayoutInflater.from(context).inflate(R.layout.pictures_slot_view, this, true)
 
-    init {
-        // Inflate the view
-        LayoutInflater.from(context).inflate(R.layout.pictures_slot_view, this, true)
-
-        // Setup the recycler view
-        adapter = PicturesSlotsAdapter()
-        adapter.onClick = onClick
-        rvPicturesSlots.adapter = adapter
-        rvPicturesSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            // Setup the recycler view
+            adapter = PicturesSlotsAdapter()
+            rvPicturesSlots.adapter = adapter
+            rvPicturesSlots.layoutManager = LinearLayoutManager(context, orientation, false)
+        }
     }
 
     /**
@@ -56,11 +80,13 @@ class PicturesSlotsView : RelativeLayout {
         // Clear the current pictures slots
         adapter.clear()
 
-        // Add non-null picture slots
+        // Add the pictures slots
         for (picture in user.picturesSlots) {
-            if (picture?.data != ApiUtils.NULL) {
-                adapter.addPicture(picture!!)
+            if (!allowNullValues && picture?.data == ApiUtils.NULL) {
+                return
             }
+
+            adapter.addPicture(picture!!)
         }
     }
 }

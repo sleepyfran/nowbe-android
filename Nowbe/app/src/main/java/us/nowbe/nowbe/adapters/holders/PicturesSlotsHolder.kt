@@ -10,13 +10,20 @@ package us.nowbe.nowbe.adapters.holders
 import android.support.v7.widget.RecyclerView
 import us.nowbe.nowbe.utils.NumberUtils
 import us.nowbe.nowbe.ui.views.PicturesSlotsPictureView
+import us.nowbe.nowbe.utils.ApiUtils
 
 class PicturesSlotsHolder(val imageView: PicturesSlotsPictureView) : RecyclerView.ViewHolder(imageView) {
     /**
      * Binds the current image into the image view
      */
     fun bindView(picture: String, coolsCounter: Int) {
-        imageView.updateImage(picture)
-        imageView.updateCounter(NumberUtils.roundNumber(coolsCounter))
+        // Display a placeholder if the data is null or the image and its cools if not
+        if (picture == ApiUtils.NULL) {
+            imageView.displayPlaceholder()
+            imageView.hideCounter()
+        } else {
+            imageView.updateImage(picture)
+            imageView.updateCounter(NumberUtils.roundNumber(coolsCounter))
+        }
     }
 }

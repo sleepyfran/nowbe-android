@@ -10,6 +10,7 @@ package us.nowbe.nowbe.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.amulyakhare.textdrawable.TextDrawable
 import com.squareup.picasso.Picasso
@@ -39,6 +40,13 @@ class PicturesSlotsPictureView : RelativeLayout {
     }
 
     /**
+     * Displays a placeholder in the slot
+     */
+    fun displayPlaceholder() {
+        Picasso.with(context).load(R.drawable.nowbe_logo).noFade().into(ivPictureSlot)
+    }
+
+    /**
      * Updates the cool counter of the slot
      */
     fun updateCounter(count: String) {
@@ -46,5 +54,12 @@ class PicturesSlotsPictureView : RelativeLayout {
                 context.resources.getColor(R.color.accent), 10)
 
         ivCoolsCounter.setImageDrawable(counter)
+    }
+
+    /**
+     * Hides the cool counter of the slot
+     */
+    fun hideCounter() {
+        ivCoolsCounter.visibility = View.GONE
     }
 }
