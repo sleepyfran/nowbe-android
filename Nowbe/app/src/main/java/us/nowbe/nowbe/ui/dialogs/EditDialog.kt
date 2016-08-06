@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.view.View
 import us.nowbe.nowbe.R
@@ -21,6 +22,11 @@ abstract class EditDialog() : DialogFragment() {
      */
     lateinit var onDismiss: DialogInterface.OnDismissListener
 
+    /**
+     * Indicates whether the user has updated anything or not
+     */
+    var hasUpdated = false
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // View of the dialog (implemented by the subclass)
         val dialogView = getDialogView()
@@ -29,7 +35,7 @@ abstract class EditDialog() : DialogFragment() {
                 .setView(dialogView)
                 .setTitle(getTitle())
                 .setPositiveButton(getString(R.string.profile_edit_update), null)
-                .setNegativeButton(getString(R.string.profile_edit_cancel), { dialog, which -> dialog.cancel() })
+                .setNegativeButton(getString(R.string.profile_edit_cancel), null)
                 .create()
 
         // Override the positive's button onClickListener so the dialog doesn't dismiss if the data is invalid
@@ -40,10 +46,12 @@ abstract class EditDialog() : DialogFragment() {
 
                 // Dismiss the dialog only if the data provided is valid
                 if (isDataValid(dialogView)) {
+                    // The data is valid so we want an update
+                    hasUpdated = true
 
                     // Perform the action of the positive button and dismiss the dialog
-                    getPositiveAction(dialogView)()
                     dismiss()
+                    getPositiveAction(dialogView)()
                 }
             }
         }
@@ -52,7 +60,10 @@ abstract class EditDialog() : DialogFragment() {
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
-        onDismiss.onDismiss(dialog)
+        // Callback only if the user has updated anything and it's valid
+        if (hasUpdated) onDismiss.onDismiss(dialog)
+
+        super.onDismiss(dialog)
     }
 
     /**

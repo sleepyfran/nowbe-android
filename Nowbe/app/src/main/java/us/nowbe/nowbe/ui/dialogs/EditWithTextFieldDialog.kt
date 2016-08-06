@@ -18,7 +18,7 @@ abstract class EditWithTextFieldDialog : EditDialog() {
     /**
      * Default text to be shown in the text field
      */
-    lateinit var defaultText: String
+    var defaultText: String? = null
 
     override fun getDialogView(): View {
         val view = LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)

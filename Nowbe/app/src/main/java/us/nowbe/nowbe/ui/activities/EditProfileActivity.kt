@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
@@ -234,10 +235,12 @@ class EditProfileActivity : AppCompatActivity() {
                 // Show the circular reveal animation passing the fab position
                 CircularReveal.showEnterRevealAnimation(clEditProfileRoot, { }, fabX, fabY)
             }
+        } else {
+            // If it's not null then we're returning from elsewhere (a rotation change for example), so show the view
+            clEditProfileRoot.visibility = View.VISIBLE
         }
 
         // Action to perform when the dialogs are dismissed
-        // TODO: Check if we can ONLY do this when the user has not pressed the cancel button or pressed back
         val onDismiss = object : DialogInterface.OnDismissListener {
             override fun onDismiss(dialog: DialogInterface?) {
                 // Re-load the user data
