@@ -104,6 +104,10 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="SettingsCard_OptionButton.NoAction">
+        <item name="android:clickable">false</item>
+    </style>
+
     <style name="SettingsCard_OptionButton_Text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

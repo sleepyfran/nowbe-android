@@ -7,4 +7,4 @@ package us.nowbe.nowbe.model.exceptions
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class RequestNotSuccessfulException(message: String) : Exception(message)
+class RequestNotSuccessfulException(message: String = "Whoops, something went wrong here") : Exception(message)

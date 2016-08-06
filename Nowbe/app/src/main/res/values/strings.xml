@@ -89,7 +89,11 @@
     <string name="profile.edit.couple_updated">Couple updated!</string>
 
     <string name="profile.edit.pictures_slots">Pictures slots</string>
+    <string name="profile.edit.pictures_slots_updated">Pictures slot %1$s updated</string>
+
     <string name="profile.edit.comments_slots">Comments slots</string>
+    <string name="profile.edit.comments_slots_updated">Comments slot %1$s updated</string>
+
     <string name="profile.edit.slots_description">%1$s set</string>
     <string name="profile.edit.unset">Not set</string>
 

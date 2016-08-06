@@ -24,6 +24,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.UpdateUserAvatarObservable
+import us.nowbe.nowbe.net.async.UpdateUserSlotObservable
 import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.*
@@ -40,6 +41,16 @@ class EditProfileActivity : AppCompatActivity() {
      * File path of the temporary file
      */
     lateinit var tempFilePath: String
+
+    /**
+     * Indicates whether the user chose to edit their profile picture (true) or a slot picture (false)
+     */
+    var isProfilePicture: Boolean = false
+
+    /**
+     * Indicates the slot that the user chose to modify
+     */
+    var slotIndex: Int = 0
 
     /**
      * Loads the data of the user and populates the widgets with that data
@@ -88,10 +99,15 @@ class EditProfileActivity : AppCompatActivity() {
                         tvEditCouple.text = getString(R.string.profile_edit_unset)
                     }
 
-                    // Load the number of pictures and comments
+                    // Load the pictures
+                    psvEditPicturesSlots.updateSlots(user)
+
+                    // Load the number of pictures
                     tvEditPicturesSlotsDescription.text =
                             getString(R.string.profile_edit_slots_description,
                                     user.picturesSlots.filter { it?.data != ApiUtils.NULL }.size)
+
+
                     tvEditCommentsSlotsDescription.text =
                             getString(R.string.profile_edit_slots_description,
                                     user.commentsSlots.filter { it?.data != "" }.size)
@@ -105,15 +121,9 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     /**
-     * Uploads a photo to the server
+     * Uploads a profile picture photo to the server
      */
-    fun uploadPhoto() {
-        // Get the token of the user
-        val token = SharedPreferencesUtils.getToken(this)!!
-
-        // Get the temporary file
-        val tempFile = File(tempFilePath)
-
+    fun uploadProfilePicture(token: String, tempFile: File) {
         // Upload it!
         UpdateUserAvatarObservable.create(token, tempFile).subscribe(
                 // On Next
@@ -137,10 +147,53 @@ class EditProfileActivity : AppCompatActivity() {
                     } else {
                         ErrorUtils.showNoConnectionToast(this)
                     }
-
-                    error.printStackTrace()
                 }
         )
+    }
+
+    /**
+     * Uploads a slot picture to the server
+     */
+    fun uploadSlotPicture(token: String, file: File) {
+        UpdateUserSlotObservable.create(token, file, slotIndex).subscribe(
+                // On Next
+                {
+                    // Show a toast confirming the change
+                    Toast.makeText(this, getString(R.string.profile_edit_pictures_slots_updated, slotIndex),
+                            Toast.LENGTH_SHORT).show()
+
+                    // Delete the temporary file
+                    InternalStorageUtils.deleteTemporaryImagefile(this, tempFilePath)
+                },
+                // On Error
+                {
+                    error ->
+
+                    if (error is RequestNotSuccessfulException) {
+                        // Show a general error, we don't know why we got the 0!
+                        ErrorUtils.showGeneralWhoopsDialog(this)
+                    } else {
+                        ErrorUtils.showNoConnectionToast(this)
+                    }
+                }
+        )
+    }
+
+    /**
+     * Uploads a photo to the server
+     */
+    fun handlePhoto() {
+        // Get the token of the user
+        val token = SharedPreferencesUtils.getToken(this)!!
+
+        // Get the temporary file
+        val tempFile = File(tempFilePath)
+
+        if (isProfilePicture) {
+            uploadProfilePicture(token, tempFile)
+        } else {
+            uploadSlotPicture(token, tempFile)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -198,6 +251,9 @@ class EditProfileActivity : AppCompatActivity() {
                 override fun onImagePath(imagePath: String) {
                     // Save the temporary image file path
                     tempFilePath = imagePath
+
+                    // We're uploading a profile pic
+                    isProfilePicture = true
                 }
             }).show(supportFragmentManager, null)
         }
@@ -231,19 +287,23 @@ class EditProfileActivity : AppCompatActivity() {
                     .show(supportFragmentManager, null)
         }
 
-        // TODO: Setup the action of the couple button
-        llEditCouple.setOnClickListener {
+        // Setup the action of clicking a pictures slot
+        psvEditPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
+            override fun onPictureSlotClick(itemSelected: Int) {
+                // Save the index
+                slotIndex = itemSelected
 
-        }
+                // We are not uploading the profile pic
+                isProfilePicture = false
 
-        // TODO: Setup the action of the pictures slots
-        llEditPictures.setOnClickListener {
-
-        }
-
-        // TODO: Setup the action of the comments slots
-        llEditComments.setOnClickListener {
-
+                // Show the pick photo bottom sheet
+                SelectPictureSourceDialog.newInstance(object : Interfaces.OnTemporaryImagePath {
+                    override fun onImagePath(imagePath: String) {
+                        // Save the temporary image file path
+                        tempFilePath = imagePath
+                    }
+                }).show(supportFragmentManager, null)
+            }
         }
     }
 
@@ -262,7 +322,7 @@ class EditProfileActivity : AppCompatActivity() {
             tempFilePath = croppedImage.path
 
             // Upload the image once we have it cropped
-            uploadPhoto()
+            handlePhoto()
         }
     }
 

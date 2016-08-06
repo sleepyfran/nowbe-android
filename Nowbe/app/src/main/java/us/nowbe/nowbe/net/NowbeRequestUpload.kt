@@ -31,7 +31,7 @@ abstract class NowbeRequestUpload {
         val response = client.newCall(request).execute()
 
         // If the request was not successful throw an exception
-        if (!response.isSuccessful) throw RequestNotSuccessfulException("Whoops, something went wrong here!")
+        if (!response.isSuccessful) throw RequestNotSuccessfulException()
 
         // Close the response
         response.close()

@@ -10,7 +10,7 @@
         android:id="@+id/clEditProfileRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                     <!-- Pictures slots button -->
                     <LinearLayout
                         android:id="@+id/llEditPictures"
-                        style="@style/SettingsCard_OptionButton">
+                        style="@style/SettingsCard_OptionButton.NoAction">
 
                         <TextView
                             style="@style/SettingsCard_OptionButton_Text"
@@ -197,6 +197,12 @@
                             android:id="@+id/tvEditPicturesSlotsDescription"
                             style="@style/SettingsCard_OptionButton_SubText"
                             android:text="@string/profile.edit.slots_description" />
+
+                        <us.nowbe.nowbe.ui.views.PicturesSlotsView
+                            android:id="@+id/psvEditPicturesSlots"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:allowNullValues="true"/>
 
                     </LinearLayout>
 

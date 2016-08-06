@@ -105,18 +105,14 @@ class ApiUtils {
         const val USER_UPDATE_EDUCATION_URL = "updateStudies.php"
         const val USER_UPDATE_COUPLE_URL = "updateCouple.php"
         const val USER_UPDATE_AVATAR_URL = "uploadImageProfile.php"
+        const val USER_UPDATE_SLOT_PICTURE_URL = "uploadPicturesSlots.php"
 
         /**
          * POST parameters
          */
         const val USER_UPDATE_PROFILE_NAME_PARAM = "name"
         const val USER_UPDATE_PROFILE_PIC_PARAM = "userPicture"
-
-        /**
-         * Results of different sections of the API
-         */
-        enum class AddUserResults {ADDED, NOT_ADDED, NO_CONNECTION}
-        enum class CheckIfFriendsResults {MUTUAL, SEMI_MUTUAL, NOT_FRIENDS}
+        const val USER_UPDATE_SLOT_PIC_PARAM = "slots"
 
         /**
          * Various utils
@@ -150,6 +146,10 @@ class ApiUtils {
             }
 
             return url
+        }
+
+        fun getUpdateSlotName(token: String, slotIndex: Int): String {
+            return token + slotIndex.toString() + ".jpg"
         }
 
         fun isAppUser(context: Context, token: String): Boolean {
