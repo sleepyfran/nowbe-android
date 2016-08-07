@@ -29,14 +29,9 @@ import us.nowbe.nowbe.utils.*
 
 class ProfileFragment : Fragment() {
     /**
-     * Adapter of the comments
-     */
-    lateinit var commentsAdapter: CommentsAdapter
-
-    /**
      * Token to which the profile refers to
      */
-    lateinit var token: String
+    lateinit var profileToken: String
 
     /**
      * Interface to call when we got a result from the API call
@@ -49,7 +44,7 @@ class ProfileFragment : Fragment() {
          */
         fun newInstance(token: String, onUserResult: Interfaces.OnUserResult?): ProfileFragment {
             val fragment = ProfileFragment()
-            fragment.token = token
+            fragment.profileToken = token
             fragment.onUserResult = onUserResult
             return fragment
         }
@@ -95,7 +90,10 @@ class ProfileFragment : Fragment() {
      * Method that loads the user data in another thread and updates the displayed data
      */
     fun loadUserData(forceRefresh: Boolean) {
-        UserDataObservable.create(token).subscribe(
+        // Get the token of the user
+        val userToken = SharedPreferencesUtils.getToken(context)!!
+
+        UserDataObservable.create(userToken, profileToken).subscribe(
                 // On Next
                 {
                     user ->
@@ -166,7 +164,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // If the user is the one using the app, hide the send mail and hello buttons
-        if (ApiUtils.isAppUser(context, token)) {
+        if (ApiUtils.isAppUser(context, profileToken)) {
             btnSayHello.visibility = View.GONE
             btnSendMessage.visibility = View.GONE
         }

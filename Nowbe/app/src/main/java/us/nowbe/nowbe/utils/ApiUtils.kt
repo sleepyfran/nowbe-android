@@ -21,6 +21,7 @@ class ApiUtils {
         const val KEY_NICKNAME = "nickname"
         const val KEY_EMAIL = "email"
         const val KEY_TOKEN = "token"
+        const val KEY_TOKEN_WANT_TO_SEE = "tokenWantToSee"
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
         const val KEY_FAKE_TOKEN = "fakeToken"
@@ -32,6 +33,8 @@ class ApiUtils {
         const val KEY_INTERESTS = "interests"
         const val KEY_EDUCATION = "studies"
         const val KEY_COUPLE = "couple"
+        const val KEY_COMMENT_INDEX = "commentNo"
+        const val KEY_COMMENT_DATA = "comment"
 
         /**
          * Non-changing values
@@ -107,6 +110,7 @@ class ApiUtils {
         const val USER_UPDATE_COUPLE_URL = "updateCouple.php"
         const val USER_UPDATE_AVATAR_URL = "uploadImageProfile.php"
         const val USER_UPDATE_SLOT_PICTURE_URL = "uploadPicturesSlots.php"
+        const val USER_UPDATE_COMMENT_URL = "updateComments.php"
 
         /**
          * POST parameters

@@ -10,17 +10,16 @@ package us.nowbe.nowbe.net.async
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import us.nowbe.nowbe.model.User
-import us.nowbe.nowbe.net.NowbeUserData
+import us.nowbe.nowbe.net.NowbeUpdateUserComment
 
-class UserDataObservable {
+class UpdateUserCommentObservable {
     companion object {
         /**
-         * Returns an observable that loads an user and returns it
+         * Returns an observable that updates the comment of an user
          */
-        fun create(userToken: String, profileToken: String): Observable<User> {
+        fun create(token: String, commentIndex: Int, comment: String): Observable<Boolean> {
             return Observable.fromCallable({
-                NowbeUserData(userToken, profileToken).getUser()
+                NowbeUpdateUserComment(token, commentIndex, comment).updateComment()
             }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         }

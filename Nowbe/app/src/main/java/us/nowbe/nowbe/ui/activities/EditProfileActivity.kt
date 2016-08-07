@@ -59,7 +59,8 @@ class EditProfileActivity : AppCompatActivity() {
     fun loadUserData(forceRefresh: Boolean) {
         // Load the user data and populate the widgets with it
         val token = SharedPreferencesUtils.getToken(this)!!
-        UserDataObservable.create(token).subscribe(
+
+        UserDataObservable.create(token, token).subscribe(
                 // On Next
                 {
                     user ->
@@ -108,10 +109,13 @@ class EditProfileActivity : AppCompatActivity() {
                             getString(R.string.profile_edit_slots_description,
                                     user.picturesSlots.filter { it?.data != ApiUtils.NULL }.size)
 
-
+                    // Load the number of comments
                     tvEditCommentsSlotsDescription.text =
                             getString(R.string.profile_edit_slots_description,
                                     user.commentsSlots.filter { it?.data != "" }.size)
+
+                    // Load the comments
+                    csvEditCommentsSlots.updateSlots(user)
                 },
                 // On Error
                 {
@@ -160,7 +164,7 @@ class EditProfileActivity : AppCompatActivity() {
                 // On Next
                 {
                     // Show a toast confirming the change
-                    Toast.makeText(this, getString(R.string.profile_edit_pictures_slots_updated, slotIndex),
+                    Toast.makeText(this, getString(R.string.profile_edit_pictures_slots_updated, slotIndex + 1),
                             Toast.LENGTH_SHORT).show()
 
                     // Delete the temporary file
@@ -306,6 +310,13 @@ class EditProfileActivity : AppCompatActivity() {
                         tempFilePath = imagePath
                     }
                 }).show(supportFragmentManager, null)
+            }
+        }
+
+        // Setup the action of clicking a comments slot
+        csvEditCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
+            override fun onCommentSlotClick(itemSelected: Int) {
+                EditCommentDialog.newInstance(onDismiss, itemSelected).show(supportFragmentManager, null)
             }
         }
     }

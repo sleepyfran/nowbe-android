@@ -15,7 +15,7 @@ import java.net.UnknownHostException
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class NowbeUserData(val token: String) : NowbeRequest() {
+class NowbeUserData(val userToken: String, val profileToken: String) : NowbeRequest() {
 
     /**
      * Attempts to get an user by its token
@@ -28,13 +28,14 @@ class NowbeUserData(val token: String) : NowbeRequest() {
         if (json.length() <= 0) throw UserDoesNotExistsException("Hello, is there anybody in there?")
 
         // Return the user if the request was successful or null otherwise
-        return User.fromJson(token, json)
+        return User.fromJson(profileToken, json)
     }
 
     override fun getBody(): FormBody {
         // Make the body with the token
         return FormBody.Builder()
-                .add(ApiUtils.KEY_TOKEN, token)
+                .add(ApiUtils.KEY_TOKEN, profileToken)
+                .add(ApiUtils.KEY_TOKEN_WANT_TO_SEE, userToken)
                 .build()
     }
 

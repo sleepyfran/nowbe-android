@@ -202,7 +202,7 @@
                             android:id="@+id/psvEditPicturesSlots"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:allowNullValues="true"/>
+                            app:allowNullValues="true" />
 
                     </LinearLayout>
 
@@ -219,6 +219,12 @@
                             android:id="@+id/tvEditCommentsSlotsDescription"
                             style="@style/SettingsCard_OptionButton_SubText"
                             android:text="@string/profile.edit.slots_description" />
+
+                        <us.nowbe.nowbe.ui.views.CommentsSlotsView
+                            android:id="@+id/csvEditCommentsSlots"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:allowNullValues="true"/>
 
                     </LinearLayout>
 

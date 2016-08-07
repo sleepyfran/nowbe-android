@@ -94,6 +94,7 @@
 
     <string name="profile.edit.comments_slots">Comments slots</string>
     <string name="profile.edit.comments_slots_updated">Comments slot %1$s updated</string>
+    <string name="profile.edit.comment_number_edit">Comment #%1$s</string>
 
     <string name="profile.edit.slots_description">%1$s set</string>
     <string name="profile.edit.unset">Not set</string>

@@ -1,6 +1,7 @@
 package us.nowbe.nowbe.ui.views
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
@@ -8,6 +9,7 @@ import com.amulyakhare.textdrawable.TextDrawable
 import kotlinx.android.synthetic.main.comments_slots_comment_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.Slot
+import us.nowbe.nowbe.utils.ApiUtils
 
 /**
  * This file is part of Nowbe for Android
@@ -36,6 +38,12 @@ class CommentsSlotsCommentView : RelativeLayout {
         ivCommentNumber.setImageDrawable(commentIndex)
 
         // Set the comment text
-        tvCommentText.text = comment.data
+        if (comment.data == ApiUtils.EMPTY) {
+            tvCommentText.text = context.getString(R.string.profile_edit_unset)
+            tvCommentText.typeface = Typeface.DEFAULT_BOLD
+        } else {
+            tvCommentText.text = comment.data
+            tvCommentText.typeface = Typeface.DEFAULT
+        }
     }
 }
