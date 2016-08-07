@@ -22,7 +22,7 @@ class FeedView(context: Context) : RelativeLayout(context) {
         // Load the user state (online or not)
         val drawableStatus: Int
 
-        if (content.isOnline) {
+        if (content.isAvailable) {
             drawableStatus = R.drawable.online_state
         } else {
             drawableStatus = R.drawable.offline_state

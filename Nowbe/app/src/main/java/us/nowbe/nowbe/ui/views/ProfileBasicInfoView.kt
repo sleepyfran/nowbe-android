@@ -3,6 +3,7 @@ package us.nowbe.nowbe.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
@@ -41,6 +42,13 @@ class ProfileBasicInfoView : RelativeLayout {
         }
 
         ivUserState.setImageDrawable(context.resources.getDrawable(drawableStatus))
+
+        // Show the ONLINE badge if the user is available
+        if (user.isOnline != null && user.isOnline!!) {
+            tvUserOnline.visibility = View.VISIBLE
+        } else {
+            tvUserOnline.visibility = View.GONE
+        }
 
         // Update the user's username
         tvUserUsername.text = context.getString(R.string.profile_username, user.username)

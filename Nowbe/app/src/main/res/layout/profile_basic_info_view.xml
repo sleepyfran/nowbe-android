@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Profile details -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- Profile details -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/profile_info_height"
     android:background="@color/cardview_dark_background">
@@ -19,7 +17,7 @@
             android:layout_width="@dimen/default_pic_size"
             android:layout_height="@dimen/default_pic_size"
             android:layout_gravity="center"
-            android:src="@drawable/nowbe_logo"/>
+            android:src="@drawable/nowbe_logo" />
 
         <ImageView
             android:id="@+id/ivUserState"
@@ -28,30 +26,53 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="@dimen/user_status_icon_margin"
             android:layout_marginRight="@dimen/user_status_icon_margin"
-            android:src="@drawable/online_state"/>
+            android:src="@drawable/online_state" />
 
     </FrameLayout>
 
-    <!-- User's username -->
-    <TextView
-        android:id="@+id/tvUserUsername"
-        android:layout_width="wrap_content"
+    <!-- User's username and status (online or not) -->
+    <LinearLayout
+        android:id="@+id/llUserUsername"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/profile_user_name_margin_left"
         android:layout_marginTop="@dimen/profile_user_name_margin_top"
         android:layout_toRightOf="@id/ivUserProfilePic"
-        android:maxLines="1"
-        android:text="@string/dummy_data.username"
-        android:textColor="@color/primary_text_white"
-        android:textSize="@dimen/profile_user_name_size"
-        android:textStyle="bold"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvUserUsername"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/dummy_data.username"
+            android:textColor="@color/primary_text_white"
+            android:textSize="@dimen/profile_user_name_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvUserOnline"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/profile_online_text_padding"
+            android:text="@string/profile.online"
+            android:textAllCaps="true"
+            android:textColor="@color/primary_text_white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
     <!-- User status -->
     <TextView
         android:id="@+id/tvUserAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvUserUsername"
+        android:layout_below="@id/llUserUsername"
         android:layout_marginLeft="@dimen/profile_status_margin_left"
         android:layout_marginRight="@dimen/profile_status_margin_right"
         android:layout_marginTop="@dimen/profile_status_margin_top"
@@ -60,7 +81,7 @@
         android:maxLines="2"
         android:text="@string/dummy_data.status"
         android:textColor="@color/primary_text_white"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <!-- User statistics -->
     <TextView
@@ -72,5 +93,5 @@
         android:layout_toRightOf="@id/ivUserProfilePic"
         android:text="@string/dummy_data.info"
         android:textColor="@color/primary_text_white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </RelativeLayout>

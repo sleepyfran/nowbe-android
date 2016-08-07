@@ -12,7 +12,7 @@ import us.nowbe.nowbe.utils.ApiUtils
 
 class FeedContent(token: String,
                   profilePic: String,
-                  isOnline: Boolean,
+                  isAvailable: Boolean,
                   fullname: String,
                   username: String,
                   update: String,
@@ -23,7 +23,7 @@ class FeedContent(token: String,
      */
     val token: String
     val profilePic: String
-    val isOnline: Boolean
+    val isAvailable: Boolean
     val fullname: String
     val username: String
     val update: String
@@ -33,7 +33,7 @@ class FeedContent(token: String,
     init {
         this.token = token
         this.profilePic = profilePic
-        this.isOnline = isOnline
+        this.isAvailable = isAvailable
         this.fullname = fullname
         this.username = username.toLowerCase()
         this.update = update
@@ -49,13 +49,13 @@ class FeedContent(token: String,
             // Get the info from the provided JSON object and return a FeedContent object from it
             val token = jsonObject.getString(ApiUtils.API_USER_TOKEN)
             val profilePic = jsonObject.getString(ApiUtils.API_FEED_PICTURE)
-            val isOnline = jsonObject.getInt(ApiUtils.API_USER_IS_ONLINE) == 1
+            val isAvailable = jsonObject.getInt(ApiUtils.API_USER_STATUS) == 1
             val fullname = jsonObject.getString(ApiUtils.API_USER_FULLNAME)
             val username = jsonObject.getString(ApiUtils.API_FEED_USERNAME)
             val update = jsonObject.getString(ApiUtils.API_FEED_UPDATE)
             val timestamp = jsonObject.getString(ApiUtils.API_TIMESTAMP)
 
-            return FeedContent(token, profilePic, isOnline, fullname, username, update, timestamp, forceRefresh)
+            return FeedContent(token, profilePic, isAvailable, fullname, username, update, timestamp, forceRefresh)
         }
     }
 }

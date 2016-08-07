@@ -25,6 +25,7 @@
     <dimen name="profile_pic_margin_left">15dp</dimen>
     <dimen name="profile_pic_margin_top">25dp</dimen>
     <dimen name="default_pic_size">100dp</dimen>
+    <dimen name="profile_online_text_padding">4dp</dimen>
     <dimen name="profile_user_name_size">25sp</dimen>
     <dimen name="profile_user_name_margin_left">10dp</dimen>
     <dimen name="profile_user_name_margin_top">25dp</dimen>
