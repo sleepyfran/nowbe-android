@@ -36,8 +36,8 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
      * Adds a comment to the array
      */
     fun addComment(slot: Slot) {
-        comments.add(slot.index, slot)
-        notifyItemChanged(slot.index)
+        comments.add(slot)
+        notifyItemChanged(comments.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {

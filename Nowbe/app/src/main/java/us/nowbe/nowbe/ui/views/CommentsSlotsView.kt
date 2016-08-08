@@ -69,7 +69,7 @@ class CommentsSlotsView : RelativeLayout {
         // Add the pictures slots
         for (comment in user.commentsSlots) {
             if (!allowNullValues && comment?.data == ApiUtils.EMPTY) {
-                return
+                continue
             }
 
             adapter.addComment(comment!!)

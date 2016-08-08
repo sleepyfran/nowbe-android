@@ -104,13 +104,13 @@
     <string name="select_picture_source.gallery">Select from gallery</string>
 
     <!-- Dummy data -->
-    <string name="dummy_data.update">Picture slot #1 updated.</string>
-    <string name="dummy_data.name">Nowbe</string>
-    <string name="dummy_data.username">\@nowbe</string>
-    <string name="dummy_data.status">The place to be</string>
-    <string name="dummy_data.info">20 years · 100M visits · 100M friends</string>
-    <string name="dummy_data.interests">Nowbe, Music, NFL</string>
-    <string name="dummy_data.education">PhD in Nowbe Science</string>
-    <string name="dummy_data.couple">Me myself And I</string>
-    <string name="dummy_data.birthday">01/01/1990</string>
+    <string name="dummy_data.update"> </string>
+    <string name="dummy_data.name"> </string>
+    <string name="dummy_data.username">\@</string>
+    <string name="dummy_data.status"> </string>
+    <string name="dummy_data.info"> </string>
+    <string name="dummy_data.interests"> </string>
+    <string name="dummy_data.education"> </string>
+    <string name="dummy_data.couple"> </string>
+    <string name="dummy_data.birthday"> </string>
 </resources>

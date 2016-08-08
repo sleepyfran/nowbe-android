@@ -83,7 +83,7 @@ class PicturesSlotsView : RelativeLayout {
         // Add the pictures slots
         for (picture in user.picturesSlots) {
             if (!allowNullValues && picture?.data == ApiUtils.NULL) {
-                return
+                continue
             }
 
             adapter.addPicture(picture!!)
