@@ -67,4 +67,11 @@ class Interfaces {
          */
         fun onImagePath(imagePath: String)
     }
+
+    interface OnDialogDismiss {
+        /**
+         * (Should) be called when the dialog has finished doing its thing
+         */
+        fun onDismiss()
+    }
 }

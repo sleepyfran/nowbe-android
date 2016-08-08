@@ -8,6 +8,7 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.UpdateUserCommentObservable
 import us.nowbe.nowbe.utils.ErrorUtils
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -27,7 +28,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
-        fun newInstance(onDismiss: DialogInterface.OnDismissListener, commentIndex: Int): EditWithTextFieldDialog {
+        fun newInstance(onDismiss: Interfaces.OnDialogDismiss, commentIndex: Int): EditWithTextFieldDialog {
             val dialog = EditCommentDialog()
             dialog.onDismiss = onDismiss
             dialog.commentIndex = commentIndex
@@ -43,7 +44,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
         return true
     }
 
-    override fun getPositiveAction(view: View): () -> Unit {
+    override fun getPositiveAction(view: View, onDismiss: Interfaces.OnDialogDismiss): () -> Unit {
         return {
             // Get the token from the user
             val token = SharedPreferencesUtils.getToken(context)!!
@@ -60,6 +61,12 @@ class EditCommentDialog : EditWithTextFieldDialog() {
                         Toast.makeText(activity,
                                 getString(R.string.profile_edit_comments_slots_updated, commentIndex),
                                 Toast.LENGTH_SHORT).show()
+
+                        // Call the onDismiss to indicate we've finished already
+                        onDismiss.onDismiss()
+
+                        // Dismiss the dialog
+                        dismiss()
                     },
                     // On Error
                     {

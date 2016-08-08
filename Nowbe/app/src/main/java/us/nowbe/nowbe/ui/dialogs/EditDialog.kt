@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.view.View
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.utils.Interfaces
 
 /**
  * This file is part of Nowbe for Android
@@ -20,12 +20,7 @@ abstract class EditDialog() : DialogFragment() {
     /**
      * Callback when the dialog is dismissed
      */
-    lateinit var onDismiss: DialogInterface.OnDismissListener
-
-    /**
-     * Indicates whether the user has updated anything or not
-     */
-    var hasUpdated = false
+    lateinit var onDismiss: Interfaces.OnDialogDismiss
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // View of the dialog (implemented by the subclass)
@@ -46,24 +41,13 @@ abstract class EditDialog() : DialogFragment() {
 
                 // Dismiss the dialog only if the data provided is valid
                 if (isDataValid(dialogView)) {
-                    // The data is valid so we want an update
-                    hasUpdated = true
-
-                    // Perform the action of the positive button and dismiss the dialog
-                    dismiss()
-                    getPositiveAction(dialogView)()
+                    // Perform the action of the positive button
+                    getPositiveAction(dialogView, onDismiss)()
                 }
             }
         }
 
         return dialog
-    }
-
-    override fun onDismiss(dialog: DialogInterface?) {
-        // Callback only if the user has updated anything and it's valid
-        if (hasUpdated) onDismiss.onDismiss(dialog)
-
-        super.onDismiss(dialog)
     }
 
     /**
@@ -79,7 +63,7 @@ abstract class EditDialog() : DialogFragment() {
     /**
      * Method to be implemented by the subclass and that's going to be called when the dialog calls the positive action
      */
-    abstract fun getPositiveAction(view: View): () -> Unit
+    abstract fun getPositiveAction(view: View, onDismiss: Interfaces.OnDialogDismiss): () -> Unit
 
     /**
      * Method to call when we need to check whether the data (input of the user) is or not valid

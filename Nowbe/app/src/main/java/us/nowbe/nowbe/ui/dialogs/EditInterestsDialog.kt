@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateUserInterestsObservable
 import us.nowbe.nowbe.utils.ErrorUtils
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -22,7 +23,7 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation and the default text
          */
-        fun newInstance(onDismiss: DialogInterface.OnDismissListener, defaultText: String): EditWithTextFieldDialog {
+        fun newInstance(onDismiss: Interfaces.OnDialogDismiss, defaultText: String): EditWithTextFieldDialog {
             val dialog = EditInterestsDialog()
             dialog.onDismiss = onDismiss
             dialog.defaultText = defaultText
@@ -34,7 +35,7 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
         return getString(R.string.profile_edit_interests)
     }
 
-    override fun getPositiveAction(view: View): () -> Unit {
+    override fun getPositiveAction(view: View, onDismiss: Interfaces.OnDialogDismiss): () -> Unit {
         return {
             // Get the token of the user
             val token = SharedPreferencesUtils.getToken(context)!!
@@ -50,6 +51,12 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
 
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_interests_updated), Toast.LENGTH_SHORT).show()
+
+                        // Call the onDismiss to indicate we've finished already
+                        onDismiss.onDismiss()
+
+                        // Dismiss the dialog
+                        dismiss()
                     },
                     // On Error
                     {

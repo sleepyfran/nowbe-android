@@ -8,6 +8,7 @@ import android.widget.Toast
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateUserBirthdayObservable
 import us.nowbe.nowbe.utils.ErrorUtils
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import java.util.*
 
@@ -24,7 +25,7 @@ class EditBirthdayDialog : EditDialog() {
         /**
          * Creates a new instance of the dialog with the onDismiss implementation
          */
-        fun newInstance(onDismiss: DialogInterface.OnDismissListener): EditDialog {
+        fun newInstance(onDismiss: Interfaces.OnDialogDismiss): EditDialog {
             val dialog = EditBirthdayDialog()
             dialog.onDismiss = onDismiss
             return dialog
@@ -53,7 +54,7 @@ class EditBirthdayDialog : EditDialog() {
         return null
     }
 
-    override fun getPositiveAction(view: View): () -> Unit {
+    override fun getPositiveAction(view: View, onDismiss: Interfaces.OnDialogDismiss): () -> Unit {
         return {
             // Get the age from the selected date
             val datePicker = view as DatePicker
@@ -71,6 +72,12 @@ class EditBirthdayDialog : EditDialog() {
 
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_birthday_updated), Toast.LENGTH_SHORT).show()
+
+                        // Call the onDismiss to indicate we've finished already
+                        onDismiss.onDismiss()
+
+                        // Dismiss the dialog
+                        dismiss()
                     },
                     // On Error
                     {

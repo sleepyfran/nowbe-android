@@ -245,8 +245,8 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         // Action to perform when the dialogs are dismissed
-        val onDismiss = object : DialogInterface.OnDismissListener {
-            override fun onDismiss(dialog: DialogInterface?) {
+        val onDismiss = object : Interfaces.OnDialogDismiss {
+            override fun onDismiss() {
                 // Re-load the user data
                 loadUserData(true)
             }
