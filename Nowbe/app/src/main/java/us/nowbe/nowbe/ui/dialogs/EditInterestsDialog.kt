@@ -44,7 +44,7 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
             val interests = view.tvEditDialogText.text.toString()
 
             // Notify the server about the change
-            UpdateUserInterestsObservable.create(token, interests).subscribe(
+            previousSubscription = UpdateUserInterestsObservable.create(token, interests).subscribe(
                     // On Next
                     {
                         result ->

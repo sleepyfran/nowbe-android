@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
@@ -28,6 +29,16 @@ import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.utils.*
 
 class ProfileFragment : Fragment() {
+    /**
+     * Previous subscription
+     */
+    var previousSubscription: Subscription? = null
+        set(value) {
+            // Unsubscribe the previous subscription before overriding it
+            field?.unsubscribe()
+            field = value
+        }
+
     /**
      * Token to which the profile refers to
      */
@@ -59,7 +70,7 @@ class ProfileFragment : Fragment() {
             val appUserToken = SharedPreferencesUtils.getToken(context)!!
 
             // Send the hello!
-            SayHelloObservable.create(appUserToken, user.token).subscribe(
+            previousSubscription = SayHelloObservable.create(appUserToken, user.token).subscribe(
                     // On Next
                     {
                         // Show a toast indicating that we sent the hello
@@ -93,7 +104,7 @@ class ProfileFragment : Fragment() {
         // Get the token of the user
         val userToken = SharedPreferencesUtils.getToken(context)!!
 
-        UserDataObservable.create(userToken, profileToken).subscribe(
+        previousSubscription = UserDataObservable.create(userToken, profileToken).subscribe(
                 // On Next
                 {
                     user ->
@@ -191,5 +202,10 @@ class ProfileFragment : Fragment() {
             // Refresh the user data
             loadUserData(true)
         }
+    }
+
+    override fun onDestroy() {
+        previousSubscription?.unsubscribe()
+        super.onDestroy()
     }
 }

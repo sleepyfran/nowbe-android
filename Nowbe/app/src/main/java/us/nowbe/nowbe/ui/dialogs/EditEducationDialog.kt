@@ -43,7 +43,7 @@ class EditEducationDialog : EditWithTextFieldDialog() {
             // Get the about text
             val newEducation = view.tvEditDialogText.text.toString()
 
-            UpdateUserEducationObservable.create(token, newEducation).subscribe(
+            previousSubscription = UpdateUserEducationObservable.create(token, newEducation).subscribe(
                     // On Next
                     {
                         result ->

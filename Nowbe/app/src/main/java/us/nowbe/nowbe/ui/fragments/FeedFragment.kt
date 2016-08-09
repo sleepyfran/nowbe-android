@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import kotlinx.android.synthetic.main.fragment_feed.*
+import rx.Subscription
 
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.ui.activities.ProfileActivity
@@ -34,6 +35,16 @@ import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 class FeedFragment : Fragment {
+    /**
+     * Previous subscription
+     */
+    var previousSubscription: Subscription? = null
+        set(value) {
+            // Unsubscribe the previous subscription before overriding it
+            field?.unsubscribe()
+            field = value
+        }
+
     /**
      * Reference to the scroll listener that our recycler view will be using
      */
@@ -105,7 +116,7 @@ class FeedFragment : Fragment {
      * Loads the data into the feed
      */
     fun loadData(adapter: FeedAdapter, forceRefresh: Boolean) {
-        FeedObsevable.create(token, forceRefresh).subscribe(
+        previousSubscription = FeedObsevable.create(token, forceRefresh).subscribe(
                 // On Next
                 {
                     feed ->
@@ -144,5 +155,10 @@ class FeedFragment : Fragment {
                 fab.show()
             }
         }
+    }
+
+    override fun onDestroy() {
+        previousSubscription?.unsubscribe()
+        super.onDestroy()
     }
 }

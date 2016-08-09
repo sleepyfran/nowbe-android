@@ -42,7 +42,7 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Update the visible name of the user
-            UpdateUserVisibleNameObservable.create(newVisibleName, token).subscribe(
+            previousSubscription = UpdateUserVisibleNameObservable.create(newVisibleName, token).subscribe(
                     // On Next
                     {
                         result ->

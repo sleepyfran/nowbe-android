@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import rx.Observable
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.model.User
@@ -53,10 +54,25 @@ class ProfileActivity : BaseActivity() {
         return false
     }
 
+    override fun onDestroy() {
+        (onUserResult as OnUserResult).previousSubscription?.unsubscribe()
+        super.onDestroy()
+    }
+
     /**
      * Implementation of the on user result
      */
     class OnUserResult(val context: Context, val fab: FloatingActionButton) : Interfaces.OnUserResult {
+        /**
+         * Previous subscription
+         */
+        var previousSubscription: Subscription? = null
+            set(value) {
+                // Unsubscribe the previous subscription before overriding it
+                field?.unsubscribe()
+                field = value
+            }
+
         /**
          * Updates the fab with the add button if the users are not friends or the remove button if they are
          */
@@ -77,7 +93,7 @@ class ProfileActivity : BaseActivity() {
 
             // Add the friend when the user clicks the fab
             fab.setOnClickListener {
-                AddUserObservable.create(appUserToken, user.token).subscribe(
+                previousSubscription = AddUserObservable.create(appUserToken, user.token).subscribe(
                         // On Next
                         {
                             result ->
@@ -107,9 +123,11 @@ class ProfileActivity : BaseActivity() {
             // Update the drawable with the remove button
             updateFabAreFriends(true)
 
+            //
+
             // Remove the friend when the user clicks the fab
             fab.setOnClickListener({
-                RemoveUserObservable.create(appUserToken, user.token).subscribe(
+                previousSubscription = RemoveUserObservable.create(appUserToken, user.token).subscribe(
                         // On Next
                         {
                             result ->
@@ -139,7 +157,7 @@ class ProfileActivity : BaseActivity() {
                 val appUserToken = SharedPreferencesUtils.getToken(context)!!
 
                 // Check if they're friends async
-                CheckIfFriendObservable.create(appUserToken, user.token).subscribe(
+                previousSubscription = CheckIfFriendObservable.create(appUserToken, user.token).subscribe(
                         // On Next
                         {
                             relation ->

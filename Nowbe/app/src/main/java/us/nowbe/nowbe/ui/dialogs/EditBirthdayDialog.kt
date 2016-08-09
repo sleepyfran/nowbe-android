@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateUserBirthdayObservable
 import us.nowbe.nowbe.utils.ErrorUtils
@@ -65,7 +66,7 @@ class EditBirthdayDialog : EditDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Update the age of the user
-            UpdateUserBirthdayObservable.create(token, date).subscribe(
+            previousSubscription = UpdateUserBirthdayObservable.create(token, date).subscribe(
                     // On Next
                     {
                         result ->

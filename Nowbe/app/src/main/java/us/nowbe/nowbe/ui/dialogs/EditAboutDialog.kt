@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateUserAboutObservable
 import us.nowbe.nowbe.utils.ErrorUtils
@@ -43,7 +44,7 @@ class EditAboutDialog : EditWithTextFieldDialog() {
             // Get the about text
             val newAbout = view.tvEditDialogText.text.toString()
 
-            UpdateUserAboutObservable.create(token, newAbout).subscribe(
+            previousSubscription = UpdateUserAboutObservable.create(token, newAbout).subscribe(
                     // On Next
                     {
                         result ->

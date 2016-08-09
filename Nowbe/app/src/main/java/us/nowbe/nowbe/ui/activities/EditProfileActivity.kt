@@ -21,6 +21,7 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
@@ -32,6 +33,16 @@ import us.nowbe.nowbe.utils.*
 import java.io.File
 
 class EditProfileActivity : AppCompatActivity() {
+    /**
+     * Previous subscription
+     */
+    var previousSubscription: Subscription? = null
+        set(value) {
+            // Unsubscribe the previous subscription before overriding it
+            field?.unsubscribe()
+            field = value
+        }
+
     /**
      * Position of the fab
      */
@@ -60,7 +71,7 @@ class EditProfileActivity : AppCompatActivity() {
         // Load the user data and populate the widgets with it
         val token = SharedPreferencesUtils.getToken(this)!!
 
-        UserDataObservable.create(token, token).subscribe(
+        previousSubscription = UserDataObservable.create(token, token).subscribe(
                 // On Next
                 {
                     user ->
@@ -130,7 +141,7 @@ class EditProfileActivity : AppCompatActivity() {
      */
     fun uploadProfilePicture(token: String, tempFile: File) {
         // Upload it!
-        UpdateUserAvatarObservable.create(token, tempFile).subscribe(
+        previousSubscription = UpdateUserAvatarObservable.create(token, tempFile).subscribe(
                 // On Next
                 {
                     // Show the new photo
@@ -160,7 +171,7 @@ class EditProfileActivity : AppCompatActivity() {
      * Uploads a slot picture to the server
      */
     fun uploadSlotPicture(token: String, file: File) {
-        UpdateUserSlotObservable.create(token, file, slotIndex).subscribe(
+        previousSubscription = UpdateUserSlotObservable.create(token, file, slotIndex).subscribe(
                 // On Next
                 {
                     // Show a toast confirming the change
@@ -359,5 +370,10 @@ class EditProfileActivity : AppCompatActivity() {
 
         // Don't show animations, we'll handle that
         overridePendingTransition(0, 0)
+    }
+
+    override fun onDestroy() {
+        previousSubscription?.unsubscribe()
+        super.onDestroy()
     }
 }

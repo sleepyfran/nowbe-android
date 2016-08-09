@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_edit_general_text.view.*
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.UpdateUserCommentObservable
@@ -52,7 +53,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
             // Get the about text
             val newComment = view.tvEditDialogText.text.toString()
 
-            UpdateUserCommentObservable.create(token, commentIndex, newComment).subscribe(
+            previousSubscription = UpdateUserCommentObservable.create(token, commentIndex, newComment).subscribe(
                     // On Next
                     {
                         result ->

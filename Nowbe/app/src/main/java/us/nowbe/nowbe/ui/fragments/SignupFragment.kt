@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.ui.activities.LandingActivity
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
@@ -26,8 +27,16 @@ import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.ValidatorUtils
 
-class SignupFragment : Fragment {
-    constructor() : super()
+class SignupFragment : Fragment() {
+    /**
+     * Previous subscription
+     */
+    var previousSubscription: Subscription? = null
+        set(value) {
+            // Unsubscribe the previous subscription before overriding it
+            field?.unsubscribe()
+            field = value
+        }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater?.inflate(R.layout.fragment_sign_up, container, false)!!
@@ -70,7 +79,7 @@ class SignupFragment : Fragment {
             }
 
             // Attempt to login with the username and password provided in another thread
-            SignupObservable.create(user, email, password).subscribe(
+            previousSubscription = SignupObservable.create(user, email, password).subscribe(
                     // On Next
                     {
                         token ->
@@ -103,5 +112,10 @@ class SignupFragment : Fragment {
                     }
             )
         })
+    }
+
+    override fun onDestroy() {
+        previousSubscription?.unsubscribe()
+        super.onDestroy()
     }
 }

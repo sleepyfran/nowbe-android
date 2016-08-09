@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.ui.activities.WizardActivity
 
-class WelcomeFragment : Fragment {
-    constructor() : super()
+class WelcomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater?.inflate(R.layout.fragment_welcome, container, false)!!

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.View
+import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.utils.Interfaces
 
@@ -17,6 +18,16 @@ import us.nowbe.nowbe.utils.Interfaces
  */
 
 abstract class EditDialog() : DialogFragment() {
+    /**
+     * Previous subscription
+     */
+    var previousSubscription: Subscription? = null
+        set(value) {
+            // Unsubscribe the previous subscription before overriding it
+            field?.unsubscribe()
+            field = value
+        }
+
     /**
      * Callback when the dialog is dismissed
      */
@@ -69,4 +80,9 @@ abstract class EditDialog() : DialogFragment() {
      * Method to call when we need to check whether the data (input of the user) is or not valid
      */
     abstract fun isDataValid(view: View): Boolean
+
+    override fun onDestroy() {
+        previousSubscription?.unsubscribe()
+        super.onDestroy()
+    }
 }
