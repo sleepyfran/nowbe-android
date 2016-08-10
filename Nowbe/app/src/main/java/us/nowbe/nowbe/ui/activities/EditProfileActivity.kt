@@ -265,13 +265,13 @@ class EditProfileActivity : AppCompatActivity() {
 
         // Setup the action of the edit profile photo
         ivUserProfilePic.setOnClickListener {
+            // We're uploading a profile pic
+            isProfilePicture = true
+
             SelectPictureSourceDialog.newInstance(object : Interfaces.OnTemporaryImagePath {
                 override fun onImagePath(imagePath: String) {
                     // Save the temporary image file path
                     tempFilePath = imagePath
-
-                    // We're uploading a profile pic
-                    isProfilePicture = true
                 }
             }).show(supportFragmentManager, null)
         }
@@ -326,8 +326,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         // Setup the action of clicking a comments slot
         csvEditCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
-            override fun onCommentSlotClick(itemSelected: Int) {
-                EditCommentDialog.newInstance(onDismiss, itemSelected).show(supportFragmentManager, null)
+            override fun onCommentSlotClick(commentText: String, commentIndex: Int) {
+                EditCommentDialog.newInstance(onDismiss, commentIndex).show(supportFragmentManager, null)
             }
         }
     }

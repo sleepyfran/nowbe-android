@@ -38,7 +38,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
     }
 
     override fun getTitle(): String {
-        return getString(R.string.profile_edit_comment_number_edit, commentIndex)
+        return getString(R.string.profile_edit_comment_number_edit, commentIndex + 1)
     }
 
     override fun isDataValid(view: View): Boolean {
@@ -60,7 +60,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
 
                         // Show a toast confirming the change
                         Toast.makeText(activity,
-                                getString(R.string.profile_edit_comments_slots_updated, commentIndex),
+                                getString(R.string.profile_edit_comments_slots_updated, commentIndex + 1),
                                 Toast.LENGTH_SHORT).show()
 
                         // Call the onDismiss to indicate we've finished already
