@@ -24,6 +24,8 @@ class ApiUtils {
         const val KEY_TOKEN_WANT_TO_SEE = "tokenWantToSee"
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
+        const val KEY_TOKEN_OWNER = "tokenOwner"
+        const val KEY_REPLY_TOKEN = "replyUserToken"
         const val KEY_FAKE_TOKEN = "fakeToken"
         const val KEY_TOKEN_TO = "tokenTo"
         const val KEY_TOKEN_FROM = "tokenFrom"
@@ -35,6 +37,8 @@ class ApiUtils {
         const val KEY_COUPLE = "couple"
         const val KEY_COMMENT_INDEX = "commentNo"
         const val KEY_COMMENT_DATA = "comment"
+        const val KEY_REPLY = "reply"
+        const val KEY_TIMESTAMP = "timestamp"
 
         /**
          * Non-changing values
@@ -66,6 +70,7 @@ class ApiUtils {
         const val API_USER_FULLNAME = "mutableName"
         const val API_USER_EMAIL = "email"
         const val API_USER_PROFILE_PIC = "profilePicture"
+        const val API_USER_PROFILE_PIC_ALT = "pictureProfile"
         const val API_USER_AGE = "age"
         const val API_USER_BIRTHDAY = "ageNonFormated"
         const val API_USER_ABOUT = "aboutUser"
@@ -111,6 +116,8 @@ class ApiUtils {
         const val USER_UPDATE_AVATAR_URL = "uploadImageProfile.php"
         const val USER_UPDATE_SLOT_PICTURE_URL = "uploadPicturesSlots.php"
         const val USER_UPDATE_COMMENT_URL = "updateComments.php"
+        const val REPLY_COMMENT_URL = "sendCommentReply.php"
+        const val COMMENT_REPLIES_URL = "getRepliesComments.php"
 
         /**
          * POST parameters

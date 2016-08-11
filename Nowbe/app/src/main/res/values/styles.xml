@@ -34,6 +34,15 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- General -->
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
     <!-- Login/Signup button -->
     <style name="LoginSignupButton">
         <item name="android:layout_width">match_parent</item>

@@ -2,6 +2,7 @@ package us.nowbe.nowbe.ui.views
 
 import android.content.Context
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
@@ -19,6 +20,18 @@ import us.nowbe.nowbe.utils.ApiUtils
  */
 
 class CommentsSlotsCommentView : RelativeLayout {
+
+    companion object {
+        /**
+         * Builds an index drawable from a integer
+         */
+        fun indexDrawableFromInt(context: Context, index: Int): Drawable {
+            return TextDrawable.builder()
+                    .buildRound(context.getString(R.string.profile_comment_number, index),
+                            context.resources.getColor(R.color.accent))
+        }
+    }
+
     constructor(context: Context?) : super(context)
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -32,9 +45,7 @@ class CommentsSlotsCommentView : RelativeLayout {
 
     fun update(comment: Slot) {
         // Make a comment number out of the index of the slot
-        val commentIndex = TextDrawable.builder()
-                .buildRound(context.getString(R.string.profile_comment_number, (comment.index + 1)),
-                        context.resources.getColor(R.color.accent))
+        val commentIndex = CommentsSlotsCommentView.indexDrawableFromInt(context, ++comment.index)
         ivCommentNumber.setImageDrawable(commentIndex)
 
         // Set the comment text

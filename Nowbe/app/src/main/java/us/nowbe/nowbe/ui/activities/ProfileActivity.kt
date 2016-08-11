@@ -123,8 +123,6 @@ class ProfileActivity : BaseActivity() {
             // Update the drawable with the remove button
             updateFabAreFriends(true)
 
-            //
-
             // Remove the friend when the user clicks the fab
             fab.setOnClickListener({
                 previousSubscription = RemoveUserObservable.create(appUserToken, user.token).subscribe(

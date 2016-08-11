@@ -1,6 +1,7 @@
 package us.nowbe.nowbe.utils
 
 import us.nowbe.nowbe.model.BottomSheetItem
+import us.nowbe.nowbe.model.CommentReply
 import us.nowbe.nowbe.model.User
 
 /**
@@ -25,7 +26,7 @@ class Interfaces {
         /**
          * (Should) return the position of the item clicked so the adapter can do whatever it wants with the comment
          */
-        fun onCommentSlotClick(itemSelected: Int)
+        fun onCommentSlotClick(commentText: String, commentIndex: Int)
     }
 
     /**
@@ -68,10 +69,23 @@ class Interfaces {
         fun onImagePath(imagePath: String)
     }
 
+    /**
+     * Interface to call when a dialog is dismissed
+     */
     interface OnDialogDismiss {
         /**
          * (Should) be called when the dialog has finished doing its thing
          */
         fun onDismiss()
+    }
+
+    /**
+     * Interface to call when a comment feedback is clicked
+     */
+    interface OnCommentReplyClick {
+        /**
+         * (Should) pass the information of that item
+         */
+        fun onClick(content: CommentReply)
     }
 }

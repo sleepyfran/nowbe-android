@@ -45,7 +45,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
 
         // Set the onClick listener for the view
         holder.itemView.setOnClickListener({
-            onClick?.onCommentSlotClick(comments[holder.adapterPosition].data, holder.adapterPosition)
+            onClick?.onCommentSlotClick(comments[holder.adapterPosition].data, comments[holder.adapterPosition].index)
         })
         return holder
     }

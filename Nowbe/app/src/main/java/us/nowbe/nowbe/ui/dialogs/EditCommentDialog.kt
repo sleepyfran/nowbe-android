@@ -38,7 +38,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
     }
 
     override fun getTitle(): String {
-        return getString(R.string.profile_edit_comment_number_edit, commentIndex + 1)
+        return getString(R.string.profile_edit_comment_number_edit, commentIndex)
     }
 
     override fun isDataValid(view: View): Boolean {
@@ -53,14 +53,14 @@ class EditCommentDialog : EditWithTextFieldDialog() {
             // Get the about text
             val newComment = view.tvEditDialogText.text.toString()
 
-            previousSubscription = UpdateUserCommentObservable.create(token, commentIndex, newComment).subscribe(
+            previousSubscription = UpdateUserCommentObservable.create(token, commentIndex - 1, newComment).subscribe(
                     // On Next
                     {
                         result ->
 
                         // Show a toast confirming the change
                         Toast.makeText(activity,
-                                getString(R.string.profile_edit_comments_slots_updated, commentIndex + 1),
+                                getString(R.string.profile_edit_comments_slots_updated, commentIndex),
                                 Toast.LENGTH_SHORT).show()
 
                         // Call the onDismiss to indicate we've finished already

@@ -26,6 +26,7 @@ import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.net.async.SayHelloObservable
 import us.nowbe.nowbe.net.async.UserDataObservable
+import us.nowbe.nowbe.ui.activities.CommentsDetailsActivity
 import us.nowbe.nowbe.utils.*
 
 class ProfileFragment : Fragment() {
@@ -133,10 +134,18 @@ class ProfileFragment : Fragment() {
                     // Add the comments to the adapter
                     csvCommentsSlots.updateSlots(user)
 
-                    // TODO: Show the full comment when clicking on a comment
+                    // Show the full comment when clicking on a comment
                     csvCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
-                        override fun onCommentSlotClick(itemSelected: Int) {
-                            Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_SHORT).show()
+                        override fun onCommentSlotClick(commentText: String, commentIndex: Int) {
+                            val commentDetail = Intent(context, CommentsDetailsActivity::class.java)
+
+                            // Add the comment text and index to the Intent's extras
+                            commentDetail.putExtra(ApiUtils.KEY_TOKEN, user.token)
+                            commentDetail.putExtra(ApiUtils.KEY_USER, user.fullName)
+                            commentDetail.putExtra(ApiUtils.KEY_COMMENT_DATA, commentText)
+                            commentDetail.putExtra(ApiUtils.KEY_COMMENT_INDEX, commentIndex)
+
+                            startActivity(commentDetail)
                         }
                     }
 
