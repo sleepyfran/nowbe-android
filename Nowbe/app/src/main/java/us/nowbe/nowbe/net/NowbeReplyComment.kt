@@ -21,11 +21,10 @@ class NowbeReplyComment(val token: String, val tokenOwner: String, val reply: St
 
     override fun getBody(): FormBody {
         // Build the body with the token, reply, token owner and the number of the comment
-        // TODO: Check the hell out of this
         return FormBody.Builder()
-                .add(ApiUtils.KEY_TOKEN, token)
+                .add(ApiUtils.KEY_USER_TOKEN, token)
                 .add(ApiUtils.KEY_REPLY, reply)
-                .add(ApiUtils.KEY_TOKEN_OWNER, tokenOwner)
+                .add(ApiUtils.KEY_TOKEN_COMMENT_OWNER, tokenOwner)
                 .add(ApiUtils.KEY_COMMENT_INDEX, commentNo.toString())
                 .build()
     }

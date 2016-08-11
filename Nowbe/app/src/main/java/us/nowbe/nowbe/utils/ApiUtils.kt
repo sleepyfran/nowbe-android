@@ -25,6 +25,8 @@ class ApiUtils {
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
         const val KEY_TOKEN_OWNER = "tokenOwner"
+        const val KEY_TOKEN_COMMENT_OWNER = "tokenCommentOwner"
+        const val KEY_USER_TOKEN = "userToken"
         const val KEY_REPLY_TOKEN = "replyUserToken"
         const val KEY_FAKE_TOKEN = "fakeToken"
         const val KEY_TOKEN_TO = "tokenTo"
