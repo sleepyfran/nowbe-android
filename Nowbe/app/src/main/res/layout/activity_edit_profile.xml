@@ -209,7 +209,7 @@
                     <!-- Comments slots button -->
                     <LinearLayout
                         android:id="@+id/llEditComments"
-                        style="@style/SettingsCard_OptionButton">
+                        style="@style/SettingsCard_OptionButton.NoAction">
 
                         <TextView
                             style="@style/SettingsCard_OptionButton_Text"
