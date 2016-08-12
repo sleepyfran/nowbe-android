@@ -30,6 +30,7 @@ class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
      */
     fun clear() {
         pictures = arrayListOf()
+        notifyDataSetChanged()
     }
 
     /**
@@ -37,7 +38,7 @@ class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
      */
     fun addPicture(slot: Slot) {
         pictures.add(slot)
-        notifyItemChanged(pictures.size - 1)
+        notifyItemInserted(pictures.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesSlotsHolder {

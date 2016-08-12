@@ -30,6 +30,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
      */
     fun clear() {
         comments = arrayListOf()
+        notifyDataSetChanged()
     }
 
     /**
@@ -37,7 +38,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentHolder>() {
      */
     fun addComment(slot: Slot) {
         comments.add(slot)
-        notifyItemChanged(comments.size - 1)
+        notifyItemInserted(comments.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
