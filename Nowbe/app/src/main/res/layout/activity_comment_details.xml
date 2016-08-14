@@ -22,7 +22,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:hint="@string/comments_details.comment_hint" />
+                android:hint="@string/comments_details.comment_hint"
+                android:inputType="textShortMessage|textMultiLine" />
 
             <Button
                 android:id="@+id/btnSendCommentReply"
@@ -37,8 +38,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             android:layout_above="@id/llAnswerComment"
+            android:fitsSystemWindows="true"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -96,7 +97,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvCommentReplies"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </android.support.v4.widget.SwipeRefreshLayout>
 
