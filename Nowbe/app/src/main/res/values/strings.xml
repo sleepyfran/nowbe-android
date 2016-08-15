@@ -99,6 +99,11 @@
     <string name="profile.edit.slots_description">%1$s set</string>
     <string name="profile.edit.unset">Not set</string>
 
+    <string name="profile.delete_friend.title">Delete friend</string>
+    <string name="profile.delete_friend.message">Do you really want to delete this user?</string>
+    <string name="profile.delete_friend.yes">Yeah!</string>
+    <string name="profile.delete_friend.no">Nope</string>
+
     <!-- Comments Details activity -->
     <string name="comments_details.comment_hint">Type your reply</string>
     <string name="comments_details.send">Send</string>

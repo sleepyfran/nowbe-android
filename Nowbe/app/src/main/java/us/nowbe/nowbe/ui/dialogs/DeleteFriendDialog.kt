@@ -11,18 +11,18 @@ import us.nowbe.nowbe.R
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class DeleteReplyDialog {
+class DeleteFriendDialog {
     companion object {
         /**
-         * Creates a dialog asking the user and removes the reply if yes is answered
+         * Creates a dialog asking the user and removes an user if yes is answered
          */
         fun createDialog(context: Context, onPositive: () -> Unit): AlertDialog {
             return AlertDialog.Builder(context)
-                    .setTitle(context.getString(R.string.comments_details_delete_reply_title))
-                    .setMessage(context.getString(R.string.comments_details_delete_reply_message))
-                    .setPositiveButton(context.getString(R.string.comments_details_delete_reply_yes),
+                    .setTitle(context.getString(R.string.profile_delete_friend_title))
+                    .setMessage(context.getString(R.string.profile_delete_friend_message))
+                    .setPositiveButton(context.getString(R.string.profile_delete_friend_yes),
                             { dialogInterface, i -> onPositive() })
-                    .setNegativeButton(context.getString(R.string.comments_details_delete_reply_no), null)
+                    .setNegativeButton(context.getString(R.string.profile_delete_friend_no), null)
                     .create()
         }
     }

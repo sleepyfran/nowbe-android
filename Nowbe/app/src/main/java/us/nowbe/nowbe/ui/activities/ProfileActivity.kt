@@ -24,6 +24,7 @@ import us.nowbe.nowbe.net.NowbeCheckIfFriend
 import us.nowbe.nowbe.net.async.AddUserObservable
 import us.nowbe.nowbe.net.async.CheckIfFriendObservable
 import us.nowbe.nowbe.net.async.RemoveUserObservable
+import us.nowbe.nowbe.ui.dialogs.DeleteFriendDialog
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces
@@ -33,7 +34,7 @@ class ProfileActivity : BaseActivity() {
     /**
      * Implementation to call on user result
      */
-    val onUserResult: Interfaces.OnUserResult by lazy { OnUserResult(applicationContext, fab) }
+    val onUserResult: Interfaces.OnUserResult by lazy { OnUserResult(this, fab) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,26 +126,28 @@ class ProfileActivity : BaseActivity() {
 
             // Remove the friend when the user clicks the fab
             fab.setOnClickListener({
-                previousSubscription = RemoveUserObservable.create(appUserToken, user.token).subscribe(
-                        // On Next
-                        {
-                            result ->
+                DeleteFriendDialog.createDialog(context, {
+                    previousSubscription = RemoveUserObservable.create(appUserToken, user.token).subscribe(
+                            // On Next
+                            {
+                                result ->
 
-                            // If the user was removed, show a toast and update the fab
-                            Toast.makeText(context, context.getString(R.string.profile_user_removed, user.fullName), Toast.LENGTH_LONG).show()
-                            setupFabAddUser(appUserToken, user)
-                        },
-                        // On Error
-                        {
-                            error ->
+                                // If the user was removed, show a toast and update the fab
+                                Toast.makeText(context, context.getString(R.string.profile_user_removed, user.fullName), Toast.LENGTH_LONG).show()
+                                setupFabAddUser(appUserToken, user)
+                            },
+                            // On Error
+                            {
+                                error ->
 
-                            if (error is RequestNotSuccessfulException) {
-                                ErrorUtils.showUserNotRemovedToast(context)
-                            } else {
-                                ErrorUtils.showNoConnectionDialog(context)
+                                if (error is RequestNotSuccessfulException) {
+                                    ErrorUtils.showUserNotRemovedToast(context)
+                                } else {
+                                    ErrorUtils.showNoConnectionDialog(context)
+                                }
                             }
-                        }
-                )
+                    )
+                }).show()
             })
         }
 
