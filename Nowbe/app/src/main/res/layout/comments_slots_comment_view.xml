@@ -20,8 +20,7 @@
             android:id="@+id/ivCommentNumber"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:src="@drawable/nowbe_logo" />
+            android:layout_gravity="center" />
 
         <!-- Text of the comment -->
         <TextView

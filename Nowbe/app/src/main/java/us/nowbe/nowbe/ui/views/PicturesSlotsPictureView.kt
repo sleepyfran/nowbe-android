@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.pictures_slots_picture_view.view.*
 
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.CircleTransform
 
 class PicturesSlotsPictureView : RelativeLayout {
 
@@ -39,6 +40,8 @@ class PicturesSlotsPictureView : RelativeLayout {
         Glide.with(context)
                 .load(ApiUtils.getThumbSlotPicDir(url, true))
                 .crossFade()
+                .transform(CircleTransform(context))
+                .error(R.drawable.nowbe_logo)
                 .into(ivPictureSlot)
     }
 

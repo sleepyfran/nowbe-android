@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_comment_replies.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.CommentReply
+import us.nowbe.nowbe.utils.CircleTransform
 
 /**
  * This file is part of Nowbe for Android
@@ -21,6 +22,8 @@ class CommentsRepliesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         Glide.with(itemView.context)
                 .load(feedback.profilePic)
                 .crossFade()
+                .transform(CircleTransform(itemView.context))
+                .error(R.drawable.nowbe_logo)
                 .into(itemView.ivUserPicture)
 
         itemView.tvUserFullName.text = feedback.fullName

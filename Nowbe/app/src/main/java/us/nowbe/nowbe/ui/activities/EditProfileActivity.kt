@@ -79,6 +79,8 @@ class EditProfileActivity : AppCompatActivity() {
                     Glide.with(this)
                             .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
                             .crossFade()
+                            .transform(CircleTransform(this))
+                            .error(R.drawable.nowbe_logo)
                             .into(ivUserPicture)
 
                     // Set the user's username

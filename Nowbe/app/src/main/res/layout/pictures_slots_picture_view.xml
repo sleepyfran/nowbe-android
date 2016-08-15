@@ -5,7 +5,7 @@
              android:layout_margin="5dp"
              android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/ivPictureSlot"
         android:layout_width="@dimen/default_pic_size"
         android:layout_height="@dimen/default_pic_size"

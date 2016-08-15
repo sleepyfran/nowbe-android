@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.profile_basic_info_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
+import us.nowbe.nowbe.utils.CircleTransform
 
 class ProfileBasicInfoView : RelativeLayout {
 
@@ -32,6 +33,8 @@ class ProfileBasicInfoView : RelativeLayout {
         Glide.with(context)
                 .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
                 .crossFade()
+                .transform(CircleTransform(context))
+                .error(R.drawable.nowbe_logo)
                 .into(ivUserPicture)
 
         // Update the user's online state

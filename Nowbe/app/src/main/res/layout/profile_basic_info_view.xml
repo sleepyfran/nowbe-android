@@ -13,12 +13,11 @@
         android:layout_marginLeft="@dimen/profile_pic_margin_left"
         android:layout_marginTop="@dimen/profile_pic_margin_top">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/ivUserPicture"
             android:layout_width="@dimen/default_pic_size"
             android:layout_height="@dimen/default_pic_size"
-            android:layout_gravity="center"
-            android:src="@drawable/nowbe_logo" />
+            android:layout_gravity="center" />
 
         <ImageView
             android:id="@+id/ivUserState"
