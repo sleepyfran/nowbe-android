@@ -88,4 +88,14 @@ class Interfaces {
          */
         fun onClick(content: CommentReply)
     }
+
+    /**
+     * Interface to call when a comment feedback is long clicked
+     */
+    interface OnCommentReplyLongClick {
+        /**
+         * (Should) pass the information of that item
+         */
+        fun onLongClick(content: CommentReply)
+    }
 }

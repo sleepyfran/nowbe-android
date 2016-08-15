@@ -2,6 +2,7 @@ package us.nowbe.nowbe.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.holders.CommentsRepliesHolder
@@ -17,9 +18,9 @@ import us.nowbe.nowbe.utils.Interfaces
 
 class CommentsRepliesAdapter : RecyclerView.Adapter<CommentsRepliesHolder>() {
     /**
-     * Feedback of the comment
+     * Replies of the comment
      */
-    val feedbackList: MutableList<CommentReply> = mutableListOf()
+    val repliesList: MutableList<CommentReply> = mutableListOf()
 
     /**
      * Interface to be called when the user presses an item
@@ -27,11 +28,16 @@ class CommentsRepliesAdapter : RecyclerView.Adapter<CommentsRepliesHolder>() {
     var onClick: Interfaces.OnCommentReplyClick? = null
 
     /**
+     * Interface to be called when the user long clicks an item
+     */
+    var onLongClick: Interfaces.OnCommentReplyLongClick? = null
+
+    /**
      * Updates the adapter with the new content and notifies about it
      */
     fun updateFeedback(content: MutableList<CommentReply>) {
-        feedbackList.clear()
-        feedbackList.addAll(content)
+        repliesList.clear()
+        repliesList.addAll(content)
         notifyDataSetChanged()
     }
 
@@ -40,16 +46,26 @@ class CommentsRepliesAdapter : RecyclerView.Adapter<CommentsRepliesHolder>() {
         val holder = CommentsRepliesHolder(view)
 
         // Set the item view click action
-        holder.itemView.setOnClickListener { onClick?.onClick(feedbackList[holder.adapterPosition]) }
+        holder.itemView.setOnClickListener { onClick?.onClick(repliesList[holder.adapterPosition]) }
+
+        // Set the item view long click action
+        holder.itemView.setOnLongClickListener {
+
+            // Call the OnLongClick Interface
+            onLongClick?.onLongClick(repliesList[holder.adapterPosition])
+
+            // Return a true
+            true
+        }
 
         return holder
     }
 
     override fun onBindViewHolder(holder: CommentsRepliesHolder?, position: Int) {
-        holder?.bindView(feedbackList[position])
+        holder?.bindView(repliesList[position])
     }
 
     override fun getItemCount(): Int {
-        return feedbackList.size
+        return repliesList.size
     }
 }

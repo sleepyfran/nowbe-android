@@ -25,9 +25,11 @@ class ApiUtils {
         const val KEY_TOKEN_1 = "token1"
         const val KEY_TOKEN_2 = "token2"
         const val KEY_TOKEN_OWNER = "tokenOwner"
+        const val KEY_OWNER_TOKEN = "ownerToken"
         const val KEY_TOKEN_COMMENT_OWNER = "tokenCommentOwner"
         const val KEY_USER_TOKEN = "userToken"
         const val KEY_REPLY_TOKEN = "replyUserToken"
+        const val KEY_REPLY_ID = "id"
         const val KEY_FAKE_TOKEN = "fakeToken"
         const val KEY_TOKEN_TO = "tokenTo"
         const val KEY_TOKEN_FROM = "tokenFrom"
@@ -41,6 +43,8 @@ class ApiUtils {
         const val KEY_COMMENT_DATA = "comment"
         const val KEY_REPLY = "reply"
         const val KEY_TIMESTAMP = "timestamp"
+        const val KEY_REPLY_ID_REQUEST = "idReply"
+        const val KEY_USER_TOKEN_REPLY = "userTokenReply"
 
         /**
          * Non-changing values
@@ -120,6 +124,7 @@ class ApiUtils {
         const val USER_UPDATE_COMMENT_URL = "updateComments.php"
         const val REPLY_COMMENT_URL = "sendCommentReply.php"
         const val COMMENT_REPLIES_URL = "getRepliesComments.php"
+        const val COMMENT_DELETE_REPLY_URL = "removeReply.php"
 
         /**
          * POST parameters

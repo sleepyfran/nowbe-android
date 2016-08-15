@@ -14,7 +14,9 @@ import us.nowbe.nowbe.adapters.CommentsRepliesAdapter
 import us.nowbe.nowbe.model.CommentReply
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.CommentRepliesObservable
+import us.nowbe.nowbe.net.async.DeleteReplyObservable
 import us.nowbe.nowbe.net.async.ReplyCommentObservable
+import us.nowbe.nowbe.ui.dialogs.DeleteReplyDialog
 import us.nowbe.nowbe.ui.views.CommentsSlotsCommentView
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
@@ -47,6 +49,9 @@ class CommentsDetailsActivity : AppCompatActivity() {
 
 
     fun loadReplies(tokenOwner: String, commentIndex: Int) {
+        // Show the refreshing icon
+        srlCommentDetails.isRefreshing = true
+
         // Get the token of the user
         val userToken = SharedPreferencesUtils.getToken(this)!!
 
@@ -106,8 +111,10 @@ class CommentsDetailsActivity : AppCompatActivity() {
         tvCommentText.text = commentText
         ivCommentNumber.setImageDrawable(CommentsSlotsCommentView.indexDrawableFromInt(this, commentIndex))
 
-        // Setup the recycler view
+        // Setup the recycler view's adapter
         repliesAdapter = CommentsRepliesAdapter()
+
+        // Setup the on click action
         repliesAdapter.onClick = object : Interfaces.OnCommentReplyClick {
             override fun onClick(content: CommentReply) {
                 // Show the profile of the person that replied
@@ -119,6 +126,34 @@ class CommentsDetailsActivity : AppCompatActivity() {
                 startActivity(profileIntent)
             }
         }
+
+        // Setup the on long click action
+        repliesAdapter.onLongClick = object : Interfaces.OnCommentReplyLongClick {
+            override fun onLongClick(content: CommentReply) {
+                // Get the token of the user
+                val token = SharedPreferencesUtils.getToken(this@CommentsDetailsActivity)!!
+
+                // Show a dialog asking if the user wants to delete the reply if the reply belongs to the app user
+                // or if the comment is from the user
+                if (token == content.token || token == commentAuthorToken) {
+                    DeleteReplyDialog.createDialog(this@CommentsDetailsActivity, {
+                        // Delete the reply if it says yeah!
+                        previousSubscription = DeleteReplyObservable.create(commentAuthorToken, content).subscribe(
+                                // On Next
+                                {
+                                    // Refresh the data
+                                    loadReplies(commentAuthorToken, commentIndex)
+                                },
+                                // On Error
+                                {
+                                    ErrorUtils.showGeneralWhoopsDialog(this@CommentsDetailsActivity)
+                                }
+                        )
+                    }).show()
+                }
+            }
+        }
+
         rvCommentReplies.layoutManager = LinearLayoutManager(this)
         rvCommentReplies.adapter = repliesAdapter
 

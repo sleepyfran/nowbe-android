@@ -11,6 +11,7 @@ import us.nowbe.nowbe.utils.ApiUtils
  */
 
 class CommentReply(token: String,
+                   id: String,
                    fullName: String,
                    username: String,
                    profilePic: String,
@@ -23,13 +24,14 @@ class CommentReply(token: String,
          */
         fun fromJson(json: JSONObject): CommentReply {
             val token = json.getString(ApiUtils.KEY_REPLY_TOKEN)
+            val id = json.getString(ApiUtils.KEY_REPLY_ID)
             val fullName = json.getString(ApiUtils.API_USER_FULLNAME)
             val username = json.getString(ApiUtils.API_USER_USERNAME).toLowerCase()
             val profilePic = ApiUtils.getThumbProfilePicDir(json.getString(ApiUtils.API_USER_PROFILE_PIC_ALT), false)
             val text = json.getString(ApiUtils.KEY_REPLY)
             val timestamp = json.getString(ApiUtils.KEY_TIMESTAMP)
 
-            return CommentReply(token, fullName, username, profilePic, text, timestamp)
+            return CommentReply(token, id,fullName, username, profilePic, text, timestamp)
         }
     }
 
@@ -37,6 +39,7 @@ class CommentReply(token: String,
      * A Nowbe feedback content representation
      */
     val token: String
+    val id: String
     val fullName: String
     val username: String
     val profilePic: String
@@ -45,6 +48,7 @@ class CommentReply(token: String,
 
     init {
         this.token = token
+        this.id = id
         this.fullName = fullName
         this.username = username
         this.profilePic = profilePic

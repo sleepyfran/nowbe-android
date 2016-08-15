@@ -103,6 +103,10 @@
     <string name="comments_details.comment_hint">Type your reply</string>
     <string name="comments_details.send">Send</string>
     <string name="comments_details.title">Comment from %1$s</string>
+    <string name="comments_details.delete_reply.title">Delete reply</string>
+    <string name="comments_details.delete_reply.message">Do you really want to delete this reply?</string>
+    <string name="comments_details.delete_reply.yes">Yeah!</string>
+    <string name="comments_details.delete_reply.no">Nope</string>
 
     <!-- Select Picture Source Dialog -->
     <string name="select_picture_source.camera">Take a photo</string>
