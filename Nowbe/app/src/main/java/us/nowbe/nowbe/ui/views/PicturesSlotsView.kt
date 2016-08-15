@@ -74,6 +74,13 @@ class PicturesSlotsView : RelativeLayout {
     }
 
     /**
+     * Enables or disables the nested scrolling of the view
+     */
+    fun setNestedScrolling(enabled: Boolean) {
+        rvPicturesSlots.isNestedScrollingEnabled = enabled
+    }
+
+    /**
      * Updates the current pictures with the new ones
      */
     fun updateSlots(user: User) {

@@ -60,6 +60,13 @@ class CommentsSlotsView : RelativeLayout {
     }
 
     /**
+     * Enables or disables the nested scrolling of the view
+     */
+    fun setNestedScrolling(enabled: Boolean) {
+        rvCommentsSlots.isNestedScrollingEnabled = enabled
+    }
+
+    /**
      * Updates the current pictures with the new ones
      */
     fun updateSlots(user: User) {

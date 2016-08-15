@@ -197,6 +197,10 @@ class ProfileFragment : Fragment() {
             else fab.show()
         }
 
+        // Disable the nested scrolling of the comments and pictures slots
+        psvPicturesSlots.setNestedScrolling(false)
+        csvCommentsSlots.setNestedScrolling(false)
+
         // If we don't have an internet connection, show an error and return
         if (!NetUtils.isConnectionAvailable(context)) {
             ErrorUtils.showNoConnectionToast(context)
