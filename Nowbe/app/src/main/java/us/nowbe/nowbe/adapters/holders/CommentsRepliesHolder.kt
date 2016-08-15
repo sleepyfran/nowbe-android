@@ -2,7 +2,7 @@ package us.nowbe.nowbe.adapters.holders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_comment_replies.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.CommentReply
@@ -18,7 +18,11 @@ class CommentsRepliesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
     fun bindView(feedback: CommentReply) {
         // Bind the content of the feedback into the view
-        Picasso.with(itemView.context).load(feedback.profilePic).noFade().into(itemView.ivUserPicture)
+        Glide.with(itemView.context)
+                .load(feedback.profilePic)
+                .crossFade()
+                .into(itemView.ivUserPicture)
+
         itemView.tvUserFullName.text = feedback.fullName
         itemView.tvUsername.text = itemView.context.getString(R.string.profile_username, feedback.username)
         itemView.tvCommentFeedback.text = feedback.text

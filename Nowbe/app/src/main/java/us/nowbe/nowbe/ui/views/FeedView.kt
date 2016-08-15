@@ -3,7 +3,7 @@ package us.nowbe.nowbe.ui.views
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.feed_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.FeedContent
@@ -17,7 +17,10 @@ class FeedView(context: Context) : RelativeLayout(context) {
 
     fun update(content: FeedContent) {
         // Load the user picture
-        Picasso.with(context).load(ApiUtils.getThumbProfilePicDir(content.profilePic, true)).noFade().placeholder(R.drawable.nowbe_logo).into(ivUserPicture)
+        Glide.with(context)
+                .load(ApiUtils.getThumbProfilePicDir(content.profilePic, true))
+                .crossFade()
+                .into(ivUserPicture)
 
         // Load the user state (online or not)
         val drawableStatus: Int

@@ -13,7 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.amulyakhare.textdrawable.TextDrawable
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.pictures_slots_picture_view.view.*
 
 import us.nowbe.nowbe.R
@@ -36,14 +36,20 @@ class PicturesSlotsPictureView : RelativeLayout {
      * Updates the image of the slot
      */
     fun updateImage(url: String) {
-        Picasso.with(context).load(ApiUtils.getThumbSlotPicDir(url, true)).noFade().into(ivPictureSlot)
+        Glide.with(context)
+                .load(ApiUtils.getThumbSlotPicDir(url, true))
+                .crossFade()
+                .into(ivPictureSlot)
     }
 
     /**
      * Displays a placeholder in the slot
      */
     fun displayPlaceholder() {
-        Picasso.with(context).load(R.drawable.nowbe_logo).noFade().into(ivPictureSlot)
+        Glide.with(context)
+                .load(R.drawable.nowbe_logo)
+                .crossFade()
+                .into(ivPictureSlot)
     }
 
     /**

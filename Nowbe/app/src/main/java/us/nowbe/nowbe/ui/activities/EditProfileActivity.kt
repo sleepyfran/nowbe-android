@@ -8,7 +8,6 @@ package us.nowbe.nowbe.ui.activities
  */
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -18,7 +17,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
@@ -77,7 +76,10 @@ class EditProfileActivity : AppCompatActivity() {
                     user ->
 
                     // Set the user photo
-                    Picasso.with(this).load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh)).noFade().into(ivUserPicture)
+                    Glide.with(this)
+                            .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
+                            .crossFade()
+                            .into(ivUserPicture)
 
                     // Set the user's username
                     tvEditUsername.text = getString(R.string.profile_username, user.username)

@@ -5,8 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.profile_basic_info_view.*
@@ -30,7 +29,10 @@ class ProfileBasicInfoView : RelativeLayout {
 
     fun updateInformation(user: User, forceRefresh: Boolean) {
         // Update the user's profile pic
-        Picasso.with(context).load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh)).noFade().into(ivUserPicture)
+        Glide.with(context)
+                .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
+                .crossFade()
+                .into(ivUserPicture)
 
         // Update the user's online state
         val drawableStatus: Int
