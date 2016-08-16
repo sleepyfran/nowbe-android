@@ -70,14 +70,8 @@ class PicturesSlotsView : RelativeLayout {
             adapter = PicturesSlotsAdapter()
             rvPicturesSlots.adapter = adapter
             rvPicturesSlots.layoutManager = LinearLayoutManager(context, orientation, false)
+            rvPicturesSlots.isNestedScrollingEnabled = false
         }
-    }
-
-    /**
-     * Enables or disables the nested scrolling of the view
-     */
-    fun setNestedScrolling(enabled: Boolean) {
-        rvPicturesSlots.isNestedScrollingEnabled = enabled
     }
 
     /**

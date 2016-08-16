@@ -56,14 +56,8 @@ class CommentsSlotsView : RelativeLayout {
             adapter = CommentsAdapter()
             rvCommentsSlots.adapter = adapter
             rvCommentsSlots.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            rvCommentsSlots.isNestedScrollingEnabled = false
         }
-    }
-
-    /**
-     * Enables or disables the nested scrolling of the view
-     */
-    fun setNestedScrolling(enabled: Boolean) {
-        rvCommentsSlots.isNestedScrollingEnabled = enabled
     }
 
     /**
