@@ -3,6 +3,7 @@ package us.nowbe.nowbe.adapters.holders
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.list_item_comment_replies.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.CommentReply
@@ -23,6 +24,8 @@ class CommentsRepliesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
                 .load(feedback.profilePic)
                 .crossFade()
                 .transform(CircleTransform(itemView.context))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .error(R.drawable.nowbe_logo)
                 .into(itemView.ivUserPicture)
 

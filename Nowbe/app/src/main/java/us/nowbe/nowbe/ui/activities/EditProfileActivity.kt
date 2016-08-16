@@ -18,6 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
@@ -80,6 +81,8 @@ class EditProfileActivity : AppCompatActivity() {
                             .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
                             .crossFade()
                             .transform(CircleTransform(this))
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
                             .error(R.drawable.nowbe_logo)
                             .into(ivUserPicture)
 

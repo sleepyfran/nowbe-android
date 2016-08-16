@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.amulyakhare.textdrawable.TextDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.pictures_slots_picture_view.view.*
 
 import us.nowbe.nowbe.R
@@ -41,6 +42,8 @@ class PicturesSlotsPictureView : RelativeLayout {
                 .load(ApiUtils.getThumbSlotPicDir(url, true))
                 .crossFade()
                 .transform(CircleTransform(context))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .error(R.drawable.nowbe_logo)
                 .into(ivPictureSlot)
     }

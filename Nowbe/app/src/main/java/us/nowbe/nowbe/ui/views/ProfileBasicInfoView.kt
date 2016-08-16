@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.profile_basic_info_view.*
@@ -34,6 +35,8 @@ class ProfileBasicInfoView : RelativeLayout {
                 .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
                 .crossFade()
                 .transform(CircleTransform(context))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .error(R.drawable.nowbe_logo)
                 .into(ivUserPicture)
 

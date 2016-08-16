@@ -29,6 +29,9 @@ class LandingActivity : BaseActivity() {
         vpFragmentList.adapter = adapter
         tlTabs.setupWithViewPager(vpFragmentList)
 
+        // Configure the off-screen of the view pager
+        vpFragmentList.offscreenPageLimit = 2
+
         // Update the menu of the activity when navigating through the ViewPager
         vpFragmentList.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
