@@ -27,7 +27,7 @@ class CommentReply(token: String,
             val id = json.getString(ApiUtils.KEY_REPLY_ID)
             val fullName = json.getString(ApiUtils.API_USER_FULLNAME)
             val username = json.getString(ApiUtils.API_USER_USERNAME).toLowerCase()
-            val profilePic = ApiUtils.getThumbProfilePicDir(json.getString(ApiUtils.API_USER_PROFILE_PIC_ALT), false)
+            val profilePic = ApiUtils.getThumbProfilePicDir(json.getString(ApiUtils.API_USER_PROFILE_PIC_ALT))
             val text = json.getString(ApiUtils.KEY_REPLY)
             val timestamp = json.getString(ApiUtils.KEY_TIMESTAMP)
 

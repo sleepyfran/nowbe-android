@@ -140,31 +140,16 @@ class ApiUtils {
             return BASE_URL + USER_PICTURE_URL + profilePic
         }
 
-        fun getThumbProfilePicDir(profilePic: String, forceRefresh: Boolean): String {
-            var url =  BASE_URL + USER_PICTURE_THUMB_URL +
-                    profilePic
-
-            if (forceRefresh) {
-                url = url + "?" + KEY_FAKE_TOKEN +
-                        NumberUtils.getCurrentUnixTimestamp().toString()
-            }
-
-            return url
+        fun getThumbProfilePicDir(profilePic: String): String {
+            return BASE_URL + USER_PICTURE_THUMB_URL + profilePic
         }
 
         fun getFullSlotPicDir(slotPic: String): String {
             return ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_URL + slotPic
         }
 
-        fun getThumbSlotPicDir(slotPic: String, forceRefresh: Boolean): String {
-            var url = ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_THUMB_URL + slotPic
-
-            if (forceRefresh) {
-                url = url + "?" + KEY_FAKE_TOKEN +
-                        NumberUtils.getCurrentUnixTimestamp().toString()
-            }
-
-            return url
+        fun getThumbSlotPicDir(slotPic: String): String {
+            return ApiUtils.BASE_URL + ApiUtils.USER_SLOTS_PICTURES_THUMB_URL + slotPic
         }
 
         fun getUpdateSlotName(token: String, slotIndex: Int): String {

@@ -39,7 +39,7 @@ class PicturesSlotsPictureView : RelativeLayout {
      */
     fun updateImage(url: String) {
         Glide.with(context)
-                .load(ApiUtils.getThumbSlotPicDir(url, true))
+                .load(ApiUtils.getThumbSlotPicDir(url))
                 .crossFade()
                 .transform(CircleTransform(context))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

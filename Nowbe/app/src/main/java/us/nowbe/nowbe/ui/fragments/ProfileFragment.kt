@@ -101,7 +101,7 @@ class ProfileFragment : Fragment() {
     /**
      * Method that loads the user data in another thread and updates the displayed data
      */
-    fun loadUserData(forceRefresh: Boolean) {
+    fun loadUserData() {
         // Get the token of the user
         val userToken = SharedPreferencesUtils.getToken(context)!!
 
@@ -109,14 +109,12 @@ class ProfileFragment : Fragment() {
                 // On Next
                 {
                     user ->
-                    // Hide the refresh icon
-                    srlProfileRefresh.isRefreshing = false
 
                     // Callback indicating the result we got if the callback is not null
                     onUserResult?.onUserResult(user)
 
                     // Update the profile information
-                    pivProfileInfo.updateInformation(user, forceRefresh)
+                    pivProfileInfo.updateInformation(user)
 
                     // Update the likes, couple and education info
                     pleLikesEducationCouple.updateInformation(user)
@@ -204,13 +202,7 @@ class ProfileFragment : Fragment() {
         }
 
         // Load the user in another thread
-        loadUserData(false)
-
-        // Implement the swipe to refresh feature
-        srlProfileRefresh.setOnRefreshListener {
-            // Refresh the user data
-            loadUserData(true)
-        }
+        loadUserData()
     }
 
     override fun onDestroy() {

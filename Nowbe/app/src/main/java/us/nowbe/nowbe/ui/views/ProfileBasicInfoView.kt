@@ -29,10 +29,10 @@ class ProfileBasicInfoView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.profile_basic_info_view, this, true)
     }
 
-    fun updateInformation(user: User, forceRefresh: Boolean) {
+    fun updateInformation(user: User) {
         // Update the user's profile pic
         Glide.with(context)
-                .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
+                .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir))
                 .crossFade()
                 .transform(CircleTransform(context))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

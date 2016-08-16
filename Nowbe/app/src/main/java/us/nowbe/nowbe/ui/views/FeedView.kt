@@ -19,7 +19,7 @@ class FeedView(context: Context) : RelativeLayout(context) {
     fun update(content: FeedContent) {
         // Load the user picture
         Glide.with(context)
-                .load(ApiUtils.getThumbProfilePicDir(content.profilePic, true))
+                .load(ApiUtils.getThumbProfilePicDir(content.profilePic))
                 .crossFade()
                 .error(R.drawable.nowbe_logo)
                 .transform(CircleTransform(context))

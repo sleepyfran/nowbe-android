@@ -67,7 +67,7 @@ class EditProfileActivity : AppCompatActivity() {
     /**
      * Loads the data of the user and populates the widgets with that data
      */
-    fun loadUserData(forceRefresh: Boolean) {
+    fun loadUserData() {
         // Load the user data and populate the widgets with it
         val token = SharedPreferencesUtils.getToken(this)!!
 
@@ -78,7 +78,7 @@ class EditProfileActivity : AppCompatActivity() {
 
                     // Set the user photo
                     Glide.with(this)
-                            .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir, forceRefresh))
+                            .load(ApiUtils.getThumbProfilePicDir(user.profilePicDir))
                             .crossFade()
                             .transform(CircleTransform(this))
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -224,7 +224,7 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_profile)
 
         // Load the data of the user
-        loadUserData(false)
+        loadUserData()
 
         // Get the extras (fab position) from the intent
         fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION)
@@ -266,7 +266,7 @@ class EditProfileActivity : AppCompatActivity() {
         val onDismiss = object : Interfaces.OnDialogDismiss {
             override fun onDismiss() {
                 // Re-load the user data
-                loadUserData(true)
+                loadUserData()
             }
         }
 
