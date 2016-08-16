@@ -20,7 +20,7 @@ class NowbeFeedData(val token: String): NowbeRequest() {
     /**
      * Attemps to get the feed of the user
      */
-    fun getFeed(forceRefresh: Boolean): Feed {
+    fun getFeed(): Feed {
         // Make the request and get the JSON data returned
         val response = super.makeRequest()
         val json = super.getArrayFromResponse(response)
@@ -29,7 +29,7 @@ class NowbeFeedData(val token: String): NowbeRequest() {
         if (json.length() <= 0) throw EmptyFeedException("This seems a little empty, m8")
 
         // Otherwise return the feed from the JSON we got
-        return Feed.fromJson(json, forceRefresh)
+        return Feed.fromJson(json)
     }
 
     override fun getBody(): FormBody {

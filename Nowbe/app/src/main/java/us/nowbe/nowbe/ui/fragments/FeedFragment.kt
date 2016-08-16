@@ -98,9 +98,8 @@ class FeedFragment : Fragment {
         // Hide the fab when scrolling the recycler view
         rvFeed.addOnScrollListener(scrollListener)
 
-        // Load the feed in another thread and set the refresh layout as loading
-        srlFeedRefresh.isRefreshing = true
-        loadData(adapter, false)
+        // Load the feed in another thread
+        loadData(adapter)
 
         // Implement the swipe to refresh feature
         srlFeedRefresh.setOnRefreshListener {
@@ -108,15 +107,18 @@ class FeedFragment : Fragment {
             llEmptyFeed.visibility = View.GONE
 
             // Refresh the adapter
-            loadData(adapter, true)
+            loadData(adapter)
         }
     }
 
     /**
      * Loads the data into the feed
      */
-    fun loadData(adapter: FeedAdapter, forceRefresh: Boolean) {
-        previousSubscription = FeedObsevable.create(token, forceRefresh).subscribe(
+    fun loadData(adapter: FeedAdapter) {
+        // Show the refreshing icon
+        srlFeedRefresh.isRefreshing = true
+
+        previousSubscription = FeedObsevable.create(token).subscribe(
                 // On Next
                 {
                     feed ->

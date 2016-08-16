@@ -16,8 +16,7 @@ class FeedContent(token: String,
                   fullname: String,
                   username: String,
                   update: String,
-                  timestamp: String,
-                  forceRefresh: Boolean) {
+                  timestamp: String) {
     /**
      * A Nowbe feed content representation
      */
@@ -28,7 +27,6 @@ class FeedContent(token: String,
     val username: String
     val update: String
     val timestamp: String
-    val forceRefresh: Boolean
 
     init {
         this.token = token
@@ -38,14 +36,13 @@ class FeedContent(token: String,
         this.username = username.toLowerCase()
         this.update = update
         this.timestamp = timestamp
-        this.forceRefresh = forceRefresh
     }
 
     companion object {
         /**
          * Returns a FeedContent from a JSON object
          */
-        fun fromJson(jsonObject: JSONObject, forceRefresh: Boolean): FeedContent {
+        fun fromJson(jsonObject: JSONObject): FeedContent {
             // Get the info from the provided JSON object and return a FeedContent object from it
             val token = jsonObject.getString(ApiUtils.API_USER_TOKEN)
             val profilePic = jsonObject.getString(ApiUtils.API_FEED_PICTURE)
@@ -55,7 +52,7 @@ class FeedContent(token: String,
             val update = jsonObject.getString(ApiUtils.API_FEED_UPDATE)
             val timestamp = jsonObject.getString(ApiUtils.API_TIMESTAMP)
 
-            return FeedContent(token, profilePic, isAvailable, fullname, username, update, timestamp, forceRefresh)
+            return FeedContent(token, profilePic, isAvailable, fullname, username, update, timestamp)
         }
     }
 }

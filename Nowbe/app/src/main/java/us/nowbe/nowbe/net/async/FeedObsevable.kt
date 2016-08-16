@@ -18,9 +18,9 @@ class FeedObsevable {
         /**
          * Returns an observable that loads the feed and returns it as a Feed object
          */
-        fun create(token: String, forceRefresh: Boolean): Observable<Feed> {
+        fun create(token: String): Observable<Feed> {
             return Observable.fromCallable({
-                NowbeFeedData(token).getFeed(forceRefresh)
+                NowbeFeedData(token).getFeed()
             }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         }
