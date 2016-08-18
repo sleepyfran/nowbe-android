@@ -24,6 +24,7 @@ import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.net.async.FeedObsevable
 import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.utils.*
+import java.io.IOException
 
 class FeedFragment() : Fragment() {
 
@@ -88,7 +89,7 @@ class FeedFragment() : Fragment() {
                     if (error is EmptyFeedException) {
                         // Show a :( message
                         llEmptyFeed.visibility = View.VISIBLE
-                    } else {
+                    } else if (error is IOException) {
                         ErrorUtils.showNoConnectionToast(context)
                     }
                 })

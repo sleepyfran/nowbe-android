@@ -31,6 +31,7 @@ import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.utils.*
 import java.io.File
+import java.io.IOException
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -147,6 +148,7 @@ class EditProfileActivity : AppCompatActivity() {
                 // On Error
                 {
                     error ->
+
                     ErrorUtils.showGeneralWhoopsDialog(this)
                 }
         )
@@ -176,7 +178,7 @@ class EditProfileActivity : AppCompatActivity() {
                     if (error is RequestNotSuccessfulException) {
                         // Show a general error, we don't know why we got the 0!
                         ErrorUtils.showGeneralWhoopsDialog(this)
-                    } else {
+                    } else if (error is IOException) {
                         ErrorUtils.showNoConnectionToast(this)
                     }
                 }
@@ -204,7 +206,7 @@ class EditProfileActivity : AppCompatActivity() {
                     if (error is RequestNotSuccessfulException) {
                         // Show a general error, we don't know why we got the 0!
                         ErrorUtils.showGeneralWhoopsDialog(this)
-                    } else {
+                    } else if (error is IOException) {
                         ErrorUtils.showNoConnectionToast(this)
                     }
                 }

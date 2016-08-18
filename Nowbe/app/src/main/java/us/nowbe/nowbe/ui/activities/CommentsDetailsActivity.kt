@@ -22,6 +22,7 @@ import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import java.io.IOException
 
 /**
  * This file is part of Nowbe for Android
@@ -72,7 +73,7 @@ class CommentsDetailsActivity : AppCompatActivity() {
 
                     if (error is RequestNotSuccessfulException) {
                         ErrorUtils.showGeneralWhoopsDialog(this)
-                    } else {
+                    } else if (error is IOException) {
                         ErrorUtils.showNoConnectionToast(this)
                     }
 

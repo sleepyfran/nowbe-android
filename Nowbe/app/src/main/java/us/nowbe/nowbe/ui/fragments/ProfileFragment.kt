@@ -26,6 +26,7 @@ import us.nowbe.nowbe.net.async.SayHelloObservable
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.ui.activities.CommentsDetailsActivity
 import us.nowbe.nowbe.utils.*
+import java.io.IOException
 
 class ProfileFragment : Fragment() {
     /**
@@ -158,7 +159,7 @@ class ProfileFragment : Fragment() {
                     // If the user doesn't exists
                     if (error is UserDoesNotExistsException) {
                         ErrorUtils.showUserDoesNotExists(context)
-                    } else {
+                    } else if (error is IOException) {
                         ErrorUtils.showNoConnectionDialog(context)
                     }
                 }

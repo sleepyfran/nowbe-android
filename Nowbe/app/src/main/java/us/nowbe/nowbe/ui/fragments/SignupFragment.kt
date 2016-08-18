@@ -25,6 +25,7 @@ import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.ValidatorUtils
+import java.io.IOException
 
 class SignupFragment : Fragment() {
     /**
@@ -104,7 +105,7 @@ class SignupFragment : Fragment() {
                         } else if (error is RequestNotSuccessfulException) {
                             // Show an error dialog when the sign up went wrong
                             ErrorUtils.showGeneralWhoopsDialog(context)
-                        } else {
+                        } else if (error is IOException) {
                             // Show an error dialog indicating that we have no connection otherwise
                             ErrorUtils.showNoConnectionDialog(context)
                         }

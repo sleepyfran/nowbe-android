@@ -9,6 +9,7 @@ import us.nowbe.nowbe.net.async.UpdateUserCommentObservable
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import java.io.IOException
 
 /**
  * This file is part of Nowbe for Android
@@ -73,7 +74,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
 
                         if (error is RequestNotSuccessfulException) {
                             ErrorUtils.showGeneralWhoopsDialog(activity)
-                        } else {
+                        } else if (error is IOException) {
                             ErrorUtils.showNoConnectionToast(activity)
                         }
                     }

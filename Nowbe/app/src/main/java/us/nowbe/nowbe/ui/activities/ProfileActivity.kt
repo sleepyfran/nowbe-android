@@ -26,6 +26,7 @@ import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import java.io.IOException
 
 class ProfileActivity : BaseActivity() {
     /**
@@ -106,7 +107,7 @@ class ProfileActivity : BaseActivity() {
 
                             if (error is RequestNotSuccessfulException) {
                                 ErrorUtils.showUserNotAddedToast(context)
-                            } else {
+                            } else if (error is IOException) {
                                 ErrorUtils.showNoConnectionDialog(context)
                             }
                         }
@@ -139,7 +140,7 @@ class ProfileActivity : BaseActivity() {
 
                                 if (error is RequestNotSuccessfulException) {
                                     ErrorUtils.showUserNotRemovedToast(context)
-                                } else {
+                                } else if (error is IOException) {
                                     ErrorUtils.showNoConnectionDialog(context)
                                 }
                             }

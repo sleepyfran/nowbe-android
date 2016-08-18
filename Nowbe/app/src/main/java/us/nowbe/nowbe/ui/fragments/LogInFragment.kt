@@ -24,6 +24,7 @@ import us.nowbe.nowbe.ui.activities.LandingActivity
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import java.io.IOException
 
 class LogInFragment : Fragment() {
     /**
@@ -87,7 +88,7 @@ class LogInFragment : Fragment() {
                         if (error is RequestNotSuccessfulException) {
                             // Show an error showing that the data provided is wrong
                             ErrorUtils.showWrongDataDialog(context)
-                        } else {
+                        } else if (error is IOException) {
                             // Show an error dialog indicating that we have no connection otherwise
                             ErrorUtils.showNoConnectionDialog(context)
                         }
