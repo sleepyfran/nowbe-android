@@ -17,13 +17,12 @@ class NowbeUpdateUserComment(val token: String, val commentIndex: Int, val comme
      */
     fun updateComment(): Boolean {
         // Make the request and get the JSON data returned
-        val response = super.makeRequest()
+        super.makeRequest()
 
         // Get the object from the response and check whether it was or not successful
-        val json = super.getObjectFromResponse(response)
-        val success = json.getInt(ApiUtils.API_SUCCESS)
-
-        if (success != 1) throw RequestNotSuccessfulException()
+        //val json = super.getObjectFromResponse(response)
+        //val success = json.getInt(ApiUtils.API_SUCCESS)
+        //if (success != 1) throw RequestNotSuccessfulException()
 
         return true
     }
