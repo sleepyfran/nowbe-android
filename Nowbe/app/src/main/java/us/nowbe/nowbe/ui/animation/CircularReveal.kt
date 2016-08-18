@@ -1,4 +1,4 @@
-package us.nowbe.nowbe.animation
+package us.nowbe.nowbe.ui.animation
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

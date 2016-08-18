@@ -23,7 +23,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.animation.CircularReveal
+import us.nowbe.nowbe.ui.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.UpdateUserAvatarObservable
 import us.nowbe.nowbe.net.async.UpdateUserSlotObservable
