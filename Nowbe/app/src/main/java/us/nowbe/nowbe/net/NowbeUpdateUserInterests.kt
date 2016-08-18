@@ -29,10 +29,13 @@ class NowbeUpdateUserInterests(val token: String, val newInterests: String) : No
     }
 
     override fun getBody(): FormBody {
+        // No whitespaces
+        val noWhitespacesInterests = newInterests.replace(" ","")
+
         // Build the body with the token and the new interests
         return FormBody.Builder()
                 .add(ApiUtils.KEY_TOKEN, token)
-                .add(ApiUtils.KEY_INTERESTS, newInterests)
+                .add(ApiUtils.KEY_INTERESTS, noWhitespacesInterests)
                 .build()
     }
 
