@@ -53,17 +53,14 @@ class ActivityFragment : Fragment() {
     }
 
     /**
-     * Shows the empty activity message
+     * Checks whether the activity is empty or not and hides or shows the empty view
      */
-    fun showEmptyActivityView() {
-        llEmptyActivity.visibility = View.VISIBLE
-    }
-
-    /**
-     * Hides the empty activity message
-     */
-    fun hideEmptyActivityView() {
-        llEmptyActivity.visibility = View.GONE
+    fun checkEmptyActivity() {
+        if (activityAdapter.itemCount > 0) {
+            llEmptyActivity.visibility = View.GONE
+        } else {
+            llEmptyActivity.visibility = View.VISIBLE
+        }
     }
 
     /**
@@ -88,9 +85,7 @@ class ActivityFragment : Fragment() {
                     activityAdapter.updateActivity(result.activityContent)
 
                     // If we have the empty activity showing and we have content, hide it
-                    if (llEmptyActivity.visibility == View.VISIBLE && activityAdapter.itemCount > 0) {
-                        hideEmptyActivityView()
-                    }
+                    checkEmptyActivity()
                 },
                 // On Error
                 {
@@ -100,7 +95,7 @@ class ActivityFragment : Fragment() {
                     srlActivityRefresh.isRefreshing = false
 
                     if (error is EmptyActivityException) {
-                        showEmptyActivityView()
+                        checkEmptyActivity()
                     } else {
                         ErrorUtils.showGeneralWhoopsDialog(context)
                     }
@@ -123,7 +118,7 @@ class ActivityFragment : Fragment() {
 
                     // If we don't have any items, show the empty activity
                     if (activityAdapter.itemCount == 0) {
-                        showEmptyActivityView()
+                        checkEmptyActivity()
                     }
                 },
                 // On Error
@@ -154,6 +149,9 @@ class ActivityFragment : Fragment() {
                             {
                                 // Notify the adapter about the removal
                                 activityAdapter.removeActivity(index)
+
+                                // Check the content of the activity
+                                checkEmptyActivity()
                             },
                             // On Error
                             {
