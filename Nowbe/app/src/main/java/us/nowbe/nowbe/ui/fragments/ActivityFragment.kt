@@ -69,7 +69,7 @@ class ActivityFragment : Fragment() {
     /**
      * Loads the activity of the user in another thread
      */
-    fun loadActivity(adapter: ActivityAdapter) {
+    fun loadActivity() {
         // Show the refreshing icon
         srlActivityRefresh.isRefreshing = true
 
@@ -85,10 +85,10 @@ class ActivityFragment : Fragment() {
                     srlActivityRefresh.isRefreshing = false
 
                     // Refresh the adapter with the new data
-                    adapter.updateActivity(result.activityContent)
+                    activityAdapter.updateActivity(result.activityContent)
 
                     // If we have the empty activity showing and we have content, hide it
-                    if (llEmptyActivity.visibility == View.VISIBLE && adapter.itemCount > 0) {
+                    if (llEmptyActivity.visibility == View.VISIBLE && activityAdapter.itemCount > 0) {
                         hideEmptyActivityView()
                     }
                 },
@@ -170,11 +170,11 @@ class ActivityFragment : Fragment() {
         rvActivity.addOnScrollListener(scrollListener)
 
         // Load the data async
-        loadActivity(activityAdapter)
+        loadActivity()
 
         // Setup the refresh
         srlActivityRefresh.setOnRefreshListener {
-            loadActivity(activityAdapter)
+            loadActivity()
         }
     }
 
