@@ -98,4 +98,14 @@ class Interfaces {
          */
         fun onLongClick(content: CommentReply)
     }
+
+    /**
+     * Interface to call when the user presses the remove button in an activity view
+     */
+    interface OnActivityDeleteClick {
+        /**
+         * (Should) pass the id of that item
+         */
+        fun onActivityDeleteClick(id: String, index: Int)
+    }
 }

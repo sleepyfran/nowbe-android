@@ -1,13 +1,10 @@
 package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
-import org.json.JSONArray
-import org.json.JSONException
-import us.nowbe.nowbe.model.Feed
-import us.nowbe.nowbe.model.exceptions.EmptyFeedException
+import us.nowbe.nowbe.model.Activity
+import us.nowbe.nowbe.model.exceptions.EmptyActivityException
+import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.utils.ApiUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android
@@ -16,30 +13,30 @@ import java.net.UnknownHostException
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class NowbeFeedData(val token: String): NowbeRequest() {
+class NowbeActivityData(val token: String) : NowbeRequest() {
     /**
-     * Attemps to get the feed of the user
+     * Attempts to get the activity data from the user
      */
-    fun getFeed(): Feed {
+    fun getActivity(): Activity {
         // Make the request and get the JSON data returned
         val response = super.makeRequest()
         val json = super.getArrayFromResponse(response)
 
         // If the JSON is empty (no results) throw an empty feed exception
-        if (json.length() <= 0) throw EmptyFeedException()
+        if (json.length() <= 0) throw EmptyActivityException()
 
-        // Otherwise return the feed from the JSON we got
-        return Feed.fromJson(json)
+        // Get the object from the response and check whether it was or not successful
+        return Activity.fromJson(json)
     }
 
     override fun getBody(): FormBody {
-        // Build the body with the token
+        // Build the body with the token of the user
         return FormBody.Builder()
                 .add(ApiUtils.KEY_TOKEN, token)
                 .build()
     }
 
     override fun getRequestUrl(): String {
-        return ApiUtils.USER_FEED_URL
+        return ApiUtils.ACTIVITY_DATA_URL
     }
 }

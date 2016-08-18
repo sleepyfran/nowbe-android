@@ -82,9 +82,10 @@
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvUpdateText"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/tvUpdateText"
+                android:gravity="bottom"
                 android:text="2 days ago" />
         </RelativeLayout>
     </LinearLayout>

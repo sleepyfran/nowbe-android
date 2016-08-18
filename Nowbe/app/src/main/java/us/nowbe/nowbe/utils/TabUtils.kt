@@ -8,10 +8,13 @@ package us.nowbe.nowbe.utils
  */
 
 import android.content.Context
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.ViewPagerAdapter
+import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.FeedFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
 
@@ -23,12 +26,21 @@ class TabUtils {
         fun createPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
             val adapter = ViewPagerAdapter(fragmentManager)
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_feed_tab))
-            adapter.addFragment(FeedFragment(), context.getString(R.string.main_notifications_tab))
+            adapter.addFragment(ActivityFragment(), context.getString(R.string.main_notifications_tab))
 
             // Load the profile fragment with the token of the user
             adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!, null),
                     context.getString(R.string.main_profile_tab))
             return adapter
+        }
+
+        /**
+         * Returns the fragment from the current position of a view pager
+         */
+        fun getFragmentFromViewPager(fragmentManager: FragmentManager, viewPager: ViewPager, viewPagerId: Int): Fragment {
+            val currentItem = viewPager.currentItem
+
+            return fragmentManager.findFragmentByTag("android:switcher:$viewPagerId:$currentItem")
         }
     }
 }

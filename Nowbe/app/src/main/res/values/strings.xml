@@ -104,6 +104,12 @@
     <string name="profile.delete_friend.yes">Yeah!</string>
     <string name="profile.delete_friend.no">Nope</string>
 
+    <!-- Activity fragment -->
+    <string name="activity.delete_activity.title">Delete notification</string>
+    <string name="activity.delete_activity.message">Do you really want to delete this notification?</string>
+    <string name="activity.delete_activity.yes">Yeah!</string>
+    <string name="activity.delete_activity.no">Nope</string>
+
     <!-- Comments Details activity -->
     <string name="comments_details.comment_hint">Type your reply</string>
     <string name="comments_details.send">Send</string>

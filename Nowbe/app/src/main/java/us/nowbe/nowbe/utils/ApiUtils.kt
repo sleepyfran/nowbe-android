@@ -45,6 +45,10 @@ class ApiUtils {
         const val KEY_TIMESTAMP = "timestamp"
         const val KEY_REPLY_ID_REQUEST = "idReply"
         const val KEY_USER_TOKEN_REPLY = "userTokenReply"
+        const val KEY_ACTIVITY_REASON = "reason"
+        const val KEY_ACTIVITY_TOKEN = "token2"
+        const val KEY_ACTIVITY_DATE = "date"
+        const val KEY_ACTIVITY_ID = "id"
 
         /**
          * Non-changing values
@@ -125,6 +129,9 @@ class ApiUtils {
         const val REPLY_COMMENT_URL = "sendCommentReply.php"
         const val COMMENT_REPLIES_URL = "getRepliesComments.php"
         const val COMMENT_DELETE_REPLY_URL = "removeReply.php"
+        const val ACTIVITY_DATA_URL = "getUserActivity.php"
+        const val ACTIVITY_DELETE_ONE_URL = "removeActivity.php"
+        const val ACTIVITY_DELETE_ALL_URL = "clearAllNotifications.php"
 
         /**
          * POST parameters

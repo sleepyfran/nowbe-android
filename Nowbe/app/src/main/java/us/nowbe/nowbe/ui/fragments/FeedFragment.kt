@@ -29,12 +29,9 @@ import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.net.NowbeFeedData
 import us.nowbe.nowbe.net.async.FeedObsevable
-import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.ErrorUtils
-import us.nowbe.nowbe.utils.Interfaces
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
+import us.nowbe.nowbe.utils.*
 
-class FeedFragment : Fragment {
+class FeedFragment() : Fragment() {
     /**
      * Previous subscription
      */
@@ -48,8 +45,8 @@ class FeedFragment : Fragment {
     /**
      * Reference to the scroll listener that our recycler view will be using
      */
-    val scrollListener: OnScrollListener by lazy {
-        OnScrollListener(activity.findViewById(R.id.fab) as FloatingActionButton)
+    val scrollListener: HideFabOnScroll by lazy {
+        HideFabOnScroll(activity.findViewById(R.id.fab) as FloatingActionButton)
     }
 
     /**
@@ -57,7 +54,40 @@ class FeedFragment : Fragment {
      */
     lateinit var token: String
 
-    constructor() : super()
+    /**
+     * Loads the data into the feed
+     */
+    fun loadData(adapter: FeedAdapter) {
+        // Show the refreshing icon
+        srlFeedRefresh.isRefreshing = true
+
+        previousSubscription = FeedObsevable.create(token).subscribe(
+                // On Next
+                {
+                    feed ->
+                    // Hide the loading progress bar and show the recycler view
+                    srlFeedRefresh.isRefreshing = false
+
+                    // Update the adapter's feed
+                    adapter.updateFeed(feed.feedContent)
+                },
+                // On Error
+                {
+                    error ->
+                    // Set an empty list to the adapter
+                    adapter.updateFeed(arrayListOf())
+
+                    // Hide the loading progress
+                    srlFeedRefresh.isRefreshing = false
+
+                    if (error is EmptyFeedException) {
+                        // Show a :( message
+                        llEmptyFeed.visibility = View.VISIBLE
+                    } else {
+                        ErrorUtils.showNoConnectionToast(context)
+                    }
+                })
+    }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -108,54 +138,6 @@ class FeedFragment : Fragment {
 
             // Refresh the adapter
             loadData(adapter)
-        }
-    }
-
-    /**
-     * Loads the data into the feed
-     */
-    fun loadData(adapter: FeedAdapter) {
-        // Show the refreshing icon
-        srlFeedRefresh.isRefreshing = true
-
-        previousSubscription = FeedObsevable.create(token).subscribe(
-                // On Next
-                {
-                    feed ->
-                    // Hide the loading progress bar and show the recycler view
-                    srlFeedRefresh.isRefreshing = false
-
-                    // Update the adapter's feed
-                    adapter.updateFeed(feed.feedContent)
-                },
-                // On Error
-                {
-                    error ->
-                    // Set an empty list to the adapter
-                    adapter.updateFeed(arrayListOf())
-
-                    // Hide the loading progress
-                    srlFeedRefresh.isRefreshing = false
-
-                    if (error is EmptyFeedException) {
-                        // Show a :( message
-                        llEmptyFeed.visibility = View.VISIBLE
-                    } else {
-                        ErrorUtils.showNoConnectionToast(context)
-                    }
-                })
-    }
-
-    /**
-     * Scroll listener to be used when the recycler view is scrolled
-     */
-    class OnScrollListener(val fab: FloatingActionButton) : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            if (dy > 0) {
-                fab.hide()
-            } else if (dy < 0) {
-                fab.show()
-            }
         }
     }
 

@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.utils.IntentUtils
 import us.nowbe.nowbe.utils.TabUtils
 
@@ -40,7 +41,7 @@ class LandingActivity : BaseActivity() {
                 if (pageTitle == getString(R.string.main_feed_tab)) {
                     setupSearchFab()
                 } else if (pageTitle == getString(R.string.main_notifications_tab)) {
-                    // TODO: Show the clear all fab
+                    setupNotificationsFab()
                 } else if (pageTitle == getString(R.string.main_profile_tab)) {
                     setupEditFab()
                 }
@@ -70,6 +71,22 @@ class LandingActivity : BaseActivity() {
         // TODO: Show the Search Activity when clicking the fab
         fab.setOnClickListener {
 
+        }
+    }
+
+    fun setupNotificationsFab() {
+        // Show the clear icon in the fab
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_clear_white))
+
+        // Clear all the notifications
+        fab.setOnClickListener {
+            // Get the adapter
+            val fragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
+                    vpFragmentList,
+                    R.id.vpFragmentList) as ActivityFragment
+
+            // Remove all the notifications
+            fragment.removeAllActivity()
         }
     }
 
