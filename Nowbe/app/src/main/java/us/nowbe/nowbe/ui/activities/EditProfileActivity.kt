@@ -33,6 +33,15 @@ import us.nowbe.nowbe.utils.*
 import java.io.File
 
 class EditProfileActivity : AppCompatActivity() {
+
+    companion object {
+        /**
+         * Request and result codes
+         */
+        const val REQUEST_EDIT = 1
+        const val RESULT_UPDATED = 1
+    }
+
     /**
      * Previous subscription
      */
@@ -267,6 +276,9 @@ class EditProfileActivity : AppCompatActivity() {
             override fun onDismiss() {
                 // Re-load the user data
                 loadUserData()
+
+                // We have updated data of the user, so force a reload when finishing the activity
+                setResult(EditProfileActivity.RESULT_UPDATED)
             }
         }
 

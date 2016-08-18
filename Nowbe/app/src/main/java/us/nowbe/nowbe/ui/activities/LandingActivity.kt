@@ -14,10 +14,64 @@ import android.support.v4.view.ViewPager
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
+import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.utils.IntentUtils
 import us.nowbe.nowbe.utils.TabUtils
 
 class LandingActivity : BaseActivity() {
+
+    /**
+     * Setups the fab with the search icon and action
+     */
+    fun setupSearchFab() {
+        // Show the search icon in the fab
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_search_white))
+
+        // TODO: Show the Search Activity when clicking the fab
+        fab.setOnClickListener {
+
+        }
+    }
+
+    /**
+     * Setups the fab with the delete all icon and action
+     */
+    fun setupNotificationsFab() {
+        // Show the clear icon in the fab
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_clear_white))
+
+        // Clear all the notifications
+        fab.setOnClickListener {
+            // Get the adapter
+            val fragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
+                    vpFragmentList,
+                    R.id.vpFragmentList) as ActivityFragment
+
+            // Remove all the notifications
+            fragment.removeAllActivity()
+        }
+    }
+
+    /**
+     * Setups the fab with the edit icon and action
+     */
+    fun setupEditFab() {
+        // Show the pencil in the fab
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_edit_white))
+
+        // Show the Edit Profile Activity when clicking the fab
+        fab.setOnClickListener {
+            // Create the intent passing the fab position
+            val editProfileIntent = Intent(this@LandingActivity, EditProfileActivity::class.java)
+            editProfileIntent.putExtra(IntentUtils.FAB_X_POSITION, fab.right)
+            editProfileIntent.putExtra(IntentUtils.FAB_Y_POSITION, fab.bottom)
+
+            startActivityForResult(editProfileIntent, EditProfileActivity.REQUEST_EDIT)
+
+            // Don't show animations, we'll handle that
+            overridePendingTransition(0, 0)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,57 +111,19 @@ class LandingActivity : BaseActivity() {
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == EditProfileActivity.REQUEST_EDIT && resultCode == EditProfileActivity.RESULT_UPDATED) {
+            // The user has updated the data, so reload the profile
+            val profileFragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
+                    vpFragmentList,
+                    R.id.vpFragmentList) as ProfileFragment
+
+            // Reload the profile
+            profileFragment.loadUserData()
+        }
+    }
+
     override fun hasTabs(): Boolean {
         return true
-    }
-
-    /**
-     * Setups the fab with the search icon and action
-     */
-    fun setupSearchFab() {
-        // Show the search icon in the fab
-        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_search_white))
-
-        // TODO: Show the Search Activity when clicking the fab
-        fab.setOnClickListener {
-
-        }
-    }
-
-    fun setupNotificationsFab() {
-        // Show the clear icon in the fab
-        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_clear_white))
-
-        // Clear all the notifications
-        fab.setOnClickListener {
-            // Get the adapter
-            val fragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
-                    vpFragmentList,
-                    R.id.vpFragmentList) as ActivityFragment
-
-            // Remove all the notifications
-            fragment.removeAllActivity()
-        }
-    }
-
-    /**
-     * Setups the fab with the edit icon and action
-     */
-    fun setupEditFab() {
-        // Show the pencil in the fab
-        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_edit_white))
-
-        // Show the Edit Profile Activity when clicking the fab
-        fab.setOnClickListener {
-            // Create the intent passing the fab position
-            val editProfileIntent = Intent(this@LandingActivity, EditProfileActivity::class.java)
-            editProfileIntent.putExtra(IntentUtils.FAB_X_POSITION, fab.right)
-            editProfileIntent.putExtra(IntentUtils.FAB_Y_POSITION, fab.bottom)
-
-            startActivity(editProfileIntent)
-
-            // Don't show animations, we'll handle that
-            overridePendingTransition(0, 0)
-        }
     }
 }
