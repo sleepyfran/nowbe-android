@@ -15,16 +15,8 @@ class NowbeUpdateUserComment(val token: String, val commentIndex: Int, val comme
     /**
      * Attempts to update the comment of an user
      */
-    fun updateComment(): Boolean {
-        // Make the request and get the JSON data returned
+    fun updateComment() {
         super.makeRequest()
-
-        // Get the object from the response and check whether it was or not successful
-        //val json = super.getObjectFromResponse(response)
-        //val success = json.getInt(ApiUtils.API_SUCCESS)
-        //if (success != 1) throw RequestNotSuccessfulException()
-
-        return true
     }
 
     override fun getBody(): FormBody {

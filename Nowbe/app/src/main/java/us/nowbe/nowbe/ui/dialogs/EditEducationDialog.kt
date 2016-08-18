@@ -45,8 +45,6 @@ class EditEducationDialog : EditWithTextFieldDialog() {
             previousSubscription = UpdateUserEducationObservable.create(token, newEducation).subscribe(
                     // On Next
                     {
-                        result ->
-
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_academic_updated), Toast.LENGTH_SHORT).show()
 

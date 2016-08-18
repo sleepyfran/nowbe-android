@@ -15,17 +15,8 @@ class NowbeUpdateUserBirthday(val token: String, val date: String) : NowbeReques
     /**
      * Attempts to update the birthday of the user and returns whether it was possible or not
      */
-    fun update(): Boolean {
-        // Make the request and get the JSON data returned
-        val response = super.makeRequest()
-
-        // Get the object from the response and check whether it was or not successful
-        val json = super.getObjectFromResponse(response)
-        val success = json.getInt(ApiUtils.API_SUCCESS)
-
-        if (success != 1) throw RequestNotSuccessfulException("We got a 0 here. Not good")
-
-        return true
+    fun update() {
+        super.makeRequest()
     }
 
     override fun getBody(): FormBody {

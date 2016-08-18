@@ -67,8 +67,6 @@ class EditBirthdayDialog : EditDialog() {
             previousSubscription = UpdateUserBirthdayObservable.create(token, date).subscribe(
                     // On Next
                     {
-                        result ->
-
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_birthday_updated), Toast.LENGTH_SHORT).show()
 

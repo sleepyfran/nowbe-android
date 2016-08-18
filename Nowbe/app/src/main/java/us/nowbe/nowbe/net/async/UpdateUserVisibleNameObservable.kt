@@ -17,7 +17,7 @@ class UpdateUserVisibleNameObservable {
         /**
          * Returns an observable that changes the visible (mutable) name of the user
          */
-        fun create(newVisibleName: String, token: String): Observable<Boolean> {
+        fun create(newVisibleName: String, token: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserVisibleName(newVisibleName, token).updateVisibleName()
             }).subscribeOn(Schedulers.io())

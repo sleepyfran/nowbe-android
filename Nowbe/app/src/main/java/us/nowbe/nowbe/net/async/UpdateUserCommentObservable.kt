@@ -17,7 +17,7 @@ class UpdateUserCommentObservable {
         /**
          * Returns an observable that updates the comment of an user
          */
-        fun create(token: String, commentIndex: Int, comment: String): Observable<Boolean> {
+        fun create(token: String, commentIndex: Int, comment: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserComment(token, commentIndex, comment).updateComment()
             }).subscribeOn(Schedulers.io())

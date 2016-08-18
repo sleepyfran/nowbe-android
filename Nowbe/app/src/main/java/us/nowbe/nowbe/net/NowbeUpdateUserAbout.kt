@@ -15,17 +15,8 @@ class NowbeUpdateUserAbout(val token: String, val about: String) : NowbeRequest(
     /**
      * Attempts to add the user of the provided token and returns whether it was or not possible
      */
-    fun updateAbout(): Boolean {
-        // Make the request and get the JSON data returned
-        val response = super.makeRequest()
-
-        // Get the object from the response and check whether it was or not successful
-        val json = super.getObjectFromResponse(response)
-        val success = json.getInt(ApiUtils.API_SUCCESS)
-
-        if (success != 1) throw RequestNotSuccessfulException("We got a 0 here, not good")
-
-        return true
+    fun updateAbout() {
+        super.makeRequest()
     }
 
     override fun getBody(): FormBody {

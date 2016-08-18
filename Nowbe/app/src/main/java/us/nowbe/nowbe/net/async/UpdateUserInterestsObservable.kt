@@ -17,7 +17,7 @@ class UpdateUserInterestsObservable {
         /**
          * Returns an observable that attempts to change the interests of the user
          */
-        fun create(token: String, interests: String): Observable<Boolean> {
+        fun create(token: String, interests: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserInterests(token, interests).update()
             }).subscribeOn(Schedulers.io())

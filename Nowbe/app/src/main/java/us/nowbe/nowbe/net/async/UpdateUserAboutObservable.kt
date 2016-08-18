@@ -17,7 +17,7 @@ class UpdateUserAboutObservable {
         /**
          * Returns an observable that changes the about section of the user
          */
-        fun create(token: String, about: String): Observable<Boolean> {
+        fun create(token: String, about: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserAbout(token, about).updateAbout()
             }).subscribeOn(Schedulers.io())

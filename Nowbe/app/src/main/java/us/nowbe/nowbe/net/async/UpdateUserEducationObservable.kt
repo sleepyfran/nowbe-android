@@ -17,7 +17,7 @@ class UpdateUserEducationObservable {
         /**
          * Returns an observable that updates the education of the user
          */
-        fun create(token: String, newEducation: String): Observable<Boolean> {
+        fun create(token: String, newEducation: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserEducation(token, newEducation).update()
             }).subscribeOn(Schedulers.io())

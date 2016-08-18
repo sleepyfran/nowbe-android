@@ -15,17 +15,8 @@ class NowbeUpdateUserEducation(val token: String, val newEducation: String) : No
     /**
      * Attempts to update the education of the user
      */
-    fun update(): Boolean {
-        // Make the request and get the JSON data returned
-        val response = super.makeRequest()
-
-        // Get the object from the response and check whether it was or not successful
-        val json = super.getObjectFromResponse(response)
-        val success = json.getInt(ApiUtils.API_SUCCESS)
-
-        if (success != 1) throw RequestNotSuccessfulException("We got a 0 here. Not good")
-
-        return true
+    fun update() {
+        super.makeRequest()
     }
 
     override fun getBody(): FormBody {

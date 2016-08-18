@@ -45,8 +45,6 @@ class EditAboutDialog : EditWithTextFieldDialog() {
             previousSubscription = UpdateUserAboutObservable.create(token, newAbout).subscribe(
                     // On Next
                     {
-                        result ->
-
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_about_user_updated), Toast.LENGTH_SHORT).show()
 

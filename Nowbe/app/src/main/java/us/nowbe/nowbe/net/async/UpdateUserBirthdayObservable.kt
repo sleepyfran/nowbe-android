@@ -17,7 +17,7 @@ class UpdateUserBirthdayObservable {
         /**
          * Returns an observable that updates the birthday of the user
          */
-        fun create(token: String, date: String): Observable<Boolean> {
+        fun create(token: String, date: String): Observable<Unit> {
             return Observable.fromCallable({
                 NowbeUpdateUserBirthday(token, date).update()
             }).subscribeOn(Schedulers.io())

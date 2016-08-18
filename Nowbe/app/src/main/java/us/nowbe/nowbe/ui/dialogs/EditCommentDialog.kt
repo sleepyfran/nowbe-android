@@ -55,8 +55,6 @@ class EditCommentDialog : EditWithTextFieldDialog() {
             previousSubscription = UpdateUserCommentObservable.create(token, commentIndex - 1, newComment).subscribe(
                     // On Next
                     {
-                        result ->
-
                         // Show a toast confirming the change
                         Toast.makeText(activity,
                                 getString(R.string.profile_edit_comments_slots_updated, commentIndex),

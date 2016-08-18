@@ -44,8 +44,6 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
             previousSubscription = UpdateUserVisibleNameObservable.create(newVisibleName, token).subscribe(
                     // On Next
                     {
-                        result ->
-
                         // Show a toast confirming the change
                         Toast.makeText(activity, getString(R.string.profile_edit_full_name_updated), Toast.LENGTH_SHORT).show()
 
