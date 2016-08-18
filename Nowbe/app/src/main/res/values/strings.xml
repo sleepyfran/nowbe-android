@@ -105,6 +105,7 @@
     <string name="profile.delete_friend.no">Nope</string>
 
     <!-- Activity fragment -->
+    <string name="activity.empty">No activity for now!</string>
     <string name="activity.delete_activity.title">Delete notification</string>
     <string name="activity.delete_activity.message">Do you really want to delete this notification?</string>
     <string name="activity.delete_activity.yes">Yeah!</string>

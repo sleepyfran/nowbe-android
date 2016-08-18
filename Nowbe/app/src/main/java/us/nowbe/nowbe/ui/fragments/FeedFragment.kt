@@ -9,26 +9,20 @@ package us.nowbe.nowbe.ui.fragments
 
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import kotlinx.android.synthetic.main.fragment_feed.*
 import rx.Subscription
-
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.adapters.FeedAdapter
-import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.model.exceptions.EmptyFeedException
-import us.nowbe.nowbe.net.NowbeFeedData
 import us.nowbe.nowbe.net.async.FeedObsevable
+import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.utils.*
 
 class FeedFragment() : Fragment() {

@@ -12,7 +12,6 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import us.nowbe.nowbe.model.Activity
 import us.nowbe.nowbe.net.NowbeActivityData
-import us.nowbe.nowbe.net.NowbeAddUser
 
 class ActivityDataObservable {
     companion object {

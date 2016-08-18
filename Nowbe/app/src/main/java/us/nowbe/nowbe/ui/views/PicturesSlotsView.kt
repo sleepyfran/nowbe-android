@@ -12,9 +12,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import android.widget.Toast
 import kotlinx.android.synthetic.main.pictures_slot_view.view.*
-
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.PicturesSlotsAdapter
 import us.nowbe.nowbe.model.User

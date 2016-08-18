@@ -6,8 +6,6 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 import us.nowbe.nowbe.R

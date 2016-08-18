@@ -27,8 +27,8 @@ import us.nowbe.nowbe.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.UpdateUserAvatarObservable
 import us.nowbe.nowbe.net.async.UpdateUserSlotObservable
-import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.net.async.UserDataObservable
+import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.utils.*
 import java.io.File
 

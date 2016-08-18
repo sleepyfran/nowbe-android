@@ -10,7 +10,6 @@ package us.nowbe.nowbe.net.async
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import us.nowbe.nowbe.net.NowbeAddUser
 import us.nowbe.nowbe.net.NowbeUpdateUserAbout
 
 class UpdateUserAboutObservable {

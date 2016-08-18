@@ -1,6 +1,5 @@
 package us.nowbe.nowbe.net
 
-import android.util.Log
 import okhttp3.MultipartBody
 import okhttp3.Request
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException

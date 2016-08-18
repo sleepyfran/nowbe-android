@@ -1,11 +1,9 @@
 package us.nowbe.nowbe.ui.dialogs
 
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
-import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateUserBirthdayObservable
 import us.nowbe.nowbe.utils.ErrorUtils

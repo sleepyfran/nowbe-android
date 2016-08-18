@@ -3,9 +3,6 @@ package us.nowbe.nowbe.net
 import okhttp3.FormBody
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android

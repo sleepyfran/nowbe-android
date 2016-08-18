@@ -10,7 +10,6 @@ package us.nowbe.nowbe.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +17,10 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import rx.Subscription
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.ui.activities.LandingActivity
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.model.exceptions.UserAlreadyExistsException
 import us.nowbe.nowbe.net.async.SignupObservable
+import us.nowbe.nowbe.ui.activities.LandingActivity
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils

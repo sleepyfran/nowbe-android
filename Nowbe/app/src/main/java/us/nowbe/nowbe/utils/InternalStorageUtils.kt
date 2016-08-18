@@ -2,10 +2,7 @@ package us.nowbe.nowbe.utils
 
 import android.content.Context
 import android.os.Environment
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
 
 /**
  * This file is part of Nowbe for Android

@@ -3,7 +3,6 @@ package us.nowbe.nowbe.net
 import okhttp3.FormBody
 import us.nowbe.nowbe.model.Activity
 import us.nowbe.nowbe.model.exceptions.EmptyActivityException
-import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.utils.ApiUtils
 
 /**

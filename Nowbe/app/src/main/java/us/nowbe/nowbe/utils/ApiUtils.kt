@@ -1,7 +1,6 @@
 package us.nowbe.nowbe.utils
 
 import android.content.Context
-import org.json.JSONObject
 
 /**
  * This file is part of Nowbe for Android

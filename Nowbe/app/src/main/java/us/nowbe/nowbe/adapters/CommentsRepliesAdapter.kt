@@ -2,7 +2,6 @@ package us.nowbe.nowbe.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.holders.CommentsRepliesHolder

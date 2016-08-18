@@ -8,23 +8,20 @@ package us.nowbe.nowbe.ui.activities
  */
 
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
-import rx.Observable
 import rx.Subscription
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
-import us.nowbe.nowbe.net.NowbeCheckIfFriend
 import us.nowbe.nowbe.net.async.AddUserObservable
 import us.nowbe.nowbe.net.async.CheckIfFriendObservable
 import us.nowbe.nowbe.net.async.RemoveUserObservable
 import us.nowbe.nowbe.ui.dialogs.DeleteFriendDialog
+import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.Interfaces

@@ -9,8 +9,6 @@ package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
 import us.nowbe.nowbe.utils.ApiUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android

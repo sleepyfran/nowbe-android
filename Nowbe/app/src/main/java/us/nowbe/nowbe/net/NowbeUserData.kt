@@ -4,9 +4,6 @@ import okhttp3.FormBody
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.utils.ApiUtils
-import us.nowbe.nowbe.utils.NumberUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android

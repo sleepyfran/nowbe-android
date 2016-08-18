@@ -1,13 +1,9 @@
 package us.nowbe.nowbe.net
 
 import okhttp3.FormBody
-import org.json.JSONArray
-import org.json.JSONException
 import us.nowbe.nowbe.model.Feed
 import us.nowbe.nowbe.model.exceptions.EmptyFeedException
 import us.nowbe.nowbe.utils.ApiUtils
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * This file is part of Nowbe for Android

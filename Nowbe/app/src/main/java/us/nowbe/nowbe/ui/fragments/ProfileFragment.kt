@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_profile.*
 import rx.Subscription
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.adapters.CommentsAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.net.async.SayHelloObservable

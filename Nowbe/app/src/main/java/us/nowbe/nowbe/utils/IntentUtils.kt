@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
-import okhttp3.MediaType
 
 /**
  * This file is part of Nowbe for Android

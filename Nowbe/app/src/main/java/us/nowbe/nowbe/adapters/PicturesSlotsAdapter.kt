@@ -11,8 +11,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import us.nowbe.nowbe.adapters.holders.PicturesSlotsHolder
 import us.nowbe.nowbe.model.Slot
-import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.ui.views.PicturesSlotsPictureView
+import us.nowbe.nowbe.utils.Interfaces
 
 class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
     /**

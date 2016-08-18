@@ -7,9 +7,6 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.android.synthetic.main.profile_basic_info_view.*
 import kotlinx.android.synthetic.main.profile_basic_info_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
