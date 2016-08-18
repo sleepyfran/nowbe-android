@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_activity.*
 import rx.Subscription
 import us.nowbe.nowbe.R
@@ -54,6 +53,20 @@ class ActivityFragment : Fragment() {
     }
 
     /**
+     * Shows the empty activity message
+     */
+    fun showEmptyActivityView() {
+        llEmptyActivity.visibility = View.VISIBLE
+    }
+
+    /**
+     * Hides the empty activity message
+     */
+    fun hideEmptyActivityView() {
+        llEmptyActivity.visibility = View.GONE
+    }
+
+    /**
      * Loads the activity of the user in another thread
      */
     fun loadActivity(adapter: ActivityAdapter) {
@@ -73,6 +86,11 @@ class ActivityFragment : Fragment() {
 
                     // Refresh the adapter with the new data
                     adapter.updateActivity(result.activityContent)
+
+                    // If we have the empty activity showing and we have content, hide it
+                    if (llEmptyActivity.visibility == View.VISIBLE && adapter.itemCount > 0) {
+                        hideEmptyActivityView()
+                    }
                 },
                 // On Error
                 {
@@ -82,7 +100,7 @@ class ActivityFragment : Fragment() {
                     srlActivityRefresh.isRefreshing = false
 
                     if (error is EmptyActivityException) {
-                        Toast.makeText(context, "No activity for now!", Toast.LENGTH_SHORT).show()
+                        showEmptyActivityView()
                     } else {
                         ErrorUtils.showGeneralWhoopsDialog(context)
                     }
@@ -97,11 +115,16 @@ class ActivityFragment : Fragment() {
         // Get the token of the user
         val userToken = SharedPreferencesUtils.getToken(context)!!
 
-        RemoveAllActivityObservable.create(userToken).subscribe(
+        previousSubscription = RemoveAllActivityObservable.create(userToken).subscribe(
                 // On Next
                 {
                     // Notify the adapter about the change
                     activityAdapter.removeAllActivity()
+
+                    // If we don't have any items, show the empty activity
+                    if (activityAdapter.itemCount == 0) {
+                        showEmptyActivityView()
+                    }
                 },
                 // On Error
                 {
@@ -126,7 +149,7 @@ class ActivityFragment : Fragment() {
                     val userToken = SharedPreferencesUtils.getToken(context)!!
 
                     // Remove the activity from the server
-                    RemoveActivityObservable.create(userToken, id).subscribe(
+                    previousSubscription = RemoveActivityObservable.create(userToken, id).subscribe(
                             // On Next
                             {
                                 // Notify the adapter about the removal
