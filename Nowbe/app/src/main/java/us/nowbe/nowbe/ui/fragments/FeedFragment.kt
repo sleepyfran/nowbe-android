@@ -26,6 +26,12 @@ import us.nowbe.nowbe.ui.activities.ProfileActivity
 import us.nowbe.nowbe.utils.*
 
 class FeedFragment() : Fragment() {
+
+    /**
+     * Adapter of the feed
+     */
+    lateinit var feedAdapter: FeedAdapter
+
     /**
      * Previous subscription
      */
@@ -51,7 +57,7 @@ class FeedFragment() : Fragment() {
     /**
      * Loads the data into the feed
      */
-    fun loadData(adapter: FeedAdapter) {
+    fun loadData() {
         // Show the refreshing icon
         srlFeedRefresh.isRefreshing = true
 
@@ -63,13 +69,18 @@ class FeedFragment() : Fragment() {
                     srlFeedRefresh.isRefreshing = false
 
                     // Update the adapter's feed
-                    adapter.updateFeed(feed.feedContent)
+                    feedAdapter.updateFeed(feed.feedContent)
+
+                    // If we have the empty activity showing and we have content, hide it
+                    if (llEmptyFeed.visibility == View.VISIBLE && feedAdapter.itemCount > 0) {
+                        llEmptyFeed.visibility = View.GONE
+                    }
                 },
                 // On Error
                 {
                     error ->
                     // Set an empty list to the adapter
-                    adapter.updateFeed(arrayListOf())
+                    feedAdapter.updateFeed(arrayListOf())
 
                     // Hide the loading progress
                     srlFeedRefresh.isRefreshing = false
@@ -98,13 +109,13 @@ class FeedFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup the recycler view with an empty list
-        val adapter = FeedAdapter()
-        adapter.onClick = object : Interfaces.OnFeedItemClick {
+        feedAdapter = FeedAdapter()
+        feedAdapter.onClick = object : Interfaces.OnFeedItemClick {
             override fun onFeedItemClick(itemSelected: Int) {
                 // TODO: Allow the user to send a hello to the user from the feed
 
                 // Get the selected user's token
-                val selectedToken = adapter.getFeedItem(itemSelected).token
+                val selectedToken = feedAdapter.getFeedItem(itemSelected).token
 
                 // Create an intent pointing to the profile activity
                 val intent = Intent(activity, ProfileActivity::class.java)
@@ -116,22 +127,19 @@ class FeedFragment() : Fragment() {
                 startActivity(intent)
             }
         }
-        rvFeed.adapter = adapter
+        rvFeed.adapter = feedAdapter
         rvFeed.layoutManager = LinearLayoutManager(context)
 
         // Hide the fab when scrolling the recycler view
         rvFeed.addOnScrollListener(scrollListener)
 
         // Load the feed in another thread
-        loadData(adapter)
+        loadData()
 
         // Implement the swipe to refresh feature
         srlFeedRefresh.setOnRefreshListener {
-            // Hide the :( face and show the recycler view if it's hidden
-            llEmptyFeed.visibility = View.GONE
-
             // Refresh the adapter
-            loadData(adapter)
+            loadData()
         }
     }
 
