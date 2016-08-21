@@ -124,6 +124,13 @@
     <string name="select_picture_source.camera">Take a photo</string>
     <string name="select_picture_source.gallery">Select from gallery</string>
 
+    <!-- Search activity -->
+    <string name="search.search_bar_hint">Search for an user</string>
+    <string name="search.title_users">Search users</string>
+    <string name="search.title_terms">Search terms</string>
+    <string name="search.title_interests">Search interests</string>
+    <string name="search.no_results">No results. Try with something else!</string>
+
     <!-- Dummy data -->
     <string name="dummy_data.update"> </string>
     <string name="dummy_data.name"> </string>

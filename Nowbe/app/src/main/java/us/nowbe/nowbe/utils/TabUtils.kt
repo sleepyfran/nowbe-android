@@ -17,13 +17,14 @@ import us.nowbe.nowbe.adapters.ViewPagerAdapter
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.FeedFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
+import us.nowbe.nowbe.ui.fragments.SearchTypeFragment
 
 class TabUtils {
     companion object {
         /**
-         * Method that will setup the view pager with the tabs
+         * Method that will setup the view pager of the landing activity with the tabs
          */
-        fun createPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
+        fun createLandingPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
             val adapter = ViewPagerAdapter(fragmentManager)
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_feed_tab))
             adapter.addFragment(ActivityFragment(), context.getString(R.string.main_notifications_tab))
@@ -31,6 +32,17 @@ class TabUtils {
             // Load the profile fragment with the token of the user
             adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!, null),
                     context.getString(R.string.main_profile_tab))
+            return adapter
+        }
+
+        /**
+         * Method that will setup the view pager of the search activity with the tabs
+         */
+        fun createSearchPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
+            val adapter = ViewPagerAdapter(fragmentManager)
+            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_users))
+            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_terms))
+            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_interests))
             return adapter
         }
 

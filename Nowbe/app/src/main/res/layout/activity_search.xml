@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- The root view should be hidden by default so we can show the animation
+        to reveal it later -->
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/clSearchRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        android:visibility="visible">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:elevation="4dp"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.arlib.floatingsearchview.FloatingSearchView
+                    android:id="@+id/fsvSearchUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:floatingSearch_close_search_on_keyboard_dismiss="true"
+                    app:floatingSearch_leftActionMode="showSearch"
+                    app:floatingSearch_searchHint="@string/search.search_bar_hint"
+                    app:floatingSearch_showSearchKey="true"
+                    app:floatingSearch_showVoiceInput="true" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tlTabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:tabIndicatorColor="@color/primary_text_white"
+                app:tabSelectedTextColor="@color/primary_text_white"
+                app:tabTextColor="@color/primary_text_tab_unselected" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpSearchTypeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</io.codetail.widget.RevealFrameLayout>

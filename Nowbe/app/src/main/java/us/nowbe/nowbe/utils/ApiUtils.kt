@@ -26,6 +26,7 @@ class ApiUtils {
         const val KEY_TOKEN_OWNER = "tokenOwner"
         const val KEY_OWNER_TOKEN = "ownerToken"
         const val KEY_TOKEN_COMMENT_OWNER = "tokenCommentOwner"
+        const val KEY_PUBLIC = "public"
         const val KEY_USER_TOKEN = "userToken"
         const val KEY_REPLY_TOKEN = "replyUserToken"
         const val KEY_REPLY_ID = "id"
@@ -48,6 +49,10 @@ class ApiUtils {
         const val KEY_ACTIVITY_TOKEN = "token2"
         const val KEY_ACTIVITY_DATE = "date"
         const val KEY_ACTIVITY_ID = "id"
+        const val KEY_SEARCH_TERM = "searchTerm"
+        const val KEY_SEARCH_ABOUT = "about"
+        const val KEY_SEARCH_MUTUAL = "isMutual"
+        const val KEY_NOTIFY_NICKNAME = "userVisitant"
 
         /**
          * Non-changing values
@@ -131,6 +136,10 @@ class ApiUtils {
         const val ACTIVITY_DATA_URL = "getUserActivity.php"
         const val ACTIVITY_DELETE_ONE_URL = "removeActivity.php"
         const val ACTIVITY_DELETE_ALL_URL = "clearAllNotifications.php"
+        const val SEARCH_INTERESTS_URL = "searchInterests.php"
+        const val SEARCH_TERM_URL = "searchTerms.php"
+        const val SEARCH_USER_URL = "searchUsers.php"
+        const val NOTIFY_ACCESS_FROM_SEARCH_URL = "notificationUserAccessedFromSearch.php"
 
         /**
          * POST parameters

@@ -5,6 +5,7 @@
     <color name="accent">#FF5252</color>
     <color name="primary_light">#9E9E9E</color>
     <color name="primary_text">#212121</color>
+    <color name="primary_text_tab_unselected">#E0E0E0</color>
     <color name="secondary_text">#727272</color>
     <color name="primary_text_white">#FFFFFF</color>
     <color name="primary_text_white_hint">#616161</color>

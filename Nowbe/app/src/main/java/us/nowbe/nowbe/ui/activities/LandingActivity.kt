@@ -27,9 +27,17 @@ class LandingActivity : BaseActivity() {
         // Show the search icon in the fab
         fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_search_white))
 
-        // TODO: Show the Search Activity when clicking the fab
+        // Show the Search Activity when clicking the fab
         fab.setOnClickListener {
+            // Create the intent passing the fab position
+            val searchIntent = Intent(this@LandingActivity, SearchActivity::class.java)
+            searchIntent.putExtra(IntentUtils.FAB_X_POSITION, fab.right)
+            searchIntent.putExtra(IntentUtils.FAB_Y_POSITION, fab.bottom)
 
+            startActivity(searchIntent)
+
+            // Don't show animations, we'll handle that
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -80,7 +88,7 @@ class LandingActivity : BaseActivity() {
         setupSearchFab()
 
         // Setup the view pager and the tab view
-        val adapter = TabUtils.createPagerAdapter(this, supportFragmentManager)
+        val adapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager)
         vpFragmentList.adapter = adapter
         tlTabs.setupWithViewPager(vpFragmentList)
 
@@ -92,12 +100,10 @@ class LandingActivity : BaseActivity() {
             override fun onPageSelected(position: Int) {
                 val pageTitle = adapter.getPageTitle(position)
 
-                if (pageTitle == getString(R.string.main_feed_tab)) {
-                    setupSearchFab()
-                } else if (pageTitle == getString(R.string.main_notifications_tab)) {
-                    setupNotificationsFab()
-                } else if (pageTitle == getString(R.string.main_profile_tab)) {
-                    setupEditFab()
+                when(pageTitle) {
+                    getString(R.string.main_feed_tab) -> setupSearchFab()
+                    getString(R.string.main_notifications_tab) -> setupNotificationsFab()
+                    getString(R.string.main_profile_tab) -> setupEditFab()
                 }
             }
 

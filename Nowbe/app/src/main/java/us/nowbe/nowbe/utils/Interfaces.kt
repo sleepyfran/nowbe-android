@@ -108,4 +108,14 @@ class Interfaces {
          */
         fun onActivityDeleteClick(id: String, index: Int)
     }
+
+    /**
+     * Interface to call when the user presses a search result
+     */
+    interface OnSearchResultClick {
+        /**
+         * (Should) pass the token of the user selected
+         */
+        fun onSearchResultClick(selectedUserToken: String)
+    }
 }
