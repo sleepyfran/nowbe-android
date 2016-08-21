@@ -27,6 +27,11 @@ class SharedPreferencesUtils {
         val TOKEN_KEY = "token"
 
         /**
+         * Username of the user in Nowbe
+         */
+        val USERNAME_KEY = "username"
+
+        /**
          * Checks whether we have prove that the user has or not logged into Nowbe
          */
         fun isLoggedIn(context: Context): Boolean {
@@ -64,6 +69,28 @@ class SharedPreferencesUtils {
             val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
             sharedPrefs.edit().putString(TOKEN_KEY, token).apply()
+        }
+
+        /**
+         * Returns the username of the user if it exists
+         */
+        fun getUsername(context: Context): String? {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            if (sharedPrefs.contains(USERNAME_KEY)) {
+                return sharedPrefs.getString(USERNAME_KEY, "None")
+            } else {
+                return null
+            }
+        }
+
+        /**
+         * Sets the username of the user in Nowbe
+         */
+        fun setUsername(context: Context, username: String) {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            sharedPrefs.edit().putString(USERNAME_KEY, username).apply()
         }
 
         /**

@@ -70,9 +70,10 @@ class LogInFragment : Fragment() {
                     // On Next
                     {
                         token ->
-                        // If the login is good save the token
+                        // If the login is good save the token and the username
                         SharedPreferencesUtils.setLoggedIn(context, true)
                         SharedPreferencesUtils.setToken(context, token)
+                        SharedPreferencesUtils.setUsername(context, username)
 
                         // And show the landing activity
                         val landingIntent = Intent(context, LandingActivity::class.java)

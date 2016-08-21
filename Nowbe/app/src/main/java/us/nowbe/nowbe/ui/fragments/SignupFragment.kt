@@ -87,6 +87,7 @@ class SignupFragment : Fragment() {
                         // Save the token of the user
                         SharedPreferencesUtils.setLoggedIn(context, true)
                         SharedPreferencesUtils.setToken(context, token)
+                        SharedPreferencesUtils.setUsername(context, user)
 
                         // Show the landing activity
                         val landingIntent = Intent(context, LandingActivity::class.java)
