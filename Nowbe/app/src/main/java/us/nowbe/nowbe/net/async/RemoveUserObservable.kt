@@ -15,7 +15,7 @@ import us.nowbe.nowbe.net.NowbeRemoveUser
 class RemoveUserObservable {
     companion object {
         /**
-         * Returns an observable that TODO: Complete
+         * Returns an observable that removes an user
          */
         fun create(tokenOfUser: String, tokenToRemove: String): Observable<String> {
             return Observable.fromCallable({

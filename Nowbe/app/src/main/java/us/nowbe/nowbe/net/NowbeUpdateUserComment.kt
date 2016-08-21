@@ -20,7 +20,7 @@ class NowbeUpdateUserComment(val token: String, val commentIndex: Int, val comme
     }
 
     override fun getBody(): FormBody {
-        // Build the body with TODO
+        // Build the body with the token, comment index and comment data
         return FormBody.Builder()
                 .add(ApiUtils.KEY_TOKEN, token)
                 .add(ApiUtils.KEY_COMMENT_INDEX, commentIndex.toString())
