@@ -11,6 +11,7 @@
     <string name="general.error_title">Error</string>
     <string name="general.whoops_message">Whoops! Something wrong happened. Please try again.</string>
     <string name="general.log_out">Log out</string>
+    <string name="general.change_availability">Change if you\'re available or not</string>
     <string name="general.sad_face">:(</string>
 
     <!-- Base activity -->
@@ -131,14 +132,20 @@
     <string name="search.title_interests">Search interests</string>
     <string name="search.no_results">No results. Try with something else!</string>
 
+    <!-- Change availability dialog -->
+    <string name="available.title">Are you available right now?</string>
+    <string name="available.message">This will allow your contacts to know if you\'re available to talk, hang out, etc.</string>
+    <string name="available.yeah">Yeah!</string>
+    <string name="available.no">Nope</string>
+
     <!-- Dummy data -->
-    <string name="dummy_data.update"> </string>
-    <string name="dummy_data.name"> </string>
-    <string name="dummy_data.username">\@</string>
-    <string name="dummy_data.status"> </string>
-    <string name="dummy_data.info"> </string>
-    <string name="dummy_data.interests"> </string>
-    <string name="dummy_data.education"> </string>
-    <string name="dummy_data.couple"> </string>
-    <string name="dummy_data.birthday"> </string>
+    <string name="dummy_data.update">███████</string>
+    <string name="dummy_data.name">████</string>
+    <string name="dummy_data.username">\@█████</string>
+    <string name="dummy_data.status">████████</string>
+    <string name="dummy_data.info">████████████████████████████</string>
+    <string name="dummy_data.interests">████████████</string>
+    <string name="dummy_data.education">████████████</string>
+    <string name="dummy_data.couple">████████████</string>
+    <string name="dummy_data.birthday">████████</string>
 </resources>
