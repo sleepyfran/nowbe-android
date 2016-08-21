@@ -21,10 +21,6 @@ class SearchResultHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
      * Binds the data into the item
      */
     fun bindResult(result: SearchResult) {
-        // Show the lock icon if the profile is locked
-        if (result.isPrivate) itemView.ivLocked.visibility = View.VISIBLE
-        else itemView.ivLocked.visibility = View.GONE
-
         Glide.with(itemView.context)
                 .load(ApiUtils.getThumbProfilePicDir(result.profilePic))
                 .crossFade()
@@ -35,5 +31,12 @@ class SearchResultHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.tvUserFullName.text = result.fullname
         itemView.tvUsername.text = result.username
         itemView.tvUserAbout.text = result.about
+
+        // Show the lock icon if the profile is locked
+        if (result.isPrivate) {
+            itemView.ivPrivateProfile.visibility = View.VISIBLE
+        } else {
+            itemView.ivPrivateProfile.visibility = View.GONE
+        }
     }
 }

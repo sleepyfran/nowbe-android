@@ -15,27 +15,11 @@
         android:orientation="horizontal">
 
         <!-- User image with the visibility of the profile -->
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/ivUserPicture"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center" />
-
-            <!-- Only show the lock sign when the profile is private -->
-            <ImageView
-                android:id="@+id/ivLocked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:visibility="gone"
-                android:src="@drawable/ic_lock_white" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/ivUserPicture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center" />
 
         <!-- User name, text and date of the post/notification -->
         <RelativeLayout
@@ -66,6 +50,13 @@
                     android:maxLines="1"
                     android:text="@string/dummy_data.username"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivPrivateProfile"
+                    android:layout_width="16sp"
+                    android:layout_height="16sp"
+                    android:src="@drawable/ic_lock_black"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <!-- Text of the feed/notification update -->
