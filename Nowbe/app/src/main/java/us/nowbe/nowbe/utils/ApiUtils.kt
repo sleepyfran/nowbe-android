@@ -53,6 +53,7 @@ class ApiUtils {
         const val KEY_SEARCH_ABOUT = "about"
         const val KEY_SEARCH_MUTUAL = "isMutual"
         const val KEY_NOTIFY_NICKNAME = "userVisitant"
+        const val KEY_STATUS = "status"
 
         /**
          * Non-changing values
@@ -140,6 +141,7 @@ class ApiUtils {
         const val SEARCH_TERM_URL = "searchTerms.php"
         const val SEARCH_USER_URL = "searchUsers.php"
         const val NOTIFY_ACCESS_FROM_SEARCH_URL = "notificationUserAccessedFromSearch.php"
+        const val CHANGE_STATUS_URL = "updateStatus.php"
 
         /**
          * POST parameters
