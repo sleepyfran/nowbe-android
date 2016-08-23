@@ -35,7 +35,7 @@ class User(token: String,
     var token: String
     var username: String
     var fullName: String
-    var status: Boolean?
+    var isAvailable: Boolean?
     var email: String
     var profilePicDir: String
     var age: Int
@@ -55,7 +55,7 @@ class User(token: String,
         this.token = token
         this.username = username.toLowerCase()
         this.fullName = fullName
-        this.status = status
+        this.isAvailable = status
         this.email = email
         this.profilePicDir = profilePicDir
         this.age = age

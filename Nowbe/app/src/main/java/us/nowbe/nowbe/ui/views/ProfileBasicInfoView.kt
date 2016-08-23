@@ -40,7 +40,7 @@ class ProfileBasicInfoView : RelativeLayout {
         // Update the user's online state
         val drawableStatus: Int
 
-        if (user.status!!) {
+        if (user.isAvailable!!) {
             drawableStatus = R.drawable.online_state
         } else {
             drawableStatus = R.drawable.offline_state
