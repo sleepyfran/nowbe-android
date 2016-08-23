@@ -60,7 +60,9 @@ class FeedFragment() : Fragment() {
      */
     fun loadData() {
         // Show the refreshing icon
-        srlFeedRefresh.isRefreshing = true
+        srlFeedRefresh.post {
+            srlFeedRefresh.isRefreshing = true
+        }
 
         previousSubscription = FeedObsevable.create(token).subscribe(
                 // On Next
