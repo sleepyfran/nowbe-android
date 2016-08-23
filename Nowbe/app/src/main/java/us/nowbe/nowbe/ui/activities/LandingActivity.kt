@@ -9,16 +9,26 @@ package us.nowbe.nowbe.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.net.async.ChangeStatusObservable
+import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.utils.IntentUtils
+import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.TabUtils
 
 class LandingActivity : BaseActivity() {
+
+    /**
+     * Adapter of the view pager
+     */
+    lateinit var pagerAdapter: FragmentPagerAdapter
 
     /**
      * Setups the fab with the search icon and action
@@ -88,8 +98,8 @@ class LandingActivity : BaseActivity() {
         setupSearchFab()
 
         // Setup the view pager and the tab view
-        val adapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager)
-        vpFragmentList.adapter = adapter
+        pagerAdapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager)
+        vpFragmentList.adapter = pagerAdapter
         tlTabs.setupWithViewPager(vpFragmentList)
 
         // Configure the off-screen of the view pager
@@ -98,7 +108,7 @@ class LandingActivity : BaseActivity() {
         // Update the menu of the activity when navigating through the ViewPager
         vpFragmentList.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
-                val pageTitle = adapter.getPageTitle(position)
+                val pageTitle = pagerAdapter.getPageTitle(position)
 
                 when(pageTitle) {
                     getString(R.string.main_feed_tab) -> setupSearchFab()
@@ -126,6 +136,39 @@ class LandingActivity : BaseActivity() {
 
             // Reload the profile
             profileFragment.loadUserData()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val selectedId = item?.itemId
+
+        if (selectedId == R.id.toolbarChangeAvailable) {
+            // Get the token of the user
+            val userToken = SharedPreferencesUtils.getToken(this)!!
+
+            // Get the profile fragment to trigger an update
+            val profileFragment = pagerAdapter.getItem(pagerAdapter.count - 1) as ProfileFragment
+
+            ChangeAvailabilityDialog.createDialog(this,
+                    {
+                        // Change the availability to available
+                        ChangeStatusObservable.create(userToken, true).subscribe()
+
+                        // Trigger an update in the user's profile
+                        profileFragment.loadUserData()
+                    },
+                    {
+                        // Change the availability to not available
+                        ChangeStatusObservable.create(userToken, false).subscribe()
+
+                        // Trigger an update in the user's profile
+                        profileFragment.loadUserData()
+                    }
+            ).show()
+
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
         }
     }
 

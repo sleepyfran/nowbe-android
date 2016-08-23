@@ -14,8 +14,6 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
-import us.nowbe.nowbe.net.async.ChangeStatusObservable
-import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -55,20 +53,6 @@ abstract class BaseActivity : AppCompatActivity() {
             // Show the welcome activity
             startActivity(Intent(this, WizardActivity::class.java))
             return true
-        } else if (selectedId == R.id.toolbarChangeAvailable) {
-            // Get the token of the user
-            val userToken = SharedPreferencesUtils.getToken(this)!!
-
-            ChangeAvailabilityDialog.createDialog(this,
-                    {
-                        // Change the availability to available
-                        ChangeStatusObservable.create(userToken, true).subscribe()
-                    },
-                    {
-                        // Change the availability to not available
-                        ChangeStatusObservable.create(userToken, false).subscribe()
-                    }
-            ).show()
         }
 
         return super.onOptionsItemSelected(item)
