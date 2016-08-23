@@ -24,13 +24,13 @@ class TabUtils {
         /**
          * Method that will setup the view pager of the landing activity with the tabs
          */
-        fun createLandingPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
+        fun createLandingPagerAdapter(context: Context, fragmentManager: FragmentManager, onUserResult: Interfaces.OnUserResult? = null): FragmentPagerAdapter {
             val adapter = ViewPagerAdapter(fragmentManager)
             adapter.addFragment(FeedFragment(), context.getString(R.string.main_feed_tab))
             adapter.addFragment(ActivityFragment(), context.getString(R.string.main_notifications_tab))
 
             // Load the profile fragment with the token of the user
-            adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!, null),
+            adapter.addFragment(ProfileFragment.newInstance(SharedPreferencesUtils.getToken(context)!!, onUserResult),
                     context.getString(R.string.main_profile_tab))
             return adapter
         }

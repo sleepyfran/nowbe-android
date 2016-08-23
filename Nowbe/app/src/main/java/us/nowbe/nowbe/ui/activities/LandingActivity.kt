@@ -12,14 +12,17 @@ import android.os.Bundle
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.async.ChangeStatusObservable
 import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
 import us.nowbe.nowbe.utils.IntentUtils
+import us.nowbe.nowbe.utils.Interfaces
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 import us.nowbe.nowbe.utils.TabUtils
 
@@ -29,6 +32,11 @@ class LandingActivity : BaseActivity() {
      * Adapter of the view pager
      */
     lateinit var pagerAdapter: FragmentPagerAdapter
+
+    /**
+     * Menu of the activity
+     */
+    var menu: Menu? = null
 
     /**
      * Setups the fab with the search icon and action
@@ -98,7 +106,17 @@ class LandingActivity : BaseActivity() {
         setupSearchFab()
 
         // Setup the view pager and the tab view
-        pagerAdapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager)
+        pagerAdapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager, object : Interfaces.OnUserResult {
+            override fun onUserResult(user: User) {
+                if (user.isAvailable!!) {
+                    // Show the green button in the menu
+                    menu?.getItem(0)?.setIcon(R.drawable.online_state)
+                } else {
+                    // Show the red button in the menu
+                    menu?.getItem(0)?.setIcon(R.drawable.offline_state)
+                }
+            }
+        })
         vpFragmentList.adapter = pagerAdapter
         tlTabs.setupWithViewPager(vpFragmentList)
 
@@ -137,6 +155,15 @@ class LandingActivity : BaseActivity() {
             // Reload the profile
             profileFragment.loadUserData()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Save the menu
+        this.menu = menu
+
+        // Inflate the menu of the base activity
+        menuInflater.inflate(R.menu.menu_base_toolbar, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

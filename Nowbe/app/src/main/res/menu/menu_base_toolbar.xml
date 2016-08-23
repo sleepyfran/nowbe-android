@@ -4,7 +4,7 @@
     <item android:id="@+id/toolbarChangeAvailable"
         android:orderInCategory="100"
         android:title="@string/general.change_availability"
-        android:icon="@drawable/ic_person_black"
+        android:icon="@drawable/no_state"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/toolbarLogOut"
