@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "915611078000",
+    "firebase_url": "https://nowbeandroid-7db22.firebaseio.com",
+    "project_id": "nowbeandroid-7db22",
+    "storage_bucket": "nowbeandroid-7db22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915611078000:android:49bb0037cdc2c980",
+        "android_client_info": {
+          "package_name": "us.nowbe.nowbe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915611078000-vjliqqij40imjojn2oqpqudiqgv7rr0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXlT2juD45zsE5MEUsmED7bGffuproMf0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
