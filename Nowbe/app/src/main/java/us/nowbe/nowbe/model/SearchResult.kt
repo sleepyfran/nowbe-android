@@ -14,9 +14,14 @@ class SearchResult(val token: String,
                    val profilePic: String,
                    val isPrivate: Boolean,
                    val fullname: String,
-                   val username: String,
+                   username: String,
                    val about: String,
                    val isRelationMutual: Boolean) {
+    val username: String
+
+    init {
+        this.username = username.toLowerCase()
+    }
 
     companion object {
         /**

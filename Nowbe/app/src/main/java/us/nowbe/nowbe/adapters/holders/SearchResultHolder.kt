@@ -29,7 +29,7 @@ class SearchResultHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .into(itemView.ivUserPicture)
 
         itemView.tvUserFullName.text = result.fullname
-        itemView.tvUsername.text = result.username
+        itemView.tvUsername.text = itemView.context.getString(R.string.profile_username, result.username)
         itemView.tvUserAbout.text = result.about
 
         // Show the lock icon if the profile is locked
