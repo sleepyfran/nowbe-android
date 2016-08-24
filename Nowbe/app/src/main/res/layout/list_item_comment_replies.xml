@@ -18,10 +18,11 @@
             android:layout_gravity="center"/>
 
         <!-- User name, text and date of the post/notification -->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
 
             <!-- User name and alias -->
             <LinearLayout
@@ -63,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:text="2 days ago"/>
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

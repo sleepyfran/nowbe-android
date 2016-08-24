@@ -139,7 +139,7 @@
     <string name="available.no">Nope</string>
 
     <!-- Dummy data -->
-    <string name="dummy_data.update">███████</string>
+    <string name="dummy_data.update">████████████████████████████████████████████████████████████████████████</string>
     <string name="dummy_data.name">████</string>
     <string name="dummy_data.username">\@█████</string>
     <string name="dummy_data.status">████████</string>
