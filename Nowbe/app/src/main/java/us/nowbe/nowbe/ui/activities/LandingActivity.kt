@@ -179,17 +179,23 @@ class LandingActivity : BaseActivity() {
             ChangeAvailabilityDialog.createDialog(this,
                     {
                         // Change the availability to available
-                        ChangeStatusObservable.create(userToken, true).subscribe()
+                        ChangeStatusObservable.create(userToken, true).subscribe({
+                            // Trigger an update in the user's profile
+                            profileFragment.loadUserData()
 
-                        // Trigger an update in the user's profile
-                        profileFragment.loadUserData()
+                            // Show the green button in the menu
+                            menu?.getItem(0)?.setIcon(R.drawable.online_state)
+                        })
                     },
                     {
                         // Change the availability to not available
-                        ChangeStatusObservable.create(userToken, false).subscribe()
+                        ChangeStatusObservable.create(userToken, false).subscribe({
+                            // Trigger an update in the user's profile
+                            profileFragment.loadUserData()
 
-                        // Trigger an update in the user's profile
-                        profileFragment.loadUserData()
+                            // Show the red button in the menu
+                            menu?.getItem(0)?.setIcon(R.drawable.offline_state)
+                        })
                     }
             ).show()
 
