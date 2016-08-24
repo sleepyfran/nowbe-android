@@ -7,4 +7,4 @@ package us.nowbe.nowbe.model.exceptions
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class EmptyFeedException() : Exception("This seems a little empty, m8")
+class EmptyFeedException : Exception("This seems a little empty, m8")

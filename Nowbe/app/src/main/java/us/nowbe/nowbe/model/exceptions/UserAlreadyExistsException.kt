@@ -7,4 +7,4 @@ package us.nowbe.nowbe.model.exceptions
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class UserAlreadyExistsException(message: String) : Exception(message)
+class UserAlreadyExistsException : Exception("That user already exists in the database.")

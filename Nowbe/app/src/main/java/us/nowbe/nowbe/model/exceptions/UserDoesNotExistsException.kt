@@ -7,4 +7,4 @@ package us.nowbe.nowbe.model.exceptions
  * Maintained by Fran González <@spaceisstrange>
  */
 
-class UserDoesNotExistsException(message: String) : Exception(message)
+class UserDoesNotExistsException : Exception("Hello, is there anybody in there?")

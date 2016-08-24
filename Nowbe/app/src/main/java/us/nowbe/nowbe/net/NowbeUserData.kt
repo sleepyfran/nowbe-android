@@ -22,7 +22,7 @@ class NowbeUserData(val userToken: String, val profileToken: String) : NowbeRequ
         val response = super.makeRequest()
         val json = super.getFirstObjectFromArray(response)
 
-        if (json.length() <= 0) throw UserDoesNotExistsException("Hello, is there anybody in there?")
+        if (json.length() <= 0) throw UserDoesNotExistsException()
 
         // Return the user if the request was successful or null otherwise
         return User.fromJson(profileToken, json)

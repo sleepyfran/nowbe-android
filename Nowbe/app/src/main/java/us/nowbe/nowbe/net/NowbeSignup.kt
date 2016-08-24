@@ -24,8 +24,8 @@ class NowbeSignup(val user: String, val email: String, val password: String) : N
         val success = json.getString(ApiUtils.API_SUCCESS)
 
         when (success) {
-            ApiUtils.API_SUCCESS_EXIST -> throw UserAlreadyExistsException("That user already exists in the database.")
-            ApiUtils.API_SUCCESS_ERROR -> throw RequestNotSuccessfulException("We got a 0 over here.")
+            ApiUtils.API_SUCCESS_EXIST -> throw UserAlreadyExistsException()
+            ApiUtils.API_SUCCESS_ERROR -> throw RequestNotSuccessfulException()
         }
 
         // Get the token
