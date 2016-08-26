@@ -40,7 +40,7 @@ class EditAboutDialog : EditWithTextFieldDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Get the about text
-            val newAbout = view.tvEditDialogText.text.toString()
+            val newAbout = view.aedCoupleName.text.toString()
 
             previousSubscription = UpdateUserAboutObservable.create(token, newAbout).subscribe(
                     // On Next

@@ -24,23 +24,23 @@ abstract class EditWithTextFieldDialog : EditDialog() {
         val view = LayoutInflater.from(activity).inflate(R.layout.dialog_edit_general_text, null, false)
 
         // Set the default text of the text field
-        view.tvEditDialogText.setText(defaultText)
+        view.aedCoupleName.setText(defaultText)
 
         // Show the description only if the subclass wants it
         if (hasDescription()) {
-            view.tvEditDialogOptionalDescription.visibility = View.VISIBLE
-            view.tvEditDialogOptionalDescription.text = getDescription()
+            view.tvDescription.visibility = View.VISIBLE
+            view.tvDescription.text = getDescription()
         }
 
         // Set the cursor at the end of the text field
-        view.tvEditDialogText.setSelection(view.tvEditDialogText.text.length)
+        view.aedCoupleName.setSelection(view.aedCoupleName.text.length)
 
         return view
     }
 
     override fun isDataValid(view: View): Boolean {
         // Get the text that the user wrote
-        val data = view.tvEditDialogText.text
+        val data = view.aedCoupleName.text
 
         return !TextUtils.isEmpty(data)
     }

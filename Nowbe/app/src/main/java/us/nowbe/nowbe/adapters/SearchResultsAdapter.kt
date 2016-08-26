@@ -43,7 +43,7 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultHolder>() {
             if (!results[holder.adapterPosition].isPrivate || results[holder.adapterPosition].isRelationMutual) {
                 val result = results[holder.adapterPosition]
 
-                onClick.onSearchResultClick(result.token)
+                onClick.onSearchResultClick(result)
             }
         })
 

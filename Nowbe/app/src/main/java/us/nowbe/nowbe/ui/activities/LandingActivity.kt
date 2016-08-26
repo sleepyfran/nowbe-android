@@ -21,12 +21,16 @@ import us.nowbe.nowbe.net.async.ChangeStatusObservable
 import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
-import us.nowbe.nowbe.utils.IntentUtils
-import us.nowbe.nowbe.utils.Interfaces
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
-import us.nowbe.nowbe.utils.TabUtils
+import us.nowbe.nowbe.utils.*
 
 class LandingActivity : BaseActivity() {
+
+    companion object {
+        /**
+         * Request codes
+         */
+        const val REQUEST_EDIT = 1
+    }
 
     /**
      * Adapter of the view pager
@@ -49,9 +53,9 @@ class LandingActivity : BaseActivity() {
         fab.setOnClickListener {
             // Create the intent passing the fab position
             val searchIntent = Intent(this@LandingActivity, SearchActivity::class.java)
+            searchIntent.putExtra(IntentUtils.SEARCH_RESULT, SearchActivity.Companion.SearchResultClick.OPEN_PROFILE)
             searchIntent.putExtra(IntentUtils.FAB_X_POSITION, fab.right)
             searchIntent.putExtra(IntentUtils.FAB_Y_POSITION, fab.bottom)
-
             startActivity(searchIntent)
 
             // Don't show animations, we'll handle that
@@ -92,7 +96,7 @@ class LandingActivity : BaseActivity() {
             editProfileIntent.putExtra(IntentUtils.FAB_X_POSITION, fab.right)
             editProfileIntent.putExtra(IntentUtils.FAB_Y_POSITION, fab.bottom)
 
-            startActivityForResult(editProfileIntent, EditProfileActivity.REQUEST_EDIT)
+            startActivityForResult(editProfileIntent, LandingActivity.REQUEST_EDIT)
 
             // Don't show animations, we'll handle that
             overridePendingTransition(0, 0)
@@ -128,7 +132,7 @@ class LandingActivity : BaseActivity() {
             override fun onPageSelected(position: Int) {
                 val pageTitle = pagerAdapter.getPageTitle(position)
 
-                when(pageTitle) {
+                when (pageTitle) {
                     getString(R.string.main_feed_tab) -> setupSearchFab()
                     getString(R.string.main_notifications_tab) -> setupNotificationsFab()
                     getString(R.string.main_profile_tab) -> setupEditFab()
@@ -146,7 +150,7 @@ class LandingActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == EditProfileActivity.REQUEST_EDIT && resultCode == EditProfileActivity.RESULT_UPDATED) {
+        if (requestCode == LandingActivity.REQUEST_EDIT && resultCode == EditProfileActivity.RESULT_UPDATED) {
             // The user has updated the data, so reload the profile
             val profileFragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
                     vpFragmentList,

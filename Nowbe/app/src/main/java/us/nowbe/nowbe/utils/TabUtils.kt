@@ -38,11 +38,11 @@ class TabUtils {
         /**
          * Method that will setup the view pager of the search activity with the tabs
          */
-        fun createSearchPagerAdapter(context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter {
+        fun createSearchPagerAdapter(context: Context, fragmentManager: FragmentManager, onClick: Interfaces.OnSearchResultClick): FragmentPagerAdapter {
             val adapter = ViewPagerAdapter(fragmentManager)
-            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_users))
-            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_terms))
-            adapter.addFragment(SearchTypeFragment(), context.getString(R.string.search_title_interests))
+            adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_users))
+            adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_terms))
+            adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_interests))
             return adapter
         }
 

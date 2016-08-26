@@ -40,7 +40,7 @@ class EditEducationDialog : EditWithTextFieldDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Get the about text
-            val newEducation = view.tvEditDialogText.text.toString()
+            val newEducation = view.aedCoupleName.text.toString()
 
             previousSubscription = UpdateUserEducationObservable.create(token, newEducation).subscribe(
                     // On Next

@@ -23,11 +23,10 @@ import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.model.SearchResult
 import us.nowbe.nowbe.ui.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
-import us.nowbe.nowbe.net.async.UpdateUserAvatarObservable
-import us.nowbe.nowbe.net.async.UpdateUserSlotObservable
-import us.nowbe.nowbe.net.async.UserDataObservable
+import us.nowbe.nowbe.net.async.*
 import us.nowbe.nowbe.ui.dialogs.*
 import us.nowbe.nowbe.utils.*
 import java.io.File
@@ -39,8 +38,8 @@ class EditProfileActivity : AppCompatActivity() {
         /**
          * Request and result codes
          */
-        const val REQUEST_EDIT = 1
         const val RESULT_UPDATED = 1
+        const val REQUEST_SEARCH = 2
     }
 
     /**
@@ -73,6 +72,19 @@ class EditProfileActivity : AppCompatActivity() {
      * Indicates the slot that the user chose to modify
      */
     var slotIndex: Int = 0
+
+    /**
+     * Action to perform when the dialogs are dismissed
+     */
+    val onDismiss = object : Interfaces.OnDialogDismiss {
+        override fun onDismiss() {
+            // Re-load the user data
+            loadUserData()
+
+            // We have updated data of the user, so force a reload when finishing the activity
+            setResult(EditProfileActivity.RESULT_UPDATED)
+        }
+    }
 
     /**
      * Loads the data of the user and populates the widgets with that data
@@ -273,17 +285,6 @@ class EditProfileActivity : AppCompatActivity() {
             clEditProfileRoot.visibility = View.VISIBLE
         }
 
-        // Action to perform when the dialogs are dismissed
-        val onDismiss = object : Interfaces.OnDialogDismiss {
-            override fun onDismiss() {
-                // Re-load the user data
-                loadUserData()
-
-                // We have updated data of the user, so force a reload when finishing the activity
-                setResult(EditProfileActivity.RESULT_UPDATED)
-            }
-        }
-
         // Setup the action of the edit profile photo
         ivUserProfilePic.setOnClickListener {
             // We're uploading a profile pic
@@ -324,6 +325,28 @@ class EditProfileActivity : AppCompatActivity() {
         llEditEducation.setOnClickListener {
             EditEducationDialog.newInstance(onDismiss, tvEditEducation.text.toString())
                     .show(supportFragmentManager, null)
+        }
+
+        llEditCouple.setOnClickListener {
+            // Start the search activity and the result will come back in the form of an activity result
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            searchIntent.putExtra(IntentUtils.SEARCH_RESULT, SearchActivity.Companion.SearchResultClick.RETURN_DATA)
+            searchIntent.putExtra(IntentUtils.ANIMATIONS, false)
+            startActivityForResult(searchIntent, REQUEST_SEARCH)
+        }
+
+        llEditCouple.setOnLongClickListener {
+            // Get the token of the user
+            val userToken = SharedPreferencesUtils.getToken(this)!!
+            RemoveCoupleObservable.create(userToken).subscribe(
+                    {
+                        onDismiss.onDismiss()
+                    },
+                    {
+                        ErrorUtils.showNoConnectionToast(this)
+                    }
+            )
+            true
         }
 
         // Setup the action of clicking a pictures slot
@@ -369,6 +392,32 @@ class EditProfileActivity : AppCompatActivity() {
 
             // Upload the image once we have it cropped
             handlePhoto()
+        } else if (requestCode == REQUEST_SEARCH && resultCode == SearchActivity.RESULT_USER_SELECTED) {
+            // Get the search result from the intent data
+            val searchResult = data?.getSerializableExtra(IntentUtils.SEARCH_RESULT) as SearchResult
+
+            // Show the confirmation dialog
+            SetCoupleDialog.createDialog(this, searchResult.fullname, {
+                // Get the token of the user
+                val userToken = SharedPreferencesUtils.getToken(this)!!
+
+                // Update the couple of the user
+                UpdateUserCoupleObservable.create(userToken, searchResult.username).subscribe(
+                        {
+                            Toast.makeText(this, getString(R.string.profile_edit_couple_updated), Toast.LENGTH_SHORT).show()
+                            onDismiss.onDismiss()
+                        },
+                        {
+                            error ->
+
+                            if (error is RequestNotSuccessfulException) {
+                                ErrorUtils.showGeneralWhoopsDialog(this)
+                            } else {
+                                ErrorUtils.showNoConnectionToast(this)
+                            }
+                        }
+                )
+            }).show()
         }
     }
 

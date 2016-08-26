@@ -25,6 +25,21 @@ import us.nowbe.nowbe.utils.SharedPreferencesUtils
  */
 
 class SearchTypeFragment : Fragment() {
+
+    companion object {
+
+        fun newInstance(onClick: Interfaces.OnSearchResultClick): SearchTypeFragment {
+            val fragment = SearchTypeFragment()
+            fragment.onClick = onClick
+            return fragment
+        }
+    }
+
+    /**
+     * On click to call when the user presses a result
+     */
+    var onClick: Interfaces.OnSearchResultClick? = null
+
     /**
      * Adapter of the results
      */
@@ -62,17 +77,8 @@ class SearchTypeFragment : Fragment() {
 
         // Setup the recycler view to show search results
         resultsAdapter.onClick = object : Interfaces.OnSearchResultClick {
-            override fun onSearchResultClick(selectedUserToken: String) {
-                // Get the username of the user
-                val userUsername = SharedPreferencesUtils.getUsername(context)!!
-
-                // Send the notification of access from the search
-                NotifyAccessFromSearchObservable.create(selectedUserToken, userUsername).subscribe()
-
-                // Show the profile of the selected user
-                val intent = Intent(activity, ProfileActivity::class.java)
-                intent.putExtra(ApiUtils.API_USER_TOKEN, selectedUserToken)
-                startActivity(intent)
+            override fun onSearchResultClick(searchResult: SearchResult) {
+                onClick?.onSearchResultClick(searchResult)
             }
         }
         rvSearchResults.adapter = resultsAdapter

@@ -50,7 +50,7 @@ class EditCommentDialog : EditWithTextFieldDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Get the about text
-            val newComment = view.tvEditDialogText.text.toString()
+            val newComment = view.aedCoupleName.text.toString()
 
             previousSubscription = UpdateUserCommentObservable.create(token, commentIndex - 1, newComment).subscribe(
                     // On Next

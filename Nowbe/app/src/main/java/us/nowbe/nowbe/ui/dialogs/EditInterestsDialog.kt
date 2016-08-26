@@ -40,7 +40,7 @@ class EditInterestsDialog : EditWithTextFieldDialog() {
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Get the new interests
-            val interests = view.tvEditDialogText.text.toString()
+            val interests = view.aedCoupleName.text.toString()
 
             // Notify the server about the change
             previousSubscription = UpdateUserInterestsObservable.create(token, interests).subscribe(

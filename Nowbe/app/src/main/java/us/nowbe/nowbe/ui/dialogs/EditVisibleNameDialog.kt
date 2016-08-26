@@ -37,7 +37,7 @@ class EditVisibleNameDialog : EditWithTextFieldDialog() {
     override fun getPositiveAction(view: View, onDismiss: Interfaces.OnDialogDismiss): () -> Unit {
         return {
             // Get the new visible name and the token of the user
-            val newVisibleName = view.tvEditDialogText.text.toString()
+            val newVisibleName = view.aedCoupleName.text.toString()
             val token = SharedPreferencesUtils.getToken(context)!!
 
             // Update the visible name of the user

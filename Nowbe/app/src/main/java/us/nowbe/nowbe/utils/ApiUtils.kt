@@ -142,6 +142,7 @@ class ApiUtils {
         const val SEARCH_USER_URL = "searchUsers.php"
         const val NOTIFY_ACCESS_FROM_SEARCH_URL = "notificationUserAccessedFromSearch.php"
         const val CHANGE_STATUS_URL = "updateStatus.php"
+        const val USER_REMOVE_COUPLE_URL = "removeCouple.php"
 
         /**
          * POST parameters

@@ -1,28 +1,24 @@
 package us.nowbe.nowbe.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import kotlinx.android.synthetic.main.activity_search.*
 import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subjects.PublishSubject
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.model.SearchResult
 import us.nowbe.nowbe.model.exceptions.NoResultsException
 import us.nowbe.nowbe.net.NowbeSearchUser
+import us.nowbe.nowbe.net.async.NotifyAccessFromSearchObservable
 import us.nowbe.nowbe.net.async.SearchUserObservable
 import us.nowbe.nowbe.ui.animation.CircularReveal
 import us.nowbe.nowbe.ui.fragments.SearchTypeFragment
-import us.nowbe.nowbe.utils.ErrorUtils
-import us.nowbe.nowbe.utils.IntentUtils
-import us.nowbe.nowbe.utils.SharedPreferencesUtils
-import us.nowbe.nowbe.utils.TabUtils
+import us.nowbe.nowbe.utils.*
 
 /**
  * This file is part of Nowbe for Android
@@ -32,6 +28,18 @@ import us.nowbe.nowbe.utils.TabUtils
  */
 
 class SearchActivity : AppCompatActivity() {
+
+    companion object {
+        /**
+         * Request and result codes
+         */
+        const val RESULT_USER_SELECTED = 1
+
+        enum class SearchResultClick {
+            OPEN_PROFILE, RETURN_DATA
+        }
+    }
+
     /**
      * Previous subscription
      */
@@ -41,6 +49,16 @@ class SearchActivity : AppCompatActivity() {
             field?.unsubscribe()
             field = value
         }
+
+    /**
+     * Boolean indicating whether the reveal animation should be displayed or not
+     */
+    var isAnimationEnabled = true
+
+    /**
+     * Type of search result that the user wants
+     */
+    var typeOfSearch: SearchResultClick = SearchResultClick.OPEN_PROFILE
 
     /**
      * Position of the fab
@@ -101,9 +119,11 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        // Get the extras (fab position) from the intent
-        fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION)
-        fabY = intent.extras.getInt(IntentUtils.FAB_Y_POSITION)
+        // Get the extras from the intent
+        typeOfSearch = intent.getSerializableExtra(IntentUtils.SEARCH_RESULT) as SearchResultClick
+        isAnimationEnabled = intent.extras.getBoolean(IntentUtils.ANIMATIONS, true)
+        fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION, 0)
+        fabY = intent.extras.getInt(IntentUtils.FAB_Y_POSITION, 0)
 
         // Load the token of the user
         userToken = SharedPreferencesUtils.getToken(this)!!
@@ -120,7 +140,7 @@ class SearchActivity : AppCompatActivity() {
 
         // If the savedInstanceState is null we can ensure that the user is not returning from outside the app
         // and thus we don't show the animation again
-        if (savedInstanceState == null) {
+        if (isAnimationEnabled && savedInstanceState == null) {
             clSearchRoot.post {
                 // Show the circular reveal animation passing the fab position
                 CircularReveal.showEnterRevealAnimation(clSearchRoot, { }, fabX, fabY)
@@ -131,7 +151,29 @@ class SearchActivity : AppCompatActivity() {
         }
 
         // Setup the view pager and the tab view
-        val pagerAdapter = TabUtils.createSearchPagerAdapter(this, supportFragmentManager)
+        val pagerAdapter = TabUtils.createSearchPagerAdapter(this, supportFragmentManager, object : Interfaces.OnSearchResultClick {
+            override fun onSearchResultClick(searchResult: SearchResult) {
+                // Check the type of return that we want
+                if (typeOfSearch == SearchResultClick.OPEN_PROFILE) {
+                    // Get the username of the user
+                    val userUsername = SharedPreferencesUtils.getUsername(this@SearchActivity)!!
+
+                    // Send the notification of access from the search
+                    NotifyAccessFromSearchObservable.create(searchResult.token, userUsername).subscribe()
+
+                    // Start the profile activity
+                    val profileIntent = Intent(this@SearchActivity, ProfileActivity::class.java)
+                    profileIntent.putExtra(ApiUtils.KEY_TOKEN, searchResult.token)
+                    startActivity(profileIntent)
+                } else if (typeOfSearch == SearchResultClick.RETURN_DATA) {
+                    // Pass the search result as the result of the activity
+                    val resultIntent = Intent()
+                    resultIntent.putExtra(IntentUtils.SEARCH_RESULT, searchResult)
+                    setResult(SearchActivity.RESULT_USER_SELECTED, resultIntent)
+                    finish()
+                }
+            }
+        })
         vpSearchTypeList.adapter = pagerAdapter
         tlTabs.setupWithViewPager(vpSearchTypeList)
 
@@ -181,15 +223,21 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // Show the exit reveal animation (and finish the activity)
-        CircularReveal.showExitRevealAnimation(clSearchRoot, { finish() }, fabX, fabY)
+        if (isAnimationEnabled) {
+            // Show the exit reveal animation (and finish the activity)
+            CircularReveal.showExitRevealAnimation(clSearchRoot, { finish() }, fabX, fabY)
+        } else {
+            finish()
+        }
     }
 
     override fun finish() {
         super.finish()
 
-        // Don't show animations, we'll handle that
-        overridePendingTransition(0, 0)
+        if (isAnimationEnabled) {
+            // Don't show animations, we'll handle that
+            overridePendingTransition(0, 0)
+        }
     }
 
     override fun onDestroy() {

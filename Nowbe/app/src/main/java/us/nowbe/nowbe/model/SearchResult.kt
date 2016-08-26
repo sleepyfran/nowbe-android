@@ -2,6 +2,7 @@ package us.nowbe.nowbe.model
 
 import org.json.JSONObject
 import us.nowbe.nowbe.utils.ApiUtils
+import java.io.Serializable
 
 /**
  * This file is part of Nowbe for Android
@@ -16,7 +17,7 @@ class SearchResult(val token: String,
                    val fullname: String,
                    username: String,
                    val about: String,
-                   val isRelationMutual: Boolean) {
+                   val isRelationMutual: Boolean) : Serializable {
     val username: String
 
     init {
@@ -38,6 +39,10 @@ class SearchResult(val token: String,
 
             return SearchResult(token, profilePic, isPrivate, fullname, username, about, isRelationMutual)
         }
+    }
+
+    override fun toString(): String {
+        return fullname
     }
 
 }

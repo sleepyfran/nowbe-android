@@ -2,7 +2,9 @@ package us.nowbe.nowbe.utils
 
 import us.nowbe.nowbe.model.BottomSheetItem
 import us.nowbe.nowbe.model.CommentReply
+import us.nowbe.nowbe.model.SearchResult
 import us.nowbe.nowbe.model.User
+import java.io.Serializable
 
 /**
  * This file is part of Nowbe for Android
@@ -114,8 +116,8 @@ class Interfaces {
      */
     interface OnSearchResultClick {
         /**
-         * (Should) pass the token of the user selected
+         * (Should) pass the search result
          */
-        fun onSearchResultClick(selectedUserToken: String)
+        fun onSearchResultClick(searchResult: SearchResult)
     }
 }

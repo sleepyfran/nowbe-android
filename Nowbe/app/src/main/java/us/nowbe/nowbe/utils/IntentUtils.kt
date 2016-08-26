@@ -15,6 +15,16 @@ import android.provider.MediaStore
 class IntentUtils {
     companion object {
         /**
+         * Keys for the type of search
+         */
+        val SEARCH_RESULT = "search"
+
+        /**
+         * Keys for animation enabling/disabling
+         */
+        val ANIMATIONS = "anim"
+
+        /**
          * Keys for the fab position
          */
         val FAB_X_POSITION = "fabX"

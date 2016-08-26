@@ -88,6 +88,9 @@
 
     <string name="profile.edit.couple">Couple</string>
     <string name="profile.edit.couple_description">Who\'s your couple? This person will receive a notification to add you as a couple too.</string>
+    <string name="profile.edit.couple_confirmation">Are you sure you want to add %1$s as your couple?</string>
+    <string name="profile.edit.couple_confirmation_yes">Sure!</string>
+    <string name="profile.edit.couple_confirmation_no">Nope</string>
     <string name="profile.edit.couple_updated">Couple updated!</string>
 
     <string name="profile.edit.pictures_slots">Pictures slots</string>
