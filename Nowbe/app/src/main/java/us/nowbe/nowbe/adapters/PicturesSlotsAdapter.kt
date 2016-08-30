@@ -34,6 +34,13 @@ class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
     }
 
     /**
+     * Returns a slot from an index
+     */
+    fun getSlot(index: Int): Slot {
+        return pictures[index]
+    }
+
+    /**
      * Adds a picture to the array
      */
     fun addPicture(slot: Slot) {
@@ -45,7 +52,9 @@ class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
         val holder = PicturesSlotsHolder(PicturesSlotsPictureView(parent.context))
 
         // Set the onClick listener for the view
-        holder.itemView.setOnClickListener({ onClick?.onPictureSlotClick(holder.adapterPosition) })
+        holder.itemView.setOnClickListener({
+            onClick?.onPictureSlotClick(pictures[holder.adapterPosition].index)
+        })
         return holder
     }
 

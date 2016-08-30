@@ -15,6 +15,21 @@ import android.provider.MediaStore
 class IntentUtils {
     companion object {
         /**
+         * Keys for passing images
+         */
+        val IMG_DATA = "img"
+
+        /**
+         * Keys for the token
+         */
+        val TOKEN = "token"
+
+        /**
+         * Keys for passing cools
+         */
+        val COOLS = "cools"
+
+        /**
          * Keys for the type of search
          */
         val SEARCH_RESULT = "search"

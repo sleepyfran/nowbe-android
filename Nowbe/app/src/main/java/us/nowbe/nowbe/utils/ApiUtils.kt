@@ -54,6 +54,7 @@ class ApiUtils {
         const val KEY_SEARCH_MUTUAL = "isMutual"
         const val KEY_NOTIFY_NICKNAME = "userVisitant"
         const val KEY_STATUS = "status"
+        const val KEY_IMG_ID = "imgId"
 
         /**
          * Non-changing values
@@ -143,6 +144,7 @@ class ApiUtils {
         const val NOTIFY_ACCESS_FROM_SEARCH_URL = "notificationUserAccessedFromSearch.php"
         const val CHANGE_STATUS_URL = "updateStatus.php"
         const val USER_REMOVE_COUPLE_URL = "removeCouple.php"
+        const val GET_COOLS_URL = "getCooler.php"
 
         /**
          * POST parameters

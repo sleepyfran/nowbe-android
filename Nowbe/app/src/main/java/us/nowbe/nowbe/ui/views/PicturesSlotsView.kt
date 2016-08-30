@@ -15,6 +15,7 @@ import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.pictures_slot_view.view.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.PicturesSlotsAdapter
+import us.nowbe.nowbe.model.Slot
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.Interfaces
@@ -70,6 +71,13 @@ class PicturesSlotsView : RelativeLayout {
             rvPicturesSlots.layoutManager = LinearLayoutManager(context, orientation, false)
             rvPicturesSlots.isNestedScrollingEnabled = false
         }
+    }
+
+    /**
+     * Returns the slot given an index
+     */
+    fun getSlot(index: Int): Slot {
+        return adapter.getSlot(index)
     }
 
     /**

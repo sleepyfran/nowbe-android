@@ -124,6 +124,9 @@
     <string name="comments_details.delete_reply.yes">Yeah!</string>
     <string name="comments_details.delete_reply.no">Nope</string>
 
+    <!-- Full image activity -->
+    <string name="full_image.cools">%1$s Cools</string>
+
     <!-- Select Picture Source Dialog -->
     <string name="select_picture_source.camera">Take a photo</string>
     <string name="select_picture_source.gallery">Select from gallery</string>

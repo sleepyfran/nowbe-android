@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.widget.NestedScrollView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import us.nowbe.nowbe.model.exceptions.UserDoesNotExistsException
 import us.nowbe.nowbe.net.async.SayHelloObservable
 import us.nowbe.nowbe.net.async.UserDataObservable
 import us.nowbe.nowbe.ui.activities.CommentsDetailsActivity
+import us.nowbe.nowbe.ui.activities.FullImageActivity
 import us.nowbe.nowbe.utils.*
 import java.io.IOException
 
@@ -121,10 +123,16 @@ class ProfileFragment : Fragment() {
                     // Set up the pictures slots
                     psvPicturesSlots.updateSlots(user)
 
-                    // TODO: Show the full picture when clicking on a slot
+                    // Show the full picture when clicking on a slot
                     psvPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
                         override fun onPictureSlotClick(itemSelected: Int) {
-                            Toast.makeText(context, itemSelected.toString(), Toast.LENGTH_SHORT).show()
+                            val slot = psvPicturesSlots.getSlot(itemSelected)
+
+                            // Create the intent with the URL of the image and the token of the profile
+                            val fullImageIntent = Intent(context, FullImageActivity::class.java)
+                            fullImageIntent.putExtra(IntentUtils.IMG_DATA, slot.data)
+                            fullImageIntent.putExtra(IntentUtils.COOLS, slot.cools)
+                            startActivity(fullImageIntent)
                         }
                     }
 
