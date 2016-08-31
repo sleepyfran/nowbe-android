@@ -28,6 +28,8 @@ class IntentUtils {
          * Keys for passing cools
          */
         val COOLS = "cools"
+        val SHOW_COOL_BAR = "coolbar"
+        val PIC_INDEX = "picIndex"
 
         /**
          * Keys for the type of search

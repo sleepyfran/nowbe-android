@@ -130,8 +130,10 @@ class ProfileFragment : Fragment() {
 
                             // Create the intent with the URL of the image and the token of the profile
                             val fullImageIntent = Intent(context, FullImageActivity::class.java)
+                            fullImageIntent.putExtra(IntentUtils.TOKEN, profileToken)
                             fullImageIntent.putExtra(IntentUtils.IMG_DATA, slot.data)
                             fullImageIntent.putExtra(IntentUtils.COOLS, slot.cools)
+                            fullImageIntent.putExtra(IntentUtils.PIC_INDEX, slot.index)
                             startActivity(fullImageIntent)
                         }
                     }

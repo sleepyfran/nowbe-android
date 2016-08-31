@@ -21,9 +21,12 @@
             android:textSize="18sp" />
 
         <ImageView
+            android:id="@+id/ivCoolPicture"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:src="@drawable/ic_cool_white" />
 
     </RelativeLayout>
