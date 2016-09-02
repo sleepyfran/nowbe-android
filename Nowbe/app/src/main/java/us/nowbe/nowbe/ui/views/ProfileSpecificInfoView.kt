@@ -43,18 +43,21 @@ class ProfileSpecificInfoView : RelativeLayout {
         if (user.interests == null) {
             llInterests.visibility = GONE
         } else {
+            llInterests.visibility = View.VISIBLE
             tvInterests.text = user.interests
         }
 
         if (user.education == null) {
             llEducation.visibility = GONE
         } else {
+            llEducation.visibility = View.VISIBLE
             tvEducation.text = user.education
         }
 
         if (user.coupleName == null) {
             llCouple.visibility = GONE
         } else {
+            llCouple.visibility = View.VISIBLE
             tvCouple.text = user.coupleName
 
             // Take the user to the couple's profile when clicking on its name
