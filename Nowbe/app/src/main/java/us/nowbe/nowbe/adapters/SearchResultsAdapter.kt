@@ -40,11 +40,9 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultHolder>() {
 
         // Set the holder on click listener only if the profile is not private or their relationship is mutual
         holder.itemView.setOnClickListener({
-            if (!results[holder.adapterPosition].isPrivate || results[holder.adapterPosition].isRelationMutual) {
-                val result = results[holder.adapterPosition]
+            val result = results[holder.adapterPosition]
 
-                onClick.onSearchResultClick(result)
-            }
+            onClick.onSearchResultClick(result)
         })
 
         return holder

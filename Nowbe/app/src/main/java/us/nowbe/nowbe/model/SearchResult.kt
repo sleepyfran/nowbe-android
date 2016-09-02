@@ -17,7 +17,7 @@ class SearchResult(val token: String,
                    val fullname: String,
                    username: String,
                    val about: String,
-                   val isRelationMutual: Boolean) : Serializable {
+                   val relation: String) : Serializable {
     val username: String
 
     init {
@@ -35,9 +35,9 @@ class SearchResult(val token: String,
             val fullname = json.getString(ApiUtils.API_USER_FULLNAME)
             val username = json.getString(ApiUtils.API_USER_USERNAME)
             val about = json.getString(ApiUtils.KEY_SEARCH_ABOUT)
-            val isRelationMutual = json.getString(ApiUtils.KEY_SEARCH_MUTUAL) == ApiUtils.API_FRIENDSHIP_MUTUAL
+            val relation = json.getString(ApiUtils.KEY_SEARCH_MUTUAL)
 
-            return SearchResult(token, profilePic, isPrivate, fullname, username, about, isRelationMutual)
+            return SearchResult(token, profilePic, isPrivate, fullname, username, about, relation)
         }
     }
 

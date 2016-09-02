@@ -13,6 +13,7 @@
     <string name="general.log_out">Log out</string>
     <string name="general.change_availability">Change if you\'re available or not</string>
     <string name="general.sad_face">:(</string>
+    <string name="general.ok">Okay...</string>
 
     <!-- Base activity -->
     <string name="main.feed_tab">Feed</string>
@@ -102,6 +103,12 @@
 
     <string name="profile.edit.slots_description">%1$s set</string>
     <string name="profile.edit.unset">Not set</string>
+
+    <string name="profile.add_private_profile.title">Hmmm&#8230;</string>
+    <string name="profile.add_private_profile.message">Seems like this user chose not to show its profile publicly. That means that you won\'t be able to see its profile until both of you added each other. Do you want to add this user to your friends?</string>
+    <string name="profile.add_private_profile.yes">Yeah!</string>
+    <string name="profile.add_private_profile.no">Nope</string>
+    <string name="profile.private_profile.wait">You already added this user. Wait for that user to add you to see its profile</string>
 
     <string name="profile.delete_friend.title">Delete friend</string>
     <string name="profile.delete_friend.message">Do you really want to delete this user?</string>
