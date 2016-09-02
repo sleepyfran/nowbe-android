@@ -72,6 +72,7 @@ class ApiUtils {
         const val API_SUCCESS_OK = "1"
         const val API_SUCCESS_ERROR = "0"
         const val API_SUCCESS_EXIST = "exist"
+        const val API_SUCCESS_ALREADY_PAIRED = "already_paired"
         const val API_ID = "id"
 
         // Friendship-specific results

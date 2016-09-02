@@ -55,6 +55,19 @@ class ErrorUtils {
         }
 
         /**
+         * Shows a dialog indicating that the user already has a couple
+         */
+        fun alreadyPairedDialog(context: Context?) {
+            if (context == null) return
+
+            AlertDialog.Builder(context)
+                    .setTitle(context.getString(R.string.general_error_title))
+                    .setMessage(context.getString(R.string.profile_edit_already_paired))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+        }
+
+        /**
          * Shows a dialog indicating that the data provided was wrong
          */
         fun showWrongDataDialog(context: Context?) {

@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.SearchResult
+import us.nowbe.nowbe.model.exceptions.AlreadyPairedException
 import us.nowbe.nowbe.ui.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.net.async.*
@@ -412,6 +413,8 @@ class EditProfileActivity : AppCompatActivity() {
 
                             if (error is RequestNotSuccessfulException) {
                                 ErrorUtils.showGeneralWhoopsDialog(this)
+                            } else if (error is AlreadyPairedException) {
+                                ErrorUtils.alreadyPairedDialog(this)
                             } else {
                                 ErrorUtils.showNoConnectionToast(this)
                             }
