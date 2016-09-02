@@ -35,10 +35,12 @@ class FullImageActivity : AppCompatActivity() {
         val showCoolbar = intent?.extras?.getBoolean(IntentUtils.SHOW_COOL_BAR, true)!!
         var cools = 0
         var pictureIndex = 0
+        var hasCooled = false
 
         if (showCoolbar) {
             cools = intent?.extras?.getInt(IntentUtils.COOLS)!!
             pictureIndex = intent?.extras?.getInt(IntentUtils.PIC_INDEX)!!
+            hasCooled = intent?.extras?.getBoolean(IntentUtils.COOLED)!!
         }
 
         // Load the image into the placeholder
@@ -63,26 +65,35 @@ class FullImageActivity : AppCompatActivity() {
             // Load the cools
             tvPictureCools.text = getString(R.string.full_image_cools, cools)
 
-            // TODO: Show the colored button if the user has already cooled the photo
+            // Show the star in red if the user has already cooled the photo
+            if (hasCooled) {
+                DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.accent))
+            } else {
+                DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.primary))
+            }
+
             // Make a cool on the photo when the user presses the cool button
             ivCoolPicture.setOnClickListener {
-                // Get the token of the user
-                val userToken = SharedPreferencesUtils.getToken(this)!!
+                // Cool the photo only if the user has not already done it
+                if (!hasCooled) {
+                    // Get the token of the user
+                    val userToken = SharedPreferencesUtils.getToken(this)!!
 
-                CoolPictureObservable.create(userToken, profileToken, pictureIndex).subscribe(
-                        {
-                            // Update the cools counter
-                            tvPictureCools.text = getString(R.string.full_image_cools, cools + 1)
+                    CoolPictureObservable.create(userToken, profileToken, pictureIndex).subscribe(
+                            {
+                                // Update the cools counter
+                                tvPictureCools.text = getString(R.string.full_image_cools, cools + 1)
 
-                            // Set the color of the button
-                            DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.accent))
-                        },
-                        {
-                            error ->
+                                // Set the color of the button
+                                DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.accent))
+                            },
+                            {
+                                error ->
 
-                            ErrorUtils.showGeneralWhoopsDialog(this)
-                        }
-                )
+                                ErrorUtils.showGeneralWhoopsDialog(this)
+                            }
+                    )
+                }
             }
         } else {
             llCoolBar.visibility = View.GONE

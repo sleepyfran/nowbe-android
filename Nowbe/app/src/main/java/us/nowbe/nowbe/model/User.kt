@@ -137,8 +137,9 @@ class User(token: String,
                 val picture = json.getString(ApiUtils.API_USER_PICTURE_SLOT + i)
                 val pictureCools = json.getInt(ApiUtils.API_USER_PICTURE_SLOT_COOLS + i)
                 val comment = json.getString(ApiUtils.API_USER_COMMENT_SLOT + i)
+                val hasCooledSlot = json.getInt("picture" + i + "Cooled")
 
-                user.addPicture(Slot(picture, i, pictureCools))
+                user.addPicture(Slot(picture, i, pictureCools, hasCooledSlot == 1))
                 user.addComment(Slot(comment, i, null))
             }
 

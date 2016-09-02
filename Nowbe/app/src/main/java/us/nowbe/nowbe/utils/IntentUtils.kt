@@ -30,6 +30,7 @@ class IntentUtils {
         val COOLS = "cools"
         val SHOW_COOL_BAR = "coolbar"
         val PIC_INDEX = "picIndex"
+        val COOLED = "cooled"
 
         /**
          * Keys for the type of search

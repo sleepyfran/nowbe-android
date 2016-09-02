@@ -134,6 +134,7 @@ class ProfileFragment : Fragment() {
                             fullImageIntent.putExtra(IntentUtils.IMG_DATA, slot.data)
                             fullImageIntent.putExtra(IntentUtils.COOLS, slot.cools)
                             fullImageIntent.putExtra(IntentUtils.PIC_INDEX, slot.index)
+                            fullImageIntent.putExtra(IntentUtils.COOLED, slot.hasCooled)
                             startActivity(fullImageIntent)
                         }
                     }
