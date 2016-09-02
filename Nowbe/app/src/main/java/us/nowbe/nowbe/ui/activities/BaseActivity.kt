@@ -14,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.net.async.UpdateOnlineObservable
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -56,6 +57,14 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // Set the user as offline
+        val userToken = SharedPreferencesUtils.getToken(this)!!
+        UpdateOnlineObservable.create(userToken, 0).subscribe()
     }
 
     /**

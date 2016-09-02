@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.async.ChangeStatusObservable
+import us.nowbe.nowbe.net.async.UpdateOnlineObservable
 import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
 import us.nowbe.nowbe.ui.fragments.ProfileFragment
@@ -147,6 +148,10 @@ class LandingActivity : BaseActivity() {
                 // Nothing
             }
         })
+
+        // Update the online state of the user
+        val userToken = SharedPreferencesUtils.getToken(this)!!
+        UpdateOnlineObservable.create(userToken, 1).subscribe()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
