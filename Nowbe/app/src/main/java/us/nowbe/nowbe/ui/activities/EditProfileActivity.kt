@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 import rx.Subscription
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.SearchResult
+import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.model.exceptions.AlreadyPairedException
 import us.nowbe.nowbe.ui.animation.CircularReveal
 import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
@@ -52,6 +53,11 @@ class EditProfileActivity : AppCompatActivity() {
             field?.unsubscribe()
             field = value
         }
+
+    /**
+     * Boolean indicating whether the reveal animation should be displayed or not
+     */
+    var isAnimationEnabled = true
 
     /**
      * Position of the fab
@@ -90,7 +96,7 @@ class EditProfileActivity : AppCompatActivity() {
     /**
      * Loads the data of the user and populates the widgets with that data
      */
-    fun loadUserData() {
+    fun loadUserData(onResult: (() -> Unit)? = null) {
         // Load the user data and populate the widgets with it
         val token = SharedPreferencesUtils.getToken(this)!!
 
@@ -157,6 +163,9 @@ class EditProfileActivity : AppCompatActivity() {
 
                     // Load the comments
                     csvEditCommentsSlots.updateSlots(user)
+
+                    // Notify about the result
+                    onResult?.invoke()
                 },
                 // On Error
                 {
@@ -247,12 +256,11 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 
-        // Load the data of the user
-        loadUserData()
-
-        // Get the extras (fab position) from the intent
-        fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION)
-        fabY = intent.extras.getInt(IntentUtils.FAB_Y_POSITION)
+        // Get the extras from the intent
+        val requestSlotsFocus = intent.extras.getBoolean(IntentUtils.REQUEST_SLOT_FOCUS, false)
+        isAnimationEnabled = intent.extras.getBoolean(IntentUtils.ANIMATIONS, true)
+        fabX = intent.extras.getInt(IntentUtils.FAB_X_POSITION, 0)
+        fabY = intent.extras.getInt(IntentUtils.FAB_Y_POSITION, 0)
 
         // Setup the toolbar title
         toolbar.title = getString(R.string.profile_edit_title)
@@ -274,9 +282,19 @@ class EditProfileActivity : AppCompatActivity() {
         ViewCompat.setElevation(llEditSpecificInfoCard, 5.toFloat())
         ViewCompat.setElevation(llEditSlotsCard, 5.toFloat())
 
+        // Load the data of the user
+        loadUserData({
+            // Request the focus of the slots if the activity that started the editing requests it
+            if (requestSlotsFocus) {
+                nsvEditProfile.post {
+                    nsvEditProfile.smoothScrollTo(0, csvEditCommentsSlots.bottom)
+                }
+            }
+        })
+
         // If the savedInstanceState is null we can ensure that the user is not returning from outside the app
         // and thus we don't show the animation again
-        if (savedInstanceState == null) {
+        if (isAnimationEnabled && savedInstanceState == null) {
             clEditProfileRoot.post {
                 // Show the circular reveal animation passing the fab position
                 CircularReveal.showEnterRevealAnimation(clEditProfileRoot, { }, fabX, fabY)
@@ -434,15 +452,21 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // Show the exit reveal animation (and finish the activity)
-        CircularReveal.showExitRevealAnimation(clEditProfileRoot, { finish() }, fabX, fabY)
+        if (isAnimationEnabled) {
+            // Show the exit reveal animation (and finish the activity)
+            CircularReveal.showExitRevealAnimation(clEditProfileRoot, { finish() }, fabX, fabY)
+        } else {
+            finish()
+        }
     }
 
     override fun finish() {
         super.finish()
 
-        // Don't show animations, we'll handle that
-        overridePendingTransition(0, 0)
+        if (isAnimationEnabled) {
+            // Don't show animations, we'll handle that
+            overridePendingTransition(0, 0)
+        }
     }
 
     override fun onDestroy() {

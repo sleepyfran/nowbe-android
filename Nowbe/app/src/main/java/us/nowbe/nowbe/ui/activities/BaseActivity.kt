@@ -15,6 +15,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateOnlineObservable
+import us.nowbe.nowbe.utils.IntentUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -46,6 +47,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
         if (selectedId == android.R.id.home) {
             finish()
+            return true
+        } else if(selectedId == R.id.toolbarEditSlots) {
+            val editWithFocusIntent = Intent(this, EditProfileActivity::class.java)
+            editWithFocusIntent.putExtra(IntentUtils.ANIMATIONS, false)
+            editWithFocusIntent.putExtra(IntentUtils.REQUEST_SLOT_FOCUS, true)
+
+            startActivity(editWithFocusIntent)
             return true
         } else if (selectedId == R.id.toolbarLogOut) {
             // Clear the data from the shared preferences

@@ -33,6 +33,11 @@ class IntentUtils {
         val COOLED = "cooled"
 
         /**
+         * Keys for the editing of the profile
+         */
+        val REQUEST_SLOT_FOCUS = "requestSlotFocus"
+
+        /**
          * Keys for the type of search
          */
         val SEARCH_RESULT = "search"

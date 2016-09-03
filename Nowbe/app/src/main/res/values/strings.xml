@@ -12,6 +12,7 @@
     <string name="general.whoops_message">Whoops! Something wrong happened. Please try again.</string>
     <string name="general.log_out">Log out</string>
     <string name="general.change_availability">Change if you\'re available or not</string>
+    <string name="general.edit_slots">Edit your comments or photos</string>
     <string name="general.sad_face">:(</string>
     <string name="general.ok">Okay...</string>
 
@@ -162,4 +163,5 @@
     <string name="dummy_data.education">████████████</string>
     <string name="dummy_data.couple">████████████</string>
     <string name="dummy_data.birthday">████████</string>
+    <string name="dummy_data.slots_set">██ set</string>
 </resources>

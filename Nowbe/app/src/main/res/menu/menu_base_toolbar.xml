@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/toolbarChangeAvailable"
-        android:orderInCategory="100"
+        android:orderInCategory="50"
         android:title="@string/general.change_availability"
         android:icon="@drawable/no_state"
         app:showAsAction="ifRoom"/>
+    <item android:id="@+id/toolbarEditSlots"
+        android:orderInCategory="100"
+        android:title="@string/general.edit_slots"
+        android:icon="@drawable/ic_edit_black"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/toolbarLogOut"
-        android:orderInCategory="100"
+        android:orderInCategory="150"
         android:title="@string/general.log_out"
         app:showAsAction="never"/>
 </menu>

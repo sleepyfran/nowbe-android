@@ -26,6 +26,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsvEditProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -195,7 +196,7 @@
                         <TextView
                             android:id="@+id/tvEditPicturesSlotsDescription"
                             style="@style/SettingsCard_OptionButton_SubText"
-                            android:text="@string/profile.edit.slots_description" />
+                            android:text="@string/dummy_data.slots_set" />
 
                         <us.nowbe.nowbe.ui.views.PicturesSlotsView
                             android:id="@+id/psvEditPicturesSlots"
@@ -217,7 +218,7 @@
                         <TextView
                             android:id="@+id/tvEditCommentsSlotsDescription"
                             style="@style/SettingsCard_OptionButton_SubText"
-                            android:text="@string/profile.edit.slots_description" />
+                            android:text="@string/dummy_data.slots_set" />
 
                         <us.nowbe.nowbe.ui.views.CommentsSlotsView
                             android:id="@+id/csvEditCommentsSlots"
