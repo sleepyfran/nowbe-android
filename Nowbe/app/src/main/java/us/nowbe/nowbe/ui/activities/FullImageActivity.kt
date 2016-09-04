@@ -5,6 +5,7 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -47,6 +48,7 @@ class FullImageActivity : AppCompatActivity() {
         Glide.with(this)
                 .load(ApiUtils.getFullSlotPicDir(imageUrl))
                 .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .listener(object : RequestListener<String, GlideDrawable> {
                     override fun onResourceReady(resource: GlideDrawable?, model: String?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
                         // Hide the loading progressbar
@@ -64,12 +66,13 @@ class FullImageActivity : AppCompatActivity() {
         if (showCoolbar) {
             // Load the cools
             tvPictureCools.text = getString(R.string.full_image_cools, cools)
+            val wrappedCoolDrawable = DrawableCompat.wrap(ivCoolPicture.drawable)
 
             // Show the star in red if the user has already cooled the photo
             if (hasCooled) {
-                DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.accent))
+                DrawableCompat.setTint(wrappedCoolDrawable, resources.getColor(R.color.accent))
             } else {
-                DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.primary))
+                DrawableCompat.setTint(wrappedCoolDrawable, resources.getColor(R.color.primary))
             }
 
             // Make a cool on the photo when the user presses the cool button
