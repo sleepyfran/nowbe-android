@@ -28,7 +28,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:foregroundGravity="right"
-            android:src="@drawable/ic_cool_white" />
+            android:src="@drawable/ic_favorite_white" />
 
     </RelativeLayout>
 
