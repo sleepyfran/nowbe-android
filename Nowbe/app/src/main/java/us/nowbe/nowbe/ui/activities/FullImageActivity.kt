@@ -1,5 +1,6 @@
 package us.nowbe.nowbe.ui.activities
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AppCompatActivity
@@ -89,6 +90,9 @@ class FullImageActivity : AppCompatActivity() {
 
                                 // Set the color of the button
                                 DrawableCompat.setTint(ivCoolPicture.drawable, resources.getColor(R.color.accent))
+
+                                // Notify the previous activity about this to force a refresh on the profile
+                                setResult(Activity.RESULT_OK)
                             },
                             {
                                 error ->

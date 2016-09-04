@@ -7,6 +7,7 @@ package us.nowbe.nowbe.ui.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,6 +32,24 @@ import us.nowbe.nowbe.utils.*
 import java.io.IOException
 
 class ProfileFragment : Fragment() {
+
+    companion object {
+        /**
+         * Values for activities results
+         */
+        const val REQUEST_FULL_IMAGE = 10
+
+        /**
+         * Returns a new instance with the specified token as the one to use
+         */
+        fun newInstance(token: String, onUserResult: Interfaces.OnUserResult?): ProfileFragment {
+            val fragment = ProfileFragment()
+            fragment.profileToken = token
+            fragment.onUserResult = onUserResult
+            return fragment
+        }
+    }
+
     /**
      * Previous subscription
      */
@@ -50,18 +69,6 @@ class ProfileFragment : Fragment() {
      * Interface to call when we got a result from the API call
      */
     var onUserResult: Interfaces.OnUserResult? = null
-
-    companion object {
-        /**
-         * Returns a new instance with the specified token as the one to use
-         */
-        fun newInstance(token: String, onUserResult: Interfaces.OnUserResult?): ProfileFragment {
-            val fragment = ProfileFragment()
-            fragment.profileToken = token
-            fragment.onUserResult = onUserResult
-            return fragment
-        }
-    }
 
     /**
      * Method that will setup the say hello button
@@ -135,7 +142,7 @@ class ProfileFragment : Fragment() {
                             fullImageIntent.putExtra(IntentUtils.COOLS, slot.cools)
                             fullImageIntent.putExtra(IntentUtils.PIC_INDEX, slot.index)
                             fullImageIntent.putExtra(IntentUtils.COOLED, slot.hasCooled)
-                            startActivity(fullImageIntent)
+                            startActivityForResult(fullImageIntent, REQUEST_FULL_IMAGE)
                         }
                     }
 
@@ -213,6 +220,13 @@ class ProfileFragment : Fragment() {
 
         // Load the user in another thread
         loadUserData()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_FULL_IMAGE && resultCode == Activity.RESULT_OK) {
+            // Reload the data
+            loadUserData()
+        }
     }
 
     override fun onDestroy() {
