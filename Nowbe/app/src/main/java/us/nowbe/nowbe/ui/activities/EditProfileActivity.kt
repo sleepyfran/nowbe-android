@@ -184,8 +184,8 @@ class EditProfileActivity : AppCompatActivity() {
         previousSubscription = UpdateUserAvatarObservable.create(token, tempFile).subscribe(
                 // On Next
                 {
-                    // Show the new photo
-                    ivUserPicture.setImageBitmap(BitmapFactory.decodeFile(tempFilePath))
+                    // Reload the data!
+                    onDismiss.onDismiss()
 
                     // Show a toast confirming the change
                     Toast.makeText(this, getString(R.string.profile_edit_avatar_updated), Toast.LENGTH_SHORT).show()
