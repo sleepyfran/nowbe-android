@@ -48,13 +48,6 @@ abstract class BaseActivity : AppCompatActivity() {
         if (selectedId == android.R.id.home) {
             finish()
             return true
-        } else if(selectedId == R.id.toolbarEditSlots) {
-            val editWithFocusIntent = Intent(this, EditProfileActivity::class.java)
-            editWithFocusIntent.putExtra(IntentUtils.ANIMATIONS, false)
-            editWithFocusIntent.putExtra(IntentUtils.REQUEST_SLOT_FOCUS, true)
-
-            startActivity(editWithFocusIntent)
-            return true
         } else if (selectedId == R.id.toolbarLogOut) {
             // Clear the data from the shared preferences
             SharedPreferencesUtils.clearData(applicationContext)
@@ -71,8 +64,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onPause()
 
         // Set the user as offline
-        val userToken = SharedPreferencesUtils.getToken(this)!!
-        UpdateOnlineObservable.create(userToken, 0).subscribe()
+        val userToken = SharedPreferencesUtils.getToken(this)
+        if (userToken != null) UpdateOnlineObservable.create(userToken, 0).subscribe()
     }
 
     /**

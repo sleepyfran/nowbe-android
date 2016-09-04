@@ -157,9 +157,7 @@ class LandingActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == LandingActivity.REQUEST_EDIT && resultCode == EditProfileActivity.RESULT_UPDATED) {
             // The user has updated the data, so reload the profile
-            val profileFragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
-                    vpFragmentList,
-                    R.id.vpFragmentList) as ProfileFragment
+            val profileFragment = pagerAdapter.getItem(2) as ProfileFragment
 
             // Reload the profile
             profileFragment.loadUserData()
@@ -208,6 +206,13 @@ class LandingActivity : BaseActivity() {
                     }
             ).show()
 
+            return true
+        } else if(selectedId == R.id.toolbarEditSlots) {
+            val editWithFocusIntent = Intent(this, EditProfileActivity::class.java)
+            editWithFocusIntent.putExtra(IntentUtils.ANIMATIONS, false)
+            editWithFocusIntent.putExtra(IntentUtils.REQUEST_SLOT_FOCUS, true)
+
+            startActivityForResult(editWithFocusIntent, REQUEST_EDIT)
             return true
         } else {
             return super.onOptionsItemSelected(item)
