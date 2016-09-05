@@ -135,6 +135,7 @@
 
     <!-- Full image activity -->
     <string name="full_image.cools">%1$s Cools</string>
+    <string name="coolers.title">Coolers</string>
 
     <!-- Select Picture Source Dialog -->
     <string name="select_picture_source.camera">Take a photo</string>

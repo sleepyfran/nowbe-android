@@ -1,6 +1,7 @@
 package us.nowbe.nowbe.ui.activities
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AppCompatActivity
@@ -74,6 +75,14 @@ class FullImageActivity : AppCompatActivity() {
                 DrawableCompat.setTint(wrappedCoolDrawable, resources.getColor(R.color.accent))
             } else {
                 DrawableCompat.setTint(wrappedCoolDrawable, resources.getColor(R.color.primary))
+            }
+
+            // Load the coolers activity when the user presses the cools of the photo
+            tvPictureCools.setOnClickListener {
+                val coolersIntent = Intent(this, CoolersActivity::class.java)
+                coolersIntent.putExtra(IntentUtils.TOKEN, profileToken)
+                coolersIntent.putExtra(IntentUtils.IMG_DATA, pictureIndex.toString())
+                startActivity(coolersIntent)
             }
 
             // Make a cool on the photo when the user presses the cool button

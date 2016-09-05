@@ -56,6 +56,7 @@ class ApiUtils {
         const val KEY_STATUS = "status"
         const val KEY_IMG_ID = "imgId"
         const val KEY_PICTURE_INDEX = "pictureIndex"
+        const val KEY_PICTURE = "picture"
         const val KEY_STATE = "state"
 
         /**
@@ -149,6 +150,7 @@ class ApiUtils {
         const val USER_REMOVE_COUPLE_URL = "removeCouple.php"
         const val COOL_PICTURE_URL = "makePictureCool.php"
         const val UPDATE_ONLINE_URL = "updateIsOnline.php"
+        const val GET_COOLERS_URL = "getCooler.php"
 
         /**
          * POST parameters
