@@ -27,7 +27,8 @@ class User(token: String,
            interests: String?,
            education: String?,
            coupleToken: String?,
-           coupleName: String?) {
+           coupleName: String?,
+           isProfilePublic: Boolean? = null) {
 
     /**
      * A Nowbe user representation
@@ -48,6 +49,7 @@ class User(token: String,
     var education: String?
     var coupleToken: String?
     var coupleName: String?
+    var isProfilePublic: Boolean?
     var commentsSlots: MutableList<Slot?>
     var picturesSlots: MutableList<Slot?>
 
@@ -68,6 +70,7 @@ class User(token: String,
         this.education = education
         this.coupleToken = coupleToken
         this.coupleName = coupleName
+        this.isProfilePublic = isProfilePublic
         this.commentsSlots = arrayListOf()
         this.picturesSlots = arrayListOf()
     }
@@ -113,6 +116,7 @@ class User(token: String,
             val education = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_EDUCATION)
             val coupleToken = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_TOKEN)
             val coupleName = JsonUtils.getNullableStringFromJson(json, ApiUtils.API_USER_COUPLE_NAME)
+            val isProfilePublic = JsonUtils.getNullableIntegerFromJson(json, ApiUtils.KEY_PUBLIC) == 1
 
             // Make the user from this data
             val user = User(token,
@@ -130,7 +134,8 @@ class User(token: String,
                     interest,
                     education,
                     coupleToken,
-                    coupleName)
+                    coupleName,
+                    isProfilePublic)
 
             // Add the pictures and comments
             for (i in 0..4) {

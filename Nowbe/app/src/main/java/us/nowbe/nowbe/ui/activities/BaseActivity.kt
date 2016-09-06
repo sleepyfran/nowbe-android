@@ -48,12 +48,8 @@ abstract class BaseActivity : AppCompatActivity() {
         if (selectedId == android.R.id.home) {
             finish()
             return true
-        } else if (selectedId == R.id.toolbarLogOut) {
-            // Clear the data from the shared preferences
-            SharedPreferencesUtils.clearData(applicationContext)
-
-            // Show the welcome activity
-            startActivity(Intent(this, WizardActivity::class.java))
+        } else if (selectedId == R.id.toolbarSettings) {
+            startActivity(Intent(this, SettingsActivity::class.java))
             return true
         }
 

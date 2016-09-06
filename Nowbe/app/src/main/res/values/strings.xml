@@ -10,6 +10,7 @@
     <string name="general.no_connection_error">Whoops! It seems like you don\'t have an internet connection or it\'s not working right.</string>
     <string name="general.error_title">Error</string>
     <string name="general.whoops_message">Whoops! Something wrong happened. Please try again.</string>
+    <string name="general.settings">Settings</string>
     <string name="general.log_out">Log out</string>
     <string name="general.change_availability">Change if you\'re available or not</string>
     <string name="general.edit_slots">Edit your comments or photos</string>
@@ -153,6 +154,32 @@
     <string name="available.message">This will allow your contacts to know if you\'re available to talk, hang out, etc.</string>
     <string name="available.yeah">Yeah!</string>
     <string name="available.no">Nope</string>
+
+    <!-- Settings Activity -->
+    <string name="settings.title">Settings</string>
+
+    <string name="settings.notifications.title">Notifications</string>
+    <string name="settings.notifications.vibration.title">Vibration</string>
+    <string name="settings.notifications.vibration.vibrating">Vibrations active</string>
+    <string name="settings.notifications.vibration.not_vibrating">Vibrations disabled</string>
+
+    <string name="settings.profile.title">Account</string>
+    <string name="settings.profile.visibility.title">Profile visibility</string>
+    <string name="settings.profile.visibility.message.visible">Your profile is visible for everyone</string>
+    <string name="settings.profile.visibility.message.invisible">Your profile is hidden for non-contacts</string>
+    <string name="settings.profile.visibility.now_public">Your profile is now public</string>
+    <string name="settings.profile.visibility.now_hidden">Your profile is now hidden to non-contacts</string>
+
+    <string name="settings.about.title">About</string>
+    <string name="settings.about.version.title">App version</string>
+    <string name="settings.about.version.release">v%1$s</string>
+    <string name="settings.about.licenses.title">Licenses</string>
+    <string name="settings.about.licenses.description">Attribution for libraries</string>
+
+    <!-- Log out dialog -->
+    <string name="log_out.message">Do you really want to log out?</string>
+    <string name="log_out.yes">Yeah!</string>
+    <string name="log_out.no">Nope</string>
 
     <!-- Dummy data -->
     <string name="dummy_data.update">████████████████████████████████████████████████████████████████████████</string>

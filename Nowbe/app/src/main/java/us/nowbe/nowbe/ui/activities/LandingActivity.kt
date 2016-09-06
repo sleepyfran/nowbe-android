@@ -113,6 +113,13 @@ class LandingActivity : BaseActivity() {
         // Setup the view pager and the tab view
         pagerAdapter = TabUtils.createLandingPagerAdapter(this, supportFragmentManager, object : Interfaces.OnUserResult {
             override fun onUserResult(user: User) {
+                // Save the profile visibility of the user
+                val profilePublic = user.isProfilePublic
+
+                if (profilePublic != null) {
+                    SharedPreferencesUtils.setProfileVisibility(this@LandingActivity, profilePublic)
+                }
+
                 if (user.isAvailable!!) {
                     // Show the green button in the menu
                     menu?.getItem(0)?.setIcon(R.drawable.online_state)
@@ -207,7 +214,7 @@ class LandingActivity : BaseActivity() {
             ).show()
 
             return true
-        } else if(selectedId == R.id.toolbarEditSlots) {
+        } else if (selectedId == R.id.toolbarEditSlots) {
             val editWithFocusIntent = Intent(this, EditProfileActivity::class.java)
             editWithFocusIntent.putExtra(IntentUtils.ANIMATIONS, false)
             editWithFocusIntent.putExtra(IntentUtils.REQUEST_SLOT_FOCUS, true)

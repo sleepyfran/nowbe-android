@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:elevation="4dp"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Notifications settings -->
+            <!-- Gone for now. TODO: Change when the notifications are implemented -->
+            <LinearLayout
+                android:id="@+id/llSettingsNotifications"
+                style="@style/SettingsCard"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/SettingsCard_OptionButton_Text"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/settings.notifications.title"
+                    android:textStyle="bold" />
+
+                <!-- Profile Visibility -->
+                <LinearLayout
+                    android:id="@+id/llNotificationsVibration"
+                    style="@style/SettingsCard_OptionButton"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/settings.notifications.vibration.title" />
+
+                        <TextView
+                            android:id="@+id/tvNotificationsVibrationState"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/settings.notifications.vibration.not_vibrating" />
+
+                    </LinearLayout>
+
+                    <Switch
+                        android:id="@+id/sSettingsNotificationsVibration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Privacy settings -->
+            <LinearLayout
+                android:id="@+id/llSettingsPrivacy"
+                style="@style/SettingsCard">
+
+                <TextView
+                    style="@style/SettingsCard_OptionButton_Text"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/settings.profile.title"
+                    android:textStyle="bold" />
+
+                <!-- Profile Visibility -->
+                <LinearLayout
+                    android:id="@+id/llProfileVisibility"
+                    style="@style/SettingsCard_OptionButton"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/SettingsCard_OptionButton_Text"
+                            android:text="@string/settings.profile.visibility.title" />
+
+                        <TextView
+                            android:id="@+id/tvVisibilityState"
+                            style="@style/SettingsCard_OptionButton_SubText"
+                            android:text="@string/settings.profile.visibility.message.visible" />
+
+                    </LinearLayout>
+
+                    <Switch
+                        android:id="@+id/sSettingsProfileVisibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!-- Log out button -->
+                <LinearLayout
+                    android:id="@+id/llProfileLogOut"
+                    style="@style/SettingsCard_OptionButton"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/general.log_out"
+                        android:textAllCaps="true"
+                        android:textColor="@color/accent"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Privacy settings -->
+            <LinearLayout
+                android:id="@+id/llSettingsAbout"
+                style="@style/SettingsCard">
+
+                <TextView
+                    style="@style/SettingsCard_OptionButton_Text"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/settings.about.title"
+                    android:textStyle="bold" />
+
+                <!-- App version -->
+                <LinearLayout
+                    android:id="@+id/llAboutApp"
+                    style="@style/SettingsCard_OptionButton"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SettingsCard_OptionButton_Text"
+                        android:text="@string/settings.about.version.title" />
+
+                    <TextView
+                        android:id="@+id/tvAboutAppVersion"
+                        style="@style/SettingsCard_OptionButton_SubText"
+                        android:text="@string/settings.about.version.release" />
+
+                </LinearLayout>
+
+                <!-- Nowbe makers -->
+                <LinearLayout
+                    android:id="@+id/llAboutMakers"
+                    style="@style/SettingsCard_OptionButton"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SettingsCard_OptionButton_Text"
+                        android:text="@string/settings.about.licenses.title" />
+
+                    <TextView
+                        android:id="@+id/tvAboutMakers"
+                        style="@style/SettingsCard_OptionButton_SubText"
+                        android:text="@string/settings.about.licenses.description" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

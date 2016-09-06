@@ -32,6 +32,11 @@ class SharedPreferencesUtils {
         val USERNAME_KEY = "username"
 
         /**
+         * Profile visibility of the user in Nowbe
+         */
+        val PROFILE_VISIBILITY_KEY = "profileVisibility"
+
+        /**
          * Checks whether we have prove that the user has or not logged into Nowbe
          */
         fun isLoggedIn(context: Context): Boolean {
@@ -91,6 +96,28 @@ class SharedPreferencesUtils {
             val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
             sharedPrefs.edit().putString(USERNAME_KEY, username).apply()
+        }
+
+        /**
+         * Returns the profile visilibility of the user if it exists
+         */
+        fun getProfileVisibility(context: Context): Boolean? {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            if (sharedPrefs.contains(PROFILE_VISIBILITY_KEY)) {
+                return sharedPrefs.getBoolean(PROFILE_VISIBILITY_KEY, false)
+            } else {
+                return null
+            }
+        }
+
+        /**
+         * Sets the profile visibility in Nowbe
+         */
+        fun setProfileVisibility(context: Context, visibility: Boolean) {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            sharedPrefs.edit().putBoolean(PROFILE_VISIBILITY_KEY, visibility).apply()
         }
 
         /**

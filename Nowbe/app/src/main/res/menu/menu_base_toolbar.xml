@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/toolbarChangeAvailable"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/toolbarChangeAvailable"
+        android:icon="@drawable/no_state"
         android:orderInCategory="50"
         android:title="@string/general.change_availability"
-        android:icon="@drawable/no_state"
-        app:showAsAction="ifRoom"/>
-    <item android:id="@+id/toolbarEditSlots"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/toolbarEditSlots"
+        android:icon="@drawable/ic_edit_black"
         android:orderInCategory="100"
         android:title="@string/general.edit_slots"
-        android:icon="@drawable/ic_edit_black"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/toolbarLogOut"
+        android:id="@+id/toolbarSettings"
+        android:icon="@drawable/ic_settings_black"
         android:orderInCategory="150"
-        android:title="@string/general.log_out"
-        app:showAsAction="never"/>
+        android:title="@string/general.settings"
+        app:showAsAction="ifRoom" />
 </menu>

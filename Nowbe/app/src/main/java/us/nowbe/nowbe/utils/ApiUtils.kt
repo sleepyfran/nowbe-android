@@ -151,6 +151,7 @@ class ApiUtils {
         const val COOL_PICTURE_URL = "makePictureCool.php"
         const val UPDATE_ONLINE_URL = "updateIsOnline.php"
         const val GET_COOLERS_URL = "getCooler.php"
+        const val CHANGE_PROFILE_VISIBILITY_URL = "changeProfileVisibility.php"
 
         /**
          * POST parameters
