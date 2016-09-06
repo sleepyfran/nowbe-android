@@ -80,6 +80,9 @@ class SettingsActivity : AppCompatActivity() {
         sSettingsProfileVisibility.setOnCheckedChangeListener {
             compoundButton, state ->
 
+            // Update the settings in the phone
+            SharedPreferencesUtils.setProfileVisibility(this, state)
+
             // Update the text
             changeVisibilityText(state)
 
