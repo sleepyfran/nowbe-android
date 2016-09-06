@@ -11,6 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import it.sephiroth.android.library.imagezoom.ImageViewTouchBase
 import kotlinx.android.synthetic.main.activity_full_image.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.CoolPictureObservable
@@ -45,6 +46,9 @@ class FullImageActivity : AppCompatActivity() {
             pictureIndex = intent?.extras?.getInt(IntentUtils.PIC_INDEX)!!
             hasCooled = intent?.extras?.getBoolean(IntentUtils.COOLED)!!
         }
+
+        // Scale the image to the image view's bounds
+        ivtFullImage.displayType = ImageViewTouchBase.DisplayType.FIT_TO_SCREEN
 
         // Load the image into the placeholder
         Glide.with(this)
