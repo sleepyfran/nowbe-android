@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
+import de.psdev.licensesdialog.LicensesDialog
 import kotlinx.android.synthetic.main.activity_settings.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.ChangeProfileVisibilityObservable
@@ -121,6 +122,14 @@ class SettingsActivity : AppCompatActivity() {
                     })
                     .setNegativeButton(getString(R.string.log_out_no), null)
                     .create()
+                    .show()
+        }
+
+        // Show the licenses when the button is pressed
+        llSettingsLicenses.setOnClickListener {
+            LicensesDialog.Builder(this)
+                    .setNotices(R.raw.notices)
+                    .build()
                     .show()
         }
     }

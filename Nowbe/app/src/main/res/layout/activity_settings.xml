@@ -162,7 +162,7 @@
 
                 <!-- Nowbe makers -->
                 <LinearLayout
-                    android:id="@+id/llAboutMakers"
+                    android:id="@+id/llSettingsLicenses"
                     style="@style/SettingsCard_OptionButton"
                     android:orientation="vertical">
 
@@ -171,7 +171,6 @@
                         android:text="@string/settings.about.licenses.title" />
 
                     <TextView
-                        android:id="@+id/tvAboutMakers"
                         style="@style/SettingsCard_OptionButton_SubText"
                         android:text="@string/settings.about.licenses.description" />
 
