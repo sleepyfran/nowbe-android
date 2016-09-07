@@ -58,6 +58,7 @@ class ApiUtils {
         const val KEY_PICTURE_INDEX = "pictureIndex"
         const val KEY_PICTURE = "picture"
         const val KEY_STATE = "state"
+        const val KEY_SLOT_NUMBER = "slotNumber"
 
         /**
          * Non-changing values
@@ -152,6 +153,8 @@ class ApiUtils {
         const val UPDATE_ONLINE_URL = "updateIsOnline.php"
         const val GET_COOLERS_URL = "getCooler.php"
         const val CHANGE_PROFILE_VISIBILITY_URL = "changeProfileVisibility.php"
+        const val REMOVE_COMMENT_URL = "resetCommentSlot.php"
+        const val REMOVE_PICTURE_URL = "resetSlotPicture.php"
 
         /**
          * POST parameters

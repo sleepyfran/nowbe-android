@@ -141,6 +141,8 @@
     <!-- Select Picture Source Dialog -->
     <string name="select_picture_source.camera">Take a photo</string>
     <string name="select_picture_source.gallery">Select from gallery</string>
+    <string name="select_picture_source.remove">Remove</string>
+    <string name="select_picture_source.edit">Edit comment</string>
 
     <!-- Search activity -->
     <string name="search.search_bar_hint">Search for an user</string>

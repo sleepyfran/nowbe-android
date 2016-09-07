@@ -383,6 +383,18 @@ class EditProfileActivity : AppCompatActivity() {
                         // Save the temporary image file path
                         tempFilePath = imagePath
                     }
+                }, true, {
+                    // Remove the current slot
+                    val userToken = SharedPreferencesUtils.getToken(this@EditProfileActivity)!!
+
+                    RemovePictureSlotObservable.create(userToken, itemSelected).subscribe(
+                            {
+                                onDismiss.onDismiss()
+                            },
+                            {
+                                ErrorUtils.showGeneralWhoopsDialog(this@EditProfileActivity)
+                            }
+                    )
                 }).show(supportFragmentManager, null)
             }
         }
@@ -390,7 +402,23 @@ class EditProfileActivity : AppCompatActivity() {
         // Setup the action of clicking a comments slot
         csvEditCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
             override fun onCommentSlotClick(commentText: String, commentIndex: Int) {
-                EditCommentDialog.newInstance(onDismiss, commentIndex).show(supportFragmentManager, null)
+                CommentEditionDialog.newInstance(
+                        {
+                            EditCommentDialog.newInstance(onDismiss, commentIndex).show(supportFragmentManager, null)
+                        },
+                        {
+                            // Remove the current slot
+                            val userToken = SharedPreferencesUtils.getToken(this@EditProfileActivity)!!
+
+                            RemoveCommentObservable.create(userToken, commentIndex).subscribe(
+                                    {
+                                        onDismiss.onDismiss()
+                                    },
+                                    {
+                                        ErrorUtils.showGeneralWhoopsDialog(this@EditProfileActivity)
+                                    }
+                            )
+                        }).show(supportFragmentManager, null)
             }
         }
     }
