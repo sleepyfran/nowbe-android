@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="30dp">
 
     <TextView
         android:id="@+id/tvSignup"
@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:text="@string/login_sign_up.sign_up"
-        android:textSize="@dimen/login_title"/>
+        android:textSize="@dimen/login_title" />
 
     <!-- Log in button -->
     <Button
         android:id="@+id/btnRegister"
         style="@style/LoginSignupButton"
-        android:text="@string/login_sign_up.sign_up"/>
+        android:text="@string/login_sign_up.sign_up" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,41 +30,65 @@
             android:orientation="vertical">
 
             <!-- Username + Email + Password edit text -->
-            <EditText
-                android:id="@+id/etSignupUsername"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:hint="@string/login_sign_up.username"/>
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/etSignupEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/login_sign_up.email"
-                android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/etSignupUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/login_sign_up.username" />
 
-            <EditText
-                android:id="@+id/etSignupPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/login_sign_up.password"
-                android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etSignupPasswordVerif"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/login_sign_up.password_verif"
-                android:inputType="textPassword"/>
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etSignupEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/login_sign_up.email"
+                    android:inputType="textEmailAddress" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etSignupPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/login_sign_up.password"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etSignupPasswordVerif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/login_sign_up.password_verif"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>

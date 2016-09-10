@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="30dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="30dp">
 
     <TextView
         android:id="@+id/tvSignin"
@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:text="@string/login_sign_up.sign_in"
-        android:textSize="@dimen/login_title"/>
+        android:textSize="@dimen/login_title" />
 
     <!-- Log in button -->
     <Button
         android:id="@+id/btnLetMeIn"
         style="@style/LoginSignupButton"
-        android:text="@string/login_sign_up.let_me_in"/>
+        android:text="@string/login_sign_up.let_me_in" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,22 +28,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!-- Username + Password edit text -->
-            <EditText
-                android:id="@+id/etLoginUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:hint="@string/login_sign_up.username"/>
 
-            <EditText
-                android:id="@+id/etLoginPassword"
+            <!-- Username + Password edit text -->
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/login_sign_up.password"
-                android:inputType="textPassword"/>
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etLoginUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="@string/login_sign_up.username" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etLoginPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/login_sign_up.password"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
     </ScrollView>
