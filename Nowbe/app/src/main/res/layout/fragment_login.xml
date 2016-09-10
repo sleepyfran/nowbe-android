@@ -13,15 +13,21 @@
         android:textSize="@dimen/login_title" />
 
     <!-- Log in button -->
-    <Button
-        android:id="@+id/btnLetMeIn"
-        style="@style/LoginSignupButton"
-        android:text="@string/login_sign_up.let_me_in" />
+    <LinearLayout
+        android:id="@+id/llLetMeIn"
+        style="@style/LoginSignupButton">
+
+        <TextView
+            android:id="@+id/btnLetMeIn"
+            style="@style/LoginSignupButtonText"
+            android:text="@string/login_sign_up.let_me_in" />
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnLetMeIn"
+        android:layout_above="@id/llLetMeIn"
         android:layout_below="@id/tvSignin">
 
         <LinearLayout
