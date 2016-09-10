@@ -93,7 +93,7 @@ class SettingsActivity : AppCompatActivity() {
             ChangeProfileVisibilityObservable.create(userToken, visibility).subscribe(
                     {
                         if (state) {
-                            Toast.makeText(this, getString(R.string.settings_profile_visibility_now_hidden), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.settings_profile_visibility_now_public), Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, getString(R.string.settings_profile_visibility_now_hidden), Toast.LENGTH_SHORT).show()
                         }
