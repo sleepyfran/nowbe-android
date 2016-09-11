@@ -44,6 +44,7 @@
     <string name="login_sign_up.error_user">Please specify an username!</string>
     <string name="login_sign_up.error_email">Please specify a valid email!</string>
     <string name="login_sign_up.error_password">Please specify a password!</string>
+    <string name="tutorial_understood">Understood!</string>
 
     <!-- Navigation drawer -->
     <string name="drawer.open">Open navigation drawer</string>

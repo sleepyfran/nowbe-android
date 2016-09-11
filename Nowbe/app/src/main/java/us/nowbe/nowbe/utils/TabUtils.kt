@@ -14,10 +14,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.adapters.ViewPagerAdapter
-import us.nowbe.nowbe.ui.fragments.ActivityFragment
-import us.nowbe.nowbe.ui.fragments.FeedFragment
-import us.nowbe.nowbe.ui.fragments.ProfileFragment
-import us.nowbe.nowbe.ui.fragments.SearchTypeFragment
+import us.nowbe.nowbe.ui.fragments.*
 
 class TabUtils {
     companion object {
@@ -43,6 +40,17 @@ class TabUtils {
             adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_users))
             adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_terms))
             adapter.addFragment(SearchTypeFragment.newInstance(onClick), context.getString(R.string.search_title_interests))
+            return adapter
+        }
+
+        /**
+         * Method that will setup the view pager of the tutorial activity
+         */
+        fun createTutorialPagerAdapter(fragmentManager: FragmentManager): FragmentPagerAdapter {
+            val adapter = ViewPagerAdapter(fragmentManager)
+            adapter.addFragment(TutorialFragment.newInstance(ApiUtils.TUTORIAL_FIRST), "")
+            adapter.addFragment(TutorialFragment.newInstance(ApiUtils.TUTORIAL_SECOND), "")
+            adapter.addFragment(TutorialFragment.newInstance(ApiUtils.TUTORIAL_THIRD, true), "")
             return adapter
         }
 

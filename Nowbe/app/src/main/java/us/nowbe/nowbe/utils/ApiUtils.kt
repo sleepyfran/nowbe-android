@@ -155,6 +155,7 @@ class ApiUtils {
         const val CHANGE_PROFILE_VISIBILITY_URL = "changeProfileVisibility.php"
         const val REMOVE_COMMENT_URL = "resetCommentSlot.php"
         const val REMOVE_PICTURE_URL = "resetSlotPicture.php"
+        const val SET_TUTORIAL_SEEN_URL = "setTutorialSeen.php"
 
         /**
          * POST parameters
@@ -162,6 +163,13 @@ class ApiUtils {
         const val USER_UPDATE_PROFILE_NAME_PARAM = "name"
         const val USER_UPDATE_PROFILE_PIC_PARAM = "userPicture"
         const val USER_UPDATE_SLOT_PIC_PARAM = "slots"
+
+        /**
+         * Tutorial links
+         */
+        const val TUTORIAL_FIRST = "https://www.nowbe.us/tutorial/first.html"
+        const val TUTORIAL_SECOND = "https://www.nowbe.us/tutorial/second.html"
+        const val TUTORIAL_THIRD = "https://www.nowbe.us/tutorial/third.html"
 
         /**
          * Various utils

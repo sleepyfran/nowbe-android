@@ -21,6 +21,7 @@ import us.nowbe.nowbe.model.exceptions.RequestNotSuccessfulException
 import us.nowbe.nowbe.model.exceptions.UserAlreadyExistsException
 import us.nowbe.nowbe.net.async.SignupObservable
 import us.nowbe.nowbe.ui.activities.LandingActivity
+import us.nowbe.nowbe.ui.activities.TutorialActivity
 import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.NetUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
@@ -90,7 +91,7 @@ class SignupFragment : Fragment() {
                         SharedPreferencesUtils.setUsername(context, user)
 
                         // Show the landing activity
-                        val landingIntent = Intent(context, LandingActivity::class.java)
+                        val landingIntent = Intent(context, TutorialActivity::class.java)
 
                         // Clear the activity stack
                         landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

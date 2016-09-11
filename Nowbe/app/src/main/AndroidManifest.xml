@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="us.nowbe.nowbe.ui.activities.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/TransparentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -61,6 +61,11 @@
             android:name="us.nowbe.nowbe.ui.activities.CoolersActivity"
             android:label="@string/app_name"
             android:theme="@style/TransparentTheme">
+        </activity>
+        <activity
+            android:name="us.nowbe.nowbe.ui.activities.TutorialActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name="us.nowbe.nowbe.ui.activities.SettingsActivity"

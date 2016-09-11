@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llUnderstood"
+        style="@style/LoginSignupButton"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/btnUnderstood"
+            style="@style/LoginSignupButtonText"
+            android:text="@string/tutorial_understood" />
+
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/wvTutorial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/llUnderstood" />
+
+</RelativeLayout>
