@@ -81,6 +81,13 @@ class PicturesSlotsView : RelativeLayout {
     }
 
     /**
+     * Returns whether the specified slot is empty or not
+     */
+    fun isSlotEmpty(index: Int): Boolean {
+        return adapter.getSlot(index).data != "null"
+    }
+
+    /**
      * Updates the current pictures with the new ones
      */
     fun updateSlots(user: User) {

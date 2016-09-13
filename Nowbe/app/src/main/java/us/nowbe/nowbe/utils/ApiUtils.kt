@@ -56,6 +56,7 @@ class ApiUtils {
         const val KEY_STATUS = "status"
         const val KEY_IMG_ID = "imgId"
         const val KEY_PICTURE_INDEX = "pictureIndex"
+        const val KEY_INDEX = "index"
         const val KEY_PICTURE = "picture"
         const val KEY_STATE = "state"
         const val KEY_SLOT_NUMBER = "slotNumber"
@@ -154,7 +155,7 @@ class ApiUtils {
         const val GET_COOLERS_URL = "getCooler.php"
         const val CHANGE_PROFILE_VISIBILITY_URL = "changeProfileVisibility.php"
         const val REMOVE_COMMENT_URL = "resetCommentSlot.php"
-        const val REMOVE_PICTURE_URL = "resetSlotPicture.php"
+        const val REMOVE_PICTURE_URL = "resetPictureSlot.php"
         const val SET_TUTORIAL_SEEN_URL = "setTutorialSeen.php"
 
         /**

@@ -16,10 +16,11 @@ class CommentEditionDialog : BottomSheetDialog() {
         /**
          * Creates a new instance of the dialog with on remove implementation
          */
-        fun newInstance(onEdit: () -> Unit, onRemove: () -> Unit): BottomSheetDialog {
+        fun newInstance(onEdit: () -> Unit, onRemove: () -> Unit, showRemove: Boolean = true): BottomSheetDialog {
             val dialog = CommentEditionDialog()
             dialog.onEdit = onEdit
             dialog.onRemove = onRemove
+            dialog.showRemove = showRemove
             return dialog
         }
     }
@@ -34,6 +35,11 @@ class CommentEditionDialog : BottomSheetDialog() {
      */
     lateinit var onRemove: () -> Unit
 
+    /**
+     * Indicates whether the remove button should be shown or not
+     */
+    var showRemove: Boolean = true
+
     override fun onClick(item: BottomSheetItem) {
         super.onClick(item)
 
@@ -45,8 +51,12 @@ class CommentEditionDialog : BottomSheetDialog() {
     }
 
     override fun getItems(): MutableList<BottomSheetItem> {
-        return mutableListOf(
-                BottomSheetItem(R.drawable.ic_edit_black, R.string.select_picture_source_edit),
-                BottomSheetItem(R.drawable.ic_clear_black_24dp, R.string.select_picture_source_remove))
+        val actions = mutableListOf(BottomSheetItem(R.drawable.ic_edit_black, R.string.select_picture_source_edit))
+
+        if (showRemove) {
+            actions.add(BottomSheetItem(R.drawable.ic_clear_black_24dp, R.string.select_picture_source_remove))
+        }
+
+        return actions
     }
 }

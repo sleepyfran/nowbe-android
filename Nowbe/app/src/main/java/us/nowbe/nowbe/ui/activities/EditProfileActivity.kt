@@ -371,6 +371,8 @@ class EditProfileActivity : AppCompatActivity() {
         // Setup the action of clicking a pictures slot
         psvEditPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
             override fun onPictureSlotClick(itemSelected: Int) {
+                val showRemove = psvEditPicturesSlots.isSlotEmpty(itemSelected)
+
                 // Save the index
                 slotIndex = itemSelected
 
@@ -383,7 +385,7 @@ class EditProfileActivity : AppCompatActivity() {
                         // Save the temporary image file path
                         tempFilePath = imagePath
                     }
-                }, true, {
+                }, showRemove, {
                     // Remove the current slot
                     val userToken = SharedPreferencesUtils.getToken(this@EditProfileActivity)!!
 
@@ -402,6 +404,8 @@ class EditProfileActivity : AppCompatActivity() {
         // Setup the action of clicking a comments slot
         csvEditCommentsSlots.onClick = object : Interfaces.OnCommentSlotClick {
             override fun onCommentSlotClick(commentText: String, commentIndex: Int) {
+                val showRemove = commentText != ""
+
                 CommentEditionDialog.newInstance(
                         {
                             EditCommentDialog.newInstance(onDismiss, commentIndex).show(supportFragmentManager, null)
@@ -418,7 +422,7 @@ class EditProfileActivity : AppCompatActivity() {
                                         ErrorUtils.showGeneralWhoopsDialog(this@EditProfileActivity)
                                     }
                             )
-                        }).show(supportFragmentManager, null)
+                        }, showRemove).show(supportFragmentManager, null)
             }
         }
     }

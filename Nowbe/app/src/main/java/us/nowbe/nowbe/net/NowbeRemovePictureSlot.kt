@@ -22,13 +22,12 @@ class NowbeRemovePictureSlot(val token: String, val commentIndex: Int) : NowbeRe
     override fun getBody(): FormBody {
         // Build the body with the token and the index of the comment
         return FormBody.Builder()
-                .add(ApiUtils.KEY_TOKEN_OWNER, token)
-                .add(ApiUtils.KEY_SLOT_NUMBER, commentIndex.toString())
+                .add(ApiUtils.KEY_TOKEN, token)
+                .add(ApiUtils.KEY_INDEX, commentIndex.toString())
                 .build()
     }
 
     override fun getRequestUrl(): String {
-        // TODO: Change to the real URL
         return ApiUtils.REMOVE_PICTURE_URL
     }
 }
