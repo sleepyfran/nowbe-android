@@ -370,7 +370,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         // Setup the action of clicking a pictures slot
         psvEditPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
-            override fun onPictureSlotClick(itemSelected: Int) {
+            override fun onPictureSlotClick(itemSelected: Int, adapterPosition: Int) {
                 val showRemove = psvEditPicturesSlots.isSlotEmpty(itemSelected)
 
                 // Save the index

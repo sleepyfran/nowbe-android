@@ -132,8 +132,8 @@ class ProfileFragment : Fragment() {
 
                     // Show the full picture when clicking on a slot
                     psvPicturesSlots.onClick = object : Interfaces.OnPictureSlotClick {
-                        override fun onPictureSlotClick(itemSelected: Int) {
-                            val slot = psvPicturesSlots.getSlot(itemSelected)
+                        override fun onPictureSlotClick(itemSelected: Int, adapterPosition: Int) {
+                            val slot = psvPicturesSlots.getSlot(adapterPosition)
 
                             // Create the intent with the URL of the image and the token of the profile
                             val fullImageIntent = Intent(context, FullImageActivity::class.java)

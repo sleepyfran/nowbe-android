@@ -21,7 +21,7 @@ class Interfaces {
         /**
          * (Should) return the position of the item clicked so the adapter can show the photo
          */
-        fun onPictureSlotClick(itemSelected: Int)
+        fun onPictureSlotClick(itemSelected: Int, adapterPosition: Int)
     }
 
     interface OnCommentSlotClick {

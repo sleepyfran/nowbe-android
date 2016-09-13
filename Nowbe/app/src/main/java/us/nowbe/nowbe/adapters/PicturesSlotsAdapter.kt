@@ -53,7 +53,7 @@ class PicturesSlotsAdapter : RecyclerView.Adapter<PicturesSlotsHolder>() {
 
         // Set the onClick listener for the view
         holder.itemView.setOnClickListener({
-            onClick?.onPictureSlotClick(pictures[holder.adapterPosition].index)
+            onClick?.onPictureSlotClick(pictures[holder.adapterPosition].index, holder.adapterPosition)
         })
         return holder
     }
