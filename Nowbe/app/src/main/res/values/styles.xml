@@ -13,6 +13,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Welcome">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
     <!-- Transparent theme to use in activities -->
     <style name="TransparentTheme" parent="AppTheme.NoActionBar">
         <item name="android:actionMenuTextColor">@color/primary_text_white</item>
