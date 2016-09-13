@@ -8,6 +8,7 @@ package us.nowbe.nowbe.ui.activities
  */
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -15,7 +16,6 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateOnlineObservable
-import us.nowbe.nowbe.utils.IntentUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -34,6 +34,11 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(toolbar)
+
+        supportActionBar?.title = ""
+
+        val nowbeTypeface = Typeface.createFromAsset(assets, "fonts/opensans.ttf")
+        logo.typeface = nowbeTypeface
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

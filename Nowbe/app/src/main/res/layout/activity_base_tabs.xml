@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,6 +17,16 @@
             app:elevation="4dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/app_name"
+                android:textColor="#757575"
+                android:textSize="20sp" />
+
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
@@ -26,7 +35,7 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:tabSelectedTextColor="@color/accent"
-            app:tabTextColor="@color/primary_text"/>
+            app:tabTextColor="@color/primary_text" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -34,7 +43,7 @@
         android:id="@+id/vpFragmentList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -42,6 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_search_white"/>
+        android:src="@drawable/ic_search_white" />
 
 </android.support.design.widget.CoordinatorLayout>

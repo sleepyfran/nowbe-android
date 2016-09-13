@@ -7,6 +7,7 @@ package us.nowbe.nowbe.ui.fragments
  * Maintained by Fran González <@spaceisstrange>
  */
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +26,12 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Show the custom typeface
+        val nowbeTypeface = Typeface.createFromAsset(activity.assets, "fonts/opensans.ttf")
+        tvAppName.typeface = nowbeTypeface
+        tvAppSlogan.typeface = nowbeTypeface
+        tvAppDescription.typeface = nowbeTypeface
 
         btnLogin.setOnClickListener { (activity as WizardActivity).switchTo(WizardActivity.FragmentsEnum.LOGIN) }
 
