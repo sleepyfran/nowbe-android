@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nowbe</string>
+    <string name="title_activity_main">Nowbe</string>
+
+    <!-- Formats (DO NOT MODIFY) -->
+    <string name="format.date">%1$s-%2$s-%3$s</string>
+
+    <!-- General -->
+    <string name="general.no_internet">Parece que hemos perdido el internet :(</string>
+    <string name="general.no_connection_error">Vaya, parece que no tienes conexión a internet o no está funcionando correctamente</string>
+    <string name="general.error_title">Error</string>
+    <string name="general.whoops_message">Whoops! Something wrong happened. Please try again.</string>
+    <string name="general.settings">Ajustes</string>
+    <string name="general.log_out">Cerrar sesión</string>
+    <string name="general.change_availability">Cambia si estás o no disponible</string>
+    <string name="general.edit_slots">Edita tus comentarios y fotos</string>
+    <string name="general.sad_face">:(</string>
+    <string name="general.ok">Vale...</string>
+
+    <!-- Base activity -->
+    <string name="main.feed_tab">Novedades</string>
+    <string name="main.notifications_tab">Notificaciones</string>
+    <string name="main.profile_tab">Yo</string>
+
+    <!-- Welcome fragment -->
+    <string name="welcome.slogan">the place to be</string>
+    <string name="welcome.login">Iniciar sesión</string>
+    <string name="welcome.sign_up">Registrarse</string>
+    <string name="welcome.introduction">Connect with your world at a glance</string>
+
+    <!-- Feed -->
+    <string name="feed.empty">Parece que esto está un poco vacío. ¿Por qué no pruebas a buscar a alguien?</string>
+
+    <!-- Log in / Sign up fragment -->
+    <string name="login_sign_up.username">Nombre de usuario</string>
+    <string name="login_sign_up.email">Email</string>
+    <string name="login_sign_up.password">Contraseña</string>
+    <string name="login_sign_up.password_verif">Repite la contraseña</string>
+    <string name="login_sign_up.let_me_in">¡Déjame entrar!</string>
+    <string name="login_sign_up.sign_in">Entrar</string>
+    <string name="login_sign_up.sign_up">Registrarse</string>
+    <string name="login_sign_up.error_login_message">Parece que ha habido un error. Revisa tu usuario y contraseña</string>
+    <string name="login_sign_up.error_sign_up_exist_message">¡Ese email o usuario ya existe!</string>
+    <string name="login_sign_up.error_user">Especifica un nombre de usuario</string>
+    <string name="login_sign_up.error_email">Especifica un email válido</string>
+    <string name="login_sign_up.error_password">Especifica una contraseña</string>
+    <string name="tutorial_understood">¡Entendido!</string>
+
+    <!-- Profile -->
+    <string name="profile.username">\@%1$s</string>
+    <string name="profile.online">En línea</string>
+    <string name="profile.info">%1$s años · %2$s visitas · %3$s amigos</string>
+    <string name="profile.say_hello">¡Di hola!</string>
+    <string name="profile.send_message">Enviar email</string>
+    <string name="profile.pictures_slots">Slots de fotos</string>
+    <string name="profile.comments_slots">Slots de comentarios</string>
+    <string name="profile.comment_number">#%1$s</string>
+    <string name="profile.does_not_exists_error">Ese perfil no existe :(</string>
+    <string name="profile.could_not_add_error">Ha habido un error añadiendo al usuario. Inténtalo de nuevo</string>
+    <string name="profile.could_not_remove_error">Ha habido un error eliminando al usuario. Inténtalo de nuevo</string>
+    <string name="profile.user_added">¡Tú y %1$s ahora sois amigos!</string>
+    <string name="profile.user_removed">Tú y %1$s ya no sois amigos :(</string>
+    <string name="profile.hello_sent">¡Hola, %1$s!</string>
+
+    <string name="profile.edit.update">Actualizar</string>
+    <string name="profile.edit.cancel">Cancelar</string>
+
+    <string name="profile.edit.title">Edita tu perfil</string>
+
+    <string name="profile.edit.avatar_updated">¡Foto de perfil actualizada!</string>
+
+    <string name="profile.edit.full_name">Nombre visible</string>
+    <string name="profile.edit.full_name_updated">¡Nombre visible actualizado!</string>
+
+    <string name="profile.edit.about_user">Sobre ti</string>
+    <string name="profile.edit.about_user_updated">¡Sobre ti actualizado!</string>
+
+    <string name="profile.edit.birthday">Cumpleaños</string>
+    <string name="profile.edit.birthday_updated">¡Cumpleaños actualizado!</string>
+
+    <string name="profile.edit.interests">Intereses</string>
+    <string name="profile.edit.interests_description">¡Cuéntanos en qué estás interesado!</string>
+    <string name="profile.edit.interests_updated">¡Intereses actualizados!</string>
+
+    <string name="profile.edit.academic">Educación</string>
+    <string name="profile.edit.academic_description">Instituto, universidad&#8230; ¿Qué has estudiado?</string>
+    <string name="profile.edit.academic_updated">¡Educación actualizada!</string>
+
+    <string name="profile.edit.couple">Pareja</string>
+    <string name="profile.edit.couple_description">¿Quién es tu pareja? Esta persona también te añadirá a ti como pareja.</string>
+    <string name="profile.edit.couple_confirmation">¿Seguro que quieres añadir a %1$s como tu pareja?</string>
+    <string name="profile.edit.couple_confirmation_yes">¡Por supuesto!</string>
+    <string name="profile.edit.couple_confirmation_no">No</string>
+    <string name="profile.edit.couple_updated">¡Pareja actualizada!</string>
+    <string name="profile.edit.already_paired">¡Este usuario ya tiene una pareja!</string>
+
+    <string name="profile.edit.pictures_slots">Slots de fotos</string>
+    <string name="profile.edit.pictures_slots_updated">Slot de fotos %1$s actualizado</string>
+
+    <string name="profile.edit.comments_slots">Slots de comentarios</string>
+    <string name="profile.edit.comments_slots_updated">Slot de comentarios %1$s actualizado</string>
+    <string name="profile.edit.comment_number_edit">Comentario #%1$s</string>
+
+    <string name="profile.edit.slots_description">%1$s puesto</string>
+    <string name="profile.edit.unset">Sin comentario</string>
+
+    <string name="profile.add_private_profile.title">Hmmm&#8230;</string>
+    <string name="profile.add_private_profile.message">Parece que este usuario prefiere no mostrar su perfil públicamente. Eso significa que no podrás ver su perfil hasta que os añadáis mutuamente. ¿Quieres añadir a este usuario a tus amigos?</string>
+    <string name="profile.add_private_profile.yes">¡Sí!</string>
+    <string name="profile.add_private_profile.no">No</string>
+    <string name="profile.private_profile.wait">Ya has añadido a este usuario. Espera hasta que te acepte para poder ver su perfil</string>
+
+    <string name="profile.delete_friend.title">Eliminar amigo</string>
+    <string name="profile.delete_friend.message">¿Seguro que quieres eliminar a este amigo?</string>
+    <string name="profile.delete_friend.yes">¡Sí!</string>
+    <string name="profile.delete_friend.no">No</string>
+
+    <!-- Activity fragment -->
+    <string name="activity.empty">Sin notificaciones por ahora</string>
+    <string name="activity.delete_activity.title">Borrar notificación</string>
+    <string name="activity.delete_activity.message">¿Seguro que quieres eliminar esta notificación?</string>
+    <string name="activity.delete_activity.yes">¡Sí!</string>
+    <string name="activity.delete_activity.no">No</string>
+
+    <!-- Comments Details activity -->
+    <string name="comments_details.comment_hint">Escribe tu respuesta</string>
+    <string name="comments_details.send">Enviar</string>
+    <string name="comments_details.title">Comentario de %1$s</string>
+    <string name="comments_details.delete_reply.title">Eliminar respuesta</string>
+    <string name="comments_details.delete_reply.message">¿Seguro que quieres eliminar tu respuesta?</string>
+    <string name="comments_details.delete_reply.yes">¡Sí!</string>
+    <string name="comments_details.delete_reply.no">No</string>
+
+    <!-- Full image activity -->
+    <string name="full_image.cools">%1$s Cools</string>
+    <string name="coolers.title">Coolers</string>
+
+    <!-- Select Picture Source Dialog -->
+    <string name="select_picture_source.camera">Hacer una foto</string>
+    <string name="select_picture_source.gallery">Seleccionar de la galería</string>
+    <string name="select_picture_source.remove">Eliminar</string>
+    <string name="select_picture_source.edit">Editar comentario</string>
+
+    <!-- Search activity -->
+    <string name="search.search_bar_hint">Busca a un usuario</string>
+    <string name="search.title_users">Buscar usuario</string>
+    <string name="search.title_terms">Buscar términos</string>
+    <string name="search.title_interests">Buscar intereses</string>
+    <string name="search.no_results">No hay resultados. ¡Prueba algo distinto!</string>
+
+    <!-- Change availability dialog -->
+    <string name="available.title">¿Estás disponible ahora mismo?</string>
+    <string name="available.message">Esto permite a tus contactos saber si estás disponible para hablar, tomar algo, etc.</string>
+    <string name="available.yeah">¡Por supuesto!</string>
+    <string name="available.no">Ahora no</string>
+
+    <!-- Settings Activity -->
+    <string name="settings.title">Ajustes</string>
+
+    <string name="settings.notifications.title">Notificaciones</string>
+    <string name="settings.notifications.vibration.title">Vibración</string>
+    <string name="settings.notifications.vibration.vibrating">Vibración activa</string>
+    <string name="settings.notifications.vibration.not_vibrating">Vibración desactivada</string>
+
+    <string name="settings.profile.title">Cuenta</string>
+    <string name="settings.profile.visibility.title">Visibilidad del perfil</string>
+    <string name="settings.profile.visibility.message.visible">Tu perfil es visible para todos</string>
+    <string name="settings.profile.visibility.message.invisible">Tu perfil está oculto para los que no sean amigos</string>
+    <string name="settings.profile.visibility.now_public">Tu perfil es ahora público</string>
+    <string name="settings.profile.visibility.now_hidden">Tu perfil está ahora oculto a los que no sean amigo</string>
+
+    <string name="settings.about.title">Sobre la aplicación</string>
+    <string name="settings.about.version.title">Versión de la aplicación</string>
+    <string name="settings.about.version.release">v%1$s</string>
+    <string name="settings.about.licenses.title">Licencias</string>
+    <string name="settings.about.licenses.description">Atribuciones de las librerías</string>
+
+    <!-- Log out dialog -->
+    <string name="log_out.message">¿Seguro que quieres cerrar sesión?</string>
+    <string name="log_out.yes">¡Sí!</string>
+    <string name="log_out.no">No</string>
+
+    <!-- Dummy data -->
+    <string name="dummy_data.update">████████████████████████████████████████████████████████████████████████</string>
+    <string name="dummy_data.name">████</string>
+    <string name="dummy_data.username">\@█████</string>
+    <string name="dummy_data.status">████████</string>
+    <string name="dummy_data.info">████████████████</string>
+    <string name="dummy_data.interests">████████████</string>
+    <string name="dummy_data.education">████████████</string>
+    <string name="dummy_data.couple">████████████</string>
+    <string name="dummy_data.birthday">████████</string>
+    <string name="dummy_data.slots_set">██ puesto</string>
+</resources>
