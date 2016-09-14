@@ -168,6 +168,12 @@ class ProfileActivity : BaseActivity() {
                                 // If they're not friends show the add fab
                                 setupFabAddUser(appUserToken, user)
                             }
+                        },
+                        // On Error
+                        {
+                            error ->
+
+                            ErrorUtils.showNoConnectionDialog(context)
                         }
                 )
             }

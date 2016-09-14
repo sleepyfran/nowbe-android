@@ -158,7 +158,16 @@ class LandingActivity : BaseActivity() {
 
         // Update the online state of the user
         val userToken = SharedPreferencesUtils.getToken(this)!!
-        UpdateOnlineObservable.create(userToken, 1).subscribe()
+        UpdateOnlineObservable.create(userToken, 1).subscribe(
+                {
+                    // Nothing
+                },
+                {
+                    error ->
+
+                    ErrorUtils.showNoConnectionDialog(this)
+                }
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -193,23 +202,37 @@ class LandingActivity : BaseActivity() {
             ChangeAvailabilityDialog.createDialog(this,
                     {
                         // Change the availability to available
-                        ChangeStatusObservable.create(userToken, true).subscribe({
-                            // Trigger an update in the user's profile
-                            profileFragment.loadUserData()
+                        ChangeStatusObservable.create(userToken, true).subscribe(
+                                {
+                                    // Trigger an update in the user's profile
+                                    profileFragment.loadUserData()
 
-                            // Show the green button in the menu
-                            menu?.getItem(0)?.setIcon(R.drawable.online_state)
-                        })
+                                    // Show the green button in the menu
+                                    menu?.getItem(0)?.setIcon(R.drawable.online_state)
+                                },
+                                {
+                                    error ->
+
+                                    ErrorUtils.showGeneralWhoopsDialog(this)
+                                }
+                        )
                     },
                     {
                         // Change the availability to not available
-                        ChangeStatusObservable.create(userToken, false).subscribe({
-                            // Trigger an update in the user's profile
-                            profileFragment.loadUserData()
+                        ChangeStatusObservable.create(userToken, false).subscribe(
+                                {
+                                    // Trigger an update in the user's profile
+                                    profileFragment.loadUserData()
 
-                            // Show the red button in the menu
-                            menu?.getItem(0)?.setIcon(R.drawable.offline_state)
-                        })
+                                    // Show the red button in the menu
+                                    menu?.getItem(0)?.setIcon(R.drawable.offline_state)
+                                },
+                                {
+                                    error ->
+
+                                    ErrorUtils.showGeneralWhoopsDialog(this)
+                                }
+                        )
                     }
             ).show()
 

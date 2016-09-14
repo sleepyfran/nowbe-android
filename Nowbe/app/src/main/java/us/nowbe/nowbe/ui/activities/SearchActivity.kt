@@ -168,7 +168,14 @@ class SearchActivity : AppCompatActivity() {
                     // Check if we can access the profile (is mutual or the profile is not private)
                     if (!searchResult.isPrivate || searchResult.relation == ApiUtils.API_FRIENDSHIP_MUTUAL) {
                         // Send the notification of access from the search
-                        NotifyAccessFromSearchObservable.create(searchResult.token, userUsername).subscribe()
+                        NotifyAccessFromSearchObservable.create(searchResult.token, userUsername).subscribe(
+                                {
+                                    // Nothing
+                                },
+                                {
+                                    error ->
+                                }
+                        )
 
                         // Start the profile activity
                         val profileIntent = Intent(this@SearchActivity, ProfileActivity::class.java)

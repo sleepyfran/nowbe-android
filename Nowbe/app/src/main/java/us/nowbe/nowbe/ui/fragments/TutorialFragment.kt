@@ -65,7 +65,14 @@ class TutorialFragment : Fragment() {
             val userToken = SharedPreferencesUtils.getToken(context)!!
 
             // Set the tutorial seen in the server
-            SetTutorialSeenObservable.create(userToken).subscribe()
+            SetTutorialSeenObservable.create(userToken).subscribe(
+                    {
+                        // Nothing
+                    },
+                    {
+                        error ->
+                    }
+            )
 
             val landingIntent = Intent(activity, LandingActivity::class.java)
             landingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -16,6 +16,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base_no_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.net.async.UpdateOnlineObservable
+import us.nowbe.nowbe.utils.ErrorUtils
 import us.nowbe.nowbe.utils.SharedPreferencesUtils
 
 /**
@@ -66,7 +67,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Set the user as offline
         val userToken = SharedPreferencesUtils.getToken(this)
-        if (userToken != null) UpdateOnlineObservable.create(userToken, 0).subscribe()
+        if (userToken != null) {
+            UpdateOnlineObservable.create(userToken, 0).subscribe(
+                    {
+                        // Nothing
+                    },
+                    {
+                        error ->
+
+                        ErrorUtils.showNoConnectionDialog(this)
+                    }
+            )
+        }
     }
 
     /**
