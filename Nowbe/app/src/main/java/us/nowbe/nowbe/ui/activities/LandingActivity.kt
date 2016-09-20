@@ -12,12 +12,15 @@ import android.os.Bundle
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.async.ChangeStatusObservable
+import us.nowbe.nowbe.net.async.SaveDeviceTokenObservable
 import us.nowbe.nowbe.net.async.UpdateOnlineObservable
 import us.nowbe.nowbe.ui.dialogs.ChangeAvailabilityDialog
 import us.nowbe.nowbe.ui.fragments.ActivityFragment
@@ -106,6 +109,22 @@ class LandingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Save the device token of the user in the server if it hasn't already
+        val deviceToken = FirebaseInstanceId.getInstance().token
+
+        if (deviceToken != null) {
+            Log.i("TOKEN", deviceToken)
+            val userToken = SharedPreferencesUtils.getToken(this)!!
+            SaveDeviceTokenObservable.create(userToken, deviceToken).subscribe(
+                    {
+                        // Nothing
+                    },
+                    {
+                        // Nothing
+                    }
+            )
+        }
 
         // Default action for the fab
         setupSearchFab()

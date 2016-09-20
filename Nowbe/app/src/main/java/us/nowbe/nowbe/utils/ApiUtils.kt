@@ -60,6 +60,7 @@ class ApiUtils {
         const val KEY_PICTURE = "picture"
         const val KEY_STATE = "state"
         const val KEY_SLOT_NUMBER = "slotNumber"
+        const val KEY_DEVICE_TOKEN = "tokenDevice"
 
         /**
          * Non-changing values
@@ -157,6 +158,7 @@ class ApiUtils {
         const val REMOVE_COMMENT_URL = "resetCommentSlot.php"
         const val REMOVE_PICTURE_URL = "resetPictureSlot.php"
         const val SET_TUTORIAL_SEEN_URL = "setTutorialSeen.php"
+        const val SAVE_TOKEN_DEVICE_URL = "saveTokenDevice.php"
 
         /**
          * POST parameters
