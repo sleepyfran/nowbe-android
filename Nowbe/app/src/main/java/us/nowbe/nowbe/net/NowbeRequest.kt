@@ -33,9 +33,6 @@ abstract class NowbeRequest() {
         val response = client.newCall(request).execute()
         val responseString = response.body().string()
 
-        // Log the response
-        Log.i(javaClass.simpleName, responseString)
-
         // Return the response
         return responseString
     }

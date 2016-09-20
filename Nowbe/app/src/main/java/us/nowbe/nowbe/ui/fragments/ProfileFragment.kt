@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
     /**
      * Token to which the profile refers to
      */
-    lateinit var profileToken: String
+    var profileToken: String = ""
 
     /**
      * Interface to call when we got a result from the API call
