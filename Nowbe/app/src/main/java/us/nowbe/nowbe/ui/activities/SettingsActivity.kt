@@ -67,7 +67,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         // Load if the profile of the user is visible or not
-        val profilePublic = SharedPreferencesUtils.getProfileVisibility(this)!!
+        val profilePublic = SharedPreferencesUtils.getProfileVisibility(this)
         changeVisibilityText(profilePublic)
         sSettingsProfileVisibility.isChecked = profilePublic
 

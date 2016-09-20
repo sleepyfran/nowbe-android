@@ -101,14 +101,10 @@ class SharedPreferencesUtils {
         /**
          * Returns the profile visilibility of the user if it exists
          */
-        fun getProfileVisibility(context: Context): Boolean? {
+        fun getProfileVisibility(context: Context): Boolean {
             val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
-            if (sharedPrefs.contains(PROFILE_VISIBILITY_KEY)) {
-                return sharedPrefs.getBoolean(PROFILE_VISIBILITY_KEY, false)
-            } else {
-                return null
-            }
+            return sharedPrefs.getBoolean(PROFILE_VISIBILITY_KEY, false)
         }
 
         /**
