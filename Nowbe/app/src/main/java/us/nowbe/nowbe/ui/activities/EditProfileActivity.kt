@@ -214,6 +214,9 @@ class EditProfileActivity : AppCompatActivity() {
         previousSubscription = UpdateUserSlotObservable.create(token, file, slotIndex).subscribe(
                 // On Next
                 {
+                    // Reload the data!
+                    onDismiss.onDismiss()
+
                     // Show a toast confirming the change
                     Toast.makeText(this, getString(R.string.profile_edit_pictures_slots_updated, slotIndex + 1),
                             Toast.LENGTH_SHORT).show()
