@@ -63,8 +63,8 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Set the elevation of the cards
-        ViewCompat.setElevation(llSettingsPrivacy, 5.toFloat())
         ViewCompat.setElevation(llSettingsNotifications, 5.toFloat())
+        ViewCompat.setElevation(llSettingsPrivacy, 5.toFloat())
         ViewCompat.setElevation(llSettingsAbout, 5.toFloat())
 
         // Load the version of the app
@@ -83,7 +83,7 @@ class SettingsActivity : AppCompatActivity() {
         sSettingsNotificationsEnabled.isChecked = notificationsEnabled
 
         // Invert the switch when the view is clicked
-        llSettingsNotifications.setOnClickListener {
+        llNotifications.setOnClickListener {
             val currentlyEnabled = sSettingsNotificationsEnabled.isChecked
             sSettingsNotificationsEnabled.isChecked = !currentlyEnabled
         }

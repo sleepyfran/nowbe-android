@@ -28,8 +28,8 @@
             android:orientation="vertical">
 
             <!-- Notifications settings -->
-            <!-- Gone for now. TODO: Change when the notifications are implemented -->
             <LinearLayout
+                android:id="@+id/llSettingsNotifications"
                 style="@style/SettingsCard">
 
                 <TextView
@@ -40,7 +40,7 @@
 
                 <!-- Profile Visibility -->
                 <LinearLayout
-                    android:id="@+id/llSettingsNotifications"
+                    android:id="@+id/llNotifications"
                     style="@style/SettingsCard_OptionButton"
                     android:orientation="horizontal">
 
