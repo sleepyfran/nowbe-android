@@ -68,7 +68,7 @@ class EditProfileActivity : AppCompatActivity() {
     /**
      * File path of the temporary file
      */
-    lateinit var tempFilePath: String
+    var tempFilePath: String = ""
 
     /**
      * Indicates whether the user chose to edit their profile picture (true) or a slot picture (false)
