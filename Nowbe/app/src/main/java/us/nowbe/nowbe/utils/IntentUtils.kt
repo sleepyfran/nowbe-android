@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.support.v4.content.FileProvider
+import us.nowbe.nowbe.BuildConfig
 
 /**
  * This file is part of Nowbe for Android
@@ -69,7 +71,8 @@ class IntentUtils {
             val tempFile = InternalStorageUtils.getTemporaryImageFile(context)
 
             // Get the photo URI and attach it to the Intent
-            val photoUri = Uri.fromFile(tempFile)
+
+            val photoUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", tempFile)
             fileIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
 
             // Return a pair with the intent and the file path
