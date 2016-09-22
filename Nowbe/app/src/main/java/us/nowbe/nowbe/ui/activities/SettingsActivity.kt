@@ -26,10 +26,21 @@ import us.nowbe.nowbe.utils.SharedPreferencesUtils
 class SettingsActivity : AppCompatActivity() {
 
     /**
+     * Changes the text of the description in the notifications settings
+     */
+    fun changeNotificationText(enabled: Boolean) {
+        if (enabled) {
+            tvNotificationsState.text = getString(R.string.settings_notifications_enabled_true)
+        } else {
+            tvNotificationsState.text = getString(R.string.settings_notifications_enabled_false)
+        }
+    }
+
+    /**
      * Changes the text of the description in the visibility settings
      */
-    fun changeVisibilityText(status: Boolean) {
-        if (status) {
+    fun changeVisibilityText(enabled: Boolean) {
+        if (enabled) {
             tvVisibilityState.text = getString(R.string.settings_profile_visibility_message_visible)
         } else {
             tvVisibilityState.text = getString(R.string.settings_profile_visibility_message_invisible)
@@ -66,6 +77,25 @@ class SettingsActivity : AppCompatActivity() {
             // ... a printStackTrace never hurt anyone
         }
 
+        // Load if the notifications are enabled or not
+        val notificationsEnabled = SharedPreferencesUtils.getNotificationsEnabled(this)
+        changeNotificationText(notificationsEnabled)
+        sSettingsNotificationsEnabled.isChecked = notificationsEnabled
+
+        // Invert the switch when the view is clicked
+        llSettingsNotifications.setOnClickListener {
+            val currentlyEnabled = sSettingsNotificationsEnabled.isChecked
+            sSettingsNotificationsEnabled.isChecked = !currentlyEnabled
+        }
+
+        // Update the shared preferences when the switch changes
+        sSettingsNotificationsEnabled.setOnCheckedChangeListener {
+            compoundButton, enabled ->
+
+            SharedPreferencesUtils.setNotificationsEnabled(this, enabled)
+            changeNotificationText(enabled)
+        }
+
         // Load if the profile of the user is visible or not
         val profilePublic = SharedPreferencesUtils.getProfileVisibility(this)
         changeVisibilityText(profilePublic)
@@ -73,30 +103,26 @@ class SettingsActivity : AppCompatActivity() {
 
         // Invert the switch when the view is clicked
         llProfileVisibility.setOnClickListener {
-            val currentStatus = sSettingsProfileVisibility.isChecked
-            sSettingsProfileVisibility.isChecked = !currentStatus
+            val currentlyEnabled = sSettingsProfileVisibility.isChecked
+            sSettingsProfileVisibility.isChecked = !currentlyEnabled
         }
 
         // Update the visibility of the user when the switch changes
         sSettingsProfileVisibility.setOnCheckedChangeListener {
-            compoundButton, state ->
+            compoundButton, enabled ->
 
             // Update the settings in the phone
-            SharedPreferencesUtils.setProfileVisibility(this, state)
+            SharedPreferencesUtils.setProfileVisibility(this, enabled)
 
             // Update the text
-            changeVisibilityText(state)
+            changeVisibilityText(enabled)
 
             // Update the server
             val userToken = SharedPreferencesUtils.getToken(this)!!
-            val visibility = if (state) 1 else 0
+            val visibility = if (enabled) 1 else 0
             ChangeProfileVisibilityObservable.create(userToken, visibility).subscribe(
                     {
-                        if (state) {
-                            Toast.makeText(this, getString(R.string.settings_profile_visibility_now_public), Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, getString(R.string.settings_profile_visibility_now_hidden), Toast.LENGTH_SHORT).show()
-                        }
+                        changeVisibilityText(enabled)
                     },
                     {
                         error ->

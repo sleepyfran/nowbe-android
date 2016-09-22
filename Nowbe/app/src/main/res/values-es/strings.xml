@@ -159,9 +159,9 @@
     <string name="settings.title">Ajustes</string>
 
     <string name="settings.notifications.title">Notificaciones</string>
-    <string name="settings.notifications.vibration.title">Vibración</string>
-    <string name="settings.notifications.vibration.vibrating">Vibración activa</string>
-    <string name="settings.notifications.vibration.not_vibrating">Vibración desactivada</string>
+    <string name="settings.notifications.enabled.title">Notificaciones</string>
+    <string name="settings.notifications.enabled.true">Notificaciones activas</string>
+    <string name="settings.notifications.enabled.false">Notificaciones desactivadas</string>
 
     <string name="settings.profile.title">Cuenta</string>
     <string name="settings.profile.visibility.title">Visibilidad del perfil</string>

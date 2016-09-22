@@ -30,9 +30,7 @@
             <!-- Notifications settings -->
             <!-- Gone for now. TODO: Change when the notifications are implemented -->
             <LinearLayout
-                android:id="@+id/llSettingsNotifications"
-                style="@style/SettingsCard"
-                android:visibility="gone">
+                style="@style/SettingsCard">
 
                 <TextView
                     style="@style/SettingsCard_OptionButton_Text"
@@ -42,7 +40,7 @@
 
                 <!-- Profile Visibility -->
                 <LinearLayout
-                    android:id="@+id/llNotificationsVibration"
+                    android:id="@+id/llSettingsNotifications"
                     style="@style/SettingsCard_OptionButton"
                     android:orientation="horizontal">
 
@@ -54,17 +52,17 @@
 
                         <TextView
                             style="@style/SettingsCard_OptionButton_Text"
-                            android:text="@string/settings.notifications.vibration.title" />
+                            android:text="@string/settings.notifications.enabled.title" />
 
                         <TextView
-                            android:id="@+id/tvNotificationsVibrationState"
+                            android:id="@+id/tvNotificationsState"
                             style="@style/SettingsCard_OptionButton_SubText"
-                            android:text="@string/settings.notifications.vibration.not_vibrating" />
+                            android:text="@string/settings.notifications.enabled.false" />
 
                     </LinearLayout>
 
                     <Switch
-                        android:id="@+id/sSettingsNotificationsVibration"
+                        android:id="@+id/sSettingsNotificationsEnabled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

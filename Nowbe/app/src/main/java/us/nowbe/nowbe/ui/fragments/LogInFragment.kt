@@ -93,9 +93,6 @@ class LogInFragment : Fragment() {
                             // Show an error dialog indicating that we have no connection otherwise
                             ErrorUtils.showNoConnectionDialog(context)
                         }
-
-                        // Log the error anyway
-                        Log.e(LogInFragment::class.java.canonicalName, error.message)
                     })
         })
     }

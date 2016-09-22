@@ -32,6 +32,11 @@ class SharedPreferencesUtils {
         val USERNAME_KEY = "username"
 
         /**
+         * Profile notifications of the user in Nowbe
+         */
+        val NOTIFICATIONS_KEY = "notifications"
+
+        /**
          * Profile visibility of the user in Nowbe
          */
         val PROFILE_VISIBILITY_KEY = "profileVisibility"
@@ -96,6 +101,24 @@ class SharedPreferencesUtils {
             val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
             sharedPrefs.edit().putString(USERNAME_KEY, username).apply()
+        }
+
+        /**
+         * Returns the notification of the user if it exists
+         */
+        fun getNotificationsEnabled(context: Context): Boolean {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            return sharedPrefs.getBoolean(NOTIFICATIONS_KEY, true)
+        }
+
+        /**
+         * Sets the profile notifications in Nowbe
+         */
+        fun setNotificationsEnabled(context: Context, notifications: Boolean) {
+            val sharedPrefs = context.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+            sharedPrefs.edit().putBoolean(NOTIFICATIONS_KEY, notifications).apply()
         }
 
         /**
