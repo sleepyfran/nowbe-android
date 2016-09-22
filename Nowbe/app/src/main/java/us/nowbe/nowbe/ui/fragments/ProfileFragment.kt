@@ -124,6 +124,18 @@ class ProfileFragment : Fragment() {
                     // Update the profile information
                     pivProfileInfo.updateInformation(user)
 
+                    // Show the full picture when clicking the
+                    pivProfileInfo.onClick = object : Interfaces.OnProfilePictureClick {
+                        override fun onProfilePicClick(pictureDir: String) {
+                            val fullImageIntent = Intent(context, FullImageActivity::class.java)
+                            fullImageIntent.putExtra(IntentUtils.TOKEN, profileToken)
+                            fullImageIntent.putExtra(IntentUtils.IMG_DATA, pictureDir)
+                            fullImageIntent.putExtra(IntentUtils.SHOW_COOL_BAR, false)
+                            fullImageIntent.putExtra(IntentUtils.IS_PROFILE_PIC, true)
+                            startActivityForResult(fullImageIntent, REQUEST_FULL_IMAGE)
+                        }
+                    }
+
                     // Update the likes, couple and education info
                     pleLikesEducationCouple.updateInformation(user)
 

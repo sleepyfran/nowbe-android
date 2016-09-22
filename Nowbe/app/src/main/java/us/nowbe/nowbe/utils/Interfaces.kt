@@ -120,4 +120,14 @@ class Interfaces {
          */
         fun onSearchResultClick(searchResult: SearchResult)
     }
+
+    /**
+     * Interface to call when the user presses a profile pic
+     */
+    interface OnProfilePictureClick {
+        /**
+         * (Should) pass the picture directory
+         */
+        fun onProfilePicClick(pictureDir: String)
+    }
 }

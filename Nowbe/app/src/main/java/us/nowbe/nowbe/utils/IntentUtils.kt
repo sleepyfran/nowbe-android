@@ -33,6 +33,7 @@ class IntentUtils {
         val SHOW_COOL_BAR = "coolbar"
         val PIC_INDEX = "picIndex"
         val COOLED = "cooled"
+        val IS_PROFILE_PIC = "isProfilePic"
 
         /**
          * Keys for the editing of the profile

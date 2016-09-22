@@ -37,6 +37,7 @@ class FullImageActivity : AppCompatActivity() {
         val profileToken = intent?.extras?.getString(IntentUtils.TOKEN)!!
         val imageUrl = intent?.extras?.getString(IntentUtils.IMG_DATA)!!
         val showCoolbar = intent?.extras?.getBoolean(IntentUtils.SHOW_COOL_BAR, true)!!
+        val isProfilePic = intent?.extras?.getBoolean(IntentUtils.IS_PROFILE_PIC, false)!!
         var cools = 0
         var pictureIndex = 0
         var hasCooled = false
@@ -51,8 +52,16 @@ class FullImageActivity : AppCompatActivity() {
         ivtFullImage.displayType = ImageViewTouchBase.DisplayType.FIT_TO_SCREEN
 
         // Load the image into the placeholder
+        val pictureUrl: String
+
+        if (isProfilePic) {
+            pictureUrl = ApiUtils.getFullProfilePicDir(imageUrl)
+        } else {
+            pictureUrl = ApiUtils.getFullSlotPicDir(imageUrl)
+        }
+
         Glide.with(this)
-                .load(ApiUtils.getFullSlotPicDir(imageUrl))
+                .load(pictureUrl)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .listener(object : RequestListener<String, GlideDrawable> {

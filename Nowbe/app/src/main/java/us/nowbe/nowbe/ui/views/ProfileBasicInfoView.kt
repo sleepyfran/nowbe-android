@@ -12,8 +12,13 @@ import us.nowbe.nowbe.R
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.utils.ApiUtils
 import us.nowbe.nowbe.utils.CircleTransform
+import us.nowbe.nowbe.utils.Interfaces
 
 class ProfileBasicInfoView : RelativeLayout {
+    /**
+     * Method to be called when the profile pic is pressed
+     */
+    var onClick: Interfaces.OnProfilePictureClick? = null
 
     constructor(context: Context) : super(context)
 
@@ -26,6 +31,9 @@ class ProfileBasicInfoView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.profile_basic_info_view, this, true)
     }
 
+    /**
+     * Updates the information of the basic profile info
+     */
     fun updateInformation(user: User) {
         // Update the user's profile pic
         Glide.with(context)
@@ -36,6 +44,10 @@ class ProfileBasicInfoView : RelativeLayout {
                 .skipMemoryCache(true)
                 .error(R.drawable.nowbe_logo)
                 .into(ivUserPicture)
+
+        ivUserPicture.setOnClickListener {
+            onClick?.onProfilePicClick(user.profilePicDir)
+        }
 
         // Update the user's online state
         val drawableStatus: Int
