@@ -10,29 +10,49 @@ package us.nowbe.nowbe.adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.PagerAdapter
+import android.view.View
+import android.view.ViewGroup
 import java.util.*
 
-class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+abstract class ViewPagerAdapter(val fragmentManager: FragmentManager) : PagerAdapter() {
     /**
      * List of fragments and their title
      */
-    private val mFragmentList = ArrayList<Fragment>()
-    private val mFragmentTitleList = ArrayList<String>()
+    val fragmentList = ArrayList<Fragment?>()
+    val fragmentTitleList = ArrayList<String>()
 
-    override fun getItem(position: Int): Fragment {
-        return mFragmentList[position]
+    override fun getPageTitle(position: Int): CharSequence {
+        return fragmentTitleList[position]
     }
 
     override fun getCount(): Int {
-        return mFragmentList.size
+        return fragmentList.size
+    }
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val fragment = getItem(position)
+        val trans = fragmentManager.beginTransaction()
+        trans.add(container.id, fragment, "fragment:" + position)
+        trans.commit()
+        return fragment
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        val trans = fragmentManager.beginTransaction()
+        trans.remove(fragmentList[position])
+        trans.commit()
+        fragmentList[position] = null
+    }
+
+    override fun isViewFromObject(view: View, fragment: Any): Boolean {
+        return (fragment as Fragment).view === view
     }
 
     fun addFragment(fragment: Fragment, title: String) {
-        mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title)
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return mFragmentTitleList[position]
-    }
+    abstract fun getItem(position: Int): Fragment
 }

@@ -18,6 +18,7 @@ import android.view.MenuItem
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_base_tabs.*
 import us.nowbe.nowbe.R
+import us.nowbe.nowbe.adapters.ViewPagerAdapter
 import us.nowbe.nowbe.model.User
 import us.nowbe.nowbe.net.async.ChangeStatusObservable
 import us.nowbe.nowbe.net.async.SaveDeviceTokenObservable
@@ -39,7 +40,7 @@ class LandingActivity : BaseActivity() {
     /**
      * Adapter of the view pager
      */
-    lateinit var pagerAdapter: FragmentPagerAdapter
+    lateinit var pagerAdapter: ViewPagerAdapter
 
     /**
      * Menu of the activity

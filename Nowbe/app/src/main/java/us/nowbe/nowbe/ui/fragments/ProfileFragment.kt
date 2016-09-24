@@ -111,7 +111,7 @@ class ProfileFragment : Fragment() {
      */
     fun loadUserData() {
         // Get the token of the user
-        val userToken = SharedPreferencesUtils.getToken(context)!!
+        val userToken = SharedPreferencesUtils.getToken(activity)!!
 
         previousSubscription = UserDataObservable.create(userToken, profileToken).subscribe(
                 // On Next
