@@ -107,14 +107,5 @@ class TabUtils {
 
             return adapter
         }
-
-        /**
-         * Returns the fragment from the current position of a view pager
-         */
-        fun getFragmentFromViewPager(fragmentManager: FragmentManager, viewPager: ViewPager, viewPagerId: Int): Fragment {
-            val currentItem = viewPager.currentItem
-
-            return fragmentManager.findFragmentByTag("android:switcher:$viewPagerId:$currentItem")
-        }
     }
 }

@@ -78,9 +78,7 @@ class LandingActivity : BaseActivity() {
         // Clear all the notifications
         fab.setOnClickListener {
             // Get the adapter
-            val fragment = TabUtils.getFragmentFromViewPager(supportFragmentManager,
-                    vpFragmentList,
-                    R.id.vpFragmentList) as ActivityFragment
+            val fragment = pagerAdapter.getItem(1) as ActivityFragment
 
             // Remove all the notifications
             fragment.removeAllActivity()
